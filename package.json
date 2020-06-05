@@ -18,7 +18,8 @@
     "react-native-reanimated": "~1.7.0",
     "react-native-screens": "~2.2.0",
     "react-native-unimodules": "~0.9.0",
-    "react-native-web": "~0.11.7"
+    "react-native-web": "~0.11.7",
+    "react-router-native": "^5.2.0"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
@@ -29,5 +30,18 @@
   "jest": {
     "preset": "react-native"
   },
-  "private": true
+  "private": true,
+  "name": "idunno",
+  "version": "1.0.0",
+  "description": "decision maker app",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cameron-cheng/idunno.git"
+  },
+  "author": "cameron, amy, jeremy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cameron-cheng/idunno/issues"
+  },
+  "homepage": "https://github.com/cameron-cheng/idunno#readme"
 }
