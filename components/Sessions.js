@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Button } from 'react-native';
-import Swiper from './swiper';
+import Swiper from './Swiper';
 
 export default ({ history }) => {
   return(
