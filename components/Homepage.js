@@ -5,6 +5,7 @@ export default ({ history }) => {
   return (
 <View>
   <Text>This is the homepage </Text>
-    <Button title="change page" onPress={() => history.push("/sessions")}></Button>
+    <Button title="Sessions" onPress={() => history.push("/sessions")}></Button>
+    <Button title="Results" onPress={() => history.push("/results")}></Button>
 </View>
   )};
