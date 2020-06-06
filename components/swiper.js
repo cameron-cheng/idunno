@@ -78,7 +78,7 @@ constructor(){
       },
       onPanResponderRelease:(evt, gestureState) => {
         //swipe right animation
-        if (gestureState.dx > 120) {
+        if (gestureState.dx > 200) {
           Animated.spring(this.position, {
             toValue: { x: SCREEN_WIDTH + 100, y: gestureState.dy}
           }).start(() => {
@@ -88,7 +88,7 @@ constructor(){
           })
 
         //swipe left animation
-        } else if (gestureState.dx <  -120) {
+        } else if (gestureState.dx <  -200) {
           Animated.spring(this.position, {
             toValue: { x: -SCREEN_WIDTH - 100, y: gestureState.dy}
            }).start(() => {
@@ -119,7 +119,7 @@ constructor(){
           <Animated.View 
           {...this.PanResponder.panHandlers}
           key={item.id} style={[this.rotateAndTranslate,
-          { height: SCREEN_HEIGHT - 120, width: SCREEN_WIDTH, padding: 10, position: 'absolute'}]} >
+          { height: SCREEN_HEIGHT - 200, width: SCREEN_WIDTH, padding: 10, position: 'absolute'}]} >
             <Animated.View style={{opacity: this.likeOpacity, transform: [{rotate: "-30deg" }], position: "absolute", top: 50, left: 40, zIndex:1000}}>
               <Text style={{borderWidth: 1, borderColor: "green", color: "green", fontSize: 32, fontWeight:"800", padding: 10}}>YUP!</Text>
             </Animated.View>
@@ -140,7 +140,7 @@ constructor(){
           key={item.id} style={[{
             opacity: this.nextCardOpacity,
             transform: [{ scale: this.nextCardScale }],
-            height: SCREEN_HEIGHT - 120, 
+            height: SCREEN_HEIGHT - 200, 
             width: SCREEN_WIDTH, 
             padding: 10, 
             position: 'absolute'
@@ -162,13 +162,13 @@ constructor(){
   render() {
     return (
       <View style={{flex: 1}}>
-       <View style={{ height: 60 }}> 
+       <View style={{ height: 100 }}> 
 
        </View>
-       <View style={{ flex: 1 }}>
+       <View style={{ flex: 1, alignItems: 'center' }}>
         {this.renderUsers()}
        </View>
-       <View style={{ height: 60 }}>
+       <View style={{ height: 100 }}>
 
        </View>
         

@@ -4,6 +4,7 @@ import { NativeRouter, Switch, Route} from 'react-router-native'
 import Home from './components/Homepage'
 import Sessions from './components/Sessions'
 import Results from './components/Results'
+import Swiper from './components/Swiper'
 
 const instructions = Platform.select({
   ios: `Press Cmd+R to reload,\nCmd+D or shake for dev menu`,
