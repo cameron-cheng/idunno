@@ -11,11 +11,6 @@ export default ({ history }) => {
       <View>
         <Swiper />
       </View>
-      <View style={{flex: 1}}>
-        <View style={styles.footer}>
-          <Text>FOOTER</Text>
-        </View>
-      </View>
       <Button title="Homepage" onPress={() => history.push("/")}></Button>
     </View>
   )};
