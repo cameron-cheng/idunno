@@ -163,6 +163,7 @@ constructor(){
       } else {
         return(
           <Animated.View 
+          {...this.PanResponder.panHandlers}
           key={item.id} style={[{
             opacity: this.nextCardOpacity,
             transform: [{ scale: this.nextCardScale }],
@@ -171,14 +172,14 @@ constructor(){
             padding: 10, 
             position: 'absolute'
             }]} >
-              {/* Card header */}
+              {/* Card header - shoudl be same styled as "top card" */}
             <Animated.View style={{width: SCREEN_WIDTH, padding:10, position: 'absolute',zIndex:1000}}>
               <View style={{backgroundColor: '#f0f0f0', borderTopRightRadius:20, borderTopLeftRadius:20, height: 50, justifyContent: 'center'}}>
                 <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>{item.title}</Text>
               </View>
             </Animated.View>
 
-            {/* Card footer */}
+            {/* Card footer - should be styled same as "top card"*/}
             <Animated.View style={{width: SCREEN_WIDTH, padding:10, position: 'absolute', bottom:0, zIndex:1000}}>
               <View style={{backgroundColor: '#f0f0f0', borderBottomRightRadius:20, borderBottomLeftRadius:20, height: 200, justifyContent: 'center'}}>
                 <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>Reviews: {item.reviews}</Text>
