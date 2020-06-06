@@ -15,9 +15,9 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
 const Users = [
-{id: '1', title: "Dark Night", uri: require('../assets/feed_images/1.jpg')},
-{id: '2', title: "Jungle Book", uri: require('../assets/feed_images/2.jpg')},
-{id: '3', title: "Avengers", uri: require('../assets/feed_images/3.png')}
+{id: '1', title: "Dark Night", reviews: "5/5", theatre: "Vancouver", genre: "Action/Adventure", uri: require('../assets/feed_images/1.jpg')},
+{id: '2', title: "Jungle Book", reviews: "3/5", theatre: "Coquitlam", genre: "Adventure/Fantasy", uri: require('../assets/feed_images/2.jpg')},
+{id: '3', title: "Avengers", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/3.png')}
 ]
 
 
@@ -79,7 +79,7 @@ constructor(){
       },
       onPanResponderRelease:(evt, gestureState) => {
         //swipe right animation
-        if (gestureState.dx > 450) {
+        if (gestureState.dx > 200) {
           Animated.spring(this.position, {
             toValue: { x: SCREEN_WIDTH + 100, y: gestureState.dy}
           }).start(() => {
@@ -89,7 +89,7 @@ constructor(){
           })
 
         //swipe left animation
-        } else if (gestureState.dx <  -450) {
+        } else if (gestureState.dx <  -200) {
           Animated.spring(this.position, {
             toValue: { x: -SCREEN_WIDTH - 100, y: gestureState.dy}
            }).start(() => {
@@ -123,19 +123,21 @@ constructor(){
           <Animated.View 
             {...this.PanResponder.panHandlers}
             key={item.id} style={[this.rotateAndTranslate,
-            { height: SCREEN_HEIGHT - 450, width: SCREEN_WIDTH, padding: 10, position: 'absolute'}]} >
+            { height: SCREEN_HEIGHT - 200, width: SCREEN_WIDTH, padding: 10, position: 'absolute'}]} >
 
             {/* Card header */}
-            <Animated.View style={{width: SCREEN_WIDTH, padding:10, position: 'absolute', borderColor: 'white', zIndex:1000}}>
-              <View style={{backgroundColor: 'blue', borderTopRightRadius:20, borderTopLeftRadius:20, height: 50, justifyContent: 'center'}}>
-                <Text style={{alignSelf: 'center', color:"pink", fontSize: 25}}>{item.title}</Text>
+            <Animated.View style={{width: SCREEN_WIDTH, padding:10, position: 'absolute',zIndex:1000}}>
+              <View style={{backgroundColor: '#f0f0f0', borderTopRightRadius:20, borderTopLeftRadius:20, height: 50, justifyContent: 'center'}}>
+                <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>{item.title}</Text>
               </View>
             </Animated.View>
 
             {/* Card footer */}
-            <Animated.View style={{width: SCREEN_WIDTH, padding:10, position: 'absolute', borderColor: 'white', zIndex:1000}}>
-              <View style={{backgroundColor: 'blue', borderTopRightRadius:20, borderTopLeftRadius:20, height: 50, justifyContent: 'center'}}>
-                <Text style={{alignSelf: 'center', color:"pink", fontSize: 25}}>{item.title}</Text>
+            <Animated.View style={{width: SCREEN_WIDTH, padding:10, position: 'absolute', bottom:0, zIndex:1000}}>
+              <View style={{backgroundColor: '#f0f0f0', borderBottomRightRadius:20, borderBottomLeftRadius:20, height: 200, justifyContent: 'center'}}>
+                <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>Reviews: {item.reviews}</Text>
+                <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>Playing in: {item.theatre}</Text>
+                <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>Genre: {item.genre}</Text>
               </View>
             </Animated.View>
 
@@ -164,11 +166,26 @@ constructor(){
           key={item.id} style={[{
             opacity: this.nextCardOpacity,
             transform: [{ scale: this.nextCardScale }],
-            height: SCREEN_HEIGHT - 450, 
+            height: SCREEN_HEIGHT - 200, 
             width: SCREEN_WIDTH, 
             padding: 10, 
             position: 'absolute'
             }]} >
+              {/* Card header */}
+            <Animated.View style={{width: SCREEN_WIDTH, padding:10, position: 'absolute',zIndex:1000}}>
+              <View style={{backgroundColor: '#f0f0f0', borderTopRightRadius:20, borderTopLeftRadius:20, height: 50, justifyContent: 'center'}}>
+                <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>{item.title}</Text>
+              </View>
+            </Animated.View>
+
+            {/* Card footer */}
+            <Animated.View style={{width: SCREEN_WIDTH, padding:10, position: 'absolute', bottom:0, zIndex:1000}}>
+              <View style={{backgroundColor: '#f0f0f0', borderBottomRightRadius:20, borderBottomLeftRadius:20, height: 200, justifyContent: 'center'}}>
+                <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>Reviews: {item.reviews}</Text>
+                <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>Playing in: {item.theatre}</Text>
+                <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>Genre: {item.genre}</Text>
+              </View>
+            </Animated.View>
             <Image 
               style={{flex:1, height:null, width:null, resizeMode: 'cover', borderRadius: 20}}
               source={item.uri}
@@ -185,7 +202,7 @@ constructor(){
   render() {
     return (
       <View>
-        <View style={{ height: 60 }}>
+        <View style={{ height: 40 }}>
 
         </View>
         <View style={{ flex: 1, alignItems: 'center' }}>

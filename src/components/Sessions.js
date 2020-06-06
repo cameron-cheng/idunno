@@ -7,9 +7,7 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 export default ({ history }) => {
   return(
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text>HEADER</Text>
-      </View>
+      
       <View>
         <Swiper />
       </View>
