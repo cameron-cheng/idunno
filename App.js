@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
-
-
+import { NativeRouter, Switch, Route} from 'react-router-native'
+import Home from './components/Homepage'
+import Sessions from './components/Sessions'
 const instructions = Platform.select({
   ios: `Press Cmd+R to reload,\nCmd+D or shake for dev menu`,
   android: `Double tap R on your keyboard to reload,\nShake or press menu button for dev menu`,
@@ -9,11 +10,14 @@ const instructions = Platform.select({
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.welcome}>Welcome to React Native!</Text>
-      <Text style={styles.instructions}>To get started, edit App.js</Text>
-      <Text style={styles.instructions}>{instructions}</Text>
-    </View>
+    <NativeRouter>
+      <View style={styles.container}>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/sessions" component={Sessions} />
+        </Switch>
+      </View>
+    </NativeRouter>
   );
 }
 
