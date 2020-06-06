@@ -8,7 +8,7 @@ export default ({ history }) => {
   <Text>This is the Sessions page </Text>
   <Text>Timer</Text>
     <Swiper />
-    <Button 
+    <Button  
       title="change page" 
       onPress={() => history.push("/")}>
     </Button>
