@@ -1,13 +1,36 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, StyleSheet, Dimensions } from 'react-native';
 import Swiper from './Swiper'
+
+const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 export default ({ history }) => {
   return(
-<View>
-  <Text>This is the Sessions page </Text>
-  <Text>Timer</Text>
-  <Swiper />
-    <Button title="Homepage" onPress={() => history.push("/")}></Button>
-</View>
+    <View style={styles.container}>
+      
+      <View>
+        <Swiper />
+      </View>
+      <Button title="Homepage" onPress={() => history.push("/")}></Button>
+    </View>
   )};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    height: '100%',
+    // justifyContent: 'center'
+  },
+  header : {
+    justifyContent: 'flex-start',
+    marginTop: 36
+  },
+  footer: {
+    flex: 1,
+    // justifyContent: 'flex-end',
+    // marginBottom: 36,
+    bottom: 0,
+    position: 'absolute'
+  },
+});

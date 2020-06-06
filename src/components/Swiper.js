@@ -9,15 +9,15 @@ import {
   PanResponder
 } from "react-native";
 
-import { List, ListItem } from 'native-base'
+import { List, ListItem, Card, CardItem, Header, Body } from 'native-base'
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
 const Users = [
-{id: '1', uri: require('../assets/feed_images/1.jpg')},
-{id: '2', uri: require('../assets/feed_images/2.jpg')},
-{id: '3', uri: require('../assets/feed_images/3.png')}
+{id: '1', title: "Dark Night", reviews: "5/5", theatre: "Vancouver", genre: "Action/Adventure", uri: require('../assets/feed_images/1.jpg')},
+{id: '2', title: "Jungle Book", reviews: "3/5", theatre: "Coquitlam", genre: "Adventure/Fantasy", uri: require('../assets/feed_images/2.jpg')},
+{id: '3', title: "Avengers", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/3.png')}
 ]
 
 
@@ -68,6 +68,7 @@ constructor(){
     outputRange: [1, 0.8, 1],
     extrapolate: 'clamp'
   })
+  
 }
 
   componentWillMount() {
@@ -112,28 +113,53 @@ constructor(){
 
     
     return Users.map((item, index) => {
+      //no cards left
       if (index < this.state.currentIndex) {
         return null
+
+        //top card
       } else if (index === this.state.currentIndex) {
         return(
           <Animated.View 
-          {...this.PanResponder.panHandlers}
-          key={item.id} style={[this.rotateAndTranslate,
-          { height: SCREEN_HEIGHT - 200, width: SCREEN_WIDTH, padding: 10, position: 'absolute'}]} >
-            <Animated.View style={{opacity: this.likeOpacity, transform: [{rotate: "-30deg" }], position: "absolute", top: 50, left: 40, zIndex:1000}}>
-              <Text style={{borderWidth: 1, borderColor: "green", color: "green", fontSize: 32, fontWeight:"800", padding: 10}}>YUP!</Text>
+            {...this.PanResponder.panHandlers}
+            key={item.id} style={[this.rotateAndTranslate,
+            { height: SCREEN_HEIGHT - 200, width: SCREEN_WIDTH, padding: 10, position: 'absolute'}]} >
+
+            {/* Card header */}
+            <Animated.View style={{width: SCREEN_WIDTH, padding:10, position: 'absolute',zIndex:1000}}>
+              <View style={{backgroundColor: '#f0f0f0', borderTopRightRadius:20, borderTopLeftRadius:20, height: 50, justifyContent: 'center'}}>
+                <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>{item.title}</Text>
+              </View>
             </Animated.View>
-            <Animated.View style={{opacity:this.dislikeOpacity, transform: [{rotate: "30deg" }], position: "absolute", top: 50, right: 40, zIndex:1000}}>
-              <Text style={{borderWidth: 1, borderColor: "red", color: "red", fontSize: 32, fontWeight:"800", padding: 10}}>NOPE!</Text>
+
+            {/* Card footer */}
+            <Animated.View style={{width: SCREEN_WIDTH, padding:10, position: 'absolute', bottom:0, zIndex:1000}}>
+              <View style={{backgroundColor: '#f0f0f0', borderBottomRightRadius:20, borderBottomLeftRadius:20, height: 200, justifyContent: 'center'}}>
+                <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>Reviews: {item.reviews}</Text>
+                <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>Playing in: {item.theatre}</Text>
+                <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>Genre: {item.genre}</Text>
+              </View>
             </Animated.View>
-            <Image 
-              style={{flex:1, height:null, width:null, resizeMode: 'cover', borderRadius: 20}}
-              source={item.uri}
-            />
-          
-          </Animated.View>
+
+            {/* Card "LIKE" icon */}
+              <Animated.View style={{opacity: this.likeOpacity, transform: [{rotate: "-30deg" }], position: "absolute", top: 80, left: 40, zIndex:1000}}>
+                <Text style={{borderWidth: 1, borderColor: "green", color: "green", fontSize: 32, fontWeight:"800", padding: 10}}>YUP!</Text>
+              </Animated.View >
+
+            {/* Card "DISLIKE" icon */}
+              <Animated.View style={{opacity:this.dislikeOpacity, transform: [{rotate: "30deg" }], position: "absolute", top: 80, right: 40, zIndex:1000}}>
+                <Text style={{borderWidth: 1, borderColor: "red", color: "red", fontSize: 32, fontWeight:"800", padding: 10}}>NOPE!</Text>
+              </Animated.View>
+              <Image 
+                style={{flex:1, height:null, width:null, resizeMode: 'cover', borderRadius: 20}}
+                source={item.uri}
+              />
+
+              
+            </Animated.View>
   
         )
+        // cards underneath
       } else {
         return(
           <Animated.View 
@@ -145,11 +171,25 @@ constructor(){
             padding: 10, 
             position: 'absolute'
             }]} >
+              {/* Card header */}
+            <Animated.View style={{width: SCREEN_WIDTH, padding:10, position: 'absolute',zIndex:1000}}>
+              <View style={{backgroundColor: '#f0f0f0', borderTopRightRadius:20, borderTopLeftRadius:20, height: 50, justifyContent: 'center'}}>
+                <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>{item.title}</Text>
+              </View>
+            </Animated.View>
+
+            {/* Card footer */}
+            <Animated.View style={{width: SCREEN_WIDTH, padding:10, position: 'absolute', bottom:0, zIndex:1000}}>
+              <View style={{backgroundColor: '#f0f0f0', borderBottomRightRadius:20, borderBottomLeftRadius:20, height: 200, justifyContent: 'center'}}>
+                <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>Reviews: {item.reviews}</Text>
+                <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>Playing in: {item.theatre}</Text>
+                <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>Genre: {item.genre}</Text>
+              </View>
+            </Animated.View>
             <Image 
               style={{flex:1, height:null, width:null, resizeMode: 'cover', borderRadius: 20}}
               source={item.uri}
             />
-          
           </Animated.View>
   
         )
@@ -161,18 +201,14 @@ constructor(){
   
   render() {
     return (
-      <View style={{flex: 1}}>
-       <View style={{ height: 100 }}> 
+      <View>
+        <View style={{ height: 40 }}>
 
-       </View>
-       <View style={{ flex: 1, alignItems: 'center' }}>
+        </View>
+        <View style={{ flex: 1, alignItems: 'center' }}>
         {this.renderUsers()}
-       </View>
-       <View style={{ height: 100 }}>
-
-       </View>
-        
-      </View >
+        </View>
+      </View>
     );
   }
 }
