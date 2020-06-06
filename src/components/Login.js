@@ -1,11 +1,10 @@
 import React from 'react';
-import { Provider } from 'react-native-paper';
-import { theme } from '../core/theme.js';
+import { View, Text, Button } from 'react-native';
 
-const Login = () => (
-  <Provider theme={theme}>
-    <App />
-  </Provider>
-);
-
-export default Login;
+export default ({ history }) => {
+  return(
+<View>
+  <Text>This is the login page </Text>
+    <Button title="Homepage" onPress={() => history.push("/")}></Button>
+</View>
+  )};
