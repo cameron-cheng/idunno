@@ -23,80 +23,88 @@ const Users = [
 
 
 export default class App extends React.Component {
-  
-constructor(){
-  super()
+  constructor(){
+    super()
 
-  this.position = new Animated.ValueXY()
-  this.state = {
-    currentIndex: 0
+    this.position = new Animated.ValueXY()
+    this.state = {
+      currentIndex: 0,
+      likes: [],
+      dislikes: []
+    }
+
+    this.rotate = this.position.x.interpolate({
+      inputRange: [-SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2],
+      outputRange: ['-10deg', '0deg', '10deg'],
+      extrapolate: 'clamp'
+    })
+
+    this.rotateAndTranslate = {
+      transform: [{
+        rotate: this.rotate
+      },
+      ...this.position.getTranslateTransform()
+    ]
+    }
+
+    this.likeOpacity = this.position.x.interpolate({
+      inputRange: [-SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2],
+      outputRange: [0, 0, 1],
+      extrapolate: 'clamp'
+    })
+
+    this.dislikeOpacity = this.position.x.interpolate({
+      inputRange: [-SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2],
+      outputRange: [1, 0, 0],
+      extrapolate: 'clamp'
+    })
+
+    this.nextCardOpacity = this.position.x.interpolate({
+      inputRange: [-SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2],
+      outputRange: [1, 0, 1],
+      extrapolate: 'clamp'
+    })
+    this.nextCardScale = this.position.x.interpolate({
+      inputRange: [-SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2],
+      outputRange: [1, 0.8, 1],
+      extrapolate: 'clamp'
+    })
   }
 
-  this.rotate = this.position.x.interpolate({
-    inputRange: [-SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2],
-    outputRange: ['-10deg', '0deg', '10deg'],
-    extrapolate: 'clamp'
-  })
 
-  this.rotateAndTranslate = {
-    transform: [{
-      rotate: this.rotate
-    },
-    ...this.position.getTranslateTransform()
-  ]
-  }
 
-  this.likeOpacity = this.position.x.interpolate({
-    inputRange: [-SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2],
-    outputRange: [0, 0, 1],
-    extrapolate: 'clamp'
-  })
-
-  this.dislikeOpacity = this.position.x.interpolate({
-    inputRange: [-SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2],
-    outputRange: [1, 0, 0],
-    extrapolate: 'clamp'
-  })
-
-  this.nextCardOpacity = this.position.x.interpolate({
-    inputRange: [-SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2],
-    outputRange: [1, 0, 1],
-    extrapolate: 'clamp'
-  })
-  this.nextCardScale = this.position.x.interpolate({
-    inputRange: [-SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2],
-    outputRange: [1, 0.8, 1],
-    extrapolate: 'clamp'
-  })
-  
-}
-
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.PanResponder = PanResponder.create({
       onStartShouldSetPanResponder:(evt, gestureState) => true,
       onPanResponderMove:(evt, gestureState) => {
         this.position.setValue({ x:gestureState.dx, y:gestureState.dy })
       },
       onPanResponderRelease:(evt, gestureState) => {
+  
+
         //swipe right animation
         if (gestureState.dx > 200) {
           Animated.spring(this.position, {
             toValue: { x: SCREEN_WIDTH + 100, y: gestureState.dy}
           }).start(() => {
-            this.setState({ currentIndex: this.state.currentIndex + 1}, () => {
+            this.setState({ currentIndex: this.state.currentIndex + 1, likes: [...this.state.likes, Users[this.state.currentIndex].title]}, () => {
               this.position.setValue({ x: 0, y:0 })
+              console.log('LIKES :>> ', this.state.likes);
             })
           })
+          console.log('INDEX :>> ', this.state.currentIndex);
 
         //swipe left animation
         } else if (gestureState.dx <  -200) {
           Animated.spring(this.position, {
             toValue: { x: -SCREEN_WIDTH - 100, y: gestureState.dy}
            }).start(() => {
-            this.setState({ currentIndex: this.state.currentIndex + 1}, () => {
+            this.setState({ currentIndex: this.state.currentIndex + 1, dislikes: [...this.state.dislikes, Users[this.state.currentIndex].title]}, () => {
               this.position.setValue({ x: 0, y:0 })
+              console.log('DISLIKES :>> ', this.state.dislikes);
             })
           })
+          console.log('INDEX :>> ', this.state.currentIndex);
 
         //spring back to middle if not swiped far enough    
         } else { 
@@ -110,8 +118,6 @@ constructor(){
   }
 
   renderUsers = () => {
-
-    
     return Users.map((item, index) => {
       //no cards left
       if (index < this.state.currentIndex) {
@@ -154,11 +160,9 @@ constructor(){
                 style={{flex:1, height:null, width:null, resizeMode: 'cover', borderRadius: 20}}
                 source={item.uri}
               />
-
-              
             </Animated.View>
-  
         )
+
         // cards underneath
       } else {
         return(
