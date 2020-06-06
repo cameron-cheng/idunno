@@ -4,7 +4,7 @@ const app = express()
 const port = 3000
 const bodyParser = require("body-parser")
 
-const YOUR_API_KEY = "AIzaSyAempLTUwM1U4v0_fNwqyB9DQZyXkhkyus"
+const YOUR_API_KEY = "AIzaSyAempLTUwM1U4v0_fNwqyB9DQZyXkhkyus" //MAKE AN ENV VAR
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -32,8 +32,9 @@ app.get('/show', (req, res) => res.render('show'))
 
 app.get('/details/:id', async (req, res) => {
   const detailsRequest = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${req.params.id}&key=${YOUR_API_KEY}`)
-  console.log(detailsRequest.data)
-  res.render('details')
+  details = detailsRequest.data.result
+  review = details.reviews[0]
+  res.render('details', { details, review })
 })
 
 app.listen(port, () => console.log(`Listening at http://localhost:${port}`))
