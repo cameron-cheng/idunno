@@ -8,28 +8,7 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
 export default function Lobby(props) {
-  // const [ready, setReady] = useState(false)
-  // console.log("PROPS", props)
 
-  function onReady() {
-    if (ready) {
-      setReady(false)
-    } else {
-      setReady(true)
-    }
-  }
-  
-  //just to see if it's working 
-  // function change() {
-  //   if (ready) {
-  //     return(<Text>TRUE</Text>)
-  //   } else {
-  //     return(<Text>FALSE</Text>)
-  //   }
-  // }
-  // const changeBool = change();
-  //
-  
   return(  
     <Container style={styles.container}>
       <Header />
@@ -50,7 +29,6 @@ export default function Lobby(props) {
                   style={styles.button}>
                     <Text style={styles.buttonText}>Ready</Text>
                 </Button>
-                
                 <Button rounded danger style={styles.button}>
                   <Text style={styles.buttonText}>Not Ready</Text>
                 </Button>
