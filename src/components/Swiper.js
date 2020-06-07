@@ -1,3 +1,5 @@
+const _ = require('lodash');
+
 import React, { Component } from "react";
 import {
   View,
@@ -8,14 +10,14 @@ import {
   Animated,
   PanResponder
 } from "react-native";
-
+import { Redirect } from 'react-router-native'
 import { List, ListItem, Card, CardItem, Header, Body } from 'native-base'
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
 const Users = [
-{id: '1', title: "Dark Night", reviews: "5/5", theatre: "Vancouver", genre: "Action/Adventure", uri: require('../assets/feed_images/1.jpg')},
+{id: '1', title: "Dark Knight", reviews: "5/5", theatre: "Vancouver", genre: "Action/Adventure", uri: require('../assets/feed_images/1.jpg')},
 {id: '2', title: "Jungle Book", reviews: "3/5", theatre: "Coquitlam", genre: "Adventure/Fantasy", uri: require('../assets/feed_images/2.jpg')},
 {id: '3', title: "Avengers", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/3.jpg')},
 {id: '4', title: "Hunger Games", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/4.jpg')},
@@ -23,7 +25,9 @@ const Users = [
 {id: '6', title: "Jurassic World", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/6.jpg')},
 {id: '7', title: "Glass", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/7.jpg')},
 {id: '8', title: "Dawn of the Planet of the Apes", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/8.jpg')},
-{id: '9', title: "Jaws", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/9.jpg')}
+{id: '9', title: "Jaws", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/9.jpg')},
+{id: '10', title: "Dark Knight", reviews: "5/5", theatre: "Langley", genre: "Action/Adventure", uri: require('../assets/feed_images/1.jpg')},
+{id: '11', title: "Jungle Book", reviews: "3/5", theatre: "Richmond", genre: "Adventure/Fantasy", uri: require('../assets/feed_images/2.jpg')},
 ]
 
 
@@ -78,7 +82,6 @@ export default class App extends React.Component {
   }
 
 
-
   UNSAFE_componentWillMount() {
     this.PanResponder = PanResponder.create({
       onStartShouldSetPanResponder:(evt, gestureState) => true,
@@ -86,7 +89,7 @@ export default class App extends React.Component {
         this.position.setValue({ x:gestureState.dx, y:gestureState.dy })
       },
       onPanResponderRelease:(evt, gestureState) => {
-  
+
 
         //swipe right animation
         if (gestureState.dx > 200) {
@@ -123,8 +126,20 @@ export default class App extends React.Component {
     })
   }
 
+  componentWillUnmount() {
+    const result = _.head(_(this.state.likes)
+                    .countBy()
+                    .entries()
+                    .maxBy(_.last));
+
+    console.log('RESULT :>> ', result);
+  }
+
+
+
   renderUsers = () => {
     return Users.map((item, index) => {
+
       //no cards left
       if (index < this.state.currentIndex) {
         return null
@@ -202,15 +217,16 @@ export default class App extends React.Component {
               source={item.uri}
             />
           </Animated.View>
-  
         )
       }
-
-      
     }).reverse()
   }
   
   render() {
+     //once the current index equals the data length (the stack is done), calculate what the most popular element in the array is
+     if (this.state.currentIndex >= Users.length) {
+      return <Redirect to="/results"/>
+    }
     return (
       <View>
         <View style={{ height: 40 }}>
@@ -223,7 +239,6 @@ export default class App extends React.Component {
     );
   }
 }
-
 
 const styles = StyleSheet.create({
   container: {
