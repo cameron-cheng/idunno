@@ -1,5 +1,3 @@
-const _ = require('lodash');
-
 import mode from '../helpers/mode'
 
 import React, { Component } from "react";
@@ -31,7 +29,6 @@ const Users = [
 {id: '10', title: "Dark Knight", reviews: "5/5", theatre: "Langley", genre: "Action/Adventure", uri: require('../assets/feed_images/1.jpg')},
 {id: '11', title: "Jungle Book", reviews: "3/5", theatre: "Richmond", genre: "Adventure/Fantasy", uri: require('../assets/feed_images/2.jpg')},
 ]
-
 
 
 export default class App extends React.Component {
@@ -127,11 +124,6 @@ export default class App extends React.Component {
       }
     })
   }
-
-  componentWillUnmount() {
-   
-  }
-
 
 
   renderUsers = () => {
