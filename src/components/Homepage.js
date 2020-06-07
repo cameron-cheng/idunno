@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, Button } from 'react-native';
 
+
 export default ({ history }) => {
   return (
 <View>
@@ -10,5 +11,6 @@ export default ({ history }) => {
     <Button title="Invitation" onPress={() => history.push("/invitation")}></Button>
     <Button title="Lobby" onPress={() => history.push("/lobby")}></Button>
     <Button title="Login" onPress={() => history.push("/login")}></Button>
+     
 </View>
   )};
