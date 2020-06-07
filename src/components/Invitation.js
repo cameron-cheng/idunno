@@ -8,7 +8,4 @@ export default ({ history }) => {
     <Button title="Homepage" onPress={() => history.push("/")}></Button>
     <Share />
 </View>
-
-
-
   )};

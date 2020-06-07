@@ -1,6 +1,6 @@
 import React from 'react';
 import { Share, View, Button } from 'react-native';
-import QRCode from 'react-native-svg';
+import QRCode from 'react-native-qrcode-svg';
 
 export default ShareExample = () => {
   const onShare = async () => {
@@ -23,8 +23,8 @@ export default ShareExample = () => {
     }
   };
     return (
-      
     <View style={{ marginTop: 50 }}>
+      <QRCode value="http://www.google.com"/>
       <Button onPress={onShare} title="Share" />
     </View>
   );
