@@ -24,7 +24,7 @@ export default ShareExample = () => {
   };
     return (
     <View style={{ marginTop: 50 }}>
-      <QRCode value="http://www.google.com"/>
+      <View style={{ marginLeft: 35 }}><QRCode value="http://www.google.com"/></View>
       <Button onPress={onShare} title="Share" />
     </View>
   );
