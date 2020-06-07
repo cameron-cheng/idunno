@@ -1,19 +1,49 @@
-import React from 'react';
-import { View, Text, Button, StyleSheet, Dimensions } from 'react-native';
-import Swiper from './Swiper'
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import { Container, Content, Card, CardItem, Header, Body, Button } from 'native-base';
+import Swiper from './Swiper';
+import Lobby from './Lobby';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-export default ({ history }) => {
-  return(
-    <View style={styles.container}>
-      
-      <View>
-        <Swiper />
+export default function Sessions(props) {
+  const [lobbyReady, setLobbyReady] = useState(false)
+ 
+  function handleReady() {
+    // console.log("Hi")
+    if (lobbyReady) {
+      setLobbyReady(false)
+      console.log(lobbyReady)
+    } else {
+      setLobbyReady(true)
+      console.log(lobbyReady)
+    }
+  }
+
+  if (lobbyReady) {
+    return(
+      <View style={styles.container}>
+        <Text></Text>
+        <View>
+          <Swiper />
+        </View>
+        <Button title="Homepage" onPress={() => history.push("/")}></Button>
       </View>
-      <Button title="Homepage" onPress={() => history.push("/")}></Button>
-    </View>
-  )};
+    )
+
+  } else {
+    return(
+      <View style={styles.container}>
+        <Text></Text>
+        <View>
+          <Lobby handleReady = {handleReady}/>
+        </View>
+        <Button title="Homepage" onPress={() => history.push("/")}></Button>
+      </View>
+    )
+  }
+  
+};
 
 const styles = StyleSheet.create({
   container: {
