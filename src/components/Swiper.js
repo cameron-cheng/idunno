@@ -8,7 +8,8 @@ import {
   Dimensions,
   Image,
   Animated,
-  PanResponder
+  PanResponder,
+  Button
 } from "react-native";
 
 import { List, ListItem, Card, CardItem, Header, Body } from 'native-base'
@@ -25,7 +26,9 @@ const Users = [
 {id: '6', title: "Jurassic World", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/6.jpg')},
 {id: '7', title: "Glass", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/7.jpg')},
 {id: '8', title: "Dawn of the Planet of the Apes", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/8.jpg')},
-{id: '9', title: "Jaws", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/9.jpg')}
+{id: '9', title: "Jaws", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/9.jpg')},
+{id: '10', title: "Dark Night", reviews: "5/5", theatre: "Langley", genre: "Action/Adventure", uri: require('../assets/feed_images/1.jpg')},
+{id: '11', title: "Jungle Book", reviews: "3/5", theatre: "Richmond", genre: "Adventure/Fantasy", uri: require('../assets/feed_images/2.jpg')},
 ]
 
 
@@ -87,7 +90,7 @@ export default class App extends React.Component {
         this.position.setValue({ x:gestureState.dx, y:gestureState.dy })
       },
       onPanResponderRelease:(evt, gestureState) => {
-  
+
 
         //swipe right animation
         if (gestureState.dx > 200) {
@@ -97,6 +100,11 @@ export default class App extends React.Component {
             this.setState({ currentIndex: this.state.currentIndex + 1, likes: [...this.state.likes, Users[this.state.currentIndex].title]}, () => {
               this.position.setValue({ x: 0, y:0 })
               console.log('LIKES :>> ', this.state.likes);
+              
+              //once the current index equals the data length (the stack is done), calculate what the most popular element in the array is
+              if (this.state.currentIndex >= Users.length) {
+                this.componentWillUnmount()
+              }
             })
           })
           console.log('INDEX :>> ', this.state.currentIndex);
@@ -109,6 +117,11 @@ export default class App extends React.Component {
             this.setState({ currentIndex: this.state.currentIndex + 1, dislikes: [...this.state.dislikes, Users[this.state.currentIndex].title]}, () => {
               this.position.setValue({ x: 0, y:0 })
               console.log('DISLIKES :>> ', this.state.dislikes);
+
+              //once the current index equals the data length (the stack is done), calculate what the most popular element in the array is
+              if (this.state.currentIndex >= Users.length) {
+                this.componentWillUnmount()
+              }
             })
           })
           console.log('INDEX :>> ', this.state.currentIndex);
@@ -124,11 +137,24 @@ export default class App extends React.Component {
     })
   }
 
+  componentWillUnmount() {
+    const result = _.head(_(this.state.likes)
+                    .countBy()
+                    .entries()
+                    .maxBy(_.last));
+
+    console.log('RESULT :>> ', result);
+    
+  }
+
+
+
   renderUsers = () => {
     return Users.map((item, index) => {
+
       //no cards left
       if (index < this.state.currentIndex) {
-        return <Button title="Results" onPress={() => history.push("/results")}></Button>
+        return null
 
         //top card
       } else if (index === this.state.currentIndex) {
@@ -224,7 +250,6 @@ export default class App extends React.Component {
     );
   }
 }
-
 
 const styles = StyleSheet.create({
   container: {
