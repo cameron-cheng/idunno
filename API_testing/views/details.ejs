@@ -6,6 +6,12 @@
   <title>Details</title>
 </head>
 <body>
-  <h1>Hello World</h1>
+  <div style="display: flex; flex-direction: column; align-items: center; max-width: 600px; margin: 0 auto">
+    <h1><%= details.name %></h1>
+    <h2>Total Ratings: <%= details.user_ratings_total %></h2>
+    <h3>Name: <%= review.author_name %></h3>
+    <h4><%= review.rating%> / 5</h4>
+    <p><%= review.text %></p>
+  </div>
 </body>
 </html>
