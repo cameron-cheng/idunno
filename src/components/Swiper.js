@@ -1,3 +1,5 @@
+const _ = require('lodash');
+
 import React, { Component } from "react";
 import {
   View,
@@ -78,7 +80,6 @@ export default class App extends React.Component {
   }
 
 
-
   UNSAFE_componentWillMount() {
     this.PanResponder = PanResponder.create({
       onStartShouldSetPanResponder:(evt, gestureState) => true,
@@ -127,7 +128,7 @@ export default class App extends React.Component {
     return Users.map((item, index) => {
       //no cards left
       if (index < this.state.currentIndex) {
-        return null
+        return <Button title="Results" onPress={() => history.push("/results")}></Button>
 
         //top card
       } else if (index === this.state.currentIndex) {
