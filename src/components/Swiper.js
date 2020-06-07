@@ -217,11 +217,8 @@ export default class App extends React.Component {
               source={item.uri}
             />
           </Animated.View>
-  
         )
       }
-
-      
     }).reverse()
   }
   

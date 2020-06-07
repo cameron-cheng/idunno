@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import { NativeRouter, Switch, Route} from 'react-router-native'
-import Home from './src/components/Homepage'
+import Homepage from './src/components/Homepage'
 import Sessions from './src/components/Sessions'
 import Results from './src/components/Results'
 import Invitation from './src/components/Invitation'
@@ -18,7 +18,7 @@ export default function App() {
     <NativeRouter>
       <View style={styles.container}>
         <Switch>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" component={Homepage} />
           <Route exact path="/sessions" component={Sessions} />
           <Route exact path="/results" component={Results}/>
           <Route exact path="/invitation" component={Invitation}/>
