@@ -11,7 +11,7 @@
       <h1><%= result.name %></h1>
       <h2><%= result.rating %> / 5</h2>
       <h3><%= result.formatted_address %></h3>
-      <img src='https://maps.googleapis.com/maps/api/place/photo?key=<%= YOUR_API_KEY %>&photoreference=<%= result.photos[0].photo_reference %>&maxheight=400'>
+      <img src='https://maps.googleapis.com/maps/api/place/photo?key=<%= API_KEY %>&photoreference=<%= result.photos[0].photo_reference %>&maxheight=400'>
       <a href='/details/<%= result.place_id %>'>RESTAURANT DETAILS</a>
       <p>=================================================================</p><br>
     <% })) %>
