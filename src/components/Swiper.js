@@ -8,17 +8,16 @@ import {
   Dimensions,
   Image,
   Animated,
-  PanResponder,
-  Button
+  PanResponder
 } from "react-native";
-
+import { Redirect } from 'react-router-native'
 import { List, ListItem, Card, CardItem, Header, Body } from 'native-base'
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
 const Users = [
-{id: '1', title: "Dark Night", reviews: "5/5", theatre: "Vancouver", genre: "Action/Adventure", uri: require('../assets/feed_images/1.jpg')},
+{id: '1', title: "Dark Knight", reviews: "5/5", theatre: "Vancouver", genre: "Action/Adventure", uri: require('../assets/feed_images/1.jpg')},
 {id: '2', title: "Jungle Book", reviews: "3/5", theatre: "Coquitlam", genre: "Adventure/Fantasy", uri: require('../assets/feed_images/2.jpg')},
 {id: '3', title: "Avengers", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/3.jpg')},
 {id: '4', title: "Hunger Games", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/4.jpg')},
@@ -27,7 +26,7 @@ const Users = [
 {id: '7', title: "Glass", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/7.jpg')},
 {id: '8', title: "Dawn of the Planet of the Apes", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/8.jpg')},
 {id: '9', title: "Jaws", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/9.jpg')},
-{id: '10', title: "Dark Night", reviews: "5/5", theatre: "Langley", genre: "Action/Adventure", uri: require('../assets/feed_images/1.jpg')},
+{id: '10', title: "Dark Knight", reviews: "5/5", theatre: "Langley", genre: "Action/Adventure", uri: require('../assets/feed_images/1.jpg')},
 {id: '11', title: "Jungle Book", reviews: "3/5", theatre: "Richmond", genre: "Adventure/Fantasy", uri: require('../assets/feed_images/2.jpg')},
 ]
 
@@ -100,11 +99,6 @@ export default class App extends React.Component {
             this.setState({ currentIndex: this.state.currentIndex + 1, likes: [...this.state.likes, Users[this.state.currentIndex].title]}, () => {
               this.position.setValue({ x: 0, y:0 })
               console.log('LIKES :>> ', this.state.likes);
-              
-              //once the current index equals the data length (the stack is done), calculate what the most popular element in the array is
-              if (this.state.currentIndex >= Users.length) {
-                this.componentWillUnmount()
-              }
             })
           })
           console.log('INDEX :>> ', this.state.currentIndex);
@@ -117,11 +111,6 @@ export default class App extends React.Component {
             this.setState({ currentIndex: this.state.currentIndex + 1, dislikes: [...this.state.dislikes, Users[this.state.currentIndex].title]}, () => {
               this.position.setValue({ x: 0, y:0 })
               console.log('DISLIKES :>> ', this.state.dislikes);
-
-              //once the current index equals the data length (the stack is done), calculate what the most popular element in the array is
-              if (this.state.currentIndex >= Users.length) {
-                this.componentWillUnmount()
-              }
             })
           })
           console.log('INDEX :>> ', this.state.currentIndex);
@@ -144,7 +133,6 @@ export default class App extends React.Component {
                     .maxBy(_.last));
 
     console.log('RESULT :>> ', result);
-    
   }
 
 
@@ -238,6 +226,10 @@ export default class App extends React.Component {
   }
   
   render() {
+     //once the current index equals the data length (the stack is done), calculate what the most popular element in the array is
+     if (this.state.currentIndex >= Users.length) {
+      return <Redirect to="/results"/>
+    }
     return (
       <View>
         <View style={{ height: 40 }}>
