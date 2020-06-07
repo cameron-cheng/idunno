@@ -1,5 +1,7 @@
 const _ = require('lodash');
 
+import mode from '../helpers/mode'
+
 import React, { Component } from "react";
 import {
   View,
@@ -127,12 +129,7 @@ export default class App extends React.Component {
   }
 
   componentWillUnmount() {
-    const result = _.head(_(this.state.likes)
-                    .countBy()
-                    .entries()
-                    .maxBy(_.last));
-
-    console.log('RESULT :>> ', result);
+   
   }
 
 
@@ -225,7 +222,12 @@ export default class App extends React.Component {
   render() {
      //once the current index equals the data length (the stack is done), calculate what the most popular element in the array is
      if (this.state.currentIndex >= Users.length) {
-      return <Redirect to="/results"/>
+      const results = mode(this.state.likes)
+      console.log('RESULT :>> ', results);
+      return <Redirect to={{
+        pathname: '/results',
+        results: results
+      }} />
     }
     return (
       <View>
