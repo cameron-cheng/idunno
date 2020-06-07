@@ -1,5 +1,5 @@
 import React from 'react';
-import { Share, View, Button } from 'react-native';
+import { Share, View, Button, Text } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 
 export default ShareExample = () => {
@@ -24,6 +24,7 @@ export default ShareExample = () => {
   };
     return (
     <View style={{ marginTop: 50 }}>
+      <Text style={{marginBottom: 30, marginLeft: 40, fontSize: 30 }}>YZXN</Text>
       <View style={{ marginLeft: 35 }}><QRCode value="http://www.google.com"/></View>
       <Button onPress={onShare} title="Share" />
     </View>
