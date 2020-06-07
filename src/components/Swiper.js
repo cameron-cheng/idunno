@@ -17,86 +17,100 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 const Users = [
 {id: '1', title: "Dark Night", reviews: "5/5", theatre: "Vancouver", genre: "Action/Adventure", uri: require('../assets/feed_images/1.jpg')},
 {id: '2', title: "Jungle Book", reviews: "3/5", theatre: "Coquitlam", genre: "Adventure/Fantasy", uri: require('../assets/feed_images/2.jpg')},
-{id: '3', title: "Avengers", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/3.png')}
+{id: '3', title: "Avengers", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/3.jpg')},
+{id: '4', title: "Hunger Games", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/4.jpg')},
+{id: '5', title: "Moana", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/5.jpg')},
+{id: '6', title: "Jurassic World", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/6.jpg')},
+{id: '7', title: "Glass", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/7.jpg')},
+{id: '8', title: "Dawn of the Planet of the Apes", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/8.jpg')},
+{id: '9', title: "Jaws", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/9.jpg')}
 ]
 
 
 
 export default class App extends React.Component {
-  
-constructor(){
-  super()
+  constructor(){
+    super()
 
-  this.position = new Animated.ValueXY()
-  this.state = {
-    currentIndex: 0
+    this.position = new Animated.ValueXY()
+    this.state = {
+      currentIndex: 0,
+      likes: [],
+      dislikes: []
+    }
+
+    this.rotate = this.position.x.interpolate({
+      inputRange: [-SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2],
+      outputRange: ['-10deg', '0deg', '10deg'],
+      extrapolate: 'clamp'
+    })
+
+    this.rotateAndTranslate = {
+      transform: [{
+        rotate: this.rotate
+      },
+      ...this.position.getTranslateTransform()
+    ]
+    }
+
+    this.likeOpacity = this.position.x.interpolate({
+      inputRange: [-SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2],
+      outputRange: [0, 0, 1],
+      extrapolate: 'clamp'
+    })
+
+    this.dislikeOpacity = this.position.x.interpolate({
+      inputRange: [-SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2],
+      outputRange: [1, 0, 0],
+      extrapolate: 'clamp'
+    })
+
+    this.nextCardOpacity = this.position.x.interpolate({
+      inputRange: [-SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2],
+      outputRange: [1, 0, 1],
+      extrapolate: 'clamp'
+    })
+    this.nextCardScale = this.position.x.interpolate({
+      inputRange: [-SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2],
+      outputRange: [1, 0.8, 1],
+      extrapolate: 'clamp'
+    })
   }
 
-  this.rotate = this.position.x.interpolate({
-    inputRange: [-SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2],
-    outputRange: ['-10deg', '0deg', '10deg'],
-    extrapolate: 'clamp'
-  })
 
-  this.rotateAndTranslate = {
-    transform: [{
-      rotate: this.rotate
-    },
-    ...this.position.getTranslateTransform()
-  ]
-  }
 
-  this.likeOpacity = this.position.x.interpolate({
-    inputRange: [-SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2],
-    outputRange: [0, 0, 1],
-    extrapolate: 'clamp'
-  })
-
-  this.dislikeOpacity = this.position.x.interpolate({
-    inputRange: [-SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2],
-    outputRange: [1, 0, 0],
-    extrapolate: 'clamp'
-  })
-
-  this.nextCardOpacity = this.position.x.interpolate({
-    inputRange: [-SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2],
-    outputRange: [1, 0, 1],
-    extrapolate: 'clamp'
-  })
-  this.nextCardScale = this.position.x.interpolate({
-    inputRange: [-SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2],
-    outputRange: [1, 0.8, 1],
-    extrapolate: 'clamp'
-  })
-  
-}
-
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.PanResponder = PanResponder.create({
       onStartShouldSetPanResponder:(evt, gestureState) => true,
       onPanResponderMove:(evt, gestureState) => {
         this.position.setValue({ x:gestureState.dx, y:gestureState.dy })
       },
       onPanResponderRelease:(evt, gestureState) => {
+  
+
         //swipe right animation
         if (gestureState.dx > 200) {
           Animated.spring(this.position, {
             toValue: { x: SCREEN_WIDTH + 100, y: gestureState.dy}
           }).start(() => {
-            this.setState({ currentIndex: this.state.currentIndex + 1}, () => {
+            this.setState({ currentIndex: this.state.currentIndex + 1, likes: [...this.state.likes, Users[this.state.currentIndex].title]}, () => {
               this.position.setValue({ x: 0, y:0 })
+              console.log('LIKES :>> ', this.state.likes);
             })
           })
+          console.log('INDEX :>> ', this.state.currentIndex);
 
         //swipe left animation
         } else if (gestureState.dx <  -200) {
           Animated.spring(this.position, {
             toValue: { x: -SCREEN_WIDTH - 100, y: gestureState.dy}
            }).start(() => {
-            this.setState({ currentIndex: this.state.currentIndex + 1}, () => {
+            this.setState({ currentIndex: this.state.currentIndex + 1, dislikes: [...this.state.dislikes, Users[this.state.currentIndex].title]}, () => {
               this.position.setValue({ x: 0, y:0 })
+              console.log('DISLIKES :>> ', this.state.dislikes);
             })
           })
+          console.log('INDEX :>> ', this.state.currentIndex);
 
         //spring back to middle if not swiped far enough    
         } else { 
@@ -110,8 +124,6 @@ constructor(){
   }
 
   renderUsers = () => {
-
-    
     return Users.map((item, index) => {
       //no cards left
       if (index < this.state.currentIndex) {
@@ -154,15 +166,14 @@ constructor(){
                 style={{flex:1, height:null, width:null, resizeMode: 'cover', borderRadius: 20}}
                 source={item.uri}
               />
-
-              
             </Animated.View>
-  
         )
+
         // cards underneath
       } else {
         return(
           <Animated.View 
+          {...this.PanResponder.panHandlers}
           key={item.id} style={[{
             opacity: this.nextCardOpacity,
             transform: [{ scale: this.nextCardScale }],
@@ -171,14 +182,14 @@ constructor(){
             padding: 10, 
             position: 'absolute'
             }]} >
-              {/* Card header */}
+              {/* Card header - shoudl be same styled as "top card" */}
             <Animated.View style={{width: SCREEN_WIDTH, padding:10, position: 'absolute',zIndex:1000}}>
               <View style={{backgroundColor: '#f0f0f0', borderTopRightRadius:20, borderTopLeftRadius:20, height: 50, justifyContent: 'center'}}>
                 <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>{item.title}</Text>
               </View>
             </Animated.View>
 
-            {/* Card footer */}
+            {/* Card footer - should be styled same as "top card"*/}
             <Animated.View style={{width: SCREEN_WIDTH, padding:10, position: 'absolute', bottom:0, zIndex:1000}}>
               <View style={{backgroundColor: '#f0f0f0', borderBottomRightRadius:20, borderBottomLeftRadius:20, height: 200, justifyContent: 'center'}}>
                 <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>Reviews: {item.reviews}</Text>
