@@ -4,7 +4,9 @@ import { NativeRouter, Switch, Route} from 'react-router-native'
 import Home from './src/components/Homepage'
 import Sessions from './src/components/Sessions'
 import Results from './src/components/Results'
-
+import Invitation from './src/components/Invitation'
+import Lobby from './src/components/Lobby'
+import Login from './src/components/Login'
 
 const instructions = Platform.select({
   ios: `Press Cmd+R to reload,\nCmd+D or shake for dev menu`,
@@ -19,6 +21,10 @@ export default function App() {
           <Route exact path="/" component={Home} />
           <Route exact path="/sessions" component={Sessions} />
           <Route exact path="/results" component={Results}/>
+          <Route exact path="/invitation" component={Invitation}/>
+          <Route exact path="/lobby" component={Lobby}/>
+          <Route exact path="/login" component={Login}/>
+
         </Switch>
       </View>
     </NativeRouter>
