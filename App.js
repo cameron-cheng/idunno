@@ -7,6 +7,7 @@ import Results from './src/components/Results'
 import Invitation from './src/components/Invitation'
 import Lobby from './src/components/Lobby'
 import Login from './src/components/Login'
+import Share from './src/components/Share'
 
 const instructions = Platform.select({
   ios: `Press Cmd+R to reload,\nCmd+D or shake for dev menu`,
@@ -16,6 +17,7 @@ const instructions = Platform.select({
 export default function App() {
   return (
     <NativeRouter>
+      
       <View style={styles.container}>
         <Switch>
           <Route exact path="/" component={Home} />
@@ -24,8 +26,8 @@ export default function App() {
           <Route exact path="/invitation" component={Invitation}/>
           <Route exact path="/lobby" component={Lobby}/>
           <Route exact path="/login" component={Login}/>
-
         </Switch>
+
       </View>
     </NativeRouter>
   );
