@@ -42,7 +42,6 @@ export default function Sessions(props) {
       </View>
     )
   }
-  
 };
 
 const styles = StyleSheet.create({

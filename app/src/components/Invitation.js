@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Text, Button } from 'react-native';
 import Share from './Share'
+
+
 export default ({ history }) => {
   return(
 <View>

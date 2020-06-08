@@ -4,10 +4,10 @@ import { NativeRouter, Switch, Route} from 'react-router-native'
 import Home from './src/components/Homepage'
 import Sessions from './src/components/Sessions'
 import Results from './src/components/Results'
-import Invitation from './src/components/Invitation'
+import Invitation from './src/components/Invigtation'
 import Lobby from './src/components/Lobby'
 import Login from './src/components/Login'
-import Share from './src/components/Share'
+
 
 const instructions = Platform.select({
   ios: `Press Cmd+R to reload,\nCmd+D or shake for dev menu`,

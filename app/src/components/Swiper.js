@@ -1,10 +1,11 @@
+
 import mode from '../helpers/mode'
 
 import React, { Component } from "react";
 import {
   View,
   Text,
-  StyleSheet, 
+  StyleSheet,
   Dimensions,
   Image,
   Animated,
