@@ -4,7 +4,7 @@ import { NativeRouter, Switch, Route} from 'react-router-native'
 import Home from './src/components/Homepage'
 import Sessions from './src/components/Sessions'
 import Results from './src/components/Results'
-import Invitation from './src/components/Invigtation'
+import Invitation from './src/components/Invitation'
 import Lobby from './src/components/Lobby'
 import Login from './src/components/Login'
 
