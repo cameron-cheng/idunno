@@ -8,7 +8,7 @@ import Invitation from './src/components/Invitation'
 import Lobby from './src/components/Lobby'
 import Login from './src/components/Login'
 import io from "socket.io-client";
-import Timer from './src/components/Timer';
+// import Timer from './src/components/Timer';
 
 
 const instructions = Platform.select({
@@ -43,7 +43,6 @@ export default function App() {
           <Route exact path="/invitation" component={Invitation}/>
           <Route exact path="/lobby" component={Lobby}/>
           <Route exact path="/login" component={Login}/>
-          {/* <Route exact path="/timer" component={Timer}/> */}
           {/* <Route path="/timer" exact render={(routeProps)=> <Timer {...routeProps} io={socket} /> */}
          />
       </Switch>
