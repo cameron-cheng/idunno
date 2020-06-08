@@ -10,7 +10,6 @@ export default function Sessions(props) {
   const [lobbyReady, setLobbyReady] = useState(false)
  
   function handleReady() {
-    // console.log("Hi")
     if (lobbyReady) {
       props.sendReady()
       setLobbyReady(false)
