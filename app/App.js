@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import { NativeRouter, Switch, Route} from 'react-router-native'
 import Home from './src/components/Homepage'
@@ -7,6 +7,8 @@ import Results from './src/components/Results'
 import Invitation from './src/components/Invitation'
 import Lobby from './src/components/Lobby'
 import Login from './src/components/Login'
+import io from "socket.io-client";
+import Timer from './src/components/Timer';
 
 
 const instructions = Platform.select({
@@ -15,18 +17,36 @@ const instructions = Platform.select({
 });
 
 export default function App() {
+  const socket = io('http://192.168.0.24:3000')
+
+  function sendReady() {
+    socket.emit("userReady", true)
+    socket.emit("chat message", "Hi")
+    console.log("ready")
+  }
+
+  useEffect(() => {
+    setTimeout(() => {
+      socket.emit("chat message", "Hi")
+    }, 2000)
+    
+  },[])
+
   return (
     <NativeRouter>
       
       <View style={styles.container}>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/sessions" component={Sessions} />
+          <Route exact path="/sessions" exact render={(routeProps)=> <Sessions {...routeProps} sendReady={sendReady}  />}/>
           <Route exact path="/results" component={Results}/>
           <Route exact path="/invitation" component={Invitation}/>
           <Route exact path="/lobby" component={Lobby}/>
           <Route exact path="/login" component={Login}/>
-        </Switch>
+          {/* <Route exact path="/timer" component={Timer}/> */}
+          {/* <Route path="/timer" exact render={(routeProps)=> <Timer {...routeProps} io={socket} /> */}
+         />
+      </Switch>
 
       </View>
     </NativeRouter>

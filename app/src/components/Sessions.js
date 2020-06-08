@@ -12,9 +12,12 @@ export default function Sessions(props) {
   function handleReady() {
     // console.log("Hi")
     if (lobbyReady) {
+      props.sendReady()
       setLobbyReady(false)
       console.log(lobbyReady)
     } else {
+      props.sendReady()
+
       setLobbyReady(true)
       console.log(lobbyReady)
     }
