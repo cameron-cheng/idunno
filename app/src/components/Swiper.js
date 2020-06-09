@@ -34,7 +34,7 @@ export default class App extends React.Component {
   
   constructor(props){
     super(props)
-
+    console.log(props.places)
     this.places = this.props.places.results
 
     this.position = new Animated.ValueXY()
@@ -101,7 +101,6 @@ export default class App extends React.Component {
               console.log('LIKES :>> ', this.state.likes);
             })
           })
-          console.log('INDEX :>> ', this.state.currentIndex);
 
         //swipe left animation
         } else if (gestureState.dx <  -200) {
@@ -113,7 +112,6 @@ export default class App extends React.Component {
               console.log('DISLIKES :>> ', this.state.dislikes);
             })
           })
-          console.log('INDEX :>> ', this.state.currentIndex);
 
         //spring back to middle if not swiped far enough    
         } else { 
@@ -170,7 +168,9 @@ export default class App extends React.Component {
               </Animated.View>
               <Image 
                 style={{flex:1, height:null, width:null, resizeMode: 'cover', borderRadius: 20}}
-                source={`https://maps.googleapis.com/maps/api/place/photo?key=${this.props.places.API_KEY}&photoreference=${item.photos[0].photo_reference}&maxheight=400`}
+                source={{
+                  uri: `https://maps.googleapis.com/maps/api/place/photo?key=${this.props.places.API_KEY}&photoreference=${item.photos[0].photo_reference}&maxheight=400`
+                }}
               />
             </Animated.View>
         )
@@ -205,7 +205,9 @@ export default class App extends React.Component {
             </Animated.View>
             <Image 
               style={{flex:1, height:null, width:null, resizeMode: 'cover', borderRadius: 20}}
-              source={`https://maps.googleapis.com/maps/api/place/photo?key=${this.props.places.API_KEY}&photoreference=${item.photos[0].photo_reference}&maxheight=400`}
+              source={{
+                uri: `https://maps.googleapis.com/maps/api/place/photo?key=${this.props.places.API_KEY}&photoreference=${item.photos[0].photo_reference}&maxheight=400`
+              }}
             />
           </Animated.View>
         )

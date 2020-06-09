@@ -30,10 +30,8 @@ export default function Sessions(props) {
   function handleReady() {
     if (lobbyReady) {
       setLobbyReady(false)
-      console.log(lobbyReady)
     } else {
       setLobbyReady(true)
-      console.log(lobbyReady)
     }
   }
 
