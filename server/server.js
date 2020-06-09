@@ -2,30 +2,40 @@ const express = require("express");
 const app = express();
 const server = require("http").createServer(app);
 const io = require("socket.io").listen(server);
+
+
 const port = 3000;
+
+function makeId() {
+  let result           = '';
+  const characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const charactersLength = characters.length;
+  for ( let i = 0; i < 4; i++ ) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
 
 //body parser MW
 const bodyParser = require("body-parser");
-server.use(bodyParser.json());
-server.use(bodyParser.urlencoded({extended:true}))
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}))
 
-//start websocket connection
+//Socket.io Lobby
+
 io.on('connection', (socket) => {
-  console.log(io)
   console.log('a user connected');
+  socket.on('createRoom', (ignore, ackFn) => {
+    const roomId = makeId();
+    socket.join(roomId);
+    console.log("Created RoomId", roomId);
+    ackFn(roomId);
+    // socket.emit('roomCreated', roomId);
+
+  })
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
-  socket.on('chat message', (msg) => {
-    console.log('message: ' + msg);
-  });
-  socket.on('SEND_TIME', function(data){
-    //here the data object is correct
-    socket.emit('RECEIVE_MESSAGE', data); //sending back to client
-  })
-  socket.on("userReady", (userReady) => {
-    console.log(userReady)
-  })
 });
 
 //import routes
@@ -34,9 +44,9 @@ const sessions = require("./routes/sessions");
 const users = require("./routes/users");
 
 //Routes 
-server.use("/api", places());
-server.use("/api", sessions());
-server.use("/api", users());
+app.use("/api", places());
+// app.use("/api", sessions());
+// app.use("/api", users());
 
 server.listen(3000, () => {
   console.log('listening on *:3000');
