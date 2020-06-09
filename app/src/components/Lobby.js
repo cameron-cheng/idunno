@@ -32,8 +32,9 @@ export default function Lobby(props) {
                 </TouchableOpacity>
                 {/* <Button rounded  
                   onPress={(event) => props.handleReady(event)}
-                  // onChange={(event) => props.onChange(event.target.value)}
-                  style={styles.buttonReady}>
+
+                  style={styles.button}>
+
                     <Text style={styles.buttonText}>Ready</Text>
                 </Button> */}
                 <Button rounded style={styles.buttonNotReady}>

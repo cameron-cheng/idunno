@@ -5,10 +5,10 @@ import QRCode  from 'react-native-qrcode-svg';
 export default ShareExample = () => {
 
   function makeid() {
-    var result           = '';
-    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    var charactersLength = characters.length;
-    for ( var i = 0; i < 4; i++ ) {
+    const result           = '';
+    const characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const charactersLength = characters.length;
+    for (const i = 0; i < 4; i++) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;

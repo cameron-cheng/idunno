@@ -1,5 +1,6 @@
 {
   "main": "index.js",
+  "proxy": "http://localhost:3000",
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
@@ -8,6 +9,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "expo": "~37.0.3",
     "expo-splash-screen": "^0.2.3",
     "expo-updates": "~0.2.0",
@@ -26,7 +28,8 @@
     "react-native-unimodules": "~0.9.0",
     "react-native-vector-icons": "^6.6.0",
     "react-native-web": "~0.11.7",
-    "react-router-native": "^5.2.0"
+    "react-router-native": "^5.2.0",
+    "socket.io-client": "^2.3.0"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",

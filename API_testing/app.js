@@ -1,12 +1,12 @@
 require('dotenv').config()
 
+const API_KEY = process.env.API_KEY
+
 const axios = require('axios')
 const express = require('express')
 const app = express()
 const port = 3000
 const bodyParser = require("body-parser")
-
-const API_KEY = process.env.API_KEY
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));

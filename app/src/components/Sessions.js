@@ -1,22 +1,37 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { Container, Content, Card, CardItem, Header, Body, Button } from 'native-base';
-import Swiper from './Swiper';
-import Lobby from './Lobby';
 
-const SCREEN_HEIGHT = Dimensions.get('window').height;
+import Lobby from './Lobby';
+import Swiper from './Swiper';
+import Results from './Results';
+import { set } from 'react-native-reanimated';
+
+const SCREEN_HEIGHT   = Dimensions.get('window').height;
 
 export default function Sessions(props) {
   const [lobbyReady, setLobbyReady] = useState(false)
- 
+  const [places, setPlaces] = useState({});
+
+  useEffect(() => {
+    async function getPlaces() {
+      try {
+        const res = await axios.get('http://192.168.1.72:3000/api/places');
+        setPlaces(res.data)
+        console.log("API Request Finished!")
+      } catch(err) {
+        console.log(err)
+      }
+    }
+    getPlaces();
+  }, []);
+  
   function handleReady() {
-    // console.log("Hi")
     if (lobbyReady) {
       setLobbyReady(false)
-      console.log(lobbyReady)
     } else {
       setLobbyReady(true)
-      console.log(lobbyReady)
     }
   }
 
@@ -25,7 +40,7 @@ export default function Sessions(props) {
       <View style={styles.container}>
         <Text></Text>
         <View>
-          <Swiper />
+          <Swiper places={places}/>
         </View>
         <Button title="Homepage" onPress={() => history.push("/")}></Button>
       </View>
@@ -36,7 +51,7 @@ export default function Sessions(props) {
       <View style={styles.container}>
         <Text></Text>
         <View>
-          <Lobby handleReady = {handleReady}/>
+          <Lobby handleReady={handleReady}/>
         </View>
         <Button title="Homepage" onPress={() => history.push("/")}></Button>
       </View>
