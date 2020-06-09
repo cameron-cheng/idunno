@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { Footer, FooterTab, Button, Left, Right, Icon, Title } from 'native-base';
 import { State } from 'react-native-gesture-handler';
-import LottieView from 'lottie-react-native'
+// import LottieView from 'lottie-react-native'
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
@@ -17,7 +17,7 @@ export default function Lobby(props) {
             </Button>
 
             <Button active>
-              <Icon active name="pluscircleo" />
+              <Icon active name="camera" />
             </Button>
             <Button>
               <Icon name="person" />
