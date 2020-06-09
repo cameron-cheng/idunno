@@ -43,12 +43,10 @@ io.on('connection', (socket) => {
 });
 
 //import routes
-const places = require("./routes/places");
 const sessions = require("./routes/sessions");
 const users = require("./routes/users");
 
 //Routes 
-app.use("/api", places());
 // app.use("/api", sessions());
 // app.use("/api", users());
 

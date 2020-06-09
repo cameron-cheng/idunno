@@ -1,4 +1,6 @@
+import { API_KEY } from 'react-native-dotenv'
 import axios from 'axios';
+
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { Container, Content, Card, CardItem, Header, Body, Button } from 'native-base';
@@ -12,14 +14,20 @@ const SCREEN_HEIGHT   = Dimensions.get('window').height;
 
 export default function Room(props) {
   const [lobbyReady, setLobbyReady] = useState(false)
-  const [places, setPlaces] = useState({});
+  const [places, setPlaces] = useState([]);
+
+  const area = 'gastown'
+  const type = 'restaurant'
+  const radius = '500'
 
   useEffect(() => {
     async function getPlaces() {
-      try {
-       const res = await axios.get('http://192.168.0.37:3000/api/places');
-        setPlaces(res.data)
-        console.log("API Request Finished!")
+      try {  
+        const textSearch = await axios.get(
+          `https://maps.googleapis.com/maps/api/place/textsearch/json?key=${API_KEY}&query=${area}&type=${type}&radius=${radius}`
+        );
+        await setPlaces(textSearch.data.results)
+        console.log("API Request Finished!", "Length:", places.length)
       } catch(err) {
         console.log(err)
       }
