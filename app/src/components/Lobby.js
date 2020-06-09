@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import { Container, Content, Card, CardItem, Body, Button } from 'native-base';
 import { State } from 'react-native-gesture-handler';
 import Header from './Header'
@@ -15,7 +15,7 @@ export default function Lobby(props) {
       <Header />
       <Content style={styles.content}>
         <Card style={styles.card}>
-          <CardItem header style={styles.header}>
+          <CardItem >
             <Text style={styles.text}>Ready to start deciding?</Text>
           </CardItem>
           <CardItem >
@@ -24,13 +24,19 @@ export default function Lobby(props) {
                 Waiting for decision makers...
               </Text>
               <View style={{flexDirection: 'row'}}>
-                <Button rounded success 
+                <TouchableOpacity>
+                  <Text>
+                    Ready
+                  </Text>
+
+                </TouchableOpacity>
+                {/* <Button rounded  
                   onPress={(event) => props.handleReady(event)}
                   // onChange={(event) => props.onChange(event.target.value)}
-                  style={styles.button}>
+                  style={styles.buttonReady}>
                     <Text style={styles.buttonText}>Ready</Text>
-                </Button>
-                <Button rounded danger style={styles.button}>
+                </Button> */}
+                <Button rounded style={styles.buttonNotReady}>
                   <Text style={styles.buttonText}>Not Ready</Text>
                 </Button>
               </View>
@@ -50,6 +56,7 @@ const styles = StyleSheet.create({
   container: {
     // flex: 1,
     width: SCREEN_WIDTH,
+    backgroundColor: '#fcfaf2',
     
     
   },
@@ -60,7 +67,12 @@ const styles = StyleSheet.create({
   card: {
     borderRadius: 20,
     height: 400,
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: '#f9f1dc',
+    shadowColor: '#988a55',
+    shadowOffset: { width: 2, height: 4 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
   },
   header: {
     borderTopLeftRadius:20, 
@@ -70,10 +82,15 @@ const styles = StyleSheet.create({
     fontSize: 25
   },
   body: {
-    alignItems: 'center',
-    top: 60
+    // alignItems: 'center',
+    // top: 60
   },
-  button: {
+  buttonReady: {
+    paddingLeft: 20, 
+    paddingRight: 20,
+    color: '#ee977a'
+  },
+  buttonNotReady: {
     paddingLeft: 20, 
     paddingRight: 20,
   },
