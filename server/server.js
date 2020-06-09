@@ -6,13 +6,17 @@ const port = 3000;
 
 //body parser MW
 const bodyParser = require("body-parser");
-server.use(bodyParser.json());
-server.use(bodyParser.urlencoded({extended:true}))
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}))
+
+//cors MW
+const cors = require('cors');
+app.use(cors());
 
 //start websocket connection
 io.on('connection', (socket) => {
-  console.log(io)
   console.log('a user connected');
+  
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
@@ -34,11 +38,11 @@ const sessions = require("./routes/sessions");
 const users = require("./routes/users");
 
 //Routes 
-server.use("/api", places());
-server.use("/api", sessions());
-server.use("/api", users());
+app.use("/api", places());
+// app.use("/api", sessions());
+// app.use("/api", users());
 
-server.listen(3000, () => {
+server.listen(port, () => {
   console.log('listening on *:3000');
 });
 

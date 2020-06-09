@@ -17,7 +17,7 @@ const instructions = Platform.select({
 });
 
 export default function App() {
-  const socket = io('http://192.168.0.24:3000')
+  const socket = io('http://192.168.1.72:3000')
 
   function sendReady() {
     socket.emit("userReady", true)
