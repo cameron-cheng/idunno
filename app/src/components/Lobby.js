@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
-import { Container, Content, Card, CardItem, Header, Body, Button } from 'native-base';
+import { Container, Content, Card, CardItem, Body, Button } from 'native-base';
 import { State } from 'react-native-gesture-handler';
+import Header from './Header'
 
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -47,7 +48,7 @@ export default function Lobby(props) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     width: SCREEN_WIDTH,
     
     
