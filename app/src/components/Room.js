@@ -14,15 +14,20 @@ const SCREEN_HEIGHT   = Dimensions.get('window').height;
 
 export default function Room(props) {
   const [lobbyReady, setLobbyReady] = useState(false)
-  const [places, setPlaces] = useState({});
+  const [places, setPlaces] = useState([]);
+
+  const area = 'gastown'
+  const type = 'restaurant'
+  const radius = '500'
 
   useEffect(() => {
     async function getPlaces() {
       try {  
-        const placesRequest = await axios.get(`https://maps.googleapis.com/maps/api/place/textsearch/json?key=${API_KEY}&query=metrotown&type=restaurant&radius=500`);
-        setPlaces(placesRequest.data.results)
-        console.log("API Request Finished!")
-        console.log(places)
+        const textSearch = await axios.get(
+          `https://maps.googleapis.com/maps/api/place/textsearch/json?key=${API_KEY}&query=${area}&type=${type}&radius=${radius}`
+        );
+        await setPlaces(textSearch.data.results)
+        console.log("API Request Finished!", "Length:", places.length)
       } catch(err) {
         console.log(err)
       }

@@ -110,7 +110,6 @@ export default class App extends React.Component {
            }).start(() => {
             this.setState({ currentIndex: this.state.currentIndex + 1, dislikes: [...this.state.dislikes, this.places[this.state.currentIndex].place_id]}, () => {
               this.position.setValue({ x: 0, y:0 })
-              console.log('DISLIKES :>> ', this.state.dislikes);
             })
           })
 
@@ -220,7 +219,7 @@ export default class App extends React.Component {
      //once the current index equals the data length (the stack is done), calculate what the most popular element in the array is
      if (this.state.currentIndex >= this.places.length) {
       const results = mode(this.state.likes)
-      console.log('RESULT :>> ', results);
+      console.log('RESULTS :>> ', results);
       return <Redirect to={{
         pathname: '/results',
         results: results,
