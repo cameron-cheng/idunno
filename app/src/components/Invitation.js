@@ -9,5 +9,6 @@ export default ({ history }) => {
   <Text>This is the Invitation page </Text>
     <Button title="Homepage" onPress={() => history.push("/")}></Button>
     <Share />
+    <Button title="Lobby" onPress={() => history.push("/lobby")}></Button>
 </View>
   )};

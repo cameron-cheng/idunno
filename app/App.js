@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import { NativeRouter, Switch, Route} from 'react-router-native'
 import Home from './src/components/Homepage'
-import Sessions from './src/components/Sessions'
+import Room from './src/components/Room'
 import Results from './src/components/Results'
 import Invitation from './src/components/Invitation'
 import Lobby from './src/components/Lobby'
@@ -11,34 +11,18 @@ import io from "socket.io-client";
 // import Timer from './src/components/Timer';
 
 
-const instructions = Platform.select({
-  ios: `Press Cmd+R to reload,\nCmd+D or shake for dev menu`,
-  android: `Double tap R on your keyboard to reload,\nShake or press menu button for dev menu`,
-});
-
 export default function App() {
-  const socket = io('http://192.168.1.72:3000')
-
-  function sendReady() {
-    socket.emit("userReady", true)
-    socket.emit("chat message", "Hi")
-    console.log("ready")
-  }
-
-  useEffect(() => {
-    setTimeout(() => {
-      socket.emit("chat message", "Hi")
-    }, 2000)
-    
-  },[])
-
+const [socket] = useState(() => io('http://192.168.0.37:3000'));
+// [roomId, setRoomId] = useState(null)
   return (
     <NativeRouter>
       
       <View style={styles.container}>
         <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/sessions" exact render={(routeProps)=> <Sessions {...routeProps} sendReady={sendReady}  />}/>
+          <Route exact path="/"  render={(routeProps) => {
+            let homeProps = {...routeProps, socket}
+            return (<Home {...homeProps}/>)}} />
+          <Route exact path="/room" exact render={(routeProps)=> <Room {...routeProps} />}/>
           <Route exact path="/results" component={Results}/>
           <Route exact path="/invitation" component={Invitation}/>
           <Route exact path="/lobby" component={Lobby}/>
