@@ -17,7 +17,7 @@ export default function Room(props) {
   useEffect(() => {
     async function getPlaces() {
       try {
-        const res = await axios.get('http://192.168.1.72:3000/api/places');
+       const res = await axios.get('http://192.168.0.37:3000/api/places');
         setPlaces(res.data)
         console.log("API Request Finished!")
       } catch(err) {
