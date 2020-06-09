@@ -7,6 +7,7 @@ import Results from './src/components/Results'
 import Invitation from './src/components/Invitation'
 import Lobby from './src/components/Lobby'
 import Login from './src/components/Login'
+import Footer from './src/components/Footer'
 import io from "socket.io-client";
 // import Timer from './src/components/Timer';
 
