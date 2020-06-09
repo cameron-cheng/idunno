@@ -10,62 +10,70 @@ export default function Lobby(props) {
   
   return (
     <View style={style.container}>
-       <Footer>
-          <FooterTab>
-            <Button>
-              <Icon name="apps" />
+       <Footer style={style.footer}>
+          <FooterTab style={style.footerTab}>
+            <Button transparent >
+              <Icon style={style.icon} type='AntDesign' name="search1" />
             </Button>
-
-            <Button active>
-              <Icon active name="pluscircleo" />
+             
+            <Button transparent style={{justifyContent: 'center', alignSelf: 'center'}}>
+              <Icon style={style.iconPlus} type='AntDesign' active name="pluscircleo" />
             </Button>
-            <Button>
-              <Icon name="person" />
+            
+            <Button transparent>
+              <Icon style={style.icon} type='AntDesign' name="user" />
             </Button>
           </FooterTab>
         </Footer>
     </View>
 
 
-
-
-      // <LottieView
-      //   source={require('../assets/lottie/idunnoFinal.json')}
-      //   autoPlay
-      //   loop
-      // />
     
   );
-  
-  
-  
-
-
 
 }
 
 const style = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     width: SCREEN_WIDTH,
+    justifyContent:'center',
+    alignItems: 'center',
+    // backgroundColor: '#fcfaf2'
     // height: 
+    
   },
-  header: {
+  footer: {
     backgroundColor: '#ee977a',
-    justifyContent: 'center',
-    height: 100
+    // justifyContent: 'center',
+    height: 80,
+    alignSelf: 'center',
+    // shadowColor: '#988a55',
+    // shadowOffset: { width: 0, height: 0 },
+    // shadowOpacity: 0.8,
+    // shadowRadius: 2,
+  },
+  footerTab: {
+    // justifyContent:'center',
+    // alignSelf: 'center',
   },
   body: {
-    flex: 1,
-    justifyContent: 'center' 
+    // flex: 1,
+    // justifyContent: 'center' 
     
   },
-  title: {
-    justifyContent: 'center',
-    alignSelf: "center",
+  
+  icon: {
     color: '#fcfaf2',
-    fontSize: 40,
-    fontFamily: 'AppleSDGothicNeo-Bold'
-    
+    // alignSelf: 'center',
   },
+  iconPlus: {
+    color: '#fcfaf2',
+    height: 65,
+    padding: 0,
+    fontSize: 60,
+    // alignSelf: 'center',
+
+  },
+
 })
