@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { Container, Content, Card, CardItem, Header, Body, Button, Left, Right, Icon, Title } from 'native-base';
 import { State } from 'react-native-gesture-handler';
-import LottieView from 'lottie-react-native'
+// import LottieView from 'lottie-react-native'
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 

@@ -12,26 +12,8 @@ import io from "socket.io-client";
 
 
 export default function App() {
-<<<<<<< HEAD
 const [socket] = useState(() => io('http://192.168.0.37:3000'));
 // [roomId, setRoomId] = useState(null)
-=======
-  const socket = io('http://192.168.1.72:3000')
-
-  function sendReady() {
-    socket.emit("userReady", true)
-    socket.emit("chat message", "Hi")
-    console.log("ready")
-  }
-
-  useEffect(() => {
-    setTimeout(() => {
-      socket.emit("chat message", "Hi")
-    }, 2000)
-    
-  },[])
-
->>>>>>> master
   return (
     <NativeRouter>
       
