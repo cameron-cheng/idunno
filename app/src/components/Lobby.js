@@ -1,13 +1,23 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { Container, Content, Card, CardItem, Header, Body, Button } from 'native-base';
 import { State } from 'react-native-gesture-handler';
-
+import io from 'socket.io-client'
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
 export default function Lobby(props) {
+  const [userJoining, setUserJoining] = useState(false)
+  const socket = props.socket
+  useEffect(() => {
+    if(userJoining === false) {
+      console.log('joining room');
+      // props.socket.emit('connect', true);
+    }
+  },[])
+
+
 
   return(  
     <Container style={styles.container}>

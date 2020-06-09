@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { Container, Content, Card, CardItem, Header, Body, Button } from 'native-base';
 import Swiper from './Swiper';
@@ -6,9 +6,9 @@ import Lobby from './Lobby';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-export default function Sessions(props) {
+export default function Room(props) {
   const [lobbyReady, setLobbyReady] = useState(false)
- 
+
   function handleReady() {
     if (lobbyReady) {
       props.sendReady()
