@@ -8,7 +8,6 @@ import Footer from './Footer'
 
 
 export default ({ history }) => {
-
   const onShare = async () => {
     try {
       const result = await Share.share({
@@ -30,32 +29,31 @@ export default ({ history }) => {
   };
 
   return(
-<View style={styles.container}>
-  <Header />
-  <View style={{flex: 1, justifyContent: 'space-between'}}>
-    <View style={{flexDirection: 'row'}}>
-      <Button title="Homepage" onPress={() => history.push("/")}></Button>
-      <Button title="Lobby" onPress={() => history.push("/lobby")}></Button>
-    </View>
-      
-      <Content style={styles.content}>  
-        <Card style={styles.cardMain}>
-          <Card style={styles.cardCode}>
-            <View>
-              <View style={styles.QR}>
-                {/* <Text style={styles.QRText}>YZXN</Text> */}
-                <QRCode value="http://www.google.com"/>
+    <View style={styles.container}>
+      <Header />
+      <View style={{flex: 1, justifyContent: 'space-between'}}>
+        <View style={{flexDirection: 'row'}}>
+          <Button title="Homepage" onPress={() => history.push("/")}></Button>
+          <Button title="Lobby" onPress={() => history.push("/lobby")}></Button>
+        </View>
+        <Content style={styles.content}>  
+          <Card style={styles.cardMain}>
+            <Card style={styles.cardCode}>
+              <View>
+                <View style={styles.QR}>
+                  {/* <Text style={styles.QRText}>YZXN</Text> */}
+                  <QRCode value="http://www.google.com"/>
+                </View>
               </View>
-            </View>
+            </Card>
+            <TouchableOpacity onPress={onShare} style={styles.share}>
+              <Text style={styles.shareText}>SHARE</Text>
+            </TouchableOpacity>
           </Card>
-          <TouchableOpacity onPress={onShare} style={styles.share}>
-            <Text style={styles.shareText}>SHARE</Text>
-          </TouchableOpacity>
-        </Card>
-      </Content>
+        </Content>
+        </View>
+      <Footer />
     </View>
-  <Footer />
-  </View>
   )};
 
 const styles = StyleSheet.create({
@@ -103,7 +101,8 @@ const styles = StyleSheet.create({
   },
   shareText: {
     color:'#fcfaf2',
-    fontSize: 36, fontWeight: '700', 
+    fontSize: 36, 
+    fontWeight: '700', 
     paddingHorizontal: 20, 
     paddingVertical: 10,
   },

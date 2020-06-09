@@ -13,7 +13,7 @@ export default function Footer(props) {
     <View style={style.container}>
         <Header span style={style.header}>
           <Body style={style.body}>
-            <Title style={style.title}>iDUNNO</Title>
+            <Title style={style.title}>¯\_(ツ)_/¯</Title>
           </Body>
         </Header>
     </View>
@@ -26,7 +26,7 @@ const style = StyleSheet.create({
   container: {
     // flex: 1,
     width: SCREEN_WIDTH,
-    // height: 80
+    // height: 80,
     justifyContent: 'center',
     shadowColor: '#ae9f77',
     shadowOffset: { width: 0, height: 4 },
@@ -47,7 +47,9 @@ const style = StyleSheet.create({
     justifyContent: 'center',
     alignSelf: "center",
     color: '#2a9d8f',
-    fontSize: 40,
+    fontSize: 50,
+    height: 60,
+    fontWeight: '900',
     fontFamily: 'AppleSDGothicNeo-Bold'
     
   },

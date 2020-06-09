@@ -69,6 +69,7 @@ const style = StyleSheet.create({
   
   icon: {
     color: '#fcfaf2',
+    height: 30
     // alignSelf: 'center',
   },
   iconPlus: {
