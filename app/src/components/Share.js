@@ -8,7 +8,7 @@ export default ShareExample = () => {
     const result           = '';
     const characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     const charactersLength = characters.length;
-    for ( const i = 0; i < 4; i++ ) {
+    for (const i = 0; i < 4; i++) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;

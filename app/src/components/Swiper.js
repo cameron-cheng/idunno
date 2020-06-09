@@ -1,4 +1,3 @@
-
 import mode from '../helpers/mode'
 
 import React, { Component } from "react";
@@ -17,24 +16,26 @@ import { List, ListItem, Card, CardItem, Header, Body } from 'native-base'
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
-const Users = [
-{id: '1', title: "Dark Knight", reviews: "5/5", theatre: "Vancouver", genre: "Action/Adventure", uri: require('../assets/feed_images/1.jpg')},
-{id: '2', title: "Jungle Book", reviews: "3/5", theatre: "Coquitlam", genre: "Adventure/Fantasy", uri: require('../assets/feed_images/2.jpg')},
-{id: '3', title: "Avengers", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/3.jpg')},
-{id: '4', title: "Hunger Games", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/4.jpg')},
-{id: '5', title: "Moana", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/5.jpg')},
-{id: '6', title: "Jurassic World", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/6.jpg')},
-{id: '7', title: "Glass", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/7.jpg')},
-{id: '8', title: "Dawn of the Planet of the Apes", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/8.jpg')},
-{id: '9', title: "Jaws", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/9.jpg')},
-{id: '10', title: "Dark Knight", reviews: "5/5", theatre: "Langley", genre: "Action/Adventure", uri: require('../assets/feed_images/1.jpg')},
-{id: '11', title: "Jungle Book", reviews: "3/5", theatre: "Richmond", genre: "Adventure/Fantasy", uri: require('../assets/feed_images/2.jpg')},
-]
-
+// const Users = [
+// {id: '1', title: "Dark Knight", reviews: "5/5", theatre: "Vancouver", genre: "Action/Adventure", uri: require('../assets/feed_images/1.jpg')},
+// {id: '2', title: "Jungle Book", reviews: "3/5", theatre: "Coquitlam", genre: "Adventure/Fantasy", uri: require('../assets/feed_images/2.jpg')},
+// {id: '3', title: "Avengers", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/3.jpg')},
+// {id: '4', title: "Hunger Games", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/4.jpg')},
+// {id: '5', title: "Moana", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/5.jpg')},
+// {id: '6', title: "Jurassic World", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/6.jpg')},
+// {id: '7', title: "Glass", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/7.jpg')},
+// {id: '8', title: "Dawn of the Planet of the Apes", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/8.jpg')},
+// {id: '9', title: "Jaws", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/9.jpg')},
+// {id: '10', title: "Dark Knight", reviews: "5/5", theatre: "Langley", genre: "Action/Adventure", uri: require('../assets/feed_images/1.jpg')},
+// {id: '11', title: "Jungle Book", reviews: "3/5", theatre: "Richmond", genre: "Adventure/Fantasy", uri: require('../assets/feed_images/2.jpg')},
+// ]
 
 export default class App extends React.Component {
-  constructor(){
-    super()
+  
+  constructor(props){
+    super(props)
+
+    this.places = this.props.places.results
 
     this.position = new Animated.ValueXY()
     this.state = {
@@ -81,8 +82,8 @@ export default class App extends React.Component {
     })
   }
 
-
   UNSAFE_componentWillMount() {
+
     this.PanResponder = PanResponder.create({
       onStartShouldSetPanResponder:(evt, gestureState) => true,
       onPanResponderMove:(evt, gestureState) => {
@@ -90,13 +91,12 @@ export default class App extends React.Component {
       },
       onPanResponderRelease:(evt, gestureState) => {
 
-
         //swipe right animation
         if (gestureState.dx > 200) {
           Animated.spring(this.position, {
             toValue: { x: SCREEN_WIDTH + 100, y: gestureState.dy}
-          }).start(() => {
-            this.setState({ currentIndex: this.state.currentIndex + 1, likes: [...this.state.likes, Users[this.state.currentIndex].title]}, () => {
+          }).start(() => {          
+            this.setState({ currentIndex: this.state.currentIndex + 1, likes: [...this.state.likes, this.places[this.state.currentIndex].name]}, () => {
               this.position.setValue({ x: 0, y:0 })
               console.log('LIKES :>> ', this.state.likes);
             })
@@ -108,7 +108,7 @@ export default class App extends React.Component {
           Animated.spring(this.position, {
             toValue: { x: -SCREEN_WIDTH - 100, y: gestureState.dy}
            }).start(() => {
-            this.setState({ currentIndex: this.state.currentIndex + 1, dislikes: [...this.state.dislikes, Users[this.state.currentIndex].title]}, () => {
+            this.setState({ currentIndex: this.state.currentIndex + 1, dislikes: [...this.state.dislikes, this.places[this.state.currentIndex].name]}, () => {
               this.position.setValue({ x: 0, y:0 })
               console.log('DISLIKES :>> ', this.state.dislikes);
             })
@@ -127,8 +127,9 @@ export default class App extends React.Component {
   }
 
 
-  renderUsers = () => {
-    return Users.map((item, index) => {
+  renderCards = () => {
+
+    return this.places.map((item, index) => {
 
       //no cards left
       if (index < this.state.currentIndex) {
@@ -145,16 +146,16 @@ export default class App extends React.Component {
             {/* Card header */}
             <Animated.View style={{width: SCREEN_WIDTH, padding:10, position: 'absolute',zIndex:1000}}>
               <View style={{backgroundColor: '#f0f0f0', borderTopRightRadius:20, borderTopLeftRadius:20, height: 50, justifyContent: 'center'}}>
-                <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>{item.title}</Text>
+                <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>{item.name}</Text>
               </View>
             </Animated.View>
 
             {/* Card footer */}
             <Animated.View style={{width: SCREEN_WIDTH, padding:10, position: 'absolute', bottom:0, zIndex:1000}}>
               <View style={{backgroundColor: '#f0f0f0', borderBottomRightRadius:20, borderBottomLeftRadius:20, height: 200, justifyContent: 'center'}}>
-                <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>Reviews: {item.reviews}</Text>
-                <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>Playing in: {item.theatre}</Text>
-                <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>Genre: {item.genre}</Text>
+                <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>Address: {item.formatted_address}</Text>
+                <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>Rating: {item.rating}</Text>
+                <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>Price Level: {item.price_level}</Text>
               </View>
             </Animated.View>
 
@@ -169,7 +170,7 @@ export default class App extends React.Component {
               </Animated.View>
               <Image 
                 style={{flex:1, height:null, width:null, resizeMode: 'cover', borderRadius: 20}}
-                source={item.uri}
+                source={`https://maps.googleapis.com/maps/api/place/photo?key=${this.props.places.API_KEY}&photoreference=${item.photos[0].photo_reference}&maxheight=400`}
               />
             </Animated.View>
         )
@@ -190,21 +191,21 @@ export default class App extends React.Component {
               {/* Card header - shoudl be same styled as "top card" */}
             <Animated.View style={{width: SCREEN_WIDTH, padding:10, position: 'absolute',zIndex:1000}}>
               <View style={{backgroundColor: '#f0f0f0', borderTopRightRadius:20, borderTopLeftRadius:20, height: 50, justifyContent: 'center'}}>
-                <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>{item.title}</Text>
+                <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>{item.name}</Text>
               </View>
             </Animated.View>
 
             {/* Card footer - should be styled same as "top card"*/}
             <Animated.View style={{width: SCREEN_WIDTH, padding:10, position: 'absolute', bottom:0, zIndex:1000}}>
               <View style={{backgroundColor: '#f0f0f0', borderBottomRightRadius:20, borderBottomLeftRadius:20, height: 200, justifyContent: 'center'}}>
-                <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>Reviews: {item.reviews}</Text>
-                <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>Playing in: {item.theatre}</Text>
-                <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>Genre: {item.genre}</Text>
+                <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>Address: {item.formatted_address}</Text>
+                <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>Rating: {item.rating}</Text>
+                <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>Price Level: {item.price_level}</Text>
               </View>
             </Animated.View>
             <Image 
               style={{flex:1, height:null, width:null, resizeMode: 'cover', borderRadius: 20}}
-              source={item.uri}
+              source={`https://maps.googleapis.com/maps/api/place/photo?key=${this.props.places.API_KEY}&photoreference=${item.photos[0].photo_reference}&maxheight=400`}
             />
           </Animated.View>
         )
@@ -214,7 +215,7 @@ export default class App extends React.Component {
   
   render() {
      //once the current index equals the data length (the stack is done), calculate what the most popular element in the array is
-     if (this.state.currentIndex >= Users.length) {
+     if (this.state.currentIndex >= this.places.length) {
       const results = mode(this.state.likes)
       console.log('RESULT :>> ', results);
       return <Redirect to={{
@@ -228,7 +229,7 @@ export default class App extends React.Component {
 
         </View>
         <View style={{ flex: 1, alignItems: 'center' }}>
-        {this.renderUsers()}
+        {this.renderCards()}
         </View>
       </View>
     );
