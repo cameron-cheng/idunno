@@ -39,10 +39,12 @@ export default ({ history }) => {
     </View>
       
       <Content style={styles.content}>  
-        <Card style={styles.card}>
+        <Card style={styles.cardMain}>
           <Card style={styles.cardCode}>
             <View>
-              <View style={styles.QR}><QRCode value="http://www.google.com"/>
+              <View style={styles.QR}>
+                {/* <Text style={styles.QRText}>YZXN</Text> */}
+                <QRCode value="http://www.google.com"/>
               </View>
             </View>
           </Card>
@@ -61,35 +63,43 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fcfaf2',
     flexDirection: 'column',
+    alignContent: 'center'
     // justifyContent: 'center',
   },
   content: {
     padding: 10,
   },
-  card: {
+  cardMain: {
     // flex:1,
     borderRadius: 20,
-    height: 400,
+    height: 450,
     alignItems: 'center',
     backgroundColor: '#f9f1dc',
     shadowColor: '#988a55',
     shadowOffset: { width: 2, height: 4 },
     shadowOpacity: 0.8,
     shadowRadius: 2,
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
   },
   cardCode: {
     // flex:1,
-    backgroundColor: '#fcfaf2',
+    // backgroundColor: '#fcfaf2',
     borderRadius: 20,
-    alignItems: 'center',
-
-    backgroundColor: '#f9f1dc',
+    alignContent: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#fcfaf2',
+    borderColor: '#fcfaf2',
+    shadowOpacity: 0.0,
+    // width: 100
     
   },
   share: {
     backgroundColor:'#ee937c',  
-    borderRadius: 10 
+    borderRadius: 10,
+    // shadowColor: '#988a55',
+    // shadowOffset: { width: 2, height: 4 },
+    // shadowOpacity: 0.8,
+    // shadowRadius: 2,
   },
   shareText: {
     color:'#fcfaf2',
@@ -99,8 +109,21 @@ const styles = StyleSheet.create({
   },
   QR: {
     paddingHorizontal: 100,
-    paddingVertical: 50,
+    paddingVertical: 80,
+    justifyContent: 'space-evenly',
+    // alignContent: 'center',
+    // alignSelf: 'center'
+    
+
     // backgroundColor: '#fcfaf2'
+  },
+  QRText: {
+    alignSelf: 'center',
+    paddingBottom: 40,
+    fontSize: 60,
+    fontWeight: '900',
+    // width: 200
   }
+
 
 })
