@@ -1,9 +1,9 @@
 
 import React, {useState} from 'react';
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
-import { Container, Content, Card, CardItem, Header, Body, Button, Left, Right, Icon, Title } from 'native-base';
+import { View, Text, StyleSheet, Dimensions, ImageBackground } from 'react-native';
+import { Container, Content, Card, CardItem, Header, Body, Button, Left, Right, Icon, Title  } from 'native-base';
 import { State } from 'react-native-gesture-handler';
-import LottieView from 'lottie-react-native'
+// import LottieView from 'lottie-react-native'
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
@@ -11,13 +11,15 @@ export default function Footer(props) {
   
   return (
     <View style={style.container}>
-      <Header span style={style.header}>
-       
-        <Body style={style.body}>
-          <Title style={style.title}>iDUNNO</Title>
-        </Body>
+      {/* <ImageBackground style ={{width:SCREEN_WIDTH}} source={{uri: "https://www.transparenttextures.com/patterns/asfalt-light.png"}}> */}
+        <Header span style={style.header}>
         
-      </Header>
+          <Body style={style.body}>
+            <Title style={style.title}>iDUNNO</Title>
+          </Body>
+          
+        </Header>
+      {/* </ImageBackground> */}
     </View>
 
 
@@ -30,24 +32,24 @@ export default function Footer(props) {
       // />
     
   );
-  
-  
-  
-
-
 
 }
 
 const style = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     width: SCREEN_WIDTH,
-    // height: 
+    // height: 80
+    justifyContent: 'center',
+    shadowColor: '#988a55',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
   },
   header: {
+    height: 80,
     backgroundColor: '#ee977a',
-    justifyContent: 'center',
-    height: 100
+    // backgroundImage: url("https://www.transparenttextures.com/patterns/asfalt-light.png")
   },
   body: {
     flex: 1,

@@ -6,18 +6,26 @@ import Footer from './Footer'
 
 export default ({ history }) => {
   return (
-  <View>
+  <View style={style.container}>
     <Header />
-      <Button title="Sessions" onPress={() => history.push("/sessions")}></Button>
-      <Button title="Results" onPress={() => history.push("/results")}></Button>
-      <Button title="Invitation" onPress={() => history.push("/invitation")}></Button>
-      <Button title="Lobby" onPress={() => history.push("/lobby")}></Button>
-      <Button title="Login" onPress={() => history.push("/login")}></Button>
+    <View style={{flex: 1, justifyContent: 'space-between'} }>
+        <Button title="Sessions" onPress={() => history.push("/sessions")}></Button>
+        <Button title="Results" onPress={() => history.push("/results")}></Button>
+        <Button title="Invitation" onPress={() => history.push("/invitation")}></Button>
+        <Button title="Lobby" onPress={() => history.push("/lobby")}></Button>
+        <Button title="Login" onPress={() => history.push("/login")}></Button>
+      </View>
     <Footer />
   </View>
   )};
 
 const style = StyleSheet.create({
-  // button
+  container: {
+    flex: 1,
+    backgroundColor: '#fcfaf2',
+    flexDirection: 'column',
+
+
+  }
 
 })
