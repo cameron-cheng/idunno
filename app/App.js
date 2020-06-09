@@ -13,11 +13,14 @@ import io from "socket.io-client";
 
 export default function App() {
 const [socket] = useState(() => io('http://192.168.0.37:3000'));
-// [roomId, setRoomId] = useState(null)
+ //[roomId, setRoomId] = useState(null)
+ 
+ //console.log('roomId :>> ', roomId);
+//  console.log('setRoomId :>> ', setRoomId);
   return (
     <NativeRouter>
       
-      <View style={styles.container}>
+      <View>
         <Switch>
           <Route exact path="/"  render={(routeProps) => {
             let homeProps = {...routeProps, socket}

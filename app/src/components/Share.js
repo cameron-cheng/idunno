@@ -4,14 +4,12 @@ import QRCode  from 'react-native-qrcode-svg';
 
 export default ShareExample = () => {
 
-  
-  
   const onShare = async () => {
     try {
       const result = await Share.share({
         message:
-          'Session Code: YZXN',
-      });
+         'Session Code: XYZN'
+     });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
           // shared with activity type of result.activityType
