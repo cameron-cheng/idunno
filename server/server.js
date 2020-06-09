@@ -21,8 +21,11 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}))
 
-//Socket.io Lobby
+//cors MW
+const cors = require('cors');
+app.use(cors());
 
+//Socket.io Lobby
 io.on('connection', (socket) => {
   console.log('a user connected');
   socket.on('createRoom', (ignore, ackFn) => {
@@ -33,6 +36,7 @@ io.on('connection', (socket) => {
     // socket.emit('roomCreated', roomId);
 
   })
+  
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
@@ -48,7 +52,7 @@ app.use("/api", places());
 // app.use("/api", sessions());
 // app.use("/api", users());
 
-server.listen(3000, () => {
+server.listen(port, () => {
   console.log('listening on *:3000');
 });
 

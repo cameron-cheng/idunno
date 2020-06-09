@@ -35,7 +35,6 @@ export default function Lobby(props) {
               <View style={{flexDirection: 'row'}}>
                 <Button rounded success 
                   onPress={(event) => props.handleReady(event)}
-                  // onChange={(event) => props.onChange(event.target.value)}
                   style={styles.button}>
                     <Text style={styles.buttonText}>Ready</Text>
                 </Button>
