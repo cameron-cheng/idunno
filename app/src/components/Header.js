@@ -9,9 +9,11 @@ export default function Footer(props) {
     <View style={style.container}>
       {/* <ImageBackground style ={{width:SCREEN_WIDTH}} source={{uri: "https://www.transparenttextures.com/patterns/asfalt-light.png"}}> */}
         <Header span style={style.header}>
+        
           <Body style={style.body}>
             <Title style={style.title}>iDUNNO</Title>
           </Body>
+          
         </Header>
       {/* </ImageBackground> */}
     </View>
@@ -28,14 +30,14 @@ const style = StyleSheet.create({
     width: SCREEN_WIDTH,
     // height: 80
     justifyContent: 'center',
-    shadowColor: '#ae9f77',
+    shadowColor: '#988a55',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.8,
     shadowRadius: 2,
   },
   header: {
     height: 80,
-    backgroundColor: '#b1d8d2',
+    backgroundColor: '#ee977a',
     // backgroundImage: url("https://www.transparenttextures.com/patterns/asfalt-light.png")
   },
   body: {

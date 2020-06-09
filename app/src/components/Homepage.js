@@ -13,10 +13,11 @@ export default ({ history, socket }) => {
      })
   }
   return (
+
   <View style={style.container}>
     <Header />
     <View style={{flex: 1, justifyContent: 'space-between'} }>
-        <Button title="Room" onPress={() => history.push("/room")}></Button>
+        <Button title="Sessions" onPress={() => history.push("/sessions")}></Button>
         <Button title="Results" onPress={() => history.push("/results")}></Button>
         <Button title="Invitation" onPress={() => history.push("/invitation")}></Button>
         <Button title="Lobby" onPress={() => history.push("/lobby")}></Button>
@@ -26,11 +27,14 @@ export default ({ history, socket }) => {
     <Footer />
   </View>
   )};
-  
 const style = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fcfaf2',
     flexDirection: 'column',
+
+
   }
+
 })
+

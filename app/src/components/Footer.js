@@ -12,19 +12,22 @@ export default function LobbyFooter(props) {
             <Button transparent >
               <Icon style={style.icon} type='AntDesign' name="search1" />
             </Button>
-            <Button transparent 
-            style={{justifyContent: 'center', alignSelf: 'center'}}
-            // onPress={() => history.push("/sessions")}
-            >
+             
+            <Button transparent style={{justifyContent: 'center', alignSelf: 'center'}}>
               <Icon style={style.iconPlus} type='AntDesign' active name="pluscircleo" />
             </Button>
+            
             <Button transparent>
               <Icon style={style.icon} type='AntDesign' name="user" />
             </Button>
           </FooterTab>
         </Footer>
     </View>
+
+
+    
   );
+
 }
 const style = StyleSheet.create({
   container: {
@@ -34,9 +37,10 @@ const style = StyleSheet.create({
     alignItems: 'center',
     // backgroundColor: '#fcfaf2'
     // height: 
+    
   },
   footer: {
-    backgroundColor: '#2a9d8f',
+    backgroundColor: '#ee977a',
     // justifyContent: 'center',
     height: 80,
     alignSelf: 'center',
@@ -52,7 +56,9 @@ const style = StyleSheet.create({
   body: {
     // flex: 1,
     // justifyContent: 'center' 
+    
   },
+  
   icon: {
     color: '#fcfaf2',
     // alignSelf: 'center',
@@ -63,5 +69,7 @@ const style = StyleSheet.create({
     padding: 0,
     fontSize: 60,
     // alignSelf: 'center',
+
   },
+
 })
