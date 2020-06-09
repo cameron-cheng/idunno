@@ -1,4 +1,6 @@
+import { API_KEY } from 'react-native-dotenv'
 import axios from 'axios';
+
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { Container, Content, Card, CardItem, Header, Body, Button } from 'native-base';
@@ -16,10 +18,11 @@ export default function Room(props) {
 
   useEffect(() => {
     async function getPlaces() {
-      try {
-       const res = await axios.get('http://192.168.0.37:3000/api/places');
-        setPlaces(res.data)
+      try {  
+        const placesRequest = await axios.get(`https://maps.googleapis.com/maps/api/place/textsearch/json?key=${API_KEY}&query=metrotown&type=restaurant&radius=500`);
+        setPlaces(placesRequest.data.results)
         console.log("API Request Finished!")
+        console.log(places)
       } catch(err) {
         console.log(err)
       }

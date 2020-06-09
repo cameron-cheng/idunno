@@ -1,3 +1,4 @@
+import { API_KEY } from 'react-native-dotenv'
 import mode from '../helpers/mode'
 
 import React, { Component } from "react";
@@ -34,8 +35,8 @@ export default class App extends React.Component {
   
   constructor(props){
     super(props)
-    console.log(props.places)
-    this.places = this.props.places.results
+    
+    this.places = this.props.places
 
     this.position = new Animated.ValueXY()
     this.state = {
@@ -96,7 +97,7 @@ export default class App extends React.Component {
           Animated.spring(this.position, {
             toValue: { x: SCREEN_WIDTH + 100, y: gestureState.dy}
           }).start(() => {          
-            this.setState({ currentIndex: this.state.currentIndex + 1, likes: [...this.state.likes, this.places[this.state.currentIndex].name]}, () => {
+            this.setState({ currentIndex: this.state.currentIndex + 1, likes: [...this.state.likes, this.places[this.state.currentIndex].place_id]}, () => {
               this.position.setValue({ x: 0, y:0 })
               console.log('LIKES :>> ', this.state.likes);
             })
@@ -107,7 +108,7 @@ export default class App extends React.Component {
           Animated.spring(this.position, {
             toValue: { x: -SCREEN_WIDTH - 100, y: gestureState.dy}
            }).start(() => {
-            this.setState({ currentIndex: this.state.currentIndex + 1, dislikes: [...this.state.dislikes, this.places[this.state.currentIndex].name]}, () => {
+            this.setState({ currentIndex: this.state.currentIndex + 1, dislikes: [...this.state.dislikes, this.places[this.state.currentIndex].place_id]}, () => {
               this.position.setValue({ x: 0, y:0 })
               console.log('DISLIKES :>> ', this.state.dislikes);
             })
@@ -169,7 +170,7 @@ export default class App extends React.Component {
               <Image 
                 style={{flex:1, height:null, width:null, resizeMode: 'cover', borderRadius: 20}}
                 source={{
-                  uri: `https://maps.googleapis.com/maps/api/place/photo?key=${this.props.places.API_KEY}&photoreference=${item.photos[0].photo_reference}&maxheight=400`
+                  uri: `https://maps.googleapis.com/maps/api/place/photo?key=${API_KEY}&photoreference=${item.photos[0].photo_reference}&maxheight=400`
                 }}
               />
             </Animated.View>
@@ -206,7 +207,7 @@ export default class App extends React.Component {
             <Image 
               style={{flex:1, height:null, width:null, resizeMode: 'cover', borderRadius: 20}}
               source={{
-                uri: `https://maps.googleapis.com/maps/api/place/photo?key=${this.props.places.API_KEY}&photoreference=${item.photos[0].photo_reference}&maxheight=400`
+                uri: `https://maps.googleapis.com/maps/api/place/photo?key=${API_KEY}&photoreference=${item.photos[0].photo_reference}&maxheight=400`
               }}
             />
           </Animated.View>
@@ -222,7 +223,8 @@ export default class App extends React.Component {
       console.log('RESULT :>> ', results);
       return <Redirect to={{
         pathname: '/results',
-        results: results
+        results: results,
+        API_KEY: this.props.places.API_KEY
       }} />
     }
     return (
