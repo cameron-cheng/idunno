@@ -3,9 +3,7 @@ import { Share, View, Button, Text } from 'react-native';
 import QRCode  from 'react-native-qrcode-svg';
 
 export default ShareExample = () => {
-
-  
-  
+    
   const onShare = async () => {
     try {
       const result = await Share.share({

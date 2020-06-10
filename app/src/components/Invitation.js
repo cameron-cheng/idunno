@@ -3,7 +3,11 @@ import { View, Text, Button } from 'react-native';
 import Share from './Share'
 
 
-export default ({ history }) => {
+
+
+export default ({history, example, roomId} ) => {
+  console.log('example :>> ', example);
+console.log('roomId :>> ', roomId);
   return(
 <View>
   <Text>This is the Invitation page </Text>
@@ -11,4 +15,4 @@ export default ({ history }) => {
     <Share />
     <Button title="Lobby" onPress={() => history.push("/lobby")}></Button>
 </View>
-  )};
+  )}; 
