@@ -16,7 +16,6 @@ import io from "socket.io-client";
 export default function App({ parentCallback }) {
 const [socket] = useState(() => io('http://192.168.1.72:3000'));
 const [roomId, setRoomId] = useState(null)
-const [example, setExample] = useState('Hello')
 
 const [filters, setFilters] = useState({
   searchType: 'nearby',
@@ -56,7 +55,7 @@ const [filters, setFilters] = useState({
       <View style={styles.container}>
         <Switch>
           <Route exact path="/"  render={(routeProps) => {
-            let homeProps = {...routeProps, socket, createRoom }
+            let homeProps = {...routeProps, socket, createRoom, setRoomId }
             return (<Home {...homeProps}/>)}} />
           <Route exact path="/lobby" component={Lobby}/>
           <Route exact path="/room" exact render={(routeProps)=> <Room {...routeProps} filters={filters}/>}/>
