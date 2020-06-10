@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
-import { Container, Content, Card, CardItem, Body, Button } from 'native-base';
+import { Container, Content, Card, CardItem, Body, Button, Icon } from 'native-base';
 import { State } from 'react-native-gesture-handler';
 import Header from './Header';
 import Footer from './Footer'
@@ -34,17 +34,19 @@ export default function Lobby(props) {
           <CardItem style={styles.cardItem}>
             <Text style={styles.title}>Ready to start deciding?</Text>
           </CardItem>
-          <CardItem style={{ flexDirection: 'row', height: 70, justifyContent: 'space-evenly', width: SCREEN_WIDTH -30, backgroundColor: '#f9f1dc' }}>
+          <CardItem style={styles.cardItemButtons}>
             <View >
               <TouchableOpacity 
                 onPress={props.handleReady}
                 style={styles.buttonReady}>
+                  <Icon type='Feather' name='check-circle' style={styles.icon}/>
                   <Text style={styles.buttonText}>Ready</Text>
               </TouchableOpacity>
             </View>
-            <View>
+            <View >
               <TouchableOpacity 
                 style={styles.buttonNotReady}>
+                  <Icon type='Entypo' name='block' style={styles.icon}/>
                   <Text style={styles.buttonText}>Not Ready</Text>
               </TouchableOpacity>
               {/* <Button rounded  
@@ -59,9 +61,42 @@ export default function Lobby(props) {
           </CardItem>
           <CardItem style={styles.cardItem}>
             <Text style={styles.text}>
-              Waiting for decision makers...
+              WAITING FOR MORE DECISION MAKERS 2/3
             </Text>
           </CardItem>
+          {/* REPLACE WITH PLAYER LOOP */}
+          <View style={{backgroundColor:'#f9f1dc'}}>
+            <View style={{backgroundColor:'#f9f1dc'}}>
+              <CardItem style={styles.players}>
+                <View style={styles.playersView}>
+                  <Text style={styles.playerText}>
+                    Cameron
+                  </Text>
+                  {/* <Icon type='Feather' name='check-circle' style={styles.playerTrue}/> */}
+                  <Icon type='Entypo' name='block' style={styles.playerFalse}/>
+                </View>
+              </CardItem>
+            </View>
+            <CardItem style={styles.players}>
+              <View style={styles.playersView}>
+                <Text style={styles.playerText}>
+                  Jeremy
+                </Text>
+                <Icon type='Feather' name='check-circle' style={styles.playerTrue}/>
+                {/* <Icon type='Entypo' name='block' style={styles.playerFalse}/> */}
+              </View>
+            </CardItem>
+            <CardItem style={styles.players}>
+            <View style={styles.playersView}>
+                <Text style={styles.playerText}>
+                  Amy
+                </Text>
+                <Icon type='Feather' name='check-circle' style={styles.playerTrue}/>
+                {/* <Icon type='Entypo' name='block' style={styles.playerFalse}/> */}
+              </View>
+            </CardItem>
+          </View>
+          {/* ------------------------ */}
         </Card>
       </Content>
     <Footer />
@@ -77,13 +112,20 @@ const styles = StyleSheet.create({
     backgroundColor: '#fcfaf2',
   },
   content: {
-    padding: 10,
+    padding: 15,
     top: 100,
   },
   cardItem: {
     flexDirection:'column', 
     backgroundColor: '#f9f1dc',
     
+  },
+  cardItemButtons: {
+    flexDirection: 'row', 
+    height: 70, 
+    justifyContent: 'space-between', 
+    width: 300, 
+    backgroundColor: '#f9f1dc',
   },
   card: {
     // justifyContent: 'space-evenly',
@@ -101,7 +143,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius:20,
   },
   text: {
-    fontSize: 25
+    fontSize: 15
   },
   title: {
     fontSize: 25
@@ -110,20 +152,61 @@ const styles = StyleSheet.create({
     // alignItems: 'center',
     // top: 60
   },
+  icon: {
+    color: '#fcfaf2', 
+    fontSize: 18, 
+    paddingLeft: 10,
+    paddingRight: 10
+  },
   buttonReady: {
     backgroundColor:'#2a9d8f',  
     borderRadius: 10,
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   buttonNotReady: {
     backgroundColor:'#ee937c',  
     borderRadius: 10,
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   buttonText: {
     color:'#fcfaf2',
     fontSize: 20, 
     fontWeight: '700', 
-    paddingHorizontal: 20, 
+    paddingRight: 10, 
     paddingVertical: 10,
+    
   },
+  playersView: {
+    width: 300, 
+    flexDirection: 'row', 
+    justifyContent: 'space-between',
+    backgroundColor: '#f9f1dc',
+  },
+  payers:{
+    width: 100,
+    flexDirection: 'row',
+    // justifyContent: 'space-between',
+    // width: 80,
+    backgroundColor: '#f9f1dc',
+    
+  },
+  playerText: {
+    fontSize: 30,
+    backgroundColor: '#f9f1dc',
+  },
+  playerTrue: {
+    paddingTop: 2,
+    fontSize: 30,
+    color: '#2a9d8f',
+  },
+  playerFalse: {
+    paddingTop: 2,
+    fontSize: 30,
+    color: '#a39571',
+
+
+  }
   
 })
