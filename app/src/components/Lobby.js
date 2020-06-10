@@ -34,6 +34,7 @@ export default function Lobby(props) {
           <CardItem style={styles.cardItem}>
             <Text style={styles.title}>Ready to start deciding?</Text>
           </CardItem>
+
           <CardItem style={styles.cardItemButtons}>
             <View >
               <TouchableOpacity 
@@ -47,6 +48,7 @@ export default function Lobby(props) {
               <TouchableOpacity 
                 style={styles.buttonNotReady}>
                   <Icon type='Entypo' name='block' style={styles.icon}/>
+
                   <Text style={styles.buttonText}>Not Ready</Text>
               </TouchableOpacity>
               {/* <Button rounded  

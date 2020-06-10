@@ -4,7 +4,7 @@ import Header from './Header';
 import Footer from './Footer'
 
 export default ({ history, socket }) => {
-  console.log('rendering');
+  
   function createRoom() {
     console.log('sending create room event')
     //event to create a room to server, response with server code
@@ -17,7 +17,9 @@ export default ({ history, socket }) => {
 
   <View style={style.container}>
     <Header />
+
     <View style={{flex: 1, justifyContent: 'space-between'}}>
+
         <Button title="Room" onPress={() => history.push("/room")}></Button>
         <Button title="Results" onPress={() => history.push("/results")}></Button>
         <Button title="Invitation" onPress={() => history.push("/invitation")}></Button>
