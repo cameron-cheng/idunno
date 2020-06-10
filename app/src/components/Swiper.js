@@ -31,7 +31,7 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 // {id: '11', title: "Jungle Book", reviews: "3/5", theatre: "Richmond", genre: "Adventure/Fantasy", uri: require('../assets/feed_images/2.jpg')},
 // ]
 
-export default class App extends React.Component {
+export default class App extends Component {
   
   constructor(props){
     super(props)
