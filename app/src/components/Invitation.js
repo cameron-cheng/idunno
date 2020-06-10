@@ -10,7 +10,7 @@ import Footer from './Footer'
 
 
 export default ShareExample = ({roomId, props}) => {
-
+console.log('roomId :>> ', roomId);
   const onShare = async () => {
     try {
       const result = await Share.share({

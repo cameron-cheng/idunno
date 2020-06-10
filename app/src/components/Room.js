@@ -1,5 +1,5 @@
-import { API_KEY } from 'react-native-dotenv'
-import axios from 'axios';
+// import { API_KEY } from 'react-native-dotenv'
+// import axios from 'axios';
 
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
