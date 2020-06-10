@@ -10,11 +10,12 @@ import Login from './src/components/Login'
 import Filters from './src/components/Filters'
 import Footer from './src/components/Footer'
 import io from "socket.io-client";
+import { IP_ADDRESS } from 'react-native-dotenv'
 // import Timer from './src/components/Timer';
 
 
 export default function App({ parentCallback }) {
-const [socket] = useState(() => io('http://192.168.1.72:3000'));
+const [socket] = useState(() => io(IP_ADDRESS));
 const [roomId, setRoomId] = useState(null)
 
 const [filters, setFilters] = useState({
@@ -33,22 +34,9 @@ const [filters, setFilters] = useState({
     socket.emit('createRoom', null, (roomId) => {
       console.log(roomId);
       setRoomId(roomId);
-      //pass roomId to Share component
      })
   }
 
-  // const getData = async () => {
-  //    socket.on('roomCreated', function(data) {
-  //     setRoomId(data)
-  //     console.log(data)
-  //   })
-  // }
-
-  // useEffect(() => {
-  //   getData();
-  // }, []);
-
-  
   return (
     <NativeRouter>
       

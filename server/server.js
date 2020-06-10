@@ -35,7 +35,6 @@ io.on('connection', (socket) => {
     ackFn(roomId);
     // socket.emit('roomCreated', roomId);
   })
-  socket.on()
   
   socket.on('joinRoom', (roomId, ackFn) => {
    const room = io.sockets.adapter.rooms[roomId];
