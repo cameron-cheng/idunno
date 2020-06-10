@@ -7,12 +7,15 @@ import Header from './Header';
 import Footer from './Footer'
 
 
-export default ({ history }) => {
+
+
+export default ShareExample = ({roomId, props}) => {
+
   const onShare = async () => {
     try {
       const result = await Share.share({
         message:
-          'Session Code: YZXN',
+          `Session Code: ${roomId}`
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -41,7 +44,7 @@ export default ({ history }) => {
             <Card style={styles.cardCode}>
               <View>
                 <View style={styles.QR}>
-                  {/* <Text style={styles.QRText}>YZXN</Text> */}
+                  { <Text style={styles.QRText}>{roomId}</Text> }
                   <QRCode value="http://www.google.com"/>
                 </View>
               </View>
