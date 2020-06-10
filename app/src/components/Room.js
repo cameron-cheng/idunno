@@ -14,7 +14,7 @@ const SCREEN_HEIGHT   = Dimensions.get('window').height;
 export default function Room(props) {
   const [lobbyReady, setLobbyReady] = useState(false)
   
-  const { places } = useAPI(props.filters) 
+  const places = useAPI(props.filters) 
   
   function handleReady() {
     setLobbyReady(!lobbyReady)

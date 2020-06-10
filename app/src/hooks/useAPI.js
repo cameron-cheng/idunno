@@ -20,7 +20,7 @@ export default function useAPI(filters) {
   async function textSearch() {
     try {  
       const res = await axios.get(
-        `https://maps.googleapis.com/maps/api/place/textsearch/json?key=${API_KEY}&type=${type}&query=${area}`
+        `https://maps.googleapis.com/maps/api/place/textsearch/json?key=${API_KEY}&type=${filters.type}&query=${filters.area}`
       );
       setPlaces(res.data.results)
       console.log("API Request Finished!", "Length:", places.length)
@@ -38,5 +38,5 @@ export default function useAPI(filters) {
     } 
   }, [])
  
-  return { places }
+  return places
 }
