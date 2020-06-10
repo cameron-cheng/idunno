@@ -1,4 +1,4 @@
-import { API_KEY } from 'react-native-dotenv'
+// import { API_KEY } from 'react-native-dotenv'
 import axios from 'axios'
 
 import React, {useState, useEffect } from 'react';

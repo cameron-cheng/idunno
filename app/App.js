@@ -16,6 +16,7 @@ import io from "socket.io-client";
 export default function App({ parentCallback }) {
 const [socket] = useState(() => io('http://192.168.1.72:3000'));
 const [roomId, setRoomId] = useState(null)
+<<<<<<< HEAD
 const [example, setExample] = useState('Hello')
 
 const [filters, setFilters] = useState({
@@ -27,26 +28,29 @@ const [filters, setFilters] = useState({
   vegan: false,
   familyFriendly: false
 }) 
+=======
+>>>>>>> 1b8794319f3fd03dc6071d661c989f3f2d294fdb
 
   function createRoom() {
     console.log('sending create room event')
     //event to create a room to server, response with server code
     socket.emit('createRoom', null, (roomId) => {
       console.log(roomId);
+      setRoomId(roomId);
       //pass roomId to Share component
      })
   }
 
-  const getData = async () => {
-     socket.on('roomCreated', function(data) {
-      setRoomId(data)
-      console.log(data)
-    })
-  }
+  // const getData = async () => {
+  //    socket.on('roomCreated', function(data) {
+  //     setRoomId(data)
+  //     console.log(data)
+  //   })
+  // }
 
-  useEffect(() => {
-    getData();
-  });
+  // useEffect(() => {
+  //   getData();
+  // }, []);
 
   
   return (

@@ -2,15 +2,11 @@ import React from 'react';
 import QRCode  from 'react-native-qrcode-svg';
 import { View, Text, Button, StyleSheet, TouchableOpacity, Share  } from 'react-native';
 import { Container, Content, Card, CardItem, Body } from 'native-base';
-import ShareCode from './Share'
 import Header from './Header';
 import Footer from './Footer'
 
-
-
-
-export default ShareExample = ({roomId, props}) => {
-
+export default Invitation = ({roomId, history}) => {
+console.log('roomId :>> ', roomId);
   const onShare = async () => {
     try {
       const result = await Share.share({
