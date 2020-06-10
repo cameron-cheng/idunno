@@ -35,10 +35,8 @@ io.on('connection', (socket) => {
     ackFn(roomId);
     // socket.emit('roomCreated', roomId);
   })
-<<<<<<< Updated upstream
   socket.on()
   
-=======
   socket.on('joinRoom', (roomId, ackFn) => {
    const room = io.sockets.adapter.rooms[roomId];
     if (!room) {
@@ -51,7 +49,6 @@ io.on('connection', (socket) => {
     }
   });
 
->>>>>>> Stashed changes
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
