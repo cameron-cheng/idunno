@@ -1,6 +1,6 @@
-import React from 'react';
-import { Share, View, Button, Text } from 'react-native';
-import QRCode  from 'react-native-qrcode-svg';
+// import React from 'react';
+// import { Share, View, Button, Text } from 'react-native';
+// import QRCode  from 'react-native-qrcode-svg';
 
 export default ShareExample = ({roomId, props}) => {
 
@@ -31,3 +31,4 @@ export default ShareExample = ({roomId, props}) => {
     </View>
   );
 };
+

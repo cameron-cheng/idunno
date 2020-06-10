@@ -3,6 +3,7 @@ import { View, Text, Button, StyleSheet } from 'react-native';
 import Header from './Header';
 import Footer from './Footer'
 
+
 export default ({ history, socket, createRoom }) => {
   console.log('rendering');
 
@@ -15,11 +16,14 @@ export default ({ history, socket, createRoom }) => {
   //     //pass roomId to Share component
   //    })
   // }
+
   return (
 
   <View style={style.container}>
     <Header />
-    <View style={{flex: 1, justifyContent: 'space-between'} }>
+
+    <View style={{flex: 1, justifyContent: 'space-between'}}>
+
         <Button title="Room" onPress={() => history.push("/room")}></Button>
         <Button title="Results" onPress={() => history.push("/results")}></Button>
         <Button title="Invitation" onPress={() => history.push("/invitation")}></Button>

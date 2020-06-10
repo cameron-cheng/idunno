@@ -2,12 +2,14 @@ import React, {useState} from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { Footer, FooterTab, Button, Left, Right, Icon, Title } from 'native-base';
 import { State } from 'react-native-gesture-handler';
+
 // import LottieView from 'lottie-react-native'
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
-export default function Lobby(props) {
-  
+export default ({ history, socket }) => {
+  const onPressPlus = () => history.push('/room')
+
   return (
     <View style={style.container}>
        <Footer style={style.footer}>
@@ -16,7 +18,10 @@ export default function Lobby(props) {
               <Icon style={style.icon} type='AntDesign' name="search1" />
             </Button>
              
-            <Button transparent style={{justifyContent: 'center', alignSelf: 'center'}}>
+            <Button transparent 
+            style={{justifyContent: 'center', alignSelf: 'center'}}
+            onPress={onPressPlus}
+            >
               <Icon style={style.iconPlus} type='AntDesign' active name="pluscircleo" />
             </Button>
             
@@ -44,7 +49,7 @@ const style = StyleSheet.create({
     
   },
   footer: {
-    backgroundColor: '#ee977a',
+    backgroundColor: '#2a9d8f',
     // justifyContent: 'center',
     height: 80,
     alignSelf: 'center',
@@ -65,6 +70,7 @@ const style = StyleSheet.create({
   
   icon: {
     color: '#fcfaf2',
+    height: 30
     // alignSelf: 'center',
   },
   iconPlus: {
