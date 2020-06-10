@@ -6,23 +6,16 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 export default function Filters(props){
-  const [state, setState] = useState({
-    visible: false,
-    searchType: 'nearby',
-    type: 'restaurant',
-    area: null,
-    radius: 500,
-    price: 1,
-    vegan: false,
-    familyFriendly: false
-  }) 
+  const [visible, setVisible] = useState(false)
+
+  const { state, setState } = props
 
   function handleSubmit() {
     console.log(state)  
   }
 
   function toggleOverlay() {
-    setState({...state, visible: !state.visible});
+    setVisible(!visible);
   }
 
   function renderSearchType() {
@@ -71,8 +64,18 @@ export default function Filters(props){
         </View>
       </View>
 
-      <Overlay overlayStyle={{ height: SCREEN_HEIGHT / 1.85 }} isVisible={state.visible} onBackdropPress={toggleOverlay}>
+      <Overlay overlayStyle={{ height: SCREEN_HEIGHT / 1.85 }} isVisible={visible} onBackdropPress={toggleOverlay}>
         <View style={{flex: 1, flexDirection: 'column'}}>
+          <CheckBox 
+            title='Vegan'
+            checked={state.vegan}
+            onPress={() => setState({...state, vegan: !state.vegan})}
+          />
+          <CheckBox
+            title='Family-Friendly'
+            checked={state.familyFriendly}
+            onPress={() => setState({...state, familyFriendly: !state.familyFriendly})}
+          />
           <CheckBox 
             title='Vegan'
             checked={state.vegan}
@@ -107,7 +110,8 @@ export default function Filters(props){
       </Overlay>
 
       <Button raised buttonStyle={styles.button} title="Extra Parameters" onPress={toggleOverlay} />
-      <Button raised buttonStyle={styles.button} title="Create Room!" onPress={handleSubmit} />
+      {/* <Button raised buttonStyle={styles.button} title="Create Room!" onPress={handleSubmit} /> */}
+      <Button title="Go to Room" onPress={() => props.history.push("/room")}></Button>
     </View>
   )
 }

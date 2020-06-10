@@ -223,7 +223,6 @@ export default class App extends Component {
       return <Redirect to={{
         pathname: '/results',
         results: results,
-        API_KEY: this.props.places.API_KEY
       }} />
     }
     return (

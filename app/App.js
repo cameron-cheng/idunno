@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import { NativeRouter, Switch, Route} from 'react-router-native'
-import Home from './src/components/Homepage'
+import Home from './src/components/Home'
 import Room from './src/components/Room'
 import Results from './src/components/Results'
 import Invitation from './src/components/Invitation'
@@ -14,10 +14,19 @@ import io from "socket.io-client";
 
 
 export default function App({ parentCallback }) {
-const [socket] = useState(() => io('http://192.168.0.37:3000'));
+const [socket] = useState(() => io('http://192.168.1.72:3000'));
 const [roomId, setRoomId] = useState(null)
 const [example, setExample] = useState('Hello')
 
+const [filters, setFilters] = useState({
+  searchType: 'nearby',
+  type: 'restaurant',
+  area: null,
+  radius: 500,
+  price: 1,
+  vegan: false,
+  familyFriendly: false
+}) 
 
   function createRoom() {
     console.log('sending create room event')
@@ -48,16 +57,14 @@ const [example, setExample] = useState('Hello')
           <Route exact path="/"  render={(routeProps) => {
             let homeProps = {...routeProps, socket, createRoom }
             return (<Home {...homeProps}/>)}} />
-          <Route exact path="/room" exact render={(routeProps)=> <Room {...routeProps} />}/>
+          <Route exact path="/lobby" component={Lobby}/>
+          <Route exact path="/room" exact render={(routeProps)=> <Room {...routeProps} filters={filters}/>}/>
           <Route exact path="/results" component={Results}/>
-          <Route exact 
-            path="/invitation" 
-          render={(routeProps) => {
+          <Route exact path="/invitation" exact render={(routeProps) => {
             let invitationProps = {...routeProps, roomId} 
             return (<Invitation {... invitationProps} />)}}/>
-          <Route exact path="/lobby" component={Lobby}/>
           <Route exact path="/login" component={Login}/>
-          <Route exact path="/filters" component={Filters}/>
+          <Route exact path="/filters" exact render={(routeProps)=> <Filters {...routeProps} state={filters} setState={setFilters}/>}/>
           {/* <Route path="/timer" exact render={(routeProps)=> <Timer {...routeProps} io={socket} /> */}
          />
       </Switch>

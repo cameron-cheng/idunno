@@ -1,22 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import Header from './Header';
 import Footer from './Footer';
-import Filters from './Filters';
 
 
 export default ({ history, socket, createRoom }) => {
   console.log('rendering');
 
-
-  // function createRoom() {
-  //   console.log('sending create room event')
-  //   //event to create a room to server, response with server code
-  //   socket.emit('createRoom', null, (roomId) => {
-  //     console.log(roomId);
-  //     //pass roomId to Share component
-  //    })
-  // }
+  
 
   return (
     <View style={style.container}>

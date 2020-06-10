@@ -50,7 +50,7 @@ const style = StyleSheet.create({
     fontSize: 50,
     height: 60,
     fontWeight: '900',
-    fontFamily: 'AppleSDGothicNeo-Bold'
+    // fontFamily: 'AppleSDGothicNeo-Bold'
     
   },
 })
