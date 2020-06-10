@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
-import { Container, Content, Card, CardItem, Body, Button } from 'native-base';
+import { Container, Content, Card, CardItem, Body, Button, Icon } from 'native-base';
 import { State } from 'react-native-gesture-handler';
-import Header from './Header'
+import Header from './Header';
+import Footer from './Footer'
 import io from 'socket.io-client'
 
 
@@ -19,64 +20,117 @@ export default function Lobby(props) {
     }
   },[])
 
-
+  const playersReady = () => {
+    //loop through players in room and return <Text>Name</Text> and <Icon type='Entypo' name='block'/>
+    //if player not ready - "not ready" button should not be pressable: greyed out?
+    //if player ready, change icon to <Icon type='FontAwesome' name='check'/>
+  }
 
   return(  
     <Container style={styles.container}>
       <Header />
       <Content style={styles.content}>
         <Card style={styles.card}>
-          <CardItem >
-            <Text style={styles.text}>Ready to start deciding?</Text>
+          <CardItem style={styles.cardItem}>
+            <Text style={styles.title}>Ready to start deciding?</Text>
           </CardItem>
-          <CardItem >
-            <Body style={styles.body}>
-              <Text style={styles.text}>
-                Waiting for decision makers...
-              </Text>
-              <View style={{flexDirection: 'row'}}>
-                <TouchableOpacity>
-                  <Text>
-                    Ready
-                  </Text>
 
-                </TouchableOpacity>
-                <Button rounded  
-                  onPress={(event) => props.handleReady(event)}
+          <CardItem style={styles.cardItemButtons}>
+            <View >
+              <TouchableOpacity 
+                onPress={props.handleReady}
+                style={styles.buttonReady}>
+                  <Icon type='Feather' name='check-circle' style={styles.icon}/>
+                  <Text style={styles.buttonText}>Ready</Text>
+              </TouchableOpacity>
+            </View>
+            <View >
+              <TouchableOpacity 
+                style={styles.buttonNotReady}>
+                  <Icon type='Entypo' name='block' style={styles.icon}/>
 
-                  style={styles.button}>
-
-                    <Text style={styles.buttonText}>Ready</Text>
-                </Button>
-                <Button rounded style={styles.buttonNotReady}>
                   <Text style={styles.buttonText}>Not Ready</Text>
-                </Button>
-              </View>
-              <View>
-                {/* {changeBool} */}
-              </View>
-            </Body>
+              </TouchableOpacity>
+              {/* <Button rounded  
+                onPress={(event) => props.handleReady(event)}
+                style={styles.button}>
+                  <Text style={styles.buttonText}>Ready</Text>
+              </Button> */}
+              {/* <Button rounded style={styles.buttonNotReady}>
+                <Text style={styles.buttonText}>Not Ready</Text>
+              </Button> */}
+            </View>
           </CardItem>
+          <CardItem style={styles.cardItem}>
+            <Text style={styles.text}>
+              WAITING FOR MORE DECISION MAKERS 2/3
+            </Text>
+          </CardItem>
+          {/* REPLACE WITH PLAYER LOOP */}
+          <View style={{backgroundColor:'#f9f1dc'}}>
+            <View style={{backgroundColor:'#f9f1dc'}}>
+              <CardItem style={styles.players}>
+                <View style={styles.playersView}>
+                  <Text style={styles.playerText}>
+                    Cameron
+                  </Text>
+                  {/* <Icon type='Feather' name='check-circle' style={styles.playerTrue}/> */}
+                  <Icon type='Entypo' name='block' style={styles.playerFalse}/>
+                </View>
+              </CardItem>
+            </View>
+            <CardItem style={styles.players}>
+              <View style={styles.playersView}>
+                <Text style={styles.playerText}>
+                  Jeremy
+                </Text>
+                <Icon type='Feather' name='check-circle' style={styles.playerTrue}/>
+                {/* <Icon type='Entypo' name='block' style={styles.playerFalse}/> */}
+              </View>
+            </CardItem>
+            <CardItem style={styles.players}>
+            <View style={styles.playersView}>
+                <Text style={styles.playerText}>
+                  Amy
+                </Text>
+                <Icon type='Feather' name='check-circle' style={styles.playerTrue}/>
+                {/* <Icon type='Entypo' name='block' style={styles.playerFalse}/> */}
+              </View>
+            </CardItem>
+          </View>
+          {/* ------------------------ */}
         </Card>
       </Content>
-    </Container>
+    <Footer />
+  </Container>
       
   )
 };
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
+    flex: 1,
     width: SCREEN_WIDTH,
     backgroundColor: '#fcfaf2',
-    
-    
   },
   content: {
-    padding: 10,
+    padding: 15,
     top: 100,
   },
+  cardItem: {
+    flexDirection:'column', 
+    backgroundColor: '#f9f1dc',
+    
+  },
+  cardItemButtons: {
+    flexDirection: 'row', 
+    height: 70, 
+    justifyContent: 'space-between', 
+    width: 300, 
+    backgroundColor: '#f9f1dc',
+  },
   card: {
+    // justifyContent: 'space-evenly',
     borderRadius: 20,
     height: 400,
     alignItems: 'center',
@@ -91,25 +145,70 @@ const styles = StyleSheet.create({
     borderTopRightRadius:20,
   },
   text: {
+    fontSize: 15
+  },
+  title: {
     fontSize: 25
   },
   body: {
     // alignItems: 'center',
     // top: 60
   },
+  icon: {
+    color: '#fcfaf2', 
+    fontSize: 18, 
+    paddingLeft: 10,
+    paddingRight: 10
+  },
   buttonReady: {
-    paddingLeft: 20, 
-    paddingRight: 20,
-    color: '#ee977a'
+    backgroundColor:'#2a9d8f',  
+    borderRadius: 10,
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   buttonNotReady: {
-    paddingLeft: 20, 
-    paddingRight: 20,
+    backgroundColor:'#ee937c',  
+    borderRadius: 10,
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   buttonText: {
-    color: 'white', 
-    fontWeight: 'bold', 
-    fontSize: 16,
+    color:'#fcfaf2',
+    fontSize: 20, 
+    fontWeight: '700', 
+    paddingRight: 10, 
+    paddingVertical: 10,
+    
   },
+  playersView: {
+    width: 300, 
+    flexDirection: 'row', 
+    justifyContent: 'space-between',
+    backgroundColor: '#f9f1dc',
+  },
+  payers:{
+    width: 100,
+    flexDirection: 'row',
+    // justifyContent: 'space-between',
+    // width: 80,
+    backgroundColor: '#f9f1dc',
+    
+  },
+  playerText: {
+    fontSize: 30,
+    backgroundColor: '#f9f1dc',
+  },
+  playerTrue: {
+    paddingTop: 2,
+    fontSize: 30,
+    color: '#2a9d8f',
+  },
+  playerFalse: {
+    paddingTop: 2,
+    fontSize: 30,
+    color: '#a39571',
+
+
+  }
   
 })

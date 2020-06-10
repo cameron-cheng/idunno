@@ -8,24 +8,53 @@ import Invitation from './src/components/Invitation'
 import Lobby from './src/components/Lobby'
 import Login from './src/components/Login'
 import Filters from './src/components/Filters'
+import Footer from './src/components/Footer'
 import io from "socket.io-client";
 // import Timer from './src/components/Timer';
 
 
-export default function App() {
-const [socket] = useState(() => io('http://192.168.1.72:3000'));
-// [roomId, setRoomId] = useState(null)
+export default function App({ parentCallback }) {
+const [socket] = useState(() => io('http://192.168.0.37:3000'));
+const [roomId, setRoomId] = useState(null)
+const [example, setExample] = useState('Hello')
+
+
+  function createRoom() {
+    console.log('sending create room event')
+    //event to create a room to server, response with server code
+    socket.emit('createRoom', null, (roomId) => {
+      console.log(roomId);
+      //pass roomId to Share component
+     })
+  }
+
+  const getData = async () => {
+     socket.on('roomCreated', function(data) {
+      setRoomId(data)
+      console.log(data)
+    })
+  }
+
+  useEffect(() => {
+    getData();
+  });
+
+  
   return (
     <NativeRouter>
       
       <View style={styles.container}>
         <Switch>
           <Route exact path="/"  render={(routeProps) => {
-            let homeProps = {...routeProps, socket}
+            let homeProps = {...routeProps, socket, createRoom }
             return (<Home {...homeProps}/>)}} />
           <Route exact path="/room" exact render={(routeProps)=> <Room {...routeProps} />}/>
           <Route exact path="/results" component={Results}/>
-          <Route exact path="/invitation" component={Invitation}/>
+          <Route exact 
+            path="/invitation" 
+          render={(routeProps) => {
+            let invitationProps = {...routeProps, roomId} 
+            return (<Invitation {... invitationProps} />)}}/>
           <Route exact path="/lobby" component={Lobby}/>
           <Route exact path="/login" component={Login}/>
           <Route exact path="/filters" component={Filters}/>
