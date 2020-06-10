@@ -1,23 +1,41 @@
-import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { Alert, View, TextInput, Button, StyleSheet } from 'react-native';
 import Header from './Header';
 import Footer from './Footer';
 import Filters from './Filters';
 
 
-export default ({ history, socket, createRoom }) => {
+export default ({ history, socket, createRoom, setRoomId }) => {
   console.log('rendering');
+  const [joinRoomId, setJoinRoomId] = useState('')
 
+  const joinRoom = (roomId) => {
+    console.log(roomId);
+    socket.emit('joinRoom', roomId, (hasJoined) => {
+      console.log('has joined', hasJoined)
+      if (hasJoined === false) {
+        failToJoinAlert();
+      } else {
+        setRoomId(roomId);
+      }
+    })
+    
 
-  // function createRoom() {
-  //   console.log('sending create room event')
-  //   //event to create a room to server, response with server code
-  //   socket.emit('createRoom', null, (roomId) => {
-  //     console.log(roomId);
-  //     //pass roomId to Share component
-  //    })
-  // }
-
+    const failToJoinAlert = () =>
+    Alert.alert(
+      "Room does not exist",
+      "Unable to join room",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "OK", onPress: () => console.log("OK Pressed") }
+      ],
+      { cancelable: false }
+    );  
+  }
   return (
     <View style={style.container}>
       <Header />
@@ -30,6 +48,8 @@ export default ({ history, socket, createRoom }) => {
         <Button title="Lobby" onPress={() => history.push("/lobby")}></Button>
         <Button title="Login" onPress={() => history.push("/login")}></Button>
         <Button title="Create Room" onPress={ createRoom }></Button>
+        <TextInput onChangeText={text => setJoinRoomId(text)} value={joinRoomId}></TextInput>
+        <Button title="Join Room" onPress={ () => joinRoom(joinRoomId)}></Button>
       </View>
 
       <Footer />

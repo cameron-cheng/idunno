@@ -45,7 +45,7 @@ const [roomId, setRoomId] = useState(null)
       <View style={styles.container}>
         <Switch>
           <Route exact path="/"  render={(routeProps) => {
-            let homeProps = {...routeProps, socket, createRoom }
+            let homeProps = {...routeProps, socket, createRoom, setRoomId }
             return (<Home {...homeProps}/>)}} />
           <Route exact path="/room" exact render={(routeProps)=> <Room {...routeProps} />}/>
           <Route exact path="/results" component={Results}/>
@@ -57,7 +57,6 @@ const [roomId, setRoomId] = useState(null)
           <Route exact path="/lobby" component={Lobby}/>
           <Route exact path="/login" component={Login}/>
           <Route exact path="/filters" component={Filters}/>
-
           {/* <Route path="/timer" exact render={(routeProps)=> <Timer {...routeProps} io={socket} /> */}
          />
       </Switch>

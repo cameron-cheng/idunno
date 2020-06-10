@@ -35,8 +35,23 @@ io.on('connection', (socket) => {
     ackFn(roomId);
     // socket.emit('roomCreated', roomId);
   })
+<<<<<<< Updated upstream
   socket.on()
   
+=======
+  socket.on('joinRoom', (roomId, ackFn) => {
+   const room = io.sockets.adapter.rooms[roomId];
+    if (!room) {
+      console.log('roomId doesn\'t exist', roomId)
+      ackFn(false);
+    } else {
+      socket.join(roomId);
+      ackFn(true)
+      console.log('client joins room', roomId);
+    }
+  });
+
+>>>>>>> Stashed changes
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
