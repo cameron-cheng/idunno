@@ -27,15 +27,20 @@ app.use(cors());
 
 //Socket.io Lobby
 io.on('connection', (socket) => {
-  console.log('a user connected');
+  console.log('a user connected', socket.id);
+  console.log("=================")
+  console.log(socket.client.conn.server.clientsCount + " users connected")
+  console.log("^^^^^^^^^^^^^^^^^")
   socket.on('createRoom', (ignore, ackFn) => {
     const roomId = makeId();
     socket.join(roomId);
-    console.log("Created RoomId", roomId);
+    // console.log(`${roomId} has `, io.sockets.adapter.rooms[`${roomId}`].length);
+    console.log('a user connected', socket.id);
+    console.log("ROOM USERS", io.sockets.adapter.rooms[`${roomId}`].length)
     ackFn(roomId);
     // socket.emit('roomCreated', roomId);
   })
-  socket.on()
+
   
   socket.on('joinRoom', (roomId, ackFn) => {
    const room = io.sockets.adapter.rooms[roomId];
@@ -45,7 +50,8 @@ io.on('connection', (socket) => {
     } else {
       socket.join(roomId);
       ackFn(true)
-      console.log('client joins room', roomId);
+      console.log(socket.id, ' joins room', roomId);
+      console.log("ROOM USERS", io.sockets.adapter.rooms[`${roomId}`].length)
     }
   });
 
