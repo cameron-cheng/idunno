@@ -1,32 +1,39 @@
 import React, { useEffect, useState } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
-import { NativeRouter, Switch, Route} from 'react-router-native'
-import Home from './src/components/Home'
-import Room from './src/components/Room'
-import Results from './src/components/Results'
-import Invitation from './src/components/Invitation'
-import Lobby from './src/components/Lobby'
-import Login from './src/components/Login'
-import Filters from './src/components/Filters'
-import Footer from './src/components/Footer'
+import { NativeRouter, Switch, Route} from 'react-router-native';
+import Home from './src/components/Home';
+import Room from './src/components/Room';
+import Results from './src/components/Results';
+import Invitation from './src/components/Invitation';
+import Lobby from './src/components/Lobby';
+import Login from './src/components/Login';
+import Filters from './src/components/Filters';
+import Footer from './src/components/Footer';
 import io from "socket.io-client";
-import { IP_ADDRESS } from 'react-native-dotenv'
+import { IP_ADDRESS } from 'react-native-dotenv';
+const socket = io(IP_ADDRESS)
+
+  socket.on('dataSentToRoom', data => {
+    console.log("Got cards", data)
+  })
+
+export { socket }
 // import Timer from './src/components/Timer';
 
 
 export default function App({ parentCallback }) {
-  const [socket] = useState(() => io(IP_ADDRESS));
-const [roomId, setRoomId] = useState(null)
+  
+  const [roomId, setRoomId] = useState(null)
 
-const [filters, setFilters] = useState({
-  searchType: 'nearby',
-  type: 'restaurant',
-  area: null,
-  radius: 500,
-  price: 1,
-  vegan: false,
-  familyFriendly: false
-}) 
+  const [filters, setFilters] = useState({
+    searchType: 'nearby',
+    type: 'restaurant',
+    area: null,
+    radius: 500,
+    price: 1,
+    vegan: false,
+    familyFriendly: false
+  }) 
 
   function createRoom() {
     console.log('sending create room event')
