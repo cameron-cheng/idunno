@@ -34,8 +34,8 @@ io.on('connection', (socket) => {
     console.log("Created RoomId", roomId);
     ackFn(roomId);
     // socket.emit('roomCreated', roomId);
-
   })
+  socket.on()
   
   socket.on('disconnect', () => {
     console.log('user disconnected');
@@ -53,4 +53,3 @@ const users = require("./routes/users");
 server.listen(port, () => {
   console.log('listening on *:3000');
 });
-
