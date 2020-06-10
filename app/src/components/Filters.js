@@ -1,26 +1,32 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Dimensions, Picker, Slider } from 'react-native';
-import { Input, Button, CheckBox } from 'react-native-elements'
+import { Input, Button, CheckBox, Overlay } from 'react-native-elements'
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 export default function Filters(props){
   const [state, setState] = useState({
-    searchType: null,
-    area: null,
+    visible: false,
+    searchType: 'nearby',
     type: 'restaurant',
+    area: null,
     radius: 500,
     price: 1,
-    clicked: false
+    vegan: false,
+    familyFriendly: false
   }) 
 
   function handleSubmit() {
     console.log(state)  
   }
 
+  function toggleOverlay() {
+    setState({...state, visible: !state.visible});
+  }
+
   function renderSearchType() {
-    if (state.searchType === "Nearby") {
+    if (state.searchType === "nearby") {
       return (
         <View style={{ flex: 1.27, alignItems: 'stretch', justifyContent: 'center' }}>
           <Slider
@@ -45,8 +51,8 @@ export default function Filters(props){
         <Picker
           selectedValue={state.searchType}
           onValueChange={currentType => setState({...state, searchType: currentType})} >
-          <Picker.Item label="Search Nearby" value="Nearby" />
-          <Picker.Item label="Search by Area" value="Text" />
+          <Picker.Item label="Search Nearby" value="nearby" />
+          <Picker.Item label="Search by Area" value="text" />
         </Picker>
       </View>
 
@@ -59,18 +65,49 @@ export default function Filters(props){
           <Slider
             minimumValue='0'
             maximumValue='4'
-            value={(Math.floor(state.price))} 
-            onValueChange={value => setState({...state, price: value})} />
-          <Text>Price: {'$'.repeat(Math.floor(state.price)) || 'Free'}</Text>
+            value={(state.price)} 
+            onValueChange={value => setState({...state, price: Math.ceil(value)})} />
+          <Text>Price: {'$'.repeat(Math.ceil(state.price)) || 'Free'}</Text>
         </View>
       </View>
-      {/* <CheckBox
-        center
-        title='Click Here'
-        checked={state.checked}
-        onPress={() => setState({...state, checked: !state.checked})}
-      /> */}
-      <Button raised style={styles.button} title="Create Room!" onPress={handleSubmit} />
+
+      <Overlay overlayStyle={{ height: SCREEN_HEIGHT / 1.85 }} isVisible={state.visible} onBackdropPress={toggleOverlay}>
+        <View style={{flex: 1, flexDirection: 'column'}}>
+          <CheckBox 
+            title='Vegan'
+            checked={state.vegan}
+            onPress={() => setState({...state, vegan: !state.vegan})}
+          />
+          <CheckBox
+            title='Family-Friendly'
+            checked={state.familyFriendly}
+            onPress={() => setState({...state, familyFriendly: !state.familyFriendly})}
+          />
+          <CheckBox 
+            title='Vegan'
+            checked={state.vegan}
+            onPress={() => setState({...state, vegan: !state.vegan})}
+          />
+          <CheckBox
+            title='Family-Friendly'
+            checked={state.familyFriendly}
+            onPress={() => setState({...state, familyFriendly: !state.familyFriendly})}
+          />
+          <CheckBox 
+            title='Vegan'
+            checked={state.vegan}
+            onPress={() => setState({...state, vegan: !state.vegan})}
+          />
+          <CheckBox
+            title='Family-Friendly'
+            checked={state.familyFriendly}
+            onPress={() => setState({...state, familyFriendly: !state.familyFriendly})}
+          />
+        </View>
+      </Overlay>
+
+      <Button raised buttonStyle={styles.button} title="Extra Parameters" onPress={toggleOverlay} />
+      <Button raised buttonStyle={styles.button} title="Create Room!" onPress={handleSubmit} />
     </View>
   )
 }
@@ -78,18 +115,17 @@ export default function Filters(props){
 const styles = StyleSheet.create({
   container: {
     flex: 2,
-    width: SCREEN_WIDTH - 40,
+    width: SCREEN_WIDTH - 60,
     marginTop: 25,
     flexDirection: 'column',
     justifyContent: 'center',
     paddingHorizontal: 40,
     backgroundColor: '#eef'
   },
-  button: {
-    // flex: 2
-    marginBottom: 20,
-  },
   input: {
     flex: 1
+  },
+  button: {
+    marginBottom: 25
   }
 });
