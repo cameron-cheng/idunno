@@ -7,12 +7,13 @@ import Results from './src/components/Results'
 import Invitation from './src/components/Invitation'
 import Lobby from './src/components/Lobby'
 import Login from './src/components/Login'
+import Filters from './src/components/Filters'
 import io from "socket.io-client";
 // import Timer from './src/components/Timer';
 
 
 export default function App() {
-const [socket] = useState(() => io('http://192.168.0.37:3000'));
+const [socket] = useState(() => io('http://192.168.1.72:3000'));
 // [roomId, setRoomId] = useState(null)
   return (
     <NativeRouter>
@@ -27,6 +28,7 @@ const [socket] = useState(() => io('http://192.168.0.37:3000'));
           <Route exact path="/invitation" component={Invitation}/>
           <Route exact path="/lobby" component={Lobby}/>
           <Route exact path="/login" component={Login}/>
+          <Route exact path="/filters" component={Filters}/>
           {/* <Route path="/timer" exact render={(routeProps)=> <Timer {...routeProps} io={socket} /> */}
          />
       </Switch>
