@@ -20,7 +20,7 @@ export default ({ history, socket, createRoom }) => {
   <View style={style.container}>
     <Header />
     <View style={{flex: 1, justifyContent: 'space-between'} }>
-        <Button title="Sessions" onPress={() => history.push("/sessions")}></Button>
+        <Button title="Room" onPress={() => history.push("/room")}></Button>
         <Button title="Results" onPress={() => history.push("/results")}></Button>
         <Button title="Invitation" onPress={() => history.push("/invitation")}></Button>
         <Button title="Lobby" onPress={() => history.push("/lobby")}></Button>

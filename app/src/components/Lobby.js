@@ -41,13 +41,13 @@ export default function Lobby(props) {
                   </Text>
 
                 </TouchableOpacity>
-                {/* <Button rounded  
+                <Button rounded  
                   onPress={(event) => props.handleReady(event)}
 
                   style={styles.button}>
 
                     <Text style={styles.buttonText}>Ready</Text>
-                </Button> */}
+                </Button>
                 <Button rounded style={styles.buttonNotReady}>
                   <Text style={styles.buttonText}>Not Ready</Text>
                 </Button>
