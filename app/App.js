@@ -7,6 +7,7 @@ import Results from './src/components/Results'
 import Invitation from './src/components/Invitation'
 import Lobby from './src/components/Lobby'
 import Login from './src/components/Login'
+import Filters from './src/components/Filters'
 import Footer from './src/components/Footer'
 import io from "socket.io-client";
 // import Timer from './src/components/Timer';
@@ -16,6 +17,7 @@ export default function App({ parentCallback }) {
 const [socket] = useState(() => io('http://192.168.0.37:3000'));
 const [roomId, setRoomId] = useState(null)
 const [example, setExample] = useState('Hello')
+
 
   function createRoom() {
     console.log('sending create room event')
@@ -37,7 +39,7 @@ const [example, setExample] = useState('Hello')
     getData();
   });
 
-
+  
   return (
     <NativeRouter>
       
@@ -55,6 +57,7 @@ const [example, setExample] = useState('Hello')
             return (<Invitation {... invitationProps} />)}}/>
           <Route exact path="/lobby" component={Lobby}/>
           <Route exact path="/login" component={Login}/>
+          <Route exact path="/filters" component={Filters}/>
           {/* <Route path="/timer" exact render={(routeProps)=> <Timer {...routeProps} io={socket} /> */}
          />
       </Switch>
