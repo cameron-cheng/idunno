@@ -5,7 +5,7 @@ import Footer from './Footer';
 
 
 export default ({ history, socket, createRoom, setRoomId }) => {
-  console.log('rendering');
+  // console.log('rendering');
   const [joinRoomId, setJoinRoomId] = useState('')
 
   const joinRoom = (roomId) => {
