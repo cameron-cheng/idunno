@@ -16,6 +16,7 @@
     "lodash": "^4.17.15",
     "metro-react-native-babel-preset": "^0.59.0",
     "native-base": "^2.13.12",
+    "path": "^0.12.7",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
     "react-native": "~0.61.5",

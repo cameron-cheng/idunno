@@ -1,4 +1,4 @@
-// import { API_KEY } from 'react-native-dotenv'
+import { API_KEY } from 'react-native-dotenv'
 import mode from '../helpers/mode'
 
 import React, { Component } from "react";
