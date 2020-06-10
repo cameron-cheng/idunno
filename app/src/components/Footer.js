@@ -9,6 +9,7 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 
 export default ({ history, socket }) => {
   const onPressPlus = () => history.push('/room')
+
   return (
     <View style={style.container}>
        <Footer style={style.footer}>
