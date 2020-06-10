@@ -2,13 +2,13 @@ import React from 'react';
 import { Share, View, Button, Text } from 'react-native';
 import QRCode  from 'react-native-qrcode-svg';
 
-export default ShareExample = () => {
-    
+export default ShareExample = ({roomId, props}) => {
+
   const onShare = async () => {
     try {
       const result = await Share.share({
         message:
-          'Session Code: YZXN',
+          `Session Code: ${roomId}`
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
