@@ -25,14 +25,30 @@ app.use(bodyParser.urlencoded({extended:true}))
 const cors = require('cors');
 app.use(cors());
 
+const data = {
+
+}
+
+const initializeRoom  = function() {
+
+}
+
+
+
 //Socket.io Lobby
 io.on('connection', (socket) => {
+  console.log(socket)
   console.log("=================")
   console.log('a user connected', socket.id);
   console.log(socket.client.conn.server.clientsCount + " total users connected")
   console.log("=================")
-  socket.on('createRoom', (ignore, ackFn) => {
+  
+  socket.emit("dataSentToRoom", "Hello")
+
+  socket.on('createRoom', (ignore, ackFn) => { //change ignore to filters/query
     const roomId = makeId();
+    data[roomId] = {cards: [],}
+
     socket.join(roomId);
     console.log("~~~~~~~~~~~~~~~~~~~~")
     console.log(`*** ${roomId} has`, io.sockets.adapter.rooms[`${roomId}`].length, "user");
@@ -43,7 +59,14 @@ io.on('connection', (socket) => {
     // socket.emit('roomCreated', roomId);
   })
 
-  
+  socket.on('getCardData', (data) => {
+    const roomId = Object.keys(socket.rooms)[1];
+    console.log("ROOM", roomId)
+    // console.log("****PLACES", data)
+    socket.in(roomId).emit("dataSentToRoom", data);
+  })
+
+
   socket.on('joinRoom', (roomId, ackFn) => {
    const room = io.sockets.adapter.rooms[roomId];
     if (!room) {

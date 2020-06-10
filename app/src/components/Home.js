@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { socket } from '../../App';
 import { Alert, View, TextInput, Button, StyleSheet } from 'react-native';
 import Header from './Header';
 import Footer from './Footer';
