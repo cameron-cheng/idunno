@@ -55,7 +55,7 @@ const [filters, setFilters] = useState({
       <View style={styles.container}>
         <Switch>
           <Route exact path="/"  render={(routeProps) => {
-            let homeProps = {...routeProps, socket, createRoom }
+            let homeProps = {...routeProps, socket, createRoom, setRoomId }
             return (<Home {...homeProps}/>)}} />
           <Route exact path="/lobby" component={Lobby}/>
           <Route exact path="/room" exact render={(routeProps)=> <Room {...routeProps} filters={filters}/>}/>

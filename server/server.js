@@ -34,9 +34,21 @@ io.on('connection', (socket) => {
     console.log("Created RoomId", roomId);
     ackFn(roomId);
     // socket.emit('roomCreated', roomId);
-
   })
+  socket.on()
   
+  socket.on('joinRoom', (roomId, ackFn) => {
+   const room = io.sockets.adapter.rooms[roomId];
+    if (!room) {
+      console.log('roomId doesn\'t exist', roomId)
+      ackFn(false);
+    } else {
+      socket.join(roomId);
+      ackFn(true)
+      console.log('client joins room', roomId);
+    }
+  });
+
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
@@ -53,4 +65,3 @@ const users = require("./routes/users");
 server.listen(port, () => {
   console.log('listening on *:3000');
 });
-
