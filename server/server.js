@@ -49,22 +49,20 @@ io.on('connection', (socket) => {
 
     fetchPlaces(filters)
       .then((places) => {data[roomId] = places})
-  
-    console.log("DATA:", data)
+      .then(() => ackFn(roomId))
+
     console.log("~~~~~~~~~~~~~~~~~~~~")
     console.log('a user connected', socket.id);
     console.log(`*** ${roomId} has`, io.sockets.adapter.rooms[`${roomId}`].length, "user");
 
-    // console.log("ROOM USERS", io.sockets.adapter.rooms[`${roomId}`].length)
-    ackFn(roomId);
-    // socket.emit('roomCreated', roomId);
   })
 
   socket.on('lobbyReady', () => {
     // const hostId = Object.keys(socket.rooms)[0];
     const roomId = Object.keys(socket.rooms)[1];
-    console.log("DATA:", data)
-    io.in(roomId).emit("dataSentToRoom", data[roomId]);
+
+    console.log("DATA:", data[roomId])
+    io.in(roomId).emit('dataSentToRoom', data[roomId]);
   })
 
   socket.on('joinRoom', (roomId, ackFn) => {

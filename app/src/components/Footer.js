@@ -7,7 +7,7 @@ import { State } from 'react-native-gesture-handler';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
-export default ({ history, socket }) => {
+export default ({ history }) => {
   const onPressPlus = () => history.push('/room')
 
   return (
