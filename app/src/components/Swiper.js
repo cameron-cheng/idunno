@@ -161,19 +161,34 @@ export default class App extends Component {
             {/* Card header */}
             <Animated.View style={{width: SCREEN_WIDTH, padding:10, position: 'absolute',zIndex:1000}}>
               <View >
-                <Card style={{backgroundColor: '#f9f1dc', borderRadius: 20, alignItems:'center', height: '100%'}}>
+                <Card style={{backgroundColor: '#f9f1dc', borderRadius: 20,  height: '100%'}}>
                   <View >
-                    <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>{item.name}</Text>
-                    <Rating type='custom' imageSize={20} readonly startingValue={item.rating} ratingColor='#ee937c' ratingBackgroundColor='#fcfaf2' style={{padding: 10}}></Rating>
+                    <Text style={{alignSelf: 'flex-start', color:"grey", fontSize: 25, padding: 20, paddingLeft:20, paddingBottom:0}}>{item.name}</Text>
+                    <Rating type='custom' imageSize={20} readonly startingValue={item.rating} ratingColor='#ee937c' ratingBackgroundColor='#fcfaf2' style={{padding:10, paddingLeft: 20, paddingBottom: 20, alignSelf: 'flex-start'}}></Rating>
                   </View>
-                  <Image 
-                  style={{flex:1, height:200, width:'90%', resizeMode: 'cover', borderRadius: 15}}
-                  source={{
-                    uri: `https://maps.googleapis.com/maps/api/place/photo?key=${API_KEY}&photoreference=${item.photos[0].photo_reference}&maxheight=400`
-                  }}/>
-                  <View style={{padding: 16}}>
-                    <Text style={{alignSelf: 'flex-start', color:"grey", fontSize: 15}}>Address: {item.formatted_address}</Text>
-                    <Text style={{alignSelf: 'flex-start', color:"grey", fontSize: 15}}>Price Level: {item.price_level}</Text>
+                  <View style={{alignItems: 'center'}}>
+                    <Image 
+                    style={{flex:1, height:200, width:'90%', resizeMode: 'cover', borderRadius: 15}}
+                    source={{
+                      uri: `https://maps.googleapis.com/maps/api/place/photo?key=${API_KEY}&photoreference=${item.photos[0].photo_reference}&maxheight=400`
+                    }}/>
+                  </View>
+
+                  
+                  <View style={{flexDirection: 'row', justifyContent: 'center', }}>
+                      <View style={{padding: 10, paddingLeft: 20, height:120, flexDirection: 'column',justifyContent: 'space-between'}}>
+                        
+                        <Icon type='MaterialIcons' name='restaurant' style={{fontSize: 25, width: 25, alignSelf: 'center'}}></Icon>
+                        <Icon type='AntDesign' name='clockcircle' style={{fontSize: 20, width: 21, alignSelf: 'center'}}></Icon>
+                        <Icon type='FontAwesome' name='dollar' style={{fontSize: 20, width: 12, alignSelf: 'center'}}></Icon>
+                      </View>
+                      <View style={{flex:1, padding: 10, height:120, justifyContent: 'space-between'}}>
+                        
+                        <Text style={{alignSelf: 'flex-start', color:"grey", fontSize: 15, }}>Cuisine: </Text>
+                        <Text style={{alignSelf: 'flex-start', color:"grey", fontSize: 15}}>OPEN now</Text>
+                        <Text style={{alignSelf: 'flex-start', color:"grey", fontSize: 15}}>Price Level: {item.price_level}</Text>
+                      </View>
+                    
                   </View>
                 </Card>
               </View>
