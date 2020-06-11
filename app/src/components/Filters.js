@@ -111,7 +111,7 @@ export default function Filters(props){
 
       <Button raised buttonStyle={styles.button} title="Extra Parameters" onPress={toggleOverlay} />
       {/* <Button raised buttonStyle={styles.button} title="Create Room!" onPress={handleSubmit} /> */}
-      <Button title="Go to Room" onPress={() => props.history.push("/room")}></Button>
+      {/* <Button title="Go to Room" onPress={() => props.history.push("/room")}></Button> */}
     </View>
   )
 }

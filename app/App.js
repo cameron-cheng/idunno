@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import { NativeRouter, Switch, Route} from 'react-router-native';
+
 import Home from './src/components/Home';
 import Room from './src/components/Room';
 import Results from './src/components/Results';
@@ -16,33 +17,29 @@ import Swiper from './src/components/Swiper';
 
 const socket = io(IP_ADDRESS)
 
-  socket.on('dataSentToRoom', data => {
-    console.log("Got cards", data)
-  })
-
-export { socket }
-// import Timer from './src/components/Timer';
 
 
-export default function App({ parentCallback }) {
+export default function App() {
+  
+  const [socket] = useState(() => io(IP_ADDRESS));
   
   const [roomId, setRoomId] = useState(null)
 
   const [filters, setFilters] = useState({
-    searchType: 'nearby',
+    searchType: 'area',
     type: 'restaurant',
     area: null,
     radius: 500,
     price: 1,
     vegan: false,
     familyFriendly: false
-  }) 
+  })
 
   function createRoom() {
     console.log('sending create room event')
     //event to create a room to server, response with server code
-    socket.emit('createRoom', null, (roomId) => {
-      console.log(roomId);
+    socket.emit('createRoom', filters, (roomId) => {
+      console.log("ROOM CODE:", roomId);
       setRoomId(roomId);
       //pass roomId to Share component
      })
@@ -54,10 +51,14 @@ export default function App({ parentCallback }) {
       <View style={styles.container}>
         <Switch>
           <Route exact path="/"  render={(routeProps) => {
-            let homeProps = {...routeProps, socket, createRoom, setRoomId }
+            let homeProps = { ...routeProps, socket, createRoom, setRoomId, filters, setFilters }
             return (<Home {...homeProps}/>)}} />
+
           <Route exact path="/lobby" component={Lobby}/>
-          <Route exact path="/room" exact render={(routeProps)=> <Room {...routeProps} filters={filters}/>}/>
+          <Route exact path="/room" exact render={(routeProps)=> {
+            let roomProps = { ...routeProps, socket, filters }
+            return (<Room {...roomProps}/>)}} />
+            
           <Route exact path="/results" component={Results}/>
           <Route exact path="/invitation" exact render={(routeProps) => {
             let invitationProps = {...routeProps, roomId} 

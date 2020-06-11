@@ -8,23 +8,26 @@ import Lobby from './Lobby';
 import Swiper from './Swiper';
 import Results from './Results';
 import { set } from 'react-native-reanimated';
-import { socket } from '../../App';
 
 const SCREEN_HEIGHT   = Dimensions.get('window').height;
 
-export default function Room(props) {
-  const [lobbyReady, setLobbyReady] = useState(false)
-  
+export default function Room({ history, socket }) {
+  const [lobbyReady, setLobbyReady] = useState(false);
+  const [places, setPlaces] = useState([]);
 
-  const places = useAPI(props.filters) 
-  
-  socket.emit("getCardData", places)
-  
   function handleReady() {
-    setLobbyReady(!lobbyReady)
+    setLobbyReady(!lobbyReady);
+    socket.emit('lobbyReady');
   }
 
+  socket.on('dataSentToRoom', (data) => {
+    console.log("Received Cards")
+    setPlaces(data);
+  })
+  console.log("PLACES:" , places)
+
   if (lobbyReady) {
+    
     return(
       <View style={styles.container}>
         <Text></Text>
@@ -34,8 +37,8 @@ export default function Room(props) {
         <Button title="Homepage" onPress={() => history.push("/")}></Button>
       </View>
     )
-
   } else {
+
     return(
       <View style={styles.container}>
         <View>

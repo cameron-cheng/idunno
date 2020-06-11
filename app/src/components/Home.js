@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import { socket } from '../../App';
 import { Alert, View, TextInput, Button, StyleSheet } from 'react-native';
+import { Input } from 'react-native-elements';
 import Header from './Header';
 import Footer from './Footer';
 import Loader from './Loader';
 
-export default ({ history, socket, createRoom, setRoomId }) => {
-  // console.log('rendering');
+
+export default ({ history, socket, createRoom, setRoomId, filters, setFilters }) => {
+  
+ 
+
   const [joinRoomId, setJoinRoomId] = useState('')
 
   const joinRoom = (roomId) => {
@@ -20,7 +23,6 @@ export default ({ history, socket, createRoom, setRoomId }) => {
       }
     })
     
-
     const failToJoinAlert = () =>
     Alert.alert(
       "Room does not exist",
@@ -36,21 +38,37 @@ export default ({ history, socket, createRoom, setRoomId }) => {
       { cancelable: false }
     );  
   }
+
+  const handleJoinRoom = () => {
+    joinRoom(joinRoomId);
+    history.push("/room");
+  }
+  
+  const handleCreateRoom = () =>{
+    createRoom();
+    history.push("/room");
+  }
+  
   return (
     <View style={style.container}>
       <Header />
-
+      <Filters state={filters} setState={setFilters}/>
       <View style={{flex: 1, justifyContent: 'space-between'} }>
-        <Button title="Filters" onPress={() => history.push("/filters")}></Button>
-        <Button title="Room" onPress={() => history.push("/room")}></Button>
-        <Button title="Results" onPress={() => history.push("/results")}></Button>
-        <Button title="Invitation" onPress={() => history.push("/invitation")}></Button>
-        <Button title="Lobby" onPress={() => history.push("/lobby")}></Button>
-        <Button title="Login" onPress={() => history.push("/login")}></Button>
-        <Button title="Create Room" onPress={ createRoom }></Button>
-        <TextInput onChangeText={text => setJoinRoomId(text)} value={joinRoomId}></TextInput>
-        <Button title="Join Room" onPress={ () => joinRoom(joinRoomId)}></Button>
-        <Button title="Loader" onPress={ () => history.push("/loader")}></Button>
+        {/* <Button title="Filters" onPress={() => history.push("/filters")}></Button> */}
+        {/* <Button title="Room" onPress={() => history.push("/room")}></Button> */}
+        {/* <Button title="Results" onPress={() => history.push("/results")}></Button> */}
+        {/* <Button title="Invitation" onPress={() => history.push("/invitation")}></Button> */}
+        {/* <Button title="Lobby" onPress={() => history.push("/lobby")}></Button> */}
+        {/* <Button title="Login" onPress={() => history.push("/login")}></Button> */}
+        <Button title="Create Room" 
+          // onPress={createRoom }
+          onPress={handleCreateRoom}
+          // onPress={createRoom}
+          >
+            
+          </Button>
+        <Input title="Join!" onChangeText={text => setJoinRoomId(text)} value={joinRoomId} ></Input>
+        <Button title="Join Room" onPress={handleJoinRoom}></Button>
       </View>
 
       <Footer />
