@@ -23,7 +23,6 @@ export default function Room({ history, emitReady }) {
   if (lobbyReady) {
     return <Loader /> 
   } else {
-
     return(
       <View style={styles.container}>
         <View>
