@@ -3,7 +3,7 @@ import { socket } from '../../App';
 import { Alert, View, TextInput, Button, StyleSheet } from 'react-native';
 import Header from './Header';
 import Footer from './Footer';
-
+import Loader from './Loader';
 
 export default ({ history, socket, createRoom, setRoomId }) => {
   // console.log('rendering');
@@ -50,6 +50,7 @@ export default ({ history, socket, createRoom, setRoomId }) => {
         <Button title="Create Room" onPress={ createRoom }></Button>
         <TextInput onChangeText={text => setJoinRoomId(text)} value={joinRoomId}></TextInput>
         <Button title="Join Room" onPress={ () => joinRoom(joinRoomId)}></Button>
+        <Button title="Loader" onPress={ () => history.push("/loader")}></Button>
       </View>
 
       <Footer />
