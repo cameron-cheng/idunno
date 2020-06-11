@@ -158,37 +158,39 @@ export default class App extends Component {
             key={item.id} style={[this.rotateAndTranslate,
             { height: SCREEN_HEIGHT - 200, width: SCREEN_WIDTH, padding: 10, position: 'absolute'}]} >
 
-            {/* Card header */}
+            
             <Animated.View style={{width: SCREEN_WIDTH, padding:10, position: 'absolute',zIndex:1000}}>
               <View >
-                <Card style={{backgroundColor: '#f9f1dc', borderRadius: 20,  height: '100%'}}>
+                <Card style={styles.card}>
                   <View >
-                    <Text style={{alignSelf: 'flex-start', color:"grey", fontSize: 25, padding: 20, paddingLeft:20, paddingBottom:0}}>{item.name}</Text>
-                    <Rating type='custom' imageSize={20} readonly startingValue={item.rating} ratingColor='#ee937c' ratingBackgroundColor='#fcfaf2' style={{padding:10, paddingLeft: 20, paddingBottom: 20, alignSelf: 'flex-start'}}></Rating>
+                    {/* Top Card Title/Rating */}
+                    <Text style={{alignSelf: 'flex-start', color:"#09413a", fontSize: 25, padding: 20, paddingLeft:20, paddingBottom:0}}>{item.name}</Text>
+                    <Rating type='custom' imageSize={30} readonly startingValue={item.rating} ratingColor='#e76f51' ratingBackgroundColor='#fcfaf2' style={{padding:10, paddingLeft: 20, paddingBottom: 20, alignSelf: 'flex-start'}}></Rating>
                   </View>
+
+                  {/* Top Card Image */}
                   <View style={{alignItems: 'center'}}>
                     <Image 
-                    style={{flex:1, height:200, width:'90%', resizeMode: 'cover', borderRadius: 15}}
+                    style={{flex:1, height:300, width:'90%', resizeMode: 'cover', borderRadius: 15}}
                     source={{
                       uri: `https://maps.googleapis.com/maps/api/place/photo?key=${API_KEY}&photoreference=${item.photos[0].photo_reference}&maxheight=400`
                     }}/>
                   </View>
 
-                  
-                  <View style={{flexDirection: 'row', justifyContent: 'center', }}>
+                  {/* Top Card details */}
+                  <View style={{flexDirection: 'row', justifyContent: 'center', paddingTop: 20 }}>
                       <View style={{padding: 10, paddingLeft: 20, height:120, flexDirection: 'column',justifyContent: 'space-between'}}>
                         
-                        <Icon type='MaterialIcons' name='restaurant' style={{fontSize: 25, width: 25, alignSelf: 'center'}}></Icon>
-                        <Icon type='AntDesign' name='clockcircle' style={{fontSize: 20, width: 21, alignSelf: 'center'}}></Icon>
-                        <Icon type='FontAwesome' name='dollar' style={{fontSize: 20, width: 12, alignSelf: 'center'}}></Icon>
+                        <Icon type='MaterialIcons' name='restaurant' style={{fontSize: 25, width: 25, alignSelf: 'center', color: '#2a9d8f'}}></Icon>
+                        <Icon type='AntDesign' name='clockcircle' style={{fontSize: 20, width: 21, alignSelf: 'center', color: '#2a9d8f'}}></Icon>
+                        <Icon type='FontAwesome' name='dollar' style={{fontSize: 20, width: 12, alignSelf: 'center', color: '#2a9d8f'}}></Icon>
                       </View>
-                      <View style={{flex:1, padding: 10, height:120, justifyContent: 'space-between'}}>
+                      <View style={{flex:1, padding: 10,  height:120, justifyContent: 'space-between'}}>
                         
-                        <Text style={{alignSelf: 'flex-start', color:"grey", fontSize: 15, }}>Cuisine: </Text>
-                        <Text style={{alignSelf: 'flex-start', color:"grey", fontSize: 15}}>OPEN now</Text>
-                        <Text style={{alignSelf: 'flex-start', color:"grey", fontSize: 15}}>Price Level: {item.price_level}</Text>
+                        <Text style={{alignSelf: 'flex-start', fontSize: 15, }}>Cuisine: </Text>
+                        <Text style={{alignSelf: 'flex-start', fontSize: 15}}>OPEN now</Text>
+                        <Text style={{alignSelf: 'flex-start', fontSize: 15}}>Price Level: {item.price_level}</Text>
                       </View>
-                    
                   </View>
                 </Card>
               </View>
@@ -204,13 +206,15 @@ export default class App extends Component {
             </Animated.View> */}
 
             {/* Card "LIKE" icon */}
-              <Animated.View style={{opacity: this.likeOpacity, transform: [{rotate: "-30deg" }], position: "absolute", top: 80, left: 40, zIndex:1000}}>
-                <Text style={{borderWidth: 1, borderColor: "green", color: "green", fontSize: 32, fontWeight:"800", padding: 10}}>YUP!</Text>
+              <Animated.View style={{opacity: this.likeOpacity, transform: [{rotate: "-30deg" }], position: "absolute", top: 160, left: 40, zIndex:1000}}>
+                <Icon type='Entypo' name='thumbs-up' style={{color: '#2a9d8f', fontSize: 150 }}></Icon>
+                {/* <Text style={{borderWidth: 1, borderColor: "green", color: "green", fontSize: 32, fontWeight:"800", padding: 10}}>YUP!</Text> */}
               </Animated.View >
 
             {/* Card "DISLIKE" icon */}
-              <Animated.View style={{opacity:this.dislikeOpacity, transform: [{rotate: "30deg" }], position: "absolute", top: 80, right: 40, zIndex:1000}}>
-                <Text style={{borderWidth: 1, borderColor: "red", color: "red", fontSize: 32, fontWeight:"800", padding: 10}}>NOPE!</Text>
+              <Animated.View style={{opacity:this.dislikeOpacity, transform: [{rotate: "-30deg" }], position: "absolute", top: 160, right: 40, zIndex:1000}}>
+              <Icon type='Entypo' name='thumbs-down' style={{color: '#e76f51', fontSize: 150 }}></Icon>
+                {/* <Text style={{borderWidth: 1, borderColor: "red", color: "red", fontSize: 32, fontWeight:"800", padding: 10}}>NOPE!</Text> */}
               </Animated.View>
               {/* <Image 
                 style={{flex:1, height:null, width:null, resizeMode: 'cover', borderRadius: 20}}
@@ -290,6 +294,23 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+    
+  },
+  card: {
+    
+    borderRadius: 20,  
+    height: '100%',
+    backgroundColor: '#f9f1dc',
+    shadowColor: '#988a55',
+    shadowOffset: { width: 2, height: 4 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+  },
+  icons: {
+    fontSize: 25, 
+    width: 25, 
+    alignSelf: 'center',
+    
+  },
 });
