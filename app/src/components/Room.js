@@ -20,19 +20,18 @@ export default function Room({ history, emitReady }) {
     emitReady();
   }
 
-  if (lobbyReady) {
-    return <Loader /> 
-  } else {
+  // if (lobbyReady) {
+  //   return<Loader /> 
+  // } else {
 
-    return(
-      <View style={styles.container}>
-        <View>
-          <Lobby handleReady={handleReady}/>
-        </View>
-        <Button title="Homepage" onPress={() => history.push("/")}></Button>
+  return(
+    <View style={styles.container}>
+      <View>
+  { lobbyReady ? <Loader /> : <Lobby handleReady={handleReady}/> }
       </View>
-    )
-  }
+      <Button title="Homepage" onPress={() => history.push("/")}></Button>
+    </View>
+  )
 };
 
 const styles = StyleSheet.create({

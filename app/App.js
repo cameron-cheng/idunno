@@ -35,12 +35,14 @@ export default function App() {
   useEffect(() => {
     socket.on('connect', () => console.log("Client connected:", socket.connected));
     socket.on('dataSentToRoom', setData);
+    socket.on('resultSentToRoom', setWinner);
     socket.on('disconnect', () => {console.log("Disconnected")});
     
     return () => socket.close();
   }, [])
 
   const [places, setPlaces] = useState([]);
+  const [result, setResult] = useState(null);
   
   function createRoom() {
     console.log('sending create room event')
@@ -76,21 +78,30 @@ export default function App() {
         { text: "OK", onPress: () => console.log("OK Pressed") }
       ],
       { cancelable: false }
-      );  
-    }
+    );  
+  }
     
-    function emitReady() {
-      socket.emit('lobbyReady');
-    }
-    
-    function setData(data) {
-      console.log("1: Received Cards")
-      setPlaces(data);
-      console.log("2: DATA:" , data.length)
-    }
-    
-    console.log("3: PLACES:" , places.length)
-    
+  function emitReady() {
+    socket.emit('lobbyReady');
+  }
+  
+  function setData(data) {
+    console.log("1: Received Cards")
+    setPlaces(data) 
+    console.log("2: DATA:" , data.length)
+  }
+  
+  function setWinner(winner) {
+    setResult(winner) 
+  }
+
+  function addToResults(like) {
+    socket.emit('addToResults', like)
+  }  
+
+  function readyForResult() {
+    socket.emit('readyForResult')
+  }    
     
   return (
     <NativeRouter>
@@ -106,15 +117,18 @@ export default function App() {
           let roomProps = { ...routeProps, emitReady }
           return (<Room {...roomProps}/>)}} />
           
-        <Route exact path="/results" component={Results}/>
         <Route exact path="/invitation" exact render={(routeProps) => {
           let invitationProps = {...routeProps, roomId} 
           return (<Invitation {... invitationProps} />)}}/>
         <Route exact path="/login" component={Login}/>
         <Route exact path="/loader" component={Loader}/>
         <Route exact path ="/swiper" exact render={(routeProps) => {
-          let swiperProps = {...routeProps, places} 
+          let swiperProps = {...routeProps, places, addToResults, readyForResult} 
           return (<Swiper {...swiperProps} />)}}/>
+
+        <Route exact path ="/results" exact render={(routeProps) => {
+          let resultsProps = {...routeProps, result} 
+          return (<Results {...resultsProps} />)}}/>
       </Switch>
 
       </View>

@@ -35,7 +35,7 @@ export default class App extends Component {
   
   constructor(props){
     super(props)
-    console.log("4: PROPS:", this.props)
+    console.log("4: PROPS:", this.props.places.length)
     this.places = this.props.places
 
     this.position = new Animated.ValueXY()
@@ -98,8 +98,9 @@ export default class App extends Component {
             toValue: { x: SCREEN_WIDTH + 100, y: gestureState.dy}
           }).start(() => {          
             this.setState({ currentIndex: this.state.currentIndex + 1, likes: [...this.state.likes, this.places[this.state.currentIndex].place_id]}, () => {
-              this.position.setValue({ x: 0, y:0 })
+              this.position.setValue({ x: 0, y: 0 })
               console.log('LIKES :>> ', this.state.likes);
+              this.props.addToResults(this.places[this.state.currentIndex].place_id)
             })
           })
 
@@ -109,7 +110,7 @@ export default class App extends Component {
             toValue: { x: -SCREEN_WIDTH - 100, y: gestureState.dy}
            }).start(() => {
             this.setState({ currentIndex: this.state.currentIndex + 1, dislikes: [...this.state.dislikes, this.places[this.state.currentIndex].place_id]}, () => {
-              this.position.setValue({ x: 0, y:0 })
+              this.position.setValue({ x: 0, y: 0 })
             })
           })
 
@@ -216,14 +217,9 @@ export default class App extends Component {
   }
   
   render() {
-     //once the current index equals the data length (the stack is done), calculate what the most popular element in the array is
-     if (this.state.currentIndex >= this.places.length) {
-      const results = mode(this.state.likes)
-      console.log('5: RESULTS :>> ', results);
-      return <Redirect to={{
-        pathname: '/results',
-        results: results,
-      }} />
+    //once the current index equals the data length (the stack is done), calculate what the most popular element in the array is
+    if (this.state.currentIndex >= this.places.length) {
+      this.props.readyForResult();
     }
     return (
       <View>

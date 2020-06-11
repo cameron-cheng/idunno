@@ -2,7 +2,8 @@ const express = require("express");
 const app = express();
 const server = require("http").createServer(app);
 const io = require("socket.io").listen(server);
-const fetchPlaces = require('./fetchPlaces')
+const fetchPlaces = require('./helpers/fetchPlaces')
+const mode = require('./helpers/mode')
 
 const port = 3000;
 
@@ -20,7 +21,8 @@ const initializeRoom  = function() {
 
 }
 
-let data = {}
+let data = {};
+let results = [];
 
 function makeId() {
   let result           = '';
@@ -56,17 +58,9 @@ io.on('connection', (socket) => {
     console.log(`*** ${roomId} has`, io.sockets.adapter.rooms[`${roomId}`].length, "user");
 
   })
-
-  socket.on('lobbyReady', () => {
-    // const hostId = Object.keys(socket.rooms)[0];
-    const roomId = Object.keys(socket.rooms)[1];
-
-    console.log("DATA:", data[roomId])
-    io.in(roomId).emit('dataSentToRoom', data[roomId]);
-  })
-
+   
   socket.on('joinRoom', (roomId, ackFn) => {
-   const room = io.sockets.adapter.rooms[roomId];
+    const room = io.sockets.adapter.rooms[roomId];
     if (!room) {
       console.log('roomId doesn\'t exist', roomId)
       ackFn(false);
@@ -78,6 +72,26 @@ io.on('connection', (socket) => {
       console.log(`*** ${roomId} has`, io.sockets.adapter.rooms[`${roomId}`].length, "user");
       console.log("~~~~~~~~~~~~~~~~~~~~")
     }
+  });
+  
+  socket.on('lobbyReady', () => {
+    // const hostId = Object.keys(socket.rooms)[0];
+    const roomId = Object.keys(socket.rooms)[1];
+    
+    console.log("DATA:", data[roomId].length)
+    io.in(roomId).emit('dataSentToRoom', data[roomId]);
+  })
+  
+  socket.on('addToResults', (like) => {
+    results.push(like);
+    console.log(results);
+  });
+  
+  socket.on('readyForResult', () => {
+    const roomId = Object.keys(socket.rooms)[1];
+    const winner = mode(results);
+    console.log(winner);
+    io.in(roomId).emit('resultSentToRoom', winner)
   });
 
   socket.on('disconnect', () => {
