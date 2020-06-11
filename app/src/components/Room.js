@@ -5,14 +5,14 @@ import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { Container, Content, Card, CardItem, Header, Body, Button } from 'native-base';
 
 import Lobby from './Lobby';
-import Swiper from './Swiper';
+import Loader from './Loader';
 import Results from './Results';
 import { set } from 'react-native-reanimated';
 import { Redirect } from 'react-router-native';
 
 const SCREEN_HEIGHT   = Dimensions.get('window').height;
 
-export default function Room({ history, emitReady, places }) {
+export default function Room({ history, emitReady }) {
   const [lobbyReady, setLobbyReady] = useState(false);
   // console.log("ROOM PROPS:", places.length)
   function handleReady() {
@@ -21,14 +21,11 @@ export default function Room({ history, emitReady, places }) {
   }
 
   if (lobbyReady) {
-    return <Redirect to={{
-      pathname: '/swiper'
-    }} />
+    return <Loader /> 
   } else {
 
     return(
       <View style={styles.container}>
-        <Text></Text>
         <View>
           <Lobby handleReady={handleReady}/>
         </View>

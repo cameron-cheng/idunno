@@ -7,14 +7,13 @@ import Room from './src/components/Room';
 import Results from './src/components/Results';
 import Invitation from './src/components/Invitation';
 import Lobby from './src/components/Lobby';
+import Loader from './src/components/Loader'
 import Swiper from './src/components/Swiper';
 import Login from './src/components/Login';
 import Filters from './src/components/Filters';
 import Footer from './src/components/Footer';
-
 import io from "socket.io-client";
 import { IP_ADDRESS } from 'react-native-dotenv';
-
 
 
 export default function App() {
@@ -104,20 +103,18 @@ export default function App() {
 
         <Route exact path="/lobby" component={Lobby}/>
         <Route exact path="/room" exact render={(routeProps)=> {
-          let roomProps = { ...routeProps, emitReady, places }
+          let roomProps = { ...routeProps, emitReady }
           return (<Room {...roomProps}/>)}} />
           
         <Route exact path="/results" component={Results}/>
         <Route exact path="/invitation" exact render={(routeProps) => {
           let invitationProps = {...routeProps, roomId} 
           return (<Invitation {... invitationProps} />)}}/>
-        <Route exact path="/swiper" exact render={(routeProps) => {
-          let swiperProps = {...routeProps, places} 
-          return (<Swiper {... swiperProps} />)}}/>
-
         <Route exact path="/login" component={Login}/>
-
-        
+        <Route exact path="/loader" component={Loader}/>
+        <Route exact path ="/swiper" exact render={(routeProps) => {
+          let swiperProps = {...routeProps, places} 
+          return (<Swiper {...swiperProps} />)}}/>
       </Switch>
 
       </View>
