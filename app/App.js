@@ -43,7 +43,7 @@ export default function App() {
 
   const [places, setPlaces] = useState([]);
   const [result, setResult] = useState(null);
-  
+
   function createRoom() {
     console.log('sending create room event')
     //event to create a room to server, response with server code
@@ -92,8 +92,7 @@ export default function App() {
   }
   
   function setWinner(winner) {
-    setResult(winner) 
-    console.log("RESULT:", result)
+    setResult(winner);
   }
 
   function addToResults(like) {

@@ -97,10 +97,10 @@ export default class App extends Component {
           Animated.spring(this.position, {
             toValue: { x: SCREEN_WIDTH + 100, y: gestureState.dy}
           }).start(() => {          
-            this.setState({ currentIndex: this.state.currentIndex + 1, likes: [...this.state.likes, this.places[this.state.currentIndex].place_id]}, () => {
+              this.props.addToResults(this.places[this.state.currentIndex].place_id)
+              this.setState({ currentIndex: this.state.currentIndex + 1, likes: [...this.state.likes, this.places[this.state.currentIndex].place_id]}, () => {
               this.position.setValue({ x: 0, y: 0 })
               console.log('LIKES :>> ', this.state.likes);
-              this.props.addToResults(this.places[this.state.currentIndex].place_id)
             })
           })
 

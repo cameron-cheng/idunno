@@ -21,9 +21,6 @@ const initializeRoom  = function() {
 
 }
 
-let data = {};
-let results = [];
-
 function makeId() {
   let result           = '';
   const characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -38,6 +35,9 @@ function makeId() {
 //Socket.io Lobby
 io.on('connection', (socket) => {
   
+  let data = {};
+  let results = [];
+
   console.log("=================")
   console.log(socket.client.conn.server.clientsCount + " total users connected")
   
@@ -90,7 +90,7 @@ io.on('connection', (socket) => {
   socket.on('readyForResult', () => {
     const roomId = Object.keys(socket.rooms)[1];
     const winners = mode(results);
-    const winner = results[Math.floor(Math.random() * winners.length)];
+    const winner = winners[Math.floor(Math.random() * winners.length)];
     console.log("WINNER:", winner);
     io.in(roomId).emit('resultSentToRoom', winner)
   });
