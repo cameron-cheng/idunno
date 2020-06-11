@@ -41,7 +41,6 @@ export default function Room({ history, socket }) {
 
     return(
       <View style={styles.container}>
-        <Text></Text>
         <View>
           <Lobby handleReady={handleReady}/>
         </View>
