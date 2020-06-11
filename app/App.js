@@ -14,6 +14,7 @@ import Filters from './src/components/Filters';
 import Footer from './src/components/Footer';
 import io from "socket.io-client";
 import { IP_ADDRESS } from 'react-native-dotenv';
+import JoinRoom from './src/components/JoinRoom';
 
 
 export default function App() {
@@ -115,6 +116,7 @@ export default function App() {
         <Route exact path ="/swiper" exact render={(routeProps) => {
           let swiperProps = {...routeProps, places} 
           return (<Swiper {...swiperProps} />)}}/>
+          <Route exact path="/joinroom" component={JoinRoom}/>
       </Switch>
 
       </View>

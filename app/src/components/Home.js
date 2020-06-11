@@ -9,12 +9,7 @@ import Loader from './Loader';
 
 export default ({ history, createRoom, joinRoom, setRoomId, filters, setFilters }) => {
   
-  const [joinRoomId, setJoinRoomId] = useState('')
 
-  const handleJoinRoom = () => {
-    joinRoom(joinRoomId);
-    history.push("/room");
-  }
   
   const handleCreateRoom = () =>{
     createRoom();
@@ -37,10 +32,9 @@ export default ({ history, createRoom, joinRoom, setRoomId, filters, setFilters 
           onPress={handleCreateRoom}
           // onPress={createRoom}
           >
-            
+             <Button title="Join Room" onPress={() => history.push("/joinroom")}></Button>
           </Button>
-        <Input title="Join!" onChangeText={text => setJoinRoomId(text)} value={joinRoomId} ></Input>
-        <Button title="Join Room" onPress={handleJoinRoom}></Button>
+
       </View>
 
       <Footer />

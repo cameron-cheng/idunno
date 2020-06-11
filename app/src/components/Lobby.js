@@ -10,7 +10,12 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
 export default function Lobby(props) {
-  
+  const handleJoinRoom = () => {
+    joinRoom(joinRoomId);
+    history.push("/room");
+  }
+
+
   const playersReady = () => {
     //loop through players in room and return <Text>Name</Text> and <Icon type='Entypo' name='block'/>
     //if player not ready - "not ready" button should not be pressable: greyed out?
