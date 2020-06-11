@@ -15,14 +15,16 @@ import io from "socket.io-client";
 import { IP_ADDRESS } from 'react-native-dotenv';
 
 
+
 export default function App() {
   
   const [socket] = useState(() => io(IP_ADDRESS));
+  socket.on('dataSentToRoom', data => {console.log("Got cards", data)})
   
   const [roomId, setRoomId] = useState(null)
 
   const [filters, setFilters] = useState({
-    searchType: 'nearby',
+    searchType: 'area',
     type: 'restaurant',
     area: null,
     radius: 500,
@@ -48,7 +50,7 @@ export default function App() {
       <View style={styles.container}>
         <Switch>
           <Route exact path="/"  render={(routeProps) => {
-            let homeProps = { ...routeProps, socket, createRoom, setRoomId }
+            let homeProps = { ...routeProps, socket, createRoom, setRoomId, filters, setFilters }
             return (<Home {...homeProps}/>)}} />
 
           <Route exact path="/lobby" component={Lobby}/>
@@ -61,8 +63,8 @@ export default function App() {
             let invitationProps = {...routeProps, roomId} 
             return (<Invitation {... invitationProps} />)}}/>
           <Route exact path="/login" component={Login}/>
-          <Route exact path="/filters" exact render={(routeProps)=> <Filters {...routeProps} state={filters} setState={setFilters}/>}/>
-         />
+          {/* <Route exact path="/filters" exact render={(routeProps)=> <Filters {...routeProps} state={filters} setState={setFilters}/>}/> */}
+         
       </Switch>
 
       </View>

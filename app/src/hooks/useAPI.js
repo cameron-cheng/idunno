@@ -12,6 +12,7 @@ export default function useAPI(filters) {
       );
       setPlaces(res.data.results)
       console.log("API Request Finished!", "Length:", places.length)
+      
     } catch(err) {
       console.log(err)
     }
@@ -31,12 +32,11 @@ export default function useAPI(filters) {
 
   
   useEffect(() => {
-
     if (filters.searchType === 'nearby') {
       nearbySearch(filters)
     } else {
       textSearch(filters)
-    } 
+    }
   }, [])
  
   return places

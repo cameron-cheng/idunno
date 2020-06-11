@@ -13,15 +13,14 @@ const SCREEN_HEIGHT   = Dimensions.get('window').height;
 
 export default function Room({ history, socket, filters }) {
   const [lobbyReady, setLobbyReady] = useState(false)
-  
 
-  const places = useAPI(filters) 
-  
-  socket.emit("getCardData", places)
-  
   function handleReady() {
     setLobbyReady(!lobbyReady)
   }
+
+  // useEffect(() => {
+    const places = useAPI(filters)
+  // }, [])
 
   if (lobbyReady) {
     return(
@@ -33,8 +32,9 @@ export default function Room({ history, socket, filters }) {
         <Button title="Homepage" onPress={() => history.push("/")}></Button>
       </View>
     )
-
   } else {
+    socket.emit("getCardData", places)
+
     return(
       <View style={styles.container}>
         <Text></Text>

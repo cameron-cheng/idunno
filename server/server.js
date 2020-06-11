@@ -43,7 +43,7 @@ io.on('connection', (socket) => {
   console.log(socket.client.conn.server.clientsCount + " total users connected")
   console.log("=================")
   
-  socket.emit("dataSentToRoom", "Hello")
+  // socket.emit("dataSentToRoom", "Hello")
 
   socket.on('createRoom', (ignore, ackFn) => { //change ignore to filters/query
     const roomId = makeId();
