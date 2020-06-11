@@ -1,5 +1,4 @@
 import { API_KEY } from 'react-native-dotenv';
-import { socket } from '../../App';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
@@ -33,7 +32,7 @@ export default function useAPI(filters) {
   
   useEffect(() => {
 
-    if (filters.searchType === 'Nearby') {
+    if (filters.searchType === 'nearby') {
       nearbySearch(filters)
     } else {
       textSearch(filters)

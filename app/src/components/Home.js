@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { socket } from '../../App';
 import { Alert, View, TextInput, Button, StyleSheet } from 'react-native';
 import Header from './Header';
 import Footer from './Footer';
 
 
 export default ({ history, socket, createRoom, setRoomId }) => {
-  // console.log('rendering');
+  
   const [joinRoomId, setJoinRoomId] = useState('')
 
   const joinRoom = (roomId) => {

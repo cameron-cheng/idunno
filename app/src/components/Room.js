@@ -8,15 +8,14 @@ import Lobby from './Lobby';
 import Swiper from './Swiper';
 import Results from './Results';
 import { set } from 'react-native-reanimated';
-import { socket } from '../../App';
 
 const SCREEN_HEIGHT   = Dimensions.get('window').height;
 
-export default function Room(props) {
+export default function Room({ history, socket, filters }) {
   const [lobbyReady, setLobbyReady] = useState(false)
   
 
-  const places = useAPI(props.filters) 
+  const places = useAPI(filters) 
   
   socket.emit("getCardData", places)
   
