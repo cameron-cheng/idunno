@@ -20,6 +20,17 @@ export default function App() {
   
   const [socket] = useState(() => io(IP_ADDRESS));
   
+  useEffect(() => {
+    const onData = (data) => {
+      console.log("Received Cards")
+      setPlaces(data);
+      console.log("PLACES:" , data)
+    }
+    socket.on('dataSentToRoom', onData)
+    socket.on('disconnect', () => {console.log("Disconnected")})
+    return () => socket.off('dataSentToRoom', onData)
+  }, [])
+  
   const [roomId, setRoomId] = useState(null)
 
   const [filters, setFilters] = useState({

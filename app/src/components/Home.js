@@ -8,8 +8,6 @@ import Filters from './Filters';
 
 
 export default ({ history, socket, createRoom, setRoomId, filters, setFilters }) => {
-  
- 
 
   const [joinRoomId, setJoinRoomId] = useState('')
 

@@ -13,43 +13,38 @@ const SCREEN_HEIGHT   = Dimensions.get('window').height;
 
 export default function Room({ history, socket }) {
   const [lobbyReady, setLobbyReady] = useState(false);
-  const [places, setPlaces] = useState([]);
+ 
+ const [places, setPlaces] = useState([]);
 
+ useEffect( () => {
+  socket.on('dataSentToRoom', (data) => {
+  console.log("Received Cards")
+  console.log('data :>> ', data);
+  setPlaces(data);
+})},[]) 
+
+
+
+ 
+  
+  
   function handleReady() {
     setLobbyReady(!lobbyReady);
     socket.emit('lobbyReady');
   }
 
-  socket.on('dataSentToRoom', (data) => {
-    console.log("Received Cards")
-    setPlaces(data);
-  })
-  console.log("PLACES:" , places)
-
-  if (lobbyReady) {
+  return(
+    <View style={styles.container}>
     
-    return(
-      <View style={styles.container}>
-        <Text></Text>
-        <View>
-          <Swiper places={places}/>
-        </View>
-        <Button title="Homepage" onPress={() => history.push("/")}></Button>
+      <View>
+      <Lobby handleReady={handleReady}/>
+      { lobbyReady && <Swiper places={places} /> } 
+        <Text>Hello</Text>
       </View>
-    )
-  } else {
-
-    return(
-      <View style={styles.container}>
-        <Text></Text>
-        <View>
-          <Lobby handleReady={handleReady}/>
-        </View>
-        <Button title="Homepage" onPress={() => history.push("/")}></Button>
-      </View>
-    )
-  }
-};
+      <Button title="Homepage" onPress={() => history.push("/")}></Button>
+    </View>
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
