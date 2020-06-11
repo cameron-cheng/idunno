@@ -1,18 +1,13 @@
 import { API_KEY } from 'react-native-dotenv'
 import mode from '../helpers/mode'
+import HeaderNav from './Header';
+import Footer from './Footer'
 
 import React, { Component } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Dimensions,
-  Image,
-  Animated,
-  PanResponder
-} from "react-native";
+import {View, Text, StyleSheet, Dimensions, Image, Animated, PanResponder } from "react-native";
+import { Rating } from "react-native-elements"
 import { Redirect } from 'react-router-native'
-import { List, ListItem, Card, CardItem, Header, Body } from 'native-base'
+import { Container, Header, DeckSwiper, Card, CardItem, Thumbnail, Left, Body, Icon } from 'native-base'
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -126,6 +121,28 @@ export default class App extends Component {
 
 
   renderCards = () => {
+    
+    // <Container>
+    //   <View>
+    //     <DeckSwiper dataSource={this.places} 
+    //       renderItem={item => 
+    //       <Card>
+    //         <CardItem>
+    //           <Left>
+    //             <Thumbnail source={{uri: `https://maps.googleapis.com/maps/api/place/photo?key=${API_KEY}&photoreference=${item.photos[0].photo_reference}&maxheight=400`}} />
+    //             <Body>
+    //               <Text>{item.address}</Text>
+    //             </Body>
+    //           </Left>
+    //         </CardItem>
+    //       </Card>
+          
+    //       }
+    //     />
+
+        
+    //   </View>
+    // </Container>
 
     return this.places.map((item, index) => {
 
@@ -143,19 +160,33 @@ export default class App extends Component {
 
             {/* Card header */}
             <Animated.View style={{width: SCREEN_WIDTH, padding:10, position: 'absolute',zIndex:1000}}>
-              <View style={{backgroundColor: '#f0f0f0', borderTopRightRadius:20, borderTopLeftRadius:20, height: 50, justifyContent: 'center'}}>
-                <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>{item.name}</Text>
+              <View >
+                <Card style={{backgroundColor: '#f9f1dc', borderRadius: 20, alignItems:'center', height: '100%'}}>
+                  <View >
+                    <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>{item.name}</Text>
+                    <Rating type='custom' imageSize={20} readonly startingValue={item.rating} ratingColor='#ee937c' ratingBackgroundColor='#fcfaf2' style={{padding: 10}}></Rating>
+                  </View>
+                  <Image 
+                  style={{flex:1, height:200, width:'90%', resizeMode: 'cover', borderRadius: 15}}
+                  source={{
+                    uri: `https://maps.googleapis.com/maps/api/place/photo?key=${API_KEY}&photoreference=${item.photos[0].photo_reference}&maxheight=400`
+                  }}/>
+                  <View style={{padding: 16}}>
+                    <Text style={{alignSelf: 'flex-start', color:"grey", fontSize: 15}}>Address: {item.formatted_address}</Text>
+                    <Text style={{alignSelf: 'flex-start', color:"grey", fontSize: 15}}>Price Level: {item.price_level}</Text>
+                  </View>
+                </Card>
               </View>
             </Animated.View>
 
             {/* Card footer */}
-            <Animated.View style={{width: SCREEN_WIDTH, padding:10, position: 'absolute', bottom:0, zIndex:1000}}>
+            {/* <Animated.View style={{width: SCREEN_WIDTH, padding:10, position: 'absolute', bottom:0, zIndex:1000}}>
               <View style={{backgroundColor: '#f0f0f0', borderBottomRightRadius:20, borderBottomLeftRadius:20, height: 200, justifyContent: 'center'}}>
                 <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>Address: {item.formatted_address}</Text>
                 <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>Rating: {item.rating}</Text>
                 <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>Price Level: {item.price_level}</Text>
               </View>
-            </Animated.View>
+            </Animated.View> */}
 
             {/* Card "LIKE" icon */}
               <Animated.View style={{opacity: this.likeOpacity, transform: [{rotate: "-30deg" }], position: "absolute", top: 80, left: 40, zIndex:1000}}>
@@ -166,12 +197,12 @@ export default class App extends Component {
               <Animated.View style={{opacity:this.dislikeOpacity, transform: [{rotate: "30deg" }], position: "absolute", top: 80, right: 40, zIndex:1000}}>
                 <Text style={{borderWidth: 1, borderColor: "red", color: "red", fontSize: 32, fontWeight:"800", padding: 10}}>NOPE!</Text>
               </Animated.View>
-              <Image 
+              {/* <Image 
                 style={{flex:1, height:null, width:null, resizeMode: 'cover', borderRadius: 20}}
                 source={{
                   uri: `https://maps.googleapis.com/maps/api/place/photo?key=${API_KEY}&photoreference=${item.photos[0].photo_reference}&maxheight=400`
                 }}
-              />
+              /> */}
             </Animated.View>
         )
 
@@ -227,12 +258,14 @@ export default class App extends Component {
     }
     return (
       <View>
+        <HeaderNav />
         <View style={{ height: 40 }}>
 
         </View>
         <View style={{ flex: 1, alignItems: 'center' }}>
         {this.renderCards()}
         </View>
+        <Footer />
       </View>
     );
   }
