@@ -38,7 +38,6 @@ export default function Room(props) {
   } else {
     return(
       <View style={styles.container}>
-        <Text></Text>
         <View>
           <Lobby handleReady={handleReady}/>
         </View>

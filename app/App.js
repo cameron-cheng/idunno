@@ -12,6 +12,8 @@ import Footer from './src/components/Footer';
 import io from "socket.io-client";
 import { IP_ADDRESS } from 'react-native-dotenv';
 import Loader from './src/components/Loader'
+import Swiper from './src/components/Swiper';
+
 const socket = io(IP_ADDRESS)
 
   socket.on('dataSentToRoom', data => {
@@ -61,9 +63,10 @@ export default function App({ parentCallback }) {
             let invitationProps = {...routeProps, roomId} 
             return (<Invitation {... invitationProps} />)}}/>
           <Route exact path="/login" component={Login}/>
-          <Route exact path="/filters" exact render={(routeProps)=> <Filters {...routeProps} state={filters} setState={setFilters}/>}/>
           <Route exact path="/loader" component={Loader}/>
-          {/* <Route path="/timer" exact render={(routeProps)=> <Timer {...routeProps} io={socket} /> */}
+          <Route exact path ="/swiper" exact render={(routeProps) => {
+            let swiperProps = {...routeProps} 
+            return (<Swiper {... swiperProps} />)}}/>
       </Switch>
 
       </View>
