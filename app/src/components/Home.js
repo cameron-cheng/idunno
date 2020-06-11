@@ -3,41 +3,13 @@ import { Alert, View, TextInput, Button, StyleSheet } from 'react-native';
 import { Input } from 'react-native-elements';
 import Header from './Header';
 import Footer from './Footer';
+import Filters from './Filters';
 import Loader from './Loader';
 
 
-export default ({ history, socket, createRoom, setRoomId, filters, setFilters }) => {
+export default ({ history, createRoom, joinRoom, setRoomId, filters, setFilters }) => {
   
- 
-
   const [joinRoomId, setJoinRoomId] = useState('')
-
-  const joinRoom = (roomId) => {
-    console.log(roomId);
-    socket.emit('joinRoom', roomId, (hasJoined) => {
-      console.log('has joined', hasJoined)
-      if (hasJoined === false) {
-        failToJoinAlert();
-      } else {
-        setRoomId(roomId);
-      }
-    })
-    
-    const failToJoinAlert = () =>
-    Alert.alert(
-      "Room does not exist",
-      "Unable to join room",
-      [
-        {
-          text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
-          style: "cancel"
-        },
-        { text: "OK", onPress: () => console.log("OK Pressed") }
-      ],
-      { cancelable: false }
-    );  
-  }
 
   const handleJoinRoom = () => {
     joinRoom(joinRoomId);

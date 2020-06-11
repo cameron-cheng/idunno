@@ -35,7 +35,7 @@ export default class App extends Component {
   
   constructor(props){
     super(props)
-
+    console.log("4: PROPS:", this.props)
     this.places = this.props.places
 
     this.position = new Animated.ValueXY()
@@ -219,7 +219,7 @@ export default class App extends Component {
      //once the current index equals the data length (the stack is done), calculate what the most popular element in the array is
      if (this.state.currentIndex >= this.places.length) {
       const results = mode(this.state.likes)
-      console.log('RESULTS :>> ', results);
+      console.log('5: RESULTS :>> ', results);
       return <Redirect to={{
         pathname: '/results',
         results: results,
