@@ -4,6 +4,7 @@ import { Input } from 'react-native-elements';
 import Header from './Header';
 import Footer from './Footer';
 import Loader from './Loader';
+import Filters from './Filters'
 
 
 export default ({ history, socket, createRoom, setRoomId, filters, setFilters }) => {
@@ -81,6 +82,7 @@ const style = StyleSheet.create({
     backgroundColor: '#fcfaf2',
     flexDirection: 'column',
   }
+
 
 })
 
