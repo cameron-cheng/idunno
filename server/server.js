@@ -2,9 +2,25 @@ const express = require("express");
 const app = express();
 const server = require("http").createServer(app);
 const io = require("socket.io").listen(server);
-
+const fetchPlaces = require('./fetchPlaces')
 
 const port = 3000;
+
+
+//body parser MW
+const bodyParser = require("body-parser");
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}))
+
+//cors MW
+const cors = require('cors');
+app.use(cors());
+
+const initializeRoom  = function() {
+
+}
+
+let data = {}
 
 function makeId() {
   let result           = '';
@@ -16,56 +32,40 @@ function makeId() {
   return result;
 }
 
-//body parser MW
-const bodyParser = require("body-parser");
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:true}))
-
-//cors MW
-const cors = require('cors');
-app.use(cors());
-
-const data = {
-
-}
-
-const initializeRoom  = function() {
-
-}
-
-
 
 //Socket.io Lobby
 io.on('connection', (socket) => {
-  console.log(socket)
+  
   console.log("=================")
-  console.log('a user connected', socket.id);
   console.log(socket.client.conn.server.clientsCount + " total users connected")
-  console.log("=================")
+  
   
   // socket.emit("dataSentToRoom", "Hello")
 
-  socket.on('createRoom', (ignore, ackFn) => { //change ignore to filters/query
+  socket.on('createRoom', (filters, ackFn) => { //change ignore to filters/query
     const roomId = makeId();
-    data[roomId] = {cards: [],}
-
+    console.log("filters:", filters)
     socket.join(roomId);
+
+    fetchPlaces(filters)
+      .then((places) => {data[roomId] = places})
+  
+    console.log("DATA:", data)
     console.log("~~~~~~~~~~~~~~~~~~~~")
-    console.log(`*** ${roomId} has`, io.sockets.adapter.rooms[`${roomId}`].length, "user");
     console.log('a user connected', socket.id);
-    console.log("~~~~~~~~~~~~~~~~~~~~")
+    console.log(`*** ${roomId} has`, io.sockets.adapter.rooms[`${roomId}`].length, "user");
+
     // console.log("ROOM USERS", io.sockets.adapter.rooms[`${roomId}`].length)
     ackFn(roomId);
     // socket.emit('roomCreated', roomId);
   })
 
-  socket.on('getCardData', (data) => {
+  socket.on('lobbyReady', () => {
+    // const hostId = Object.keys(socket.rooms)[0];
     const roomId = Object.keys(socket.rooms)[1];
-    console.log("ROOM", roomId)
-    // console.log("****PLACES", data)
-    socket.in(roomId).emit("dataSentToRoom", data);
+    console.log("DATA:", data)
+    io.in(roomId).emit("dataSentToRoom", data[roomId]);
   })
-
 
   socket.on('joinRoom', (roomId, ackFn) => {
    const room = io.sockets.adapter.rooms[roomId];
@@ -74,7 +74,7 @@ io.on('connection', (socket) => {
       ackFn(false);
     } else {
       socket.join(roomId);
-      ackFn(true)
+      ackFn(true);
       console.log("~~~~~~~~~~~~~~~~~~~~")
       console.log(socket.id, ' joins room', roomId);
       console.log(`*** ${roomId} has`, io.sockets.adapter.rooms[`${roomId}`].length, "user");
@@ -89,11 +89,9 @@ io.on('connection', (socket) => {
 
 //import routes
 const sessions = require("./routes/sessions");
-const users = require("./routes/users");
 
 //Routes 
 // app.use("/api", sessions());
-// app.use("/api", users());
 
 server.listen(port, () => {
   console.log('listening on *:3000');

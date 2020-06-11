@@ -11,18 +11,23 @@ import { set } from 'react-native-reanimated';
 
 const SCREEN_HEIGHT   = Dimensions.get('window').height;
 
-export default function Room({ history, socket, filters }) {
-  const [lobbyReady, setLobbyReady] = useState(false)
+export default function Room({ history, socket }) {
+  const [lobbyReady, setLobbyReady] = useState(false);
+  const [places, setPlaces] = useState([]);
 
   function handleReady() {
-    setLobbyReady(!lobbyReady)
+    setLobbyReady(!lobbyReady);
+    socket.emit('lobbyReady');
   }
 
-  // useEffect(() => {
-    const places = useAPI(filters)
-  // }, [])
+  socket.on('dataSentToRoom', (data) => {
+    console.log("Received Cards")
+    setPlaces(data);
+  })
+  console.log("PLACES:" , places)
 
   if (lobbyReady) {
+    
     return(
       <View style={styles.container}>
         <Text></Text>
@@ -33,7 +38,6 @@ export default function Room({ history, socket, filters }) {
       </View>
     )
   } else {
-    socket.emit("getCardData", places)
 
     return(
       <View style={styles.container}>

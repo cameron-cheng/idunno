@@ -19,7 +19,6 @@ import { IP_ADDRESS } from 'react-native-dotenv';
 export default function App() {
   
   const [socket] = useState(() => io(IP_ADDRESS));
-  socket.on('dataSentToRoom', data => {console.log("Got cards", data)})
   
   const [roomId, setRoomId] = useState(null)
 
@@ -36,8 +35,8 @@ export default function App() {
   function createRoom() {
     console.log('sending create room event')
     //event to create a room to server, response with server code
-    socket.emit('createRoom', null, (roomId) => {
-      console.log(roomId);
+    socket.emit('createRoom', filters, (roomId) => {
+      console.log("ROOM CODE:", roomId);
       setRoomId(roomId);
       //pass roomId to Share component
      })

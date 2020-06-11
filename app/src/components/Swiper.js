@@ -35,7 +35,7 @@ export default class App extends Component {
   
   constructor(props){
     super(props)
-    
+
     this.places = this.props.places
 
     this.position = new Animated.ValueXY()
