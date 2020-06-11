@@ -93,6 +93,7 @@ export default function App() {
   
   function setWinner(winner) {
     setResult(winner) 
+    console.log("RESULT:", result)
   }
 
   function addToResults(like) {

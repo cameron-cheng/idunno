@@ -78,19 +78,20 @@ io.on('connection', (socket) => {
     // const hostId = Object.keys(socket.rooms)[0];
     const roomId = Object.keys(socket.rooms)[1];
     
-    console.log("DATA:", data[roomId].length)
+    console.log("DATA:", data[roomId])
     io.in(roomId).emit('dataSentToRoom', data[roomId]);
   })
   
   socket.on('addToResults', (like) => {
     results.push(like);
-    console.log(results);
+    console.log("RESULTS:", results);
   });
   
   socket.on('readyForResult', () => {
     const roomId = Object.keys(socket.rooms)[1];
-    const winner = mode(results);
-    console.log(winner);
+    const winners = mode(results);
+    const winner = results[Math.floor(Math.random() * winners.length)];
+    console.log("WINNER:", winner);
     io.in(roomId).emit('resultSentToRoom', winner)
   });
 

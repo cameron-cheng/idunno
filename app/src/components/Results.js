@@ -7,8 +7,7 @@ import { View, Text, Button } from 'react-native';
 export default function Results(props) {
   const [details, setDetails] = useState(null);
 
-  const results = props.location.results
-  const winner = results[Math.floor(Math.random() * results.length)];
+  const winner = props.location.result;
 
   useEffect(() => {
     async function getDetails() {

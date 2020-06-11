@@ -220,6 +220,10 @@ export default class App extends Component {
     //once the current index equals the data length (the stack is done), calculate what the most popular element in the array is
     if (this.state.currentIndex >= this.places.length) {
       this.props.readyForResult();
+
+      return <Redirect to={{
+        pathname: '/results'
+      }} />
     }
     return (
       <View>
