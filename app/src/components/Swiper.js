@@ -272,21 +272,21 @@ export default class App extends Component {
   render() {
     //once the current index equals the data length (the stack is done), calculate what the most popular element in the array is
     if (this.state.currentIndex >= this.places.length) {
-      this.props.readyForResult();
+      // this.props.readyForResult();
 
-      return <Redirect to={{
-        pathname: '/results'
-      }} />
+      // return <Redirect to={{
+      //   pathname: '/results'
+      // }} />
     }
     return (
       <View>
         <HeaderNav />
-        <View style={{ height: 40 }}>
-        <Countdown/>
-        </View>
-        <View style={{ flex: 1, alignItems: 'center' }}>
-        {this.renderCards()}
-        </View>
+          <View style={{ height: 40 }}>
+            <Countdown readyForResult={this.props.readyForResult} />
+          </View>
+          <View style={{ flex: 1, alignItems: 'center' }}>
+            {this.renderCards()}
+          </View>
         <Footer />
       </View>
     );
