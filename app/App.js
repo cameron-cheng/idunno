@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Alert, Platform, StyleSheet, Text, View } from 'react-native';
-import { NativeRouter, Switch, Route} from 'react-router-native';
+import { NativeRouter, Switch, Route } from 'react-router-native';
+
 import Home from './src/components/Home';
 import Room from './src/components/Room';
 import Results from './src/components/Results';
@@ -55,7 +56,7 @@ export default function App() {
   const [users, setUsers] = useState([]);
   const [places, setPlaces] = useState([]);
   const [result, setResult] = useState('');
-
+  
   function createRoom(nickname) {
     console.log('sending create room event')
     //event to create a room to server, response with server code
@@ -66,15 +67,24 @@ export default function App() {
     })
   }
   
+  const [lobbyReady, setLobbyReady] = useState(false);
+  const [shouldRedirect, setShouldRedirect] = useState(false);
+
+  function handleReady() {
+    setLobbyReady(!lobbyReady);
+    emitReady();
+  }
+
   function joinRoom(roomId, nickname) {
     console.log(roomId);
     socket.emit('joinRoom', roomId, nickname, (hasJoined) => {
-      console.log('has joined', hasJoined)
+      console.log('has joined is', hasJoined)
       if (hasJoined === false) {
         failToJoinAlert();
       } else {
-        setRoomId(roomId);
-      }
+        console.log("GOT HERE")
+        setShouldRedirect(true);
+      }        
     })
     
     const failToJoinAlert = () =>
@@ -125,7 +135,7 @@ export default function App() {
     <View style={styles.container}>
       <Switch>
         <Route exact path="/"  render={(routeProps) => {
-          let homeProps = { ...routeProps, createRoom, joinRoom, setRoomId, filters, setFilters }
+          let homeProps = { ...routeProps, createRoom, joinRoom, setRoomId, shouldRedirect }
           return (<Home {...homeProps}/>)}} />
 
         <Route exact path="/filters"  render={(routeProps) => {
@@ -133,7 +143,7 @@ export default function App() {
           return (<Filters {...filtersProps}/>)}} />
 
         <Route exact path="/room" exact render={(routeProps)=> {
-          let roomProps = { ...routeProps, emitReady, users }
+          let roomProps = { ...routeProps, handleReady, lobbyReady, users }
           return (<Room {...roomProps}/>)}} />
           
         <Route exact path="/invitation" exact render={(routeProps) => {
