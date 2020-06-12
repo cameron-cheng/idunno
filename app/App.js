@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import { NativeRouter, Switch, Route} from 'react-router-native';
-
 import Home from './src/components/Home';
 import Room from './src/components/Room';
 import Results from './src/components/Results';
@@ -14,6 +13,7 @@ import io from "socket.io-client";
 import { IP_ADDRESS } from 'react-native-dotenv';
 import Loader from './src/components/Loader'
 import Swiper from './src/components/Swiper';
+import Countdown from './src/components/Countdown';
 
 const socket = io(IP_ADDRESS)
 
@@ -68,6 +68,7 @@ export default function App() {
           <Route exact path ="/swiper" exact render={(routeProps) => {
             let swiperProps = {...routeProps} 
             return (<Swiper {... swiperProps} />)}}/>
+            <Route exact path="/countdown" component={Countdown}/>
       </Switch>
 
       </View>

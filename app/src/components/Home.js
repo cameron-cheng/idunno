@@ -61,6 +61,7 @@ export default ({ history, socket, createRoom, setRoomId, filters, setFilters })
         {/* <Button title="Invitation" onPress={() => history.push("/invitation")}></Button> */}
         {/* <Button title="Lobby" onPress={() => history.push("/lobby")}></Button> */}
         {/* <Button title="Login" onPress={() => history.push("/login")}></Button> */}
+        
         <Button title="Create Room" 
           // onPress={createRoom }
           onPress={handleCreateRoom}
@@ -68,6 +69,7 @@ export default ({ history, socket, createRoom, setRoomId, filters, setFilters })
           >
             
           </Button>
+          <Button title="Countdown" onPress={() => history.push("/countdown")}></Button>
         <Input title="Join!" onChangeText={text => setJoinRoomId(text)} value={joinRoomId} ></Input>
         <Button title="Join Room" onPress={handleJoinRoom}></Button>
       </View>

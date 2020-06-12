@@ -1,5 +1,6 @@
 import { API_KEY } from 'react-native-dotenv'
 import mode from '../helpers/mode'
+import Countdown from '../components/Countdown'
 
 import React, { Component } from "react";
 import {
@@ -228,7 +229,7 @@ export default class App extends Component {
     return (
       <View>
         <View style={{ height: 40 }}>
-
+        <Countdown/>
         </View>
         <View style={{ flex: 1, alignItems: 'center' }}>
         {this.renderCards()}
