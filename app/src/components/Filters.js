@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Dimensions, Picker, Slider } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, Picker, Slider,TouchableOpacity } from 'react-native';
 import { Input, Button, CheckBox, Overlay } from 'react-native-elements'
 import { Container } from 'native-base';
 import Header from './Header';
@@ -25,19 +25,22 @@ export default function Filters(props){
   function renderSearchType() {
     if (filters.searchType === "nearby") {
       return (
-        <View style={{ flex: 1.69, alignItems: 'stretch', justifyContent: 'center' }}>
+        <View style={{alignItems: 'stretch', justifyContent: 'center', height:40}}>
           <Slider
+            
             minimumValue='500'
             maximumValue='2000'
             step='10'
             value={filters.radius} 
             onValueChange={value => setFilters({...filters, radius: value})} />
-          <Text>Radius: {filters.radius}m</Text>
+          <Text style={{paddingVertical: 15}}>Radius: {filters.radius}m</Text>
         </View>
       )
     } else {
       return (
-        <Input style={styles.input} placeholder="Area Name" onChangeText={text => setFilters({...filters, area: text.toLowerCase().trim()})} />
+        <View style={{height:40}}>
+        <Input style={styles.input} placeholder="Enter a location" onChangeText={text => setFilters({...filters, area: text.toLowerCase().trim()})} />
+        </View>
       )
     }
   }
@@ -47,21 +50,19 @@ export default function Filters(props){
     <Container style={styles.container}>
       <Header />
         <View style={styles.filters}>
-          <View style={{ flex: 3 }}>
-            <Picker
-              selectedValue={filters.searchType}
-              onValueChange={currentType => setFilters({...filters, searchType: currentType})} >
-              <Picker.Item label="Search Nearby" value="nearby" />
-              <Picker.Item label="Search by Area" value="text" />
-            </Picker>
-          </View>
-
-          <View style={{ flex: 2.5 }}>
-            {/* <Input style={styles.input} placeholder="Type" onChangeText={text => setFilters({...filters, type: text.toLowerCase().trim()})} /> */}
-
+          <View style={{width:300, height:530, justifyContent:'space-between', }}>
+            <View>
+            <View>
+              <Picker
+              style={{}}
+                selectedValue={filters.searchType}
+                onValueChange={currentType => setFilters({...filters, searchType: currentType})} >
+                <Picker.Item label="Search Nearby" value="nearby" />
+                <Picker.Item label="Search by Area" value="text" />
+              </Picker>
+            </View>
             {renderSearchType()}
-
-            <View style={{ flex: 2, alignItems: 'stretch', justifyContent: 'center' }}>
+            <View style={{ alignItems: 'stretch', paddingVertical:20,justifyContent: 'center' }}>
               <Slider
                 minimumValue='0'
                 maximumValue='4'
@@ -69,6 +70,20 @@ export default function Filters(props){
                 onValueChange={value => setFilters({...filters, price: Math.ceil(value)})} />
               <Text>Price: {'$'.repeat(Math.ceil(filters.price)) || 'Free'}</Text>
             </View>
+            <TouchableOpacity onPress={toggleOverlay} style={{borderRadius: 10,}}>
+              <Text style={{fontSize: 18, alignSelf: 'flex-end', color:'#e76f51', fontWeight: '500'}}>More Filters</Text>
+            </TouchableOpacity>
+            </View>
+            <View>
+          
+            <Input style={{height:40}}placeholder="Host Name" onChangeText={text => setNickname(text.trim())} value={nickname} ></Input>
+
+            <TouchableOpacity onPress={handleCreateRoom} style={{backgroundColor: '#e76f51', borderRadius: 10,}}>
+              <Text style={{fontSize: 30, alignSelf: 'center', color:'#fcfaf2', fontWeight: '700', paddingVertical:10}}>Start Deciding!</Text>
+            </TouchableOpacity>
+          
+            </View>
+        
           </View>
 
           <Overlay overlayStyle={{ height: 470 }} isVisible={visible} onBackdropPress={toggleOverlay}>
@@ -115,13 +130,6 @@ export default function Filters(props){
               />
             </View>
           </Overlay>
-
-
-          <Button raised buttonStyle={styles.button} title="Extra Parameters" onPress={toggleOverlay} />
-
-          <Input placeholder="Nickname" onChangeText={text => setNickname(text.trim())} value={nickname} ></Input>
-          <Button raised buttonStyle={styles.button} title="Create Room!" onPress={handleCreateRoom} />
-
         </View>
       <Footer />
     </Container>
@@ -130,22 +138,29 @@ export default function Filters(props){
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    width: SCREEN_WIDTH,
+    // flex:5,
+    // width: SCREEN_WIDTH,
     backgroundColor: '#fcfaf2',
+    // flex: 1, 
+    padding: 20,  
+    justifyContent: 'space-between', 
+    alignItems: 'center', 
   },
   filters: {
-    flex: 1,
+    
     flexDirection: 'column',
     justifyContent: 'center',
-    paddingHorizontal: 60,
-    paddingBottom: 20,
-    backgroundColor: '#fff'
+    // paddingHorizontal: 60,
+    // paddingBottom: 20,
+    // backgroundColor: '#fff',
+    margin:50,
+    
+  
   },
   input: {
-    flex: 1
+    // flex: 1
   },
   button: {
-    marginBottom: 5
+    // marginBottom: 5
   }
 });

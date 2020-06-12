@@ -21,47 +21,68 @@ export default ({ history, joinRoom }) => {
     joinRoom(joinRoomId, nickname)
     history.push("/room");
   }
+
+  const handleNewRoom = () => {
+    history.push("/filters");
+  }
   
   return (
 
     <View style={styles.container}>
       <Header />
-      <View style={{flex: 1, justifyContent: 'space-between'} }>
+      {/* <View style={{flex: 1, justifyContent: 'space-between'} }> */}
       
-        <Button title="Create Room" onPress={() => history.push('/filters')}></Button>
+        {/* <Button title="Create Room" onPress={() => history.push('/filters')}></Button> */}
 
-        {/* ----- MAIN HOME ----- */}
-      {/* <View style={{  flex: 1,padding: 20, justifyContent: 'space-evenly', alignItems: 'center', }}>
-        <TouchableOpacity style={styles.buttons}><Text style={styles.buttonText}>NEW DECISION</Text></TouchableOpacity>
+       
+      <View style={{flex: 5, padding: 20,  justifyContent: 'space-evenly', alignItems: 'center', }}>
+        <View style={{width:300}}>
+      
+          <Input placeholder="Nickname" style={{}} onChangeText={text => setNickname(text.trim())} value={nickname} ></Input>
+          <Input placeholder="Room Code" style={{}} onChangeText={text => setJoinRoomId(text.toUpperCase().trim())} value={joinRoomId} ></Input>
+          <TouchableOpacity onPress={handleJoinRoom} style={styles.buttonJoin}>
+            <Text style={styles.buttonText}>JOIN DECISION</Text>
+          </TouchableOpacity>
+          <Text style={styles.shrugger}>¯\_(ツ)_/¯</Text>
+          <TouchableOpacity onPress={handleNewRoom} style={styles.buttonNew}>
+            <Text style={styles.buttonText}>NEW DECISION</Text>
+          </TouchableOpacity>
+        
+        
+        {/* <Input placeholder="Nickname" style={{}} onChangeText={text => setNickname(text.trim())} value={nickname} ></Input>
+        <Input placeholder="Room Code" style={{}} onChangeText={text => setJoinRoomId(text.toUpperCase().trim())} value={joinRoomId} ></Input>
+        
+        <TouchableOpacity onPress={handleJoinRoom} style={styles.buttons}>
+          <Text style={styles.buttonText}>JOIN DECISION</Text>
+        </TouchableOpacity>
+        </View>
         <Text style={styles.shrugger}>¯\_(ツ)_/¯</Text>
-        <TouchableOpacity style={styles.buttons}><Text style={styles.buttonText}>JOIN DECISION</Text></TouchableOpacity>
-      </View> */}
-      {/* ----- MAIN HOME ----- */}
+        <TouchableOpacity onPress={handleNewRoom} style={styles.buttons}>
+          <Text style={styles.buttonText}>NEW DECISION</Text>
+        </TouchableOpacity>
+         */}
+        
+        </View>
+      </View>
+      
 
-      <Input placeholder="Room Code" onChangeText={text => setJoinRoomId(text.toUpperCase().trim())} value={joinRoomId} ></Input>
-      <Input placeholder="Nickname" onChangeText={text => setNickname(text.trim())} value={nickname} ></Input>
-      <Button title="Join Room" onPress={handleJoinRoom}></Button>
-     </View>
+      {/* <Button title="Join Room" onPress={handleJoinRoom}></Button> */}
+     {/* </View> */}
+     <Footer />
    </View>
  )};
- 
- {/* <Button title="Filters" onPress={() => history.push("/filters")}></Button> */}
- {/* <Button title="Room" onPress={() => history.push("/room")}></Button> */}
- {/* <Button title="Results" onPress={() => history.push("/results")}></Button> */}
- {/* <Button title="Invitation" onPress={() => history.push("/invitation")}></Button> */}
- {/* <Button title="Lobby" onPress={() => history.push("/lobby")}></Button> */}
- {/* <Button title="Login" onPress={() => history.push("/login")}></Button> */}
+
 
  const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     backgroundColor: '#fcfaf2',
     flexDirection: 'column',
     justifyContent: 'center',
     alignContent: 'center'
   },
   //home buttons
-  buttons: {
+  buttonJoin: {
     backgroundColor:'#ee937c', 
     padding: 20, 
     borderRadius: 10,
@@ -70,6 +91,20 @@ export default ({ history, joinRoom }) => {
     shadowOffset: { width: 3, height: 4 },
     shadowOpacity: 0.8,
     shadowRadius: 2,
+    zIndex: 10,
+  },
+  buttonNew: {
+    backgroundColor:'#ee937c', 
+    padding: 20, 
+    borderRadius: 10,
+    width: 300,
+    shadowColor: '#ae9f77',
+    shadowOffset: { width: 3, height: 4 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    zIndex: 10,
+    position: 'absolute',
+    top: 380
   },
   // home buttons
   buttonText: {
@@ -86,8 +121,8 @@ export default ({ history, joinRoom }) => {
     shadowOffset: { width: 3, height: 3 },
     shadowOpacity: 0.8,
     shadowRadius: 2,
-    paddingBottom: 100,
-    paddingTop: 100
+    paddingBottom: 50,
+    paddingTop: 50
   }
 
 })
