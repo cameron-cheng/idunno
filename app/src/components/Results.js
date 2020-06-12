@@ -2,7 +2,11 @@ import { API_KEY } from 'react-native-dotenv'
 import axios from 'axios'
 
 import React, {useState, useEffect } from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, StyleSheet, Button } from 'react-native';
+import { Container } from 'native-base';
+
+import HeaderNav from './Header';
+import Footer from './Footer'
 
 export default function Results(props) {
   const [details, setDetails] = useState(null);
@@ -20,18 +24,43 @@ export default function Results(props) {
   }, []);
   
   if (!details) {
-    return null;
+    return (
+      <Container>
+        <HeaderNav />
+        <View style={styles.main}>
+          <Text>Really...nothing?</Text>
+        </View>
+        <Footer />
+      </Container>
+    );
   } else {
     return (
-      <View>
-        <Text>This is the results page</Text>
-        <Text>Result: {details.name}</Text>
-        <Text>Total Ratings: {details.user_ratings_total}</Text>
-        <Text>Reviewer: {details.reviews[0].author_name}</Text>
-        <Text>Rating: {details.reviews[0].rating} / 5</Text>
-        <Text>Text: {details.reviews[0].text}</Text>
+      <Container>
+        <HeaderNav />
+        <View style={styles.main}>
+          <Text>This is the results page</Text>
+          <Text>Result: {details.name}</Text>
+          <Text>Total Ratings: {details.user_ratings_total}</Text>
+          <Text>Reviewer: {details.reviews[0].author_name}</Text>
+          <Text>Rating: {details.reviews[0].rating} / 5</Text>
+          <Text>Text: {details.reviews[0].text}</Text>
 
-        <Button title="home" onPress={() => props.history.push("/")}></Button>
-      </View>
+        </View>
+        <Footer />
+      </Container>
     )
 }};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  main: {
+    flex: 3, 
+    height: 530,
+    width: 300
+  }
+
+})
