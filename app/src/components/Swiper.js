@@ -1,5 +1,4 @@
 import { API_KEY } from 'react-native-dotenv'
-import mode from '../helpers/mode'
 
 import Countdown from '../components/Countdown'
 

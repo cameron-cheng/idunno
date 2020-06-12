@@ -67,11 +67,12 @@ export default function App() {
     })
   }
   
-  const [lobbyReady, setLobbyReady] = useState(false);
-  const [shouldRedirect, setShouldRedirect] = useState(false);
+  // const [lobbyReady, setLobbyReady] = useState(false);
+  const [redirectLobby, setRedirectLobby] = useState(false);
+  const [startSession, setStartSession] = useState(false);
 
   function handleReady() {
-    setLobbyReady(!lobbyReady);
+    // setLobbyReady(!lobbyReady);
     emitReady();
   }
 
@@ -83,7 +84,7 @@ export default function App() {
         failToJoinAlert();
       } else {
         console.log("GOT HERE")
-        setShouldRedirect(true);
+        setRedirectLobby(true);
       }        
     })
     
@@ -112,9 +113,10 @@ export default function App() {
   }
   
   function setData(data) {
-    console.log("1: Received Cards")
+    console.log("Received Cards")
     setPlaces(data) 
-    console.log("2: DATA:" , data.length)
+    console.log("DATA:" , data.length)
+    setStartSession(true);
   }
   
   function setWinner(winner) {
@@ -135,7 +137,7 @@ export default function App() {
     <View style={styles.container}>
       <Switch>
         <Route exact path="/"  render={(routeProps) => {
-          let homeProps = { ...routeProps, createRoom, joinRoom, setRoomId, shouldRedirect }
+          let homeProps = { ...routeProps, createRoom, joinRoom, setRoomId, redirectLobby }
           return (<Home {...homeProps}/>)}} />
 
         <Route exact path="/filters"  render={(routeProps) => {
@@ -143,7 +145,7 @@ export default function App() {
           return (<Filters {...filtersProps}/>)}} />
 
         <Route exact path="/room" exact render={(routeProps)=> {
-          let roomProps = { ...routeProps, handleReady, lobbyReady, users }
+          let roomProps = { ...routeProps, handleReady, startSession, users }
           return (<Room {...roomProps}/>)}} />
           
         <Route exact path="/invitation" exact render={(routeProps) => {

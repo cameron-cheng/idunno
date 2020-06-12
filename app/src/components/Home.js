@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Alert, View, TextInput, Text, StyleSheet, Button, TouchableOpacity,  } from 'react-native';
+import { Alert, View, Text, StyleSheet, Button, TouchableOpacity,  } from 'react-native';
 import { Input } from 'react-native-elements';
 import { Redirect } from 'react-router-native';
 
@@ -13,7 +13,7 @@ import LottieView from 'lottie-react-native';
 
 
 
-export default ({ history, joinRoom, shouldRedirect }) => {
+export default ({ history, joinRoom, redirectLobby }) => {
   
   const [joinRoomId, setJoinRoomId] = useState('')
   const [nickname, setNickname] = useState('')
@@ -26,7 +26,7 @@ export default ({ history, joinRoom, shouldRedirect }) => {
     history.push("/filters");
   }
   
-  if (shouldRedirect) {
+  if (redirectLobby) {
     return <Redirect to='/room' />
   }
 
@@ -41,7 +41,7 @@ export default ({ history, joinRoom, shouldRedirect }) => {
        
       <View style={{flex: 5, padding: 20,  justifyContent: 'space-evenly', alignItems: 'center', }}>
         <View style={{width:300}}>
-        feature/shrugger-loader
+
         <Button title="shrugger" onPress={() => history.push('/shrugger')}></Button>
 
 
