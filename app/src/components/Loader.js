@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Text } from 'react-native'
-import { Route, Redirect } from 'react-router-native'
+import { Route, Redirect } from 'react-router-native';
 import LottieView from 'lottie-react-native';
 
 export default Loader = () => {

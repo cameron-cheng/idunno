@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import { Route, Redirect } from 'react-router-native';
 import { Footer, FooterTab, Button, Left, Right, Icon, Title } from 'native-base';
 import { State } from 'react-native-gesture-handler';
 
@@ -8,13 +9,18 @@ import { State } from 'react-native-gesture-handler';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
 export default ({ history }) => {
-  const onPressPlus = () => history.push('/room')
+
+  const [redirectHome, setRedirectHome] = useState(false)
+  
+  if (redirectHome) {
+    return <Redirect to='/' />
+  }
 
   return (
     <View style={styles.container}>
       <View style={styles.footer}>
         <View style={styles.body}>
-          <Button transparent style={{justifyContent: 'center', alignSelf: 'center'}} onPress={onPressPlus}>
+          <Button transparent style={{justifyContent: 'center', alignSelf: 'center'}} onPress={() => setRedirectHome(true)}>
             <Icon style={styles.iconPlus} type='FontAwesome' active name="home" />
           </Button>
         </View> 
