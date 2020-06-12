@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Dimensions, Picker, Slider,TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, Picker, Slider,TouchableOpacity } from 'react-native';
 import { Input, Button, CheckBox, Overlay } from 'react-native-elements'
 import { Container } from 'native-base';
 import Header from './Header';
@@ -76,13 +76,13 @@ export default function Filters(props){
             </View>
             
           
-            <KeyboardAvoidingView behavior={Platform.OS == 'ios' ? 'padding' : 'height'}>
+            <View >
               <Input style={{height:40}}placeholder="Host Name" onChangeText={text => setNickname(text.trim())} value={nickname} ></Input>
 
               <TouchableOpacity onPress={handleCreateRoom} style={{backgroundColor: '#ee937c', borderRadius: 10,}}>
                 <Text style={{fontSize: 30, alignSelf: 'center', color:'#fcfaf2', fontWeight: '700', paddingVertical:10}}>Start Deciding!</Text>
               </TouchableOpacity>
-            </KeyboardAvoidingView>
+            </View>
           
             
         
