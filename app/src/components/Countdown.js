@@ -49,7 +49,4 @@ const style = StyleSheet.create({
     fontSize: 30,	
     alignSelf: "center"
   }
-  
-
-
 })
