@@ -8,7 +8,7 @@ import Footer from './Footer'
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
 export default Invitation = ({roomId, history}) => {
-console.log('roomId :>> ', roomId);
+
   const onShare = async () => {
     try {
       const result = await Share.share({

@@ -12,13 +12,8 @@ import { Redirect } from 'react-router-native';
 
 const SCREEN_HEIGHT   = Dimensions.get('window').height;
 
-export default function Room({ history, emitReady, users }) {
-  const [lobbyReady, setLobbyReady] = useState(false);
-  // console.log("ROOM PROPS:", places.length)
-  function handleReady() {
-    setLobbyReady(!lobbyReady);
-    emitReady();
-  }
+export default function Room({ history, handleReady, lobbyReady, users }) {
+ 
 
   if (lobbyReady) {
     return <Loader /> 
