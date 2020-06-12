@@ -6,7 +6,7 @@ import Header from './Header';
 import Footer from './Footer'
 
 export default Invitation = ({roomId, history}) => {
-console.log('roomId :>> ', roomId);
+
   const onShare = async () => {
     try {
       const result = await Share.share({
@@ -32,10 +32,10 @@ console.log('roomId :>> ', roomId);
       <Header />
       <View style={{flex: 1, justifyContent: 'space-between'}}>
         <View style={{flexDirection: 'row'}}>
-          <Button title="Homepage" onPress={() => history.push("/")}></Button>
-          <Button title="Lobby" onPress={() => history.push("/room")}></Button>
+          {/* <Button title="Homepage" onPress={() => history.push("/")}></Button> */}
         </View>
         <Content style={styles.content}>  
+          <Button title="Lobby" onPress={() => history.push("/room")}></Button>
           <Card style={styles.cardMain}>
             <Card style={styles.cardCode}>
               <View>

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 
 import { Alert, View, TextInput, Text, StyleSheet, Button, TouchableOpacity,  } from 'react-native';
-import { Input} from 'react-native-elements';
+import { Input } from 'react-native-elements';
+import { Redirect } from 'react-router-native';
 
 import Header from './Header';
 import Footer from './Footer';
@@ -12,20 +13,23 @@ import LottieView from 'lottie-react-native';
 
 
 
-export default ({ history, joinRoom }) => {
+export default ({ history, joinRoom, shouldRedirect }) => {
   
   const [joinRoomId, setJoinRoomId] = useState('')
   const [nickname, setNickname] = useState('')
 
   const handleJoinRoom = () => {
     joinRoom(joinRoomId, nickname)
-    history.push("/room");
   }
 
   const handleNewRoom = () => {
     history.push("/filters");
   }
   
+  if (shouldRedirect) {
+    return <Redirect to='/room' />
+  }
+
   return (
 
     <View style={styles.container}>
@@ -38,7 +42,7 @@ export default ({ history, joinRoom }) => {
       <View style={{flex: 5, padding: 20,  justifyContent: 'space-evenly', alignItems: 'center', }}>
         <View style={{width:300}}>
       
-          <Input placeholder="Nickname" style={{}} onChangeText={text => setNickname(text.trim())} value={nickname} ></Input>
+          <Input placeholder="Nickname" style={{}} onChangeText={text => setNickname(text)} value={nickname} ></Input>
           <Input placeholder="Room Code" style={{}} onChangeText={text => setJoinRoomId(text.toUpperCase().trim())} value={joinRoomId} ></Input>
           <TouchableOpacity onPress={handleJoinRoom} style={styles.buttonJoin}>
             <Text style={styles.buttonText}>JOIN DECISION</Text>

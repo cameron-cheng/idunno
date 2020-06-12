@@ -22,7 +22,7 @@ module.exports = (filters) => {
   async function nearbySearch() {
     try {  
       const res = await axios.get(
-        `https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${API_KEY}&type=${filters.type}&radius=${filters.radius}&keyword=restaurant${additionalQueries}`
+        `https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${API_KEY}&location=49.2813245,-123.1171937&radius=${filters.radius}&type=${filters.type}&keyword=restaurant${additionalQueries}`
       );
       console.log("API Request Finished!", "Length:", res.data.results.length);
       return res.data.results;
@@ -36,7 +36,7 @@ module.exports = (filters) => {
       const res = await axios.get(
         `https://maps.googleapis.com/maps/api/place/textsearch/json?key=${API_KEY}&type=${filters.type}&query=${filters.area}${additionalQueries}`
       );
-      console.log("API Request Finished!", "Length:", res);
+      console.log("API Request Finished!", "Length:", res.data.results.length);
       return res.data.results;
     } catch(err) {
       console.log(err)

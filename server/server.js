@@ -31,13 +31,13 @@ function makeId() {
   return result;
 }
 
+let users = {};
 
 //Socket.io Lobby
 io.on('connection', (socket) => {
   
   let data = {};
   let results = [];
-  let users = [];
 
   console.log("=================")
   console.log(socket.client.conn.server.clientsCount + " total users connected")
@@ -51,7 +51,7 @@ io.on('connection', (socket) => {
     socket.join(roomId);
     
     socket.nickname = nickname;
-    users.push(...users, socket.nickname);
+    users[roomId] = [socket.nickname];
 
     fetchPlaces(filters)
       .then((places) => {data[roomId] = places})
@@ -60,7 +60,8 @@ io.on('connection', (socket) => {
     console.log("~~~~~~~~~~~~~~~~~~~~")
     console.log('a user connected', socket.id);
     console.log(`*** ${roomId} has ${io.sockets.adapter.rooms[`${roomId}`].length} user ***`);
-
+    console.log("USERS:", users)
+    io.in(roomId).emit('usersSentToRoom', users[roomId]);
   })
    
   socket.on('joinRoom', (roomId, nickname, ackFn) => {
@@ -72,14 +73,14 @@ io.on('connection', (socket) => {
       socket.join(roomId);
 
       socket.nickname = nickname;
-      users.push(...users, socket.nickname);
+      users[roomId] = [...users[roomId], socket.nickname];
 
       ackFn(true);
       console.log("~~~~~~~~~~~~~~~~~~~~")
       console.log(`${socket.nickname} joins room ${roomId}`);
       console.log(`*** ${roomId} has ${io.sockets.adapter.rooms[`${roomId}`].length} user ***`);
       console.log("USERS:", users)
-      io.in(roomId).emit('usersSentToRoom', users);
+      io.in(roomId).emit('usersSentToRoom', users[roomId]);
     }
   });
   
