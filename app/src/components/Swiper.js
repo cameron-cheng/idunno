@@ -188,7 +188,7 @@ export default class App extends Component {
                       <View style={{flex:1, padding: 10,  height:120, justifyContent: 'space-between'}}>
                         
                         <Text style={{alignSelf: 'flex-start', fontSize: 15, }}>Cuisine: </Text>
-                        <Text style={{alignSelf: 'flex-start', fontSize: 15}}>OPEN now</Text>
+                        <Text style={{alignSelf: 'flex-start', fontSize: 15}}>{item.opening_hours.open_now}</Text>
                         <Text style={{alignSelf: 'flex-start', fontSize: 15}}>Price Level: {item.price_level}</Text>
                       </View>
                   </View>
