@@ -27,9 +27,9 @@ export default ({ history, createRoom, joinRoom, setRoomId, filters, setFilters 
   
   return (
     <View style={styles.container}>
-      <View style={{}}>
+      {/* <View style={{}}>
         <Header />
-      </View>
+      </View> */}
       {/* ----- MAIN HOME ----- */}
       {/* <View style={{  flex: 1,padding: 20, justifyContent: 'space-evenly', alignItems: 'center', }}>
         <TouchableOpacity style={styles.buttons}><Text style={styles.buttonText}>NEW DECISION</Text></TouchableOpacity>
@@ -38,8 +38,9 @@ export default ({ history, createRoom, joinRoom, setRoomId, filters, setFilters 
       </View> */}
       {/* ----- MAIN HOME ----- */}
 
-      <View style={{zIndex:10, }}>
-        <View style={{flex: 5}}>
+      <View style={{}}>
+        <View style={{}}>
+          <Text style={{fontSize: 60}}>HI</Text>
           <Filters state={filters} setState={setFilters} style ={{justifyContent: 'center',}}/>
         </View>
         <View style={{flex: 1} }>
@@ -49,13 +50,13 @@ export default ({ history, createRoom, joinRoom, setRoomId, filters, setFilters 
           </Button>
 
 
-          {/* <Input title="Join!" onChangeText={text => setJoinRoomId(text)} value={joinRoomId} ></Input>
-          <Button title="Join Room" onPress={handleJoinRoom}></Button> */}
+          <Input title="Join!" onChangeText={text => setJoinRoomId(text)} value={joinRoomId} ></Input>
+          <Button title="Join Room" onPress={handleJoinRoom}></Button>
         </View>
       </View>
-      <View style={{}}>
+      {/* <View style={{}}>
        <Footer />
-      </View>
+      </View> */}
       
     </View>
  )};
