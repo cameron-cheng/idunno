@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Dimensions, Picker, Slider,TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, Picker, Slider,TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
 import { Input, Button, CheckBox, Overlay } from 'react-native-elements'
 import { Container } from 'native-base';
 import Header from './Header';
@@ -71,18 +71,20 @@ export default function Filters(props){
               <Text>Price: {'$'.repeat(Math.ceil(filters.price)) || 'Free'}</Text>
             </View>
             <TouchableOpacity onPress={toggleOverlay} style={{borderRadius: 10,}}>
-              <Text style={{fontSize: 18, alignSelf: 'flex-end', color:'#e76f51', fontWeight: '500'}}>More Filters</Text>
+              <Text style={{fontSize: 18, alignSelf: 'flex-end', color:'#ee937c', fontWeight: '500'}}>More Filters</Text>
             </TouchableOpacity>
             </View>
-            <View>
+            
           
-            <Input style={{height:40}}placeholder="Host Name" onChangeText={text => setNickname(text.trim())} value={nickname} ></Input>
+            <KeyboardAvoidingView behavior={Platform.OS == 'ios' ? 'padding' : 'height'}>
+              <Input style={{height:40}}placeholder="Host Name" onChangeText={text => setNickname(text.trim())} value={nickname} ></Input>
 
-            <TouchableOpacity onPress={handleCreateRoom} style={{backgroundColor: '#e76f51', borderRadius: 10,}}>
-              <Text style={{fontSize: 30, alignSelf: 'center', color:'#fcfaf2', fontWeight: '700', paddingVertical:10}}>Start Deciding!</Text>
-            </TouchableOpacity>
+              <TouchableOpacity onPress={handleCreateRoom} style={{backgroundColor: '#ee937c', borderRadius: 10,}}>
+                <Text style={{fontSize: 30, alignSelf: 'center', color:'#fcfaf2', fontWeight: '700', paddingVertical:10}}>Start Deciding!</Text>
+              </TouchableOpacity>
+            </KeyboardAvoidingView>
           
-            </View>
+            
         
           </View>
 
