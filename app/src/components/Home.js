@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+
 import { Alert, View, TextInput, Text, StyleSheet, Button, TouchableOpacity,  } from 'react-native';
 import { Input} from 'react-native-elements';
-// import { Button } from 'native-base';
+
 import Header from './Header';
 import Footer from './Footer';
 import Filters from './Filters';
@@ -11,26 +12,25 @@ import LottieView from 'lottie-react-native';
 
 
 
-export default ({ history, createRoom, joinRoom, setRoomId, filters, setFilters }) => {
+export default ({ history, joinRoom }) => {
   
   const [joinRoomId, setJoinRoomId] = useState('')
+  const [nickname, setNickname] = useState('')
 
   const handleJoinRoom = () => {
-    joinRoom(joinRoomId);
-    history.push("/room");
-  }
-  
-  const handleCreateRoom = () =>{
-    createRoom();
+    joinRoom(joinRoomId, nickname)
     history.push("/room");
   }
   
   return (
+
     <View style={styles.container}>
-      {/* <View style={{}}>
-        <Header />
-      </View> */}
-      {/* ----- MAIN HOME ----- */}
+      <Header />
+      <View style={{flex: 1, justifyContent: 'space-between'} }>
+      
+        <Button title="Create Room" onPress={() => history.push('/filters')}></Button>
+
+        {/* ----- MAIN HOME ----- */}
       {/* <View style={{  flex: 1,padding: 20, justifyContent: 'space-evenly', alignItems: 'center', }}>
         <TouchableOpacity style={styles.buttons}><Text style={styles.buttonText}>NEW DECISION</Text></TouchableOpacity>
         <Text style={styles.shrugger}>¯\_(ツ)_/¯</Text>
@@ -38,27 +38,11 @@ export default ({ history, createRoom, joinRoom, setRoomId, filters, setFilters 
       </View> */}
       {/* ----- MAIN HOME ----- */}
 
-      <View style={{}}>
-        <View style={{}}>
-          <Text style={{fontSize: 60}}>HI</Text>
-          <Filters state={filters} setState={setFilters} style ={{justifyContent: 'center',}}/>
-        </View>
-        <View style={{flex: 1} }>
-          <Button title="Create Room"
-            onPress={handleCreateRoom}
-            >
-          </Button>
-
-
-          <Input title="Join!" onChangeText={text => setJoinRoomId(text)} value={joinRoomId} ></Input>
-          <Button title="Join Room" onPress={handleJoinRoom}></Button>
-        </View>
-      </View>
-      {/* <View style={{}}>
-       <Footer />
-      </View> */}
-      
-    </View>
+      <Input placeholder="Room Code" onChangeText={text => setJoinRoomId(text.toUpperCase().trim())} value={joinRoomId} ></Input>
+      <Input placeholder="Nickname" onChangeText={text => setNickname(text.trim())} value={nickname} ></Input>
+      <Button title="Join Room" onPress={handleJoinRoom}></Button>
+     </View>
+   </View>
  )};
  
  {/* <Button title="Filters" onPress={() => history.push("/filters")}></Button> */}
