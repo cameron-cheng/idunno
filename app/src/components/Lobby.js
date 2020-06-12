@@ -3,20 +3,20 @@ import { View, Text, StyleSheet, Dimensions, TouchableOpacity } from 'react-nati
 import { Container, Content, Card, CardItem, Body, Button, Icon } from 'native-base';
 import { State } from 'react-native-gesture-handler';
 import Header from './Header';
-import Footer from './Footer'
+import Footer from './Footer';
 
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
 export default function Lobby(props) {
-  
+  console.log("USERS:", props.users)
   const playersReady = () => {
     //loop through players in room and return <Text>Name</Text> and <Icon type='Entypo' name='block'/>
     //if player not ready - "not ready" button should not be pressable: greyed out?
     //if player ready, change icon to <Icon type='FontAwesome' name='check'/>
   }
-
+  
   return(  
     <Container style={styles.container}>
       <Header />
@@ -35,13 +35,13 @@ export default function Lobby(props) {
                   <Text style={styles.buttonText}>Ready</Text>
               </TouchableOpacity>
             </View>
-            <View >
-              <TouchableOpacity 
+            {/* <View > */}
+              {/* <TouchableOpacity 
                 style={styles.buttonNotReady}>
                   <Icon type='Entypo' name='block' style={styles.icon}/>
 
                   <Text style={styles.buttonText}>Not Ready</Text>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
               {/* <Button rounded  
                 onPress={(event) => props.handleReady(event)}
                 style={styles.button}>
@@ -50,44 +50,21 @@ export default function Lobby(props) {
               {/* <Button rounded style={styles.buttonNotReady}>
                 <Text style={styles.buttonText}>Not Ready</Text>
               </Button> */}
-            </View>
+            {/* </View> */}
           </CardItem>
           <CardItem style={styles.cardItem}>
             <Text style={styles.text}>
-              WAITING FOR MORE DECISION MAKERS 2/3
+              CURRENT DECISION MAKERS:
             </Text>
           </CardItem>
           {/* REPLACE WITH PLAYER LOOP */}
           <View style={{backgroundColor:'#f9f1dc'}}>
-            <View style={{backgroundColor:'#f9f1dc'}}>
-              <CardItem style={styles.players}>
-                <View style={styles.playersView}>
-                  <Text style={styles.playerText}>
-                    Cameron
-                  </Text>
-                  {/* <Icon type='Feather' name='check-circle' style={styles.playerTrue}/> */}
-                  <Icon type='Entypo' name='block' style={styles.playerFalse}/>
-                </View>
-              </CardItem>
-            </View>
-            <CardItem style={styles.players}>
-              <View style={styles.playersView}>
-                <Text style={styles.playerText}>
-                  Jeremy
-                </Text>
-                <Icon type='Feather' name='check-circle' style={styles.playerTrue}/>
-                {/* <Icon type='Entypo' name='block' style={styles.playerFalse}/> */}
-              </View>
-            </CardItem>
-            <CardItem style={styles.players}>
-            <View style={styles.playersView}>
-                <Text style={styles.playerText}>
-                  Amy
-                </Text>
-                <Icon type='Feather' name='check-circle' style={styles.playerTrue}/>
-                {/* <Icon type='Entypo' name='block' style={styles.playerFalse}/> */}
-              </View>
-            </CardItem>
+            {props.users.map((user, index) => {  
+              return (
+                <UserItem key={index} user={user} />
+              )
+            })}
+
           </View>
           {/* ------------------------ */}
         </Card>
@@ -97,6 +74,20 @@ export default function Lobby(props) {
       
   )
 };
+
+const UserItem = ({ user }) => {
+  return (
+    <CardItem style={styles.players}>
+      <View style={styles.playersView}>
+        <Text style={styles.playerText}>
+          {user}
+        </Text>
+        <Icon type='Feather' name='check-circle' style={styles.playerTrue}/>
+        {/* <Icon type='Entypo' name='block' style={styles.playerFalse}/> */}
+      </View>
+    </CardItem>
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -158,7 +149,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   buttonNotReady: {
-    backgroundColor:'#ee937c',  
+    backgroundColor:'#e76f51',  
     borderRadius: 10,
     flexDirection: 'row',
     alignItems: 'center'

@@ -33,7 +33,7 @@ console.log('roomId :>> ', roomId);
       <View style={{flex: 1, justifyContent: 'space-between'}}>
         <View style={{flexDirection: 'row'}}>
           <Button title="Homepage" onPress={() => history.push("/")}></Button>
-          <Button title="Lobby" onPress={() => history.push("/lobby")}></Button>
+          <Button title="Lobby" onPress={() => history.push("/room")}></Button>
         </View>
         <Content style={styles.content}>  
           <Card style={styles.cardMain}>
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     
   },
   share: {
-    backgroundColor:'#ee937c',  
+    backgroundColor:'#e76f51',  
     borderRadius: 10,
     // shadowColor: '#988a55',
     // shadowOffset: { width: 2, height: 4 },

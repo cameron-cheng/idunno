@@ -11,25 +11,14 @@ export default ({ history }) => {
   const onPressPlus = () => history.push('/room')
 
   return (
-    <View style={style.container}>
-       <Footer style={style.footer}>
-          <FooterTab style={style.footerTab}>
-            <Button transparent >
-              <Icon style={style.icon} type='AntDesign' name="search1" />
-            </Button>
-             
-            <Button transparent 
-            style={{justifyContent: 'center', alignSelf: 'center'}}
-            onPress={onPressPlus}
-            >
-              <Icon style={style.iconPlus} type='AntDesign' active name="pluscircleo" />
-            </Button>
-            
-            <Button transparent>
-              <Icon style={style.icon} type='AntDesign' name="user" />
-            </Button>
-          </FooterTab>
-        </Footer>
+    <View style={styles.container}>
+      <View style={styles.footer}>
+        <View style={styles.body}>
+          <Button transparent style={{justifyContent: 'center', alignSelf: 'center'}} onPress={onPressPlus}>
+            <Icon style={styles.iconPlus} type='FontAwesome' active name="home" />
+          </Button>
+        </View> 
+      </View>
     </View>
 
 
@@ -38,48 +27,77 @@ export default ({ history }) => {
 
 }
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    width: SCREEN_WIDTH,
-    justifyContent:'center',
-    alignItems: 'center',
-    // backgroundColor: '#fcfaf2'
-    // height: 
-    
+    flex: 1,
+    justifyContent: 'center',
+    shadowColor: '#ae9f77',
+    shadowOffset: { width: 0, height: -4 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
   },
   footer: {
     backgroundColor: '#2a9d8f',
-    // justifyContent: 'center',
-    height: 80,
+    justifyContent: 'flex-start',
+    height: 800,
+    width: 1500,
+    bottom: -370,
     alignSelf: 'center',
-    // shadowColor: '#988a55',
-    // shadowOffset: { width: 0, height: 0 },
-    // shadowOpacity: 0.8,
-    // shadowRadius: 2,
-  },
-  footerTab: {
-    // justifyContent:'center',
-    // alignSelf: 'center',
+    borderTopLeftRadius: 1000,
+    borderTopRightRadius: 1000,
   },
   body: {
-    // flex: 1,
-    // justifyContent: 'center' 
-    
+    flex: 1,
+    justifyContent: 'flex-start' ,
+    paddingTop: 20,
+    position: 'relative'
   },
-  
   icon: {
     color: '#fcfaf2',
-    height: 30
-    // alignSelf: 'center',
+    height: 30,
+    alignSelf: 'center',
   },
   iconPlus: {
     color: '#fcfaf2',
     height: 65,
-    padding: 0,
     fontSize: 60,
-    // alignSelf: 'center',
-
   },
+
+
+
+////HOME PAGE STYLES DO NOT DELETE!!!!
+  // container: {
+  //   flex: 1,
+  //   justifyContent: 'center',
+  //   shadowColor: '#ae9f77',
+  //   shadowOffset: { width: 0, height: -4 },
+  //   shadowOpacity: 0.8,
+  //   shadowRadius: 2,
+  // },
+  // footer: {
+  //   backgroundColor: '#2a9d8f',
+  //   justifyContent: 'flex-start',
+  //   height: 800,
+  //   width: 1500,
+  //   bottom: -440,
+  //   alignSelf: 'center',
+  //   borderTopLeftRadius: 1000,
+  //   borderTopRightRadius: 1000,
+  // },
+  // body: {
+  //   flex: 1,
+  //   justifyContent: 'flex-start' ,
+  //   paddingTop: 20
+  // },
+  // icon: {
+  //   color: '#fcfaf2',
+  //   height: 30,
+  //   alignSelf: 'center',
+  // },
+  // iconPlus: {
+  //   color: '#fcfaf2',
+  //   height: 65,
+  //   fontSize: 60,
+  // },
 
 })

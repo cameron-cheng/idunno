@@ -11,11 +11,11 @@ export default function Footer(props) {
   
   return (
     <View style={style.container}>
-        <Header span style={style.header}>
+        <View span style={style.header}>
           <Body style={style.body}>
-            <Title style={style.title}>¯\_(ツ)_/¯</Title>
+            <Title style={style.title}>iDUNNO</Title>
           </Body>
-        </Header>
+        </View>
     </View>
 
   );
@@ -24,9 +24,9 @@ export default function Footer(props) {
 
 const style = StyleSheet.create({
   container: {
-    // flex: 1,
-    width: SCREEN_WIDTH,
-    // height: 80,
+    flex: 1,
+    // width: SCREEN_WIDTH,
+    // height: 10,
     justifyContent: 'center',
     shadowColor: '#ae9f77',
     shadowOffset: { width: 0, height: 4 },
@@ -34,14 +34,18 @@ const style = StyleSheet.create({
     shadowRadius: 2,
   },
   header: {
-    height: 80,
+    height: 800,
+    top: -330,
+    width: 1500,
     backgroundColor: '#b1d8d2',
-    // backgroundImage: url("https://www.transparenttextures.com/patterns/asfalt-light.png")
+    borderBottomLeftRadius: 1000,
+    borderBottomRightRadius: 1000,
   },
   body: {
     flex: 1,
-    justifyContent: 'center' 
-    
+    justifyContent: 'flex-end' ,
+    paddingBottom: 20,
+    position: 'relative'
   },
   title: {
     justifyContent: 'center',
@@ -50,7 +54,43 @@ const style = StyleSheet.create({
     fontSize: 50,
     height: 60,
     fontWeight: '900',
-    // fontFamily: 'AppleSDGothicNeo-Bold'
+    // position: 'absolute',
     
   },
+
+
+
+
+////HOME PAGE STYLES DO NOT DELETE!!!!
+  // container: {
+  //   flex: 1,
+  //   // width: SCREEN_WIDTH,
+  //   // height: 10,
+  //   justifyContent: 'center',
+  //   shadowColor: '#ae9f77',
+  //   shadowOffset: { width: 0, height: 4 },
+  //   shadowOpacity: 0.8,
+  //   shadowRadius: 2,
+  // },
+  // header: {
+  //   height: 800,
+  //   top: -420,
+  //   width: 1500,
+  //   backgroundColor: '#b1d8d2',
+  //   borderBottomLeftRadius: 1000,
+  //   borderBottomRightRadius: 1000,
+  // },
+  // body: {
+  //   flex: 1,
+  //   justifyContent: 'flex-end' ,
+  //   paddingBottom: 20
+  // },
+  // title: {
+  //   justifyContent: 'center',
+  //   alignSelf: "center",
+  //   color: '#2a9d8f',
+  //   fontSize: 50,
+  //   height: 60,
+  //   fontWeight: '900',
+  // },
 })

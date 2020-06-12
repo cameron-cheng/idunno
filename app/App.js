@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { Alert, Platform, StyleSheet, Text, View } from 'react-native';
 import { NativeRouter, Switch, Route} from 'react-router-native';
 import Home from './src/components/Home';
 import Room from './src/components/Room';
@@ -24,19 +24,26 @@ export default function App() {
   const [roomId, setRoomId] = useState(null)
   
   const [filters, setFilters] = useState({
-    searchType: 'area',
+    searchType: 'nearby',
     type: 'restaurant',
     area: null,
     radius: 500,
     price: 1,
     vegan: false,
-    familyFriendly: false
+    family: false,
+    casual: false,
+    fine: false,
+    cafe: false,
+    buffet: false,
+    bistro: false,
+    breakfast: false,
   })
   
   const [socket] = useState(() => io(IP_ADDRESS));
 
   useEffect(() => {
     socket.on('connect', () => console.log("Client connected:", socket.connected));
+    socket.on('usersSentToRoom', setUserArray);
     socket.on('dataSentToRoom', setData);
     socket.on('resultSentToRoom', setWinner);
     socket.on('disconnect', () => {console.log("Disconnected")});
@@ -44,22 +51,23 @@ export default function App() {
     return () => socket.close();
   }, [])
 
+  const [users, setUsers] = useState([]);
   const [places, setPlaces] = useState([]);
-  const [result, setResult] = useState(null);
+  const [result, setResult] = useState('');
 
-  function createRoom() {
+  function createRoom(nickname) {
     console.log('sending create room event')
     //event to create a room to server, response with server code
-    socket.emit('createRoom', filters, (roomId) => {
+    socket.emit('createRoom', filters, nickname, (roomId) => {
       console.log("ROOM CODE:", roomId);
       setRoomId(roomId);
       //pass roomId to Share component
     })
   }
   
-  function joinRoom(roomId) {
+  function joinRoom(roomId, nickname) {
     console.log(roomId);
-    socket.emit('joinRoom', roomId, (hasJoined) => {
+    socket.emit('joinRoom', roomId, nickname, (hasJoined) => {
       console.log('has joined', hasJoined)
       if (hasJoined === false) {
         failToJoinAlert();
@@ -87,6 +95,10 @@ export default function App() {
   function emitReady() {
     socket.emit('lobbyReady');
   }
+
+  function setUserArray(users) {
+    setUsers(users);
+  }
   
   function setData(data) {
     console.log("1: Received Cards")
@@ -97,7 +109,7 @@ export default function App() {
   function setWinner(winner) {
     setResult(winner);
   }
-
+  
   function addToResults(like) {
     socket.emit('addToResults', like)
   }  
@@ -105,7 +117,7 @@ export default function App() {
   function readyForResult() {
     socket.emit('readyForResult')
   }    
-    
+
   return (
     <NativeRouter>
     
@@ -115,16 +127,20 @@ export default function App() {
           let homeProps = { ...routeProps, createRoom, joinRoom, setRoomId, filters, setFilters }
           return (<Home {...homeProps}/>)}} />
 
-        <Route exact path="/lobby" component={Lobby}/>
+        <Route exact path="/filters"  render={(routeProps) => {
+          let filtersProps = { ...routeProps, createRoom, filters, setFilters }
+          return (<Filters {...filtersProps}/>)}} />
+
         <Route exact path="/room" exact render={(routeProps)=> {
-          let roomProps = { ...routeProps, emitReady }
+          let roomProps = { ...routeProps, emitReady, users }
           return (<Room {...roomProps}/>)}} />
           
         <Route exact path="/invitation" exact render={(routeProps) => {
           let invitationProps = {...routeProps, roomId} 
           return (<Invitation {... invitationProps} />)}}/>
-        <Route exact path="/login" component={Login}/>
+
         <Route exact path="/loader" component={Loader}/>
+
         <Route exact path ="/swiper" exact render={(routeProps) => {
           let swiperProps = {...routeProps, places, addToResults, readyForResult} 
           return (<Swiper {...swiperProps} />)}}/>

@@ -37,6 +37,7 @@ io.on('connection', (socket) => {
   
   let data = {};
   let results = [];
+  let users = [];
 
   console.log("=================")
   console.log(socket.client.conn.server.clientsCount + " total users connected")
@@ -44,10 +45,13 @@ io.on('connection', (socket) => {
   
   // socket.emit("dataSentToRoom", "Hello")
 
-  socket.on('createRoom', (filters, ackFn) => { //change ignore to filters/query
+  socket.on('createRoom', (filters, nickname, ackFn) => { 
     const roomId = makeId();
     console.log("filters:", filters)
     socket.join(roomId);
+    
+    socket.nickname = nickname;
+    users.push(...users, socket.nickname);
 
     fetchPlaces(filters)
       .then((places) => {data[roomId] = places})
@@ -55,22 +59,27 @@ io.on('connection', (socket) => {
 
     console.log("~~~~~~~~~~~~~~~~~~~~")
     console.log('a user connected', socket.id);
-    console.log(`*** ${roomId} has`, io.sockets.adapter.rooms[`${roomId}`].length, "user");
+    console.log(`*** ${roomId} has ${io.sockets.adapter.rooms[`${roomId}`].length} user ***`);
 
   })
    
-  socket.on('joinRoom', (roomId, ackFn) => {
+  socket.on('joinRoom', (roomId, nickname, ackFn) => {
     const room = io.sockets.adapter.rooms[roomId];
     if (!room) {
       console.log('roomId doesn\'t exist', roomId)
       ackFn(false);
     } else {
       socket.join(roomId);
+
+      socket.nickname = nickname;
+      users.push(...users, socket.nickname);
+
       ackFn(true);
       console.log("~~~~~~~~~~~~~~~~~~~~")
-      console.log(socket.id, ' joins room', roomId);
-      console.log(`*** ${roomId} has`, io.sockets.adapter.rooms[`${roomId}`].length, "user");
-      console.log("~~~~~~~~~~~~~~~~~~~~")
+      console.log(`${socket.nickname} joins room ${roomId}`);
+      console.log(`*** ${roomId} has ${io.sockets.adapter.rooms[`${roomId}`].length} user ***`);
+      console.log("USERS:", users)
+      io.in(roomId).emit('usersSentToRoom', users);
     }
   });
   
