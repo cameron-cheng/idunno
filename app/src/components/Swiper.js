@@ -1,7 +1,11 @@
 import { API_KEY } from 'react-native-dotenv'
 import mode from '../helpers/mode'
+
+import Countdown from '../components/Countdown'
+
 import HeaderNav from './Header';
 import Footer from './Footer'
+
 
 import React, { Component } from "react";
 import {View, Text, StyleSheet, Dimensions, Image, Animated, PanResponder } from "react-native";
@@ -279,7 +283,7 @@ export default class App extends Component {
       <View>
         <HeaderNav />
         <View style={{ height: 40 }}>
-
+        <Countdown/>
         </View>
         <View style={{ flex: 1, alignItems: 'center' }}>
         {this.renderCards()}

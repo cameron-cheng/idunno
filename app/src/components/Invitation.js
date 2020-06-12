@@ -1,9 +1,11 @@
 import React from 'react';
 import QRCode  from 'react-native-qrcode-svg';
-import { View, Text, Button, StyleSheet, TouchableOpacity, Share  } from 'react-native';
+import { View, Text, Button, StyleSheet, TouchableOpacity, Share, Dimensions  } from 'react-native';
 import { Container, Content, Card, CardItem, Body } from 'native-base';
 import Header from './Header';
 import Footer from './Footer'
+
+const SCREEN_WIDTH = Dimensions.get('window').width;
 
 export default Invitation = ({roomId, history}) => {
 
@@ -27,67 +29,101 @@ export default Invitation = ({roomId, history}) => {
     }
   };
 
+  const goToLobby = () => {
+    history.push("/room");
+  }
+
   return(
-    <View style={styles.container}>
-      <Header />
-      <View style={{flex: 1, justifyContent: 'space-between'}}>
-        <View style={{flexDirection: 'row'}}>
-          {/* <Button title="Homepage" onPress={() => history.push("/")}></Button> */}
-        </View>
-        <Content style={styles.content}>  
-          <Button title="Lobby" onPress={() => history.push("/room")}></Button>
-          <Card style={styles.cardMain}>
-            <Card style={styles.cardCode}>
-              <View>
-                <View style={styles.QR}>
-                  { <Text style={styles.QRText}>{roomId}</Text> }
-                  <QRCode value="http://www.google.com"/>
-                </View>
+    <Container style={{flex: 1,}}>
+      <Header/>
+      <View style={{width: 350, top: 20, height: 590,justifyContent: 'center',alignSelf: 'center'}}>
+        <Card style={styles.cardMain}>
+          <Card style={styles.cardCode}>
+          <View style={{}}>
+            <View style={{width: 300, height: 280, justifyContent:'space-evenly'}}>
+              <Text style={{alignSelf:'center', color: "#09413a", fontWeight: '500'}}>YOUR DECISION ID IS...</Text>
+              <Text style={styles.QRText}>{roomId}</Text> 
+              <View style={styles.QR}>
+                <QRCode value="http://www.google.com"/>
               </View>
-            </Card>
-            <TouchableOpacity onPress={onShare} style={styles.share}>
-              <Text style={styles.shareText}>SHARE</Text>
-            </TouchableOpacity>
+            </View>
+          </View>
+            {/* <Text style={{alignSelf: 'center'}}>HI</Text> */}
           </Card>
-        </Content>
-        </View>
+          <View style={{paddingTop:20, height: 150, justifyContent: 'space-around'}}>
+          <TouchableOpacity onPress={onShare} style={styles.share}>
+            <Text style={styles.shareText}>SHARE CODE</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={goToLobby} style={styles.share}>
+            <Text style={styles.shareText}>CONTINUE TO LOBBY</Text>
+          </TouchableOpacity>
+          </View>
+        </Card>
+      </View>
       <Footer />
-    </View>
+    </Container>
+    // <Container style={{}}>
+    //   <Header />
+    //   <View style={{flex: 5, top:30, }}>
+    //     <Text style={{fontSize: 50,}}>Card</Text>
+    //     <View style={{flexDirection: 'row'}}>
+    //       <Button title="Homepage" onPress={() => history.push("/")}></Button>
+    //       <Button title="Lobby" onPress={() => history.push("/room")}></Button>
+    //     </View>
+    //     <Content style={styles.content}>  
+    //       <Card style={styles.cardMain}>
+    //         <Card style={styles.cardCode}>
+    //           <View>
+                // <View style={styles.QR}>
+                //   { <Text style={styles.QRText}>{roomId}</Text> }
+                //   <QRCode value="http://www.google.com"/>
+                // </View>
+    //           </View>
+    //         </Card>
+            // <TouchableOpacity onPress={onShare} style={styles.share}>
+            //   <Text style={styles.shareText}>SHARE</Text>
+            // </TouchableOpacity>
+    //       </Card>
+    //     </Content>
+    //   </View>
+    //   <Footer />
+    // </Container>
   )};
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex:1,
+    // width: SCREEN_WIDTH,
     backgroundColor: '#fcfaf2',
-    flexDirection: 'column',
-    alignContent: 'center'
-    // justifyContent: 'center',
+    // flex: 1, 
+    padding: 20,  
+    alignItems: 'center',
   },
   content: {
-    padding: 10,
+    // flex:1,
+    // padding: 10,
+    // justifyContent: 'center'
   },
   cardMain: {
-    // flex:1,
     borderRadius: 20,
-    height: 450,
     alignItems: 'center',
     backgroundColor: '#f9f1dc',
     shadowColor: '#988a55',
     shadowOffset: { width: 2, height: 4 },
     shadowOpacity: 0.8,
     shadowRadius: 2,
-    justifyContent: 'space-evenly',
+    padding: 20,
+    justifyContent: 'space-between',
   },
   cardCode: {
-    // flex:1,
-    // backgroundColor: '#fcfaf2',
+    backgroundColor: '#fcfaf2',
     borderRadius: 20,
     alignContent: 'center',
     justifyContent: 'center',
-    backgroundColor: '#fcfaf2',
     borderColor: '#fcfaf2',
     shadowOpacity: 0.0,
-    // width: 100
+    width: 300,
+   
     
   },
   share: {
@@ -100,27 +136,22 @@ const styles = StyleSheet.create({
   },
   shareText: {
     color:'#fcfaf2',
-    fontSize: 36, 
+    fontSize: 20, 
     fontWeight: '700', 
     paddingHorizontal: 20, 
     paddingVertical: 10,
+    alignSelf: 'center'
   },
   QR: {
-    paddingHorizontal: 100,
-    paddingVertical: 80,
-    justifyContent: 'space-evenly',
-    // alignContent: 'center',
-    // alignSelf: 'center'
     
-
-    // backgroundColor: '#fcfaf2'
+    alignSelf: 'center',
   },
   QRText: {
     alignSelf: 'center',
-    paddingBottom: 40,
-    fontSize: 60,
+    // padding: 20,
+    fontSize: 80,
     fontWeight: '900',
-    // width: 200
+    color: '#2a9d8f',
   }
 
 
