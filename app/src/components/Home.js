@@ -63,6 +63,7 @@ export default ({ history, joinRoom }) => {
          */}
         
         </View>
+
       </View>
       
 
@@ -124,6 +125,7 @@ export default ({ history, joinRoom }) => {
     paddingBottom: 50,
     paddingTop: 50
   }
+
 
 })
 

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Alert, Platform, StyleSheet, Text, View } from 'react-native';
 import { NativeRouter, Switch, Route} from 'react-router-native';
-
 import Home from './src/components/Home';
 import Room from './src/components/Room';
 import Results from './src/components/Results';
@@ -14,6 +13,10 @@ import Filters from './src/components/Filters';
 import Footer from './src/components/Footer';
 import io from "socket.io-client";
 import { IP_ADDRESS } from 'react-native-dotenv';
+import Countdown from './src/components/Countdown';
+
+const socket = io(IP_ADDRESS)
+
 
 
 export default function App() {
