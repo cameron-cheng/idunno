@@ -16,11 +16,57 @@ export default function Lobby(props) {
     //if player not ready - "not ready" button should not be pressable: greyed out?
     //if player ready, change icon to <Icon type='FontAwesome' name='check'/>
   }
+
+  const UserItem = ({ user }) => {
+    return (
+      <CardItem style={styles.players}>
+        <View style={styles.playersView}>
+          <Text style={styles.playerText}>
+            {user}
+          </Text>
+          <Icon type='Feather' name='check-circle' style={styles.playerTrue}/>
+          {/* <Icon type='Entypo' name='block' style={styles.playerFalse}/> */}
+        </View>
+      </CardItem>
+    )
+  }
   
   return(  
     <Container style={styles.container}>
       <Header />
-      <Content style={styles.content}>
+        <View style={{width: 350, top: 20, height: 590,justifyContent: 'center',alignSelf: 'center'}}>
+          <Card style={styles.cardMain}>
+            <Text style={styles.title}>Ready to start deciding?</Text>
+            <CardItem style={styles.cardItemButtons}>
+              <View >
+                <TouchableOpacity 
+                  onPress={props.handleReady}
+                  style={styles.buttonReady}>
+                    <Icon type='Feather' name='check-circle' style={styles.icon}/>
+                    <Text style={styles.buttonText}>Ready</Text>
+                </TouchableOpacity>
+              </View>
+            </CardItem>
+            <CardItem style={styles.cardItem}>
+              <Text style={styles.text}>
+                CURRENT DECISION MAKERS:
+              </Text>
+            </CardItem>
+            <Card style={styles.cardPlayers}>
+
+              <View style={{backgroundColor:'#f9f1dc'}}>
+              {props.users.map((user, index) => {  
+                return (
+                  <UserItem key={index} user={user} />
+                )
+              })}
+
+              </View>
+            </Card>
+          </Card>
+        </View>
+
+      {/* <Content style={styles.content}>
         <Card style={styles.card}>
           <CardItem style={styles.cardItem}>
             <Text style={styles.title}>Ready to start deciding?</Text>
@@ -35,70 +81,61 @@ export default function Lobby(props) {
                   <Text style={styles.buttonText}>Ready</Text>
               </TouchableOpacity>
             </View>
-            {/* <View > */}
-              {/* <TouchableOpacity 
-                style={styles.buttonNotReady}>
-                  <Icon type='Entypo' name='block' style={styles.icon}/>
-
-                  <Text style={styles.buttonText}>Not Ready</Text>
-              </TouchableOpacity> */}
-              {/* <Button rounded  
-                onPress={(event) => props.handleReady(event)}
-                style={styles.button}>
-                  <Text style={styles.buttonText}>Ready</Text>
-              </Button> */}
-              {/* <Button rounded style={styles.buttonNotReady}>
-                <Text style={styles.buttonText}>Not Ready</Text>
-              </Button> */}
-            {/* </View> */}
+            
           </CardItem>
           <CardItem style={styles.cardItem}>
             <Text style={styles.text}>
               CURRENT DECISION MAKERS:
             </Text>
           </CardItem>
-          {/* REPLACE WITH PLAYER LOOP */}
-          <View style={{backgroundColor:'#f9f1dc'}}>
-            {props.users.map((user, index) => {  
-              return (
-                <UserItem key={index} user={user} />
-              )
-            })}
 
-          </View>
-          {/* ------------------------ */}
+          
+          
         </Card>
-      </Content>
+      </Content> */}
     <Footer />
   </Container>
       
   )
 };
 
-const UserItem = ({ user }) => {
-  return (
-    <CardItem style={styles.players}>
-      <View style={styles.playersView}>
-        <Text style={styles.playerText}>
-          {user}
-        </Text>
-        <Icon type='Feather' name='check-circle' style={styles.playerTrue}/>
-        {/* <Icon type='Entypo' name='block' style={styles.playerFalse}/> */}
-      </View>
-    </CardItem>
-  )
-}
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: SCREEN_WIDTH,
+    // width: SCREEN_WIDTH,
     backgroundColor: '#fcfaf2',
+    justifyContent: 'center',
   },
-  content: {
-    padding: 15,
-    top: 100,
+  cardMain: {
+    borderRadius: 20,
+    alignItems: 'center',
+    backgroundColor: '#f9f1dc',
+    shadowColor: '#988a55',
+    shadowOffset: { width: 2, height: 4 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    padding: 20,
+    justifyContent: 'space-between',
   },
+  cardPlayers: {
+    backgroundColor: '#fcfaf2',
+    borderRadius: 20,
+    alignContent: 'center',
+    justifyContent: 'center',
+    borderColor: '#fcfaf2',
+    shadowOpacity: 0.0,
+    width: 300,
+   
+    
+  },
+  // content: {
+  //   padding: 15,
+  //   top: 100,
+  //   width: 300,
+  //   alignSelf: 'center'
+  // },
   cardItem: {
     flexDirection:'column', 
     backgroundColor: '#f9f1dc',
@@ -111,31 +148,31 @@ const styles = StyleSheet.create({
     width: 300, 
     backgroundColor: '#f9f1dc',
   },
-  card: {
-    // justifyContent: 'space-evenly',
-    borderRadius: 20,
-    height: 400,
-    alignItems: 'center',
-    backgroundColor: '#f9f1dc',
-    shadowColor: '#988a55',
-    shadowOffset: { width: 2, height: 4 },
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
-  },
-  header: {
-    borderTopLeftRadius:20, 
-    borderTopRightRadius:20,
-  },
-  text: {
-    fontSize: 15
-  },
+  // card: {
+  //   // justifyContent: 'space-evenly',
+  //   borderRadius: 20,
+  //   height: 400,
+  //   alignItems: 'center',
+  //   backgroundColor: '#f9f1dc',
+  //   shadowColor: '#988a55',
+  //   shadowOffset: { width: 2, height: 4 },
+  //   shadowOpacity: 0.8,
+  //   shadowRadius: 2,
+  // },
+  // header: {
+  //   borderTopLeftRadius:20, 
+  //   borderTopRightRadius:20,
+  // },
+  // text: {
+  //   fontSize: 15
+  // },
   title: {
     fontSize: 25
   },
-  body: {
-    // alignItems: 'center',
-    // top: 60
-  },
+  // body: {
+  //   // alignItems: 'center',
+  //   // top: 60
+  // },
   icon: {
     color: '#fcfaf2', 
     fontSize: 18, 
@@ -148,12 +185,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center'
   },
-  buttonNotReady: {
-    backgroundColor:'#e76f51',  
-    borderRadius: 10,
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
+  // buttonNotReady: {
+  //   backgroundColor:'#e76f51',  
+  //   borderRadius: 10,
+  //   flexDirection: 'row',
+  //   alignItems: 'center'
+  // },
   buttonText: {
     color:'#fcfaf2',
     fontSize: 20, 
@@ -162,35 +199,53 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     
   },
-  playersView: {
-    width: 300, 
-    flexDirection: 'row', 
-    justifyContent: 'space-between',
-    backgroundColor: '#f9f1dc',
-  },
-  payers:{
-    width: 100,
-    flexDirection: 'row',
-    // justifyContent: 'space-between',
-    // width: 80,
-    backgroundColor: '#f9f1dc',
+  // playersView: {
+  //   width: 300, 
+  //   flexDirection: 'row', 
+  //   justifyContent: 'space-between',
+  //   backgroundColor: '#f9f1dc',
+  // },
+  // payers:{
+  //   width: 100,
+  //   flexDirection: 'row',
+  //   // justifyContent: 'space-between',
+  //   // width: 80,
+  //   backgroundColor: '#f9f1dc',
     
-  },
-  playerText: {
-    fontSize: 30,
-    backgroundColor: '#f9f1dc',
-  },
-  playerTrue: {
-    paddingTop: 2,
-    fontSize: 30,
-    color: '#2a9d8f',
-  },
-  playerFalse: {
-    paddingTop: 2,
-    fontSize: 30,
-    color: '#a39571',
+  // },
+  // playerText: {
+  //   fontSize: 30,
+  //   backgroundColor: '#f9f1dc',
+  // },
+  // playerTrue: {
+  //   paddingTop: 2,
+  //   fontSize: 30,
+  //   color: '#2a9d8f',
+  // },
+  // playerFalse: {
+  //   paddingTop: 2,
+  //   fontSize: 30,
+  //   color: '#a39571',
 
 
-  }
+  // }
   
 })
+
+
+{/* <View > */}
+  {/* <TouchableOpacity 
+    style={styles.buttonNotReady}>
+      <Icon type='Entypo' name='block' style={styles.icon}/>
+
+      <Text style={styles.buttonText}>Not Ready</Text>
+  </TouchableOpacity> */}
+  {/* <Button rounded  
+    onPress={(event) => props.handleReady(event)}
+    style={styles.button}>
+      <Text style={styles.buttonText}>Ready</Text>
+  </Button> */}
+  {/* <Button rounded style={styles.buttonNotReady}>
+    <Text style={styles.buttonText}>Not Ready</Text>
+  </Button> */}
+{/* </View> */}
