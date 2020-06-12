@@ -37,7 +37,8 @@ export default ({ history, joinRoom }) => {
        
       <View style={{flex: 5, padding: 20,  justifyContent: 'space-evenly', alignItems: 'center', }}>
         <View style={{width:300}}>
-      
+      <Button title="swiper" onPress={() => history.push('/swiper')}> </Button>
+      <Button title="countdown" onPress={() => history.push('/countdown')}> </Button>
           <Input placeholder="Nickname" style={{}} onChangeText={text => setNickname(text.trim())} value={nickname} ></Input>
           <Input placeholder="Room Code" style={{}} onChangeText={text => setJoinRoomId(text.toUpperCase().trim())} value={joinRoomId} ></Input>
           <TouchableOpacity onPress={handleJoinRoom} style={styles.buttonJoin}>

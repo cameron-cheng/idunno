@@ -38,14 +38,16 @@ export default function Timer({ seconds }) {
 
 const style = StyleSheet.create({
   container: {
-    backgroundColor: 'black',
+    width: 50,
+    backgroundColor: '#e76f51',
     borderRadius: 10,
     
   },
 
   text: {
     color: 'white',
-    fontSize: 30	
+    fontSize: 30,	
+    alignSelf: "center"
   }
   
 

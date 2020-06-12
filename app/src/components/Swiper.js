@@ -16,19 +16,19 @@ import { Container, Header, DeckSwiper, Card, CardItem, Thumbnail, Left, Body, I
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
-// const Users = [
-// {id: '1', title: "Dark Knight", reviews: "5/5", theatre: "Vancouver", genre: "Action/Adventure", uri: require('../assets/feed_images/1.jpg')},
-// {id: '2', title: "Jungle Book", reviews: "3/5", theatre: "Coquitlam", genre: "Adventure/Fantasy", uri: require('../assets/feed_images/2.jpg')},
-// {id: '3', title: "Avengers", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/3.jpg')},
-// {id: '4', title: "Hunger Games", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/4.jpg')},
-// {id: '5', title: "Moana", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/5.jpg')},
-// {id: '6', title: "Jurassic World", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/6.jpg')},
-// {id: '7', title: "Glass", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/7.jpg')},
-// {id: '8', title: "Dawn of the Planet of the Apes", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/8.jpg')},
-// {id: '9', title: "Jaws", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/9.jpg')},
-// {id: '10', title: "Dark Knight", reviews: "5/5", theatre: "Langley", genre: "Action/Adventure", uri: require('../assets/feed_images/1.jpg')},
-// {id: '11', title: "Jungle Book", reviews: "3/5", theatre: "Richmond", genre: "Adventure/Fantasy", uri: require('../assets/feed_images/2.jpg')},
-// ]
+const Users = [
+{id: '1', title: "Dark Knight", reviews: "5/5", theatre: "Vancouver", genre: "Action/Adventure", uri: require('../assets/feed_images/1.jpg')},
+{id: '2', title: "Jungle Book", reviews: "3/5", theatre: "Coquitlam", genre: "Adventure/Fantasy", uri: require('../assets/feed_images/2.jpg')},
+{id: '3', title: "Avengers", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/3.jpg')},
+{id: '4', title: "Hunger Games", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/4.jpg')},
+{id: '5', title: "Moana", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/5.jpg')},
+{id: '6', title: "Jurassic World", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/6.jpg')},
+{id: '7', title: "Glass", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/7.jpg')},
+{id: '8', title: "Dawn of the Planet of the Apes", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/8.jpg')},
+{id: '9', title: "Jaws", reviews: "4/5", theatre: "Burnaby", genre: "Action/Sci-Fi", uri: require('../assets/feed_images/9.jpg')},
+{id: '10', title: "Dark Knight", reviews: "5/5", theatre: "Langley", genre: "Action/Adventure", uri: require('../assets/feed_images/1.jpg')},
+{id: '11', title: "Jungle Book", reviews: "3/5", theatre: "Richmond", genre: "Adventure/Fantasy", uri: require('../assets/feed_images/2.jpg')},
+]
 
 export default class App extends Component {
   
@@ -149,7 +149,7 @@ export default class App extends Component {
     //   </View>
     // </Container>
 
-    return this.places.map((item, index) => {
+    return Users.map((item, index) => {
 
       //no cards left
       if (index < this.state.currentIndex) {
@@ -166,6 +166,10 @@ export default class App extends Component {
             
             <Animated.View style={{width: SCREEN_WIDTH, padding:10, position: 'absolute',zIndex:1000}}>
               <View >
+                <View style={styles.countdown}>
+                  <Countdown />
+                </View>
+                
                 <Card style={styles.card}>
                   <View >
                     {/* Top Card Title/Rating */}
@@ -177,9 +181,7 @@ export default class App extends Component {
                   <View style={{alignItems: 'center'}}>
                     <Image 
                     style={{flex:1, height:300, width:'90%', resizeMode: 'cover', borderRadius: 15}}
-                    source={{
-                      uri: `https://maps.googleapis.com/maps/api/place/photo?key=${API_KEY}&photoreference=${item.photos[0].photo_reference}&maxheight=400`
-                    }}/>
+                    source={item.uri}/>
                   </View>
 
                   {/* Top Card details */}
@@ -231,54 +233,56 @@ export default class App extends Component {
         )
 
         // cards underneath
-      } else {
-        return(
-          <Animated.View 
-          {...this.PanResponder.panHandlers}
-          key={item.id} style={[{
-            opacity: this.nextCardOpacity,
-            transform: [{ scale: this.nextCardScale }],
-            height: SCREEN_HEIGHT - 200, 
-            width: SCREEN_WIDTH, 
-            padding: 10, 
-            position: 'absolute'
-            }]} >
-              {/* Card header - shoudl be same styled as "top card" */}
-            <Animated.View style={{width: SCREEN_WIDTH, padding:10, position: 'absolute',zIndex:1000}}>
-              <View style={{backgroundColor: '#f0f0f0', borderTopRightRadius:20, borderTopLeftRadius:20, height: 50, justifyContent: 'center'}}>
-                <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>{item.name}</Text>
-              </View>
-            </Animated.View>
+      } 
+      // else {
+      //   return(
+      //     <Animated.View 
+      //     {...this.PanResponder.panHandlers}
+      //     key={item.id} style={[{
+      //       opacity: this.nextCardOpacity,
+      //       transform: [{ scale: this.nextCardScale }],
+      //       height: SCREEN_HEIGHT - 200, 
+      //       width: SCREEN_WIDTH, 
+      //       padding: 10, 
+      //       position: 'absolute'
+      //       }]} >
+      //         {/* Card header - shoudl be same styled as "top card" */}
+      //       <Animated.View style={{width: SCREEN_WIDTH, padding:10, position: 'absolute',zIndex:1000}}>
+      //         <View style={{backgroundColor: '#f0f0f0', borderTopRightRadius:20, borderTopLeftRadius:20, height: 50, justifyContent: 'center'}}>
+      //           <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>{item.name}</Text>
+      //         </View>
+      //       </Animated.View>
 
-            {/* Card footer - should be styled same as "top card"*/}
-            <Animated.View style={{width: SCREEN_WIDTH, padding:10, position: 'absolute', bottom:0, zIndex:1000}}>
-              <View style={{backgroundColor: '#f0f0f0', borderBottomRightRadius:20, borderBottomLeftRadius:20, height: 200, justifyContent: 'center'}}>
-                <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>Address: {item.formatted_address}</Text>
-                <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>Rating: {item.rating}</Text>
-                <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>Price Level: {item.price_level}</Text>
-              </View>
-            </Animated.View>
-            <Image 
-              style={{flex:1, height:null, width:null, resizeMode: 'cover', borderRadius: 20}}
-              source={{
-                uri: `https://maps.googleapis.com/maps/api/place/photo?key=${API_KEY}&photoreference=${item.photos[0].photo_reference}&maxheight=400`
-              }}
-            />
-          </Animated.View>
-        )
-      }
-    }).reverse()
+      //       {/* Card footer - should be styled same as "top card"*/}
+      //       <Animated.View style={{width: SCREEN_WIDTH, padding:10, position: 'absolute', bottom:0, zIndex:1000}}>
+      //         <View style={{backgroundColor: '#f0f0f0', borderBottomRightRadius:20, borderBottomLeftRadius:20, height: 200, justifyContent: 'center'}}>
+      //           <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>Address: {item.formatted_address}</Text>
+      //           <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>Rating: {item.rating}</Text>
+      //           <Text style={{alignSelf: 'center', color:"grey", fontSize: 25}}>Price Level: {item.price_level}</Text>
+      //         </View>
+      //       </Animated.View>
+      //       <Image 
+      //         style={{flex:1, height:null, width:null, resizeMode: 'cover', borderRadius: 20}}
+      //         source={{
+      //           uri: `https://maps.googleapis.com/maps/api/place/photo?key=${API_KEY}&photoreference=${item.photos[0].photo_reference}&maxheight=400`
+      //         }}
+      //       />
+      //     </Animated.View>
+      //   )
+      //}
+    }
+    ).reverse()
   }
   
   render() {
     //once the current index equals the data length (the stack is done), calculate what the most popular element in the array is
-    if (this.state.currentIndex >= this.places.length) {
-      this.props.readyForResult();
+    // if (this.state.currentIndex >= this.places.length) {
+    //   this.props.readyForResult();
 
-      return <Redirect to={{
-        pathname: '/results'
-      }} />
-    }
+    //   return <Redirect to={{
+    //     pathname: '/results'
+    //   }} />
+    // }
     return (
       <View>
         <HeaderNav />
@@ -315,6 +319,10 @@ const styles = StyleSheet.create({
     fontSize: 25, 
     width: 25, 
     alignSelf: 'center',
-    
   },
+  countdown: {
+    flex: 1, 
+    alignItems: "flex-end"
+
+  }
 });
