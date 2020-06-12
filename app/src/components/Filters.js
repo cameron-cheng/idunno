@@ -43,6 +43,7 @@ export default function Filters(props){
   }
 
   return (
+
     <Container style={styles.container}>
       <Header />
         <View style={styles.filters}>
@@ -114,6 +115,7 @@ export default function Filters(props){
               />
             </View>
           </Overlay>
+
 
           <Button raised buttonStyle={styles.button} title="Extra Parameters" onPress={toggleOverlay} />
 

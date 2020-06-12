@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   buttonNotReady: {
-    backgroundColor:'#ee937c',  
+    backgroundColor:'#e76f51',  
     borderRadius: 10,
     flexDirection: 'row',
     alignItems: 'center'

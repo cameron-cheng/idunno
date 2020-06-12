@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     
   },
   share: {
-    backgroundColor:'#ee937c',  
+    backgroundColor:'#e76f51',  
     borderRadius: 10,
     // shadowColor: '#988a55',
     // shadowOffset: { width: 2, height: 4 },
