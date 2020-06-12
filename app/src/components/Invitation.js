@@ -33,7 +33,7 @@ console.log('roomId :>> ', roomId);
       <View style={{flex: 1, justifyContent: 'space-between'}}>
         <View style={{flexDirection: 'row'}}>
           <Button title="Homepage" onPress={() => history.push("/")}></Button>
-          <Button title="Lobby" onPress={() => history.push("/lobby")}></Button>
+          <Button title="Lobby" onPress={() => history.push("/room")}></Button>
         </View>
         <Content style={styles.content}>  
           <Card style={styles.cardMain}>

@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Dimensions, Picker, Slider } from 'react-native';
 import { Input, Button, CheckBox, Overlay } from 'react-native-elements'
+import { Container } from 'native-base';
+import Header from './Header';
+import Footer from './Footer';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 export default function Filters(props){
   const [visible, setVisible] = useState(false)
+  const [nickname, setNickname] = useState('')
+  const { filters, setFilters } = props
 
-  const { state, setState } = props
-
-  function handleSubmit() {
-    console.log(state)  
+  const handleCreateRoom = () =>{
+    props.createRoom(nickname);
+    props.history.push('/invitation');
   }
 
   function toggleOverlay() {
@@ -19,117 +23,127 @@ export default function Filters(props){
   }
 
   function renderSearchType() {
-    if (state.searchType === "nearby") {
+    if (filters.searchType === "nearby") {
       return (
-        <View style={{ flex: 1.27, alignItems: 'stretch', justifyContent: 'center' }}>
+        <View style={{ flex: 1.69, alignItems: 'stretch', justifyContent: 'center' }}>
           <Slider
             minimumValue='500'
             maximumValue='2000'
             step='10'
-            value={state.radius} 
-            onValueChange={value => setState({...state, radius: value})} />
-          <Text>Radius: {state.radius}m</Text>
+            value={filters.radius} 
+            onValueChange={value => setFilters({...filters, radius: value})} />
+          <Text>Radius: {filters.radius}m</Text>
         </View>
       )
     } else {
       return (
-        <Input style={styles.input} placeholder="Area Name" onChangeText={text => setState({...state, area: text})} />
+        <Input style={styles.input} placeholder="Area Name" onChangeText={text => setFilters({...filters, area: text.toLowerCase().trim()})} />
       )
     }
   }
 
   return (
-    <View style={styles.container}>
-      <View style={{ flex: 1.5 }}>
-        <Picker
-          selectedValue={state.searchType}
-          onValueChange={currentType => setState({...state, searchType: currentType})} >
-          <Picker.Item label="Search Nearby" value="nearby" />
-          <Picker.Item label="Search by Area" value="text" />
-        </Picker>
-      </View>
+    <Container style={styles.container}>
+      <Header />
+        <View style={styles.filters}>
+          <View style={{ flex: 3 }}>
+            <Picker
+              selectedValue={filters.searchType}
+              onValueChange={currentType => setFilters({...filters, searchType: currentType})} >
+              <Picker.Item label="Search Nearby" value="nearby" />
+              <Picker.Item label="Search by Area" value="text" />
+            </Picker>
+          </View>
 
-      <View style={{ flex: 2 }}>
-        <Input style={styles.input} placeholder="Type" onChangeText={text => setState({...state, type: text})} />
+          <View style={{ flex: 2.5 }}>
+            {/* <Input style={styles.input} placeholder="Type" onChangeText={text => setFilters({...filters, type: text.toLowerCase().trim()})} /> */}
 
-        {renderSearchType()}
+            {renderSearchType()}
 
-        <View style={{ flex: 1.5, alignItems: 'stretch', justifyContent: 'center' }}>
-          <Slider
-            minimumValue='0'
-            maximumValue='4'
-            value={(state.price)} 
-            onValueChange={value => setState({...state, price: Math.ceil(value)})} />
-          <Text>Price: {'$'.repeat(Math.ceil(state.price)) || 'Free'}</Text>
+            <View style={{ flex: 2, alignItems: 'stretch', justifyContent: 'center' }}>
+              <Slider
+                minimumValue='0'
+                maximumValue='4'
+                value={(filters.price)} 
+                onValueChange={value => setFilters({...filters, price: Math.ceil(value)})} />
+              <Text>Price: {'$'.repeat(Math.ceil(filters.price)) || 'Free'}</Text>
+            </View>
+          </View>
+
+          <Overlay overlayStyle={{ height: 470 }} isVisible={visible} onBackdropPress={toggleOverlay}>
+            <View style={{flex: 1, flexDirection: 'column'}}>
+              <CheckBox 
+                title='Vegan'
+                checked={filters.vegan}
+                onPress={() => setFilters({...filters, vegan: !filters.vegan})}
+              />
+              <CheckBox
+                title='Family-Friendly'
+                checked={filters.family}
+                onPress={() => setFilters({...filters, family: !filters.family})}
+              />
+              <CheckBox
+                title='Casual Dining'
+                checked={filters.casual}
+                onPress={() => setFilters({...filters, casual: !filters.casual})}
+              />
+              <CheckBox 
+                title='Fine Dining'
+                checked={filters.fine}
+                onPress={() => setFilters({...filters, fine: !filters.fine})}
+              />
+              <CheckBox 
+                title='Café'
+                checked={filters.cafe}
+                onPress={() => setFilters({...filters, cafe: !filters.cafe})}
+              />
+              <CheckBox
+                title='Buffet'
+                checked={filters.buffet}
+                onPress={() => setFilters({...filters, buffet: !filters.buffet})}
+              />
+              <CheckBox 
+                title='Bistro'
+                checked={filters.bistro}
+                onPress={() => setFilters({...filters, bistro: !filters.bistro})}
+              />
+              <CheckBox
+                title='Breakfast'
+                checked={filters.breakfast}
+                onPress={() => setFilters({...filters, breakfast: !filters.breakfast})}
+              />
+            </View>
+          </Overlay>
+
+          <Button raised buttonStyle={styles.button} title="Extra Parameters" onPress={toggleOverlay} />
+
+          <Input placeholder="Nickname" onChangeText={text => setNickname(text.trim())} value={nickname} ></Input>
+          <Button raised buttonStyle={styles.button} title="Create Room!" onPress={handleCreateRoom} />
+
         </View>
-      </View>
-
-      <Overlay overlayStyle={{ height: SCREEN_HEIGHT / 1.85 }} isVisible={visible} onBackdropPress={toggleOverlay}>
-        <View style={{flex: 1, flexDirection: 'column'}}>
-          <CheckBox 
-            title='Vegan'
-            checked={state.vegan}
-            onPress={() => setState({...state, vegan: !state.vegan})}
-          />
-          <CheckBox
-            title='Family-Friendly'
-            checked={state.familyFriendly}
-            onPress={() => setState({...state, familyFriendly: !state.familyFriendly})}
-          />
-          <CheckBox 
-            title='Vegan'
-            checked={state.vegan}
-            onPress={() => setState({...state, vegan: !state.vegan})}
-          />
-          <CheckBox
-            title='Family-Friendly'
-            checked={state.familyFriendly}
-            onPress={() => setState({...state, familyFriendly: !state.familyFriendly})}
-          />
-          <CheckBox 
-            title='Vegan'
-            checked={state.vegan}
-            onPress={() => setState({...state, vegan: !state.vegan})}
-          />
-          <CheckBox
-            title='Family-Friendly'
-            checked={state.familyFriendly}
-            onPress={() => setState({...state, familyFriendly: !state.familyFriendly})}
-          />
-          <CheckBox 
-            title='Vegan'
-            checked={state.vegan}
-            onPress={() => setState({...state, vegan: !state.vegan})}
-          />
-          <CheckBox
-            title='Family-Friendly'
-            checked={state.familyFriendly}
-            onPress={() => setState({...state, familyFriendly: !state.familyFriendly})}
-          />
-        </View>
-      </Overlay>
-
-      <Button raised buttonStyle={styles.button} title="Extra Parameters" onPress={toggleOverlay} />
-      {/* <Button raised buttonStyle={styles.button} title="Create Room!" onPress={handleSubmit} /> */}
-      {/* <Button title="Go to Room" onPress={() => props.history.push("/room")}></Button> */}
-    </View>
+      <Footer />
+    </Container>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 2,
-    width: SCREEN_WIDTH - 60,
-    marginTop: 25,
+    flex: 1,
+    width: SCREEN_WIDTH,
+    backgroundColor: '#fcfaf2',
+  },
+  filters: {
+    flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
-    paddingHorizontal: 40,
-    backgroundColor: '#eef'
+    paddingHorizontal: 60,
+    paddingBottom: 20,
+    backgroundColor: '#fff'
   },
   input: {
     flex: 1
   },
   button: {
-    marginBottom: 25
+    marginBottom: 5
   }
 });

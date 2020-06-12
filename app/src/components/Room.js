@@ -12,7 +12,7 @@ import { Redirect } from 'react-router-native';
 
 const SCREEN_HEIGHT   = Dimensions.get('window').height;
 
-export default function Room({ history, emitReady }) {
+export default function Room({ history, emitReady, users }) {
   const [lobbyReady, setLobbyReady] = useState(false);
   // console.log("ROOM PROPS:", places.length)
   function handleReady() {
@@ -26,7 +26,7 @@ export default function Room({ history, emitReady }) {
     return(
       <View style={styles.container}>
         <View>
-          <Lobby handleReady={handleReady}/>
+          <Lobby handleReady={handleReady} users={users}/>
         </View>
         <Button title="Homepage" onPress={() => history.push("/")}></Button>
       </View>
