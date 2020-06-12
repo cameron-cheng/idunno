@@ -42,6 +42,11 @@ export default ({ history, joinRoom, shouldRedirect }) => {
       <View style={{flex: 5, padding: 20,  justifyContent: 'space-evenly', alignItems: 'center', }}>
         <View style={{width:300}}>
 
+        
+        <Button title="shrugger" onPress={() => history.push('/shrugger')}></Button>
+
+
+
         <Button title="shrugger" onPress={() => history.push('/shrugger')}></Button>
 
           <Input placeholder="Nickname" style={{}} onChangeText={text => setNickname(text)} value={nickname} ></Input>

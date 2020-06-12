@@ -10,6 +10,7 @@ import Results from './Results';
 import { set } from 'react-native-reanimated';
 import { Redirect } from 'react-router-native';
 
+
 const SCREEN_HEIGHT   = Dimensions.get('window').height;
 
 export default function Room({ history, handleReady, lobbyReady, users }) {
