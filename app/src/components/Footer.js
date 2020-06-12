@@ -49,7 +49,8 @@ const styles = StyleSheet.create({
   body: {
     flex: 1,
     justifyContent: 'flex-start' ,
-    paddingTop: 20
+    paddingTop: 20,
+    position: 'relative'
   },
   icon: {
     color: '#fcfaf2',

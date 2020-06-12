@@ -35,7 +35,7 @@ const style = StyleSheet.create({
   },
   header: {
     height: 800,
-    top: -420,
+    top: -330,
     width: 1500,
     backgroundColor: '#b1d8d2',
     borderBottomLeftRadius: 1000,
@@ -44,7 +44,8 @@ const style = StyleSheet.create({
   body: {
     flex: 1,
     justifyContent: 'flex-end' ,
-    paddingBottom: 20
+    paddingBottom: 20,
+    position: 'relative'
   },
   title: {
     justifyContent: 'center',
@@ -53,6 +54,8 @@ const style = StyleSheet.create({
     fontSize: 50,
     height: 60,
     fontWeight: '900',
+    // position: 'absolute',
+    
   },
 
 
