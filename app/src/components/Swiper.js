@@ -1,5 +1,6 @@
 import { API_KEY } from 'react-native-dotenv'
 import mode from '../helpers/mode'
+import Shrugger from './Shrugger'
 
 import React, { Component } from "react";
 import {
@@ -13,6 +14,7 @@ import {
 } from "react-native";
 import { Redirect } from 'react-router-native'
 import { List, ListItem, Card, CardItem, Header, Body } from 'native-base'
+
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -221,10 +223,9 @@ export default class App extends Component {
     if (this.state.currentIndex >= this.places.length) {
       this.props.readyForResult();
 
-      return <Redirect to={{
-        pathname: '/results'
-      }} />
-    }
+      return <Shrugger />
+     
+    } else {
     return (
       <View>
         <View style={{ height: 40 }}>
@@ -235,6 +236,7 @@ export default class App extends Component {
         </View>
       </View>
     );
+    }
   }
 }
 
