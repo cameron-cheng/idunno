@@ -15,6 +15,7 @@ import Footer from './src/components/Footer';
 import io from "socket.io-client";
 import { IP_ADDRESS } from 'react-native-dotenv';
 import Countdown from './src/components/Countdown';
+import Shrugger from './src/components/Shrugger';
 
 const socket = io(IP_ADDRESS)
 
@@ -150,7 +151,7 @@ export default function App() {
           return (<Invitation {... invitationProps} />)}}/>
 
         <Route exact path="/loader" component={Loader}/>
-
+        <Route exact path="/shrugger" component={Shrugger}/>
         <Route exact path ="/swiper" exact render={(routeProps) => {
           let swiperProps = {...routeProps, places, addToResults, readyForResult} 
           return (<Swiper {...swiperProps} />)}}/>

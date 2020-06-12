@@ -41,6 +41,11 @@ export default ({ history, joinRoom, shouldRedirect }) => {
        
       <View style={{flex: 5, padding: 20,  justifyContent: 'space-evenly', alignItems: 'center', }}>
         <View style={{width:300}}>
+        feature/shrugger-loader
+        <Button title="shrugger" onPress={() => history.push('/shrugger')}></Button>
+
+
+
       
           <Input placeholder="Nickname" style={{}} onChangeText={text => setNickname(text)} value={nickname} ></Input>
           <Input placeholder="Room Code" style={{}} onChangeText={text => setJoinRoomId(text.toUpperCase().trim())} value={joinRoomId} ></Input>
