@@ -25,6 +25,7 @@ module.exports = (filters) => {
         `https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${API_KEY}&location=49.2813245,-123.1171937&radius=${filters.radius}&type=${filters.type}&keyword=restaurant${additionalQueries}`
       );
       console.log("API Request Finished!", "Length:", res.data.results.length);
+      console.log("Request URL:", res.config.url);
       return res.data.results;
     } catch(err) {
       console.log(err)
@@ -37,6 +38,7 @@ module.exports = (filters) => {
         `https://maps.googleapis.com/maps/api/place/textsearch/json?key=${API_KEY}&type=${filters.type}&query=${filters.area}${additionalQueries}`
       );
       console.log("API Request Finished!", "Length:", res.data.results.length);
+      console.log("Request URL:", res.config.url);
       return res.data.results;
     } catch(err) {
       console.log(err)
