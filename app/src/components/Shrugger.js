@@ -5,7 +5,7 @@ import LottieView from 'lottie-react-native';
 export default function Shrugger() {
 
   return (
-    <LottieView source={require('../assets/shrugs-green.json')} autoPlay/>
+    <LottieView source={require('../assets/shrugs-green.json')} autoPlay speed={2}/>
   )
   
   

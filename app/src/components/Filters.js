@@ -28,7 +28,7 @@ export default function Filters(props){
         <View style={{alignItems: 'stretch', justifyContent: 'center', height:40}}>
           <Slider
             
-            minimumValue='500'
+            minimumValue='200'
             maximumValue='2000'
             step='10'
             value={filters.radius} 

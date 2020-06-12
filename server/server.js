@@ -32,12 +32,12 @@ function makeId() {
 }
 
 let users = {};
+let results = [];
 
 //Socket.io Lobby
 io.on('connection', (socket) => {
   
   let data = {};
-  let results = [];
 
   console.log("=================")
   console.log(socket.client.conn.server.clientsCount + " total users connected")
