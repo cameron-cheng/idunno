@@ -41,7 +41,7 @@ export default Invitation = ({roomId, history}) => {
           <Card style={styles.cardCode}>
           <View style={{}}>
             <View style={{width: 300, height: 280, justifyContent:'space-evenly'}}>
-              <Text style={{alignSelf:'center', color: "#09413a", fontWeight: '500'}}>YOUR DECISION ID IS...</Text>
+              <Text style={{alignSelf:'center', color: "#09413a", fontWeight: '500'}}>YOUR DECISION CODE IS...</Text>
               <Text style={styles.QRText}>{roomId}</Text> 
               <View style={styles.QR}>
                 <QRCode value="http://www.google.com"/>
@@ -62,32 +62,6 @@ export default Invitation = ({roomId, history}) => {
       </View>
       <Footer />
     </Container>
-    // <Container style={{}}>
-    //   <Header />
-    //   <View style={{flex: 5, top:30, }}>
-    //     <Text style={{fontSize: 50,}}>Card</Text>
-    //     <View style={{flexDirection: 'row'}}>
-    //       <Button title="Homepage" onPress={() => history.push("/")}></Button>
-    //       <Button title="Lobby" onPress={() => history.push("/room")}></Button>
-    //     </View>
-    //     <Content style={styles.content}>  
-    //       <Card style={styles.cardMain}>
-    //         <Card style={styles.cardCode}>
-    //           <View>
-                // <View style={styles.QR}>
-                //   { <Text style={styles.QRText}>{roomId}</Text> }
-                //   <QRCode value="http://www.google.com"/>
-                // </View>
-    //           </View>
-    //         </Card>
-            // <TouchableOpacity onPress={onShare} style={styles.share}>
-            //   <Text style={styles.shareText}>SHARE</Text>
-            // </TouchableOpacity>
-    //       </Card>
-    //     </Content>
-    //   </View>
-    //   <Footer />
-    // </Container>
   )};
 
 const styles = StyleSheet.create({
