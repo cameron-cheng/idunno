@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     height: 800,
     width: 1500,
-    bottom: -440,
+    bottom: -370,
     alignSelf: 'center',
     borderTopLeftRadius: 1000,
     borderTopRightRadius: 1000,

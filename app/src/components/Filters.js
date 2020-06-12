@@ -50,7 +50,7 @@ export default function Filters(props){
     <Container style={styles.container}>
       <Header />
         <View style={styles.filters}>
-          <View style={{width:300, height:550, justifyContent:'space-between', }}>
+          <View style={{width:300, height:530, justifyContent:'space-between', }}>
             <View>
             <View>
               <Picker
