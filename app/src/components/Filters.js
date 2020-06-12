@@ -40,7 +40,8 @@ export default function Filters(props){
 
   return (
     <View style={styles.container}>
-      <View style={{ flex: 1.5 }}>
+      <Text>HELLO FROM FILTERS</Text>
+      {/* <View style={{ flex: 1.5 }}>
         <Picker
           selectedValue={state.searchType}
           onValueChange={currentType => setState({...state, searchType: currentType})} >
@@ -107,11 +108,11 @@ export default function Filters(props){
             onPress={() => setState({...state, familyFriendly: !state.familyFriendly})}
           />
         </View>
-      </Overlay>
+      </Overlay> */}
 
       <Button raised buttonStyle={styles.button} title="Extra Parameters" onPress={toggleOverlay} />
       {/* <Button raised buttonStyle={styles.button} title="Create Room!" onPress={handleSubmit} /> */}
-      <Button title="Go to Room" onPress={() => props.history.push("/room")}></Button>
+      {/* <Button title="Go to Room" onPress={() => props.history.push("/room")}></Button> */}
     </View>
   )
 }

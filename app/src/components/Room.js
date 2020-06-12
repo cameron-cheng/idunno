@@ -5,40 +5,26 @@ import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { Container, Content, Card, CardItem, Header, Body, Button } from 'native-base';
 
 import Lobby from './Lobby';
-import Swiper from './Swiper';
+import Loader from './Loader';
 import Results from './Results';
 import { set } from 'react-native-reanimated';
-import { socket } from '../../App';
+import { Redirect } from 'react-router-native';
 
 const SCREEN_HEIGHT   = Dimensions.get('window').height;
 
-export default function Room(props) {
-  const [lobbyReady, setLobbyReady] = useState(false)
-  
-
-  const places = useAPI(props.filters) 
-  
-  socket.emit("getCardData", places)
-  
+export default function Room({ history, emitReady }) {
+  const [lobbyReady, setLobbyReady] = useState(false);
+  // console.log("ROOM PROPS:", places.length)
   function handleReady() {
-    setLobbyReady(!lobbyReady)
+    setLobbyReady(!lobbyReady);
+    emitReady();
   }
 
   if (lobbyReady) {
-    return(
-      <View style={styles.container}>
-        <Text></Text>
-        <View>
-          <Swiper places={places}/>
-        </View>
-        <Button title="Homepage" onPress={() => history.push("/")}></Button>
-      </View>
-    )
-
+    return <Loader /> 
   } else {
     return(
       <View style={styles.container}>
-        <Text></Text>
         <View>
           <Lobby handleReady={handleReady}/>
         </View>

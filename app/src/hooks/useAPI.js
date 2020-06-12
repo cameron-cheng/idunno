@@ -1,5 +1,4 @@
 import { API_KEY } from 'react-native-dotenv';
-import { socket } from '../../App';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
@@ -13,6 +12,7 @@ export default function useAPI(filters) {
       );
       setPlaces(res.data.results)
       console.log("API Request Finished!", "Length:", places.length)
+      
     } catch(err) {
       console.log(err)
     }
@@ -32,12 +32,11 @@ export default function useAPI(filters) {
 
   
   useEffect(() => {
-
-    if (filters.searchType === 'Nearby') {
+    if (filters.searchType === 'nearby') {
       nearbySearch(filters)
     } else {
       textSearch(filters)
-    } 
+    }
   }, [])
  
   return places

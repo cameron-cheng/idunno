@@ -7,13 +7,10 @@ import { View, Text, Button } from 'react-native';
 export default function Results(props) {
   const [details, setDetails] = useState(null);
 
-  const results = props.location.results
-  const winner = results[Math.floor(Math.random() * results.length)];
-
   useEffect(() => {
     async function getDetails() {
       try {
-        const detailsRequest = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${winner}&key=${API_KEY}`);
+        const detailsRequest = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${props.result}&key=${API_KEY}`);
         setDetails(detailsRequest.data.result)
       } catch(err) {
         console.log(err)
