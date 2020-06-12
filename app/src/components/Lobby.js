@@ -19,50 +19,44 @@ export default function Lobby(props) {
 
   const UserItem = ({ user }) => {
     return (
-      <CardItem style={styles.players}>
-        <View style={styles.playersView}>
-          <Text style={styles.playerText}>
-            {user}
-          </Text>
-          <Icon type='Feather' name='check-circle' style={styles.playerTrue}/>
-          {/* <Icon type='Entypo' name='block' style={styles.playerFalse}/> */}
-        </View>
-      </CardItem>
+      <View style={{padding:20, alignItems: 'center'}}>
+        <Icon type='Feather' name='check-circle' style={styles.playerTrue}/>
+        <Text>{user}</Text>
+      </View>
     )
   }
   
   return(  
     <Container style={styles.container}>
       <Header />
-        <View style={{width: 350, top: 20, height: 590,justifyContent: 'center',alignSelf: 'center'}}>
+      <View style={{margin: 50, }}>
+        <View style={{width: 350, top: 20, height: 490,justifyContent: 'center',alignSelf: 'center'}}>
           <Card style={styles.cardMain}>
-            <Text style={styles.title}>Ready to start deciding?</Text>
-            <CardItem style={styles.cardItemButtons}>
-              <View >
-                <TouchableOpacity 
-                  onPress={props.handleReady}
-                  style={styles.buttonReady}>
-                    <Icon type='Feather' name='check-circle' style={styles.icon}/>
-                    <Text style={styles.buttonText}>Ready</Text>
-                </TouchableOpacity>
-              </View>
-            </CardItem>
-            <CardItem style={styles.cardItem}>
-              <Text style={styles.text}>
-                CURRENT DECISION MAKERS:
-              </Text>
-            </CardItem>
-            <Card style={styles.cardPlayers}>
-
-              <View style={{backgroundColor:'#f9f1dc'}}>
-              {props.users.map((user, index) => {  
-                return (
-                  <UserItem key={index} user={user} />
-                )
+            <View>
+            <Text style={styles.text}>
+              CURRENT DECISION MAKERS:
+            </Text>
+            <CardItem style={{width: 300, borderRadius:20, justifyContent: 'space-between',  flexWrap: 'wrap',  }}>
+            {props.users.map((user, index) => {  
+                  return (
+                    <UserItem key={index} user={user} />
+                  )
               })}
-
-              </View>
-            </Card>
+            </CardItem>
+            </View>
+            <View>
+              <Text style={styles.title}>Ready to start deciding?</Text>
+              <CardItem style={styles.cardItemButtons}>
+                <View >
+                  <TouchableOpacity 
+                    onPress={props.handleReady}
+                    style={styles.buttonReady}>
+                      <Icon type='Feather' name='check-circle' style={styles.icon}/>
+                      <Text style={styles.buttonText}>Ready</Text>
+                  </TouchableOpacity>
+                </View>
+              </CardItem>
+            </View>
           </Card>
         </View>
 
@@ -93,6 +87,7 @@ export default function Lobby(props) {
           
         </Card>
       </Content> */}
+      </View>
     <Footer />
   </Container>
       
@@ -109,6 +104,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   cardMain: {
+    flex:1,
     borderRadius: 20,
     alignItems: 'center',
     backgroundColor: '#f9f1dc',
@@ -122,11 +118,12 @@ const styles = StyleSheet.create({
   cardPlayers: {
     backgroundColor: '#fcfaf2',
     borderRadius: 20,
+    padding: 20,
     alignContent: 'center',
     justifyContent: 'center',
     borderColor: '#fcfaf2',
-    shadowOpacity: 0.0,
     width: 300,
+    // justifyContent: 'space-between'
    
     
   },
@@ -139,12 +136,13 @@ const styles = StyleSheet.create({
   cardItem: {
     flexDirection:'column', 
     backgroundColor: '#f9f1dc',
+    borderRadius: 20,
     
   },
   cardItemButtons: {
     flexDirection: 'row', 
     height: 70, 
-    justifyContent: 'space-between', 
+    justifyContent: 'center', 
     width: 300, 
     backgroundColor: '#f9f1dc',
   },
@@ -163,11 +161,14 @@ const styles = StyleSheet.create({
   //   borderTopLeftRadius:20, 
   //   borderTopRightRadius:20,
   // },
-  // text: {
-  //   fontSize: 15
-  // },
+  text: {
+    fontSize: 15,
+    alignSelf: 'center',
+    padding: 20
+  },
   title: {
-    fontSize: 25
+    fontSize: 25,
+    alignSelf: 'center'
   },
   // body: {
   //   // alignItems: 'center',
@@ -180,7 +181,7 @@ const styles = StyleSheet.create({
     paddingRight: 10
   },
   buttonReady: {
-    backgroundColor:'#2a9d8f',  
+    backgroundColor:'#e76f51',  
     borderRadius: 10,
     flexDirection: 'row',
     alignItems: 'center'
@@ -199,36 +200,29 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     
   },
-  // playersView: {
-  //   width: 300, 
-  //   flexDirection: 'row', 
-  //   justifyContent: 'space-between',
-  //   backgroundColor: '#f9f1dc',
-  // },
-  // payers:{
-  //   width: 100,
-  //   flexDirection: 'row',
-  //   // justifyContent: 'space-between',
-  //   // width: 80,
-  //   backgroundColor: '#f9f1dc',
+  playersView: {
+    width: 257, 
+    // flexDirection: 'row', 
+    // justifyContent: 'space-between',
+    backgroundColor: '#fcfaf2',
+  },
+  payers:{
+    width: 100,
+    flexDirection: 'row',
+    // justifyContent: 'space-between',
+    // width: 80,
+    backgroundColor: '#f9f1dc',
     
-  // },
-  // playerText: {
-  //   fontSize: 30,
-  //   backgroundColor: '#f9f1dc',
-  // },
-  // playerTrue: {
-  //   paddingTop: 2,
-  //   fontSize: 30,
-  //   color: '#2a9d8f',
-  // },
-  // playerFalse: {
-  //   paddingTop: 2,
-  //   fontSize: 30,
-  //   color: '#a39571',
-
-
-  // }
+  },
+  playerText: {
+    // fontSize: 30,
+    backgroundColor: '#f9f1dc',
+  },
+  playerTrue: {
+    paddingTop: 2,
+    fontSize: 30,
+    color: '#2a9d8f',
+  },
   
 })
 
