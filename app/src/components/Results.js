@@ -4,7 +4,7 @@ import axios from 'axios'
 import React, {useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, Button } from 'react-native';
 import { Container } from 'native-base';
-// import Carousel from 'react-native-snap-carousel'
+import Carousel from 'react-native-snap-carousel'
 
 import HeaderNav from './Header';
 import Footer from './Footer'
