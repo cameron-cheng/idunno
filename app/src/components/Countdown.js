@@ -5,9 +5,9 @@ import { Redirect } from 'react-router-native';
 export default function Countdown(props) {
   // initialize timeLeft with the seconds prop
   const [timeLeft, setTimeLeft] = useState(15);
-  console.log(timeLeft)
   
   useEffect(() => {
+    console.log(timeLeft)
     // exit early when we reach 0
     if (!timeLeft) return;
     
@@ -31,13 +31,13 @@ export default function Countdown(props) {
   }    
 
   return (
-    <View style={style.container}>
-      <Text style={style.text}> {timeLeft} </Text> 
+    <View style={styles.container}>
+      <Text style={styles.text}> {timeLeft} </Text> 
     </View>
   );
 };
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     backgroundColor: 'black',
     borderRadius: 10,

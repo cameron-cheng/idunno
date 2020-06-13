@@ -17,9 +17,6 @@ import { IP_ADDRESS } from 'react-native-dotenv';
 import Countdown from './src/components/Countdown';
 import Shrugger from './src/components/Shrugger';
 
-const socket = io(IP_ADDRESS)
-
-
 
 export default function App() {
 
@@ -56,42 +53,47 @@ export default function App() {
   const [users, setUsers] = useState([]);
   const [places, setPlaces] = useState([]);
   const [result, setResult] = useState('');
+  const [socketName, setSocketName] = useState('');
   
   function createRoom(nickname) {
-    console.log('sending create room event')
-    //event to create a room to server, response with server code
-    socket.emit('createRoom', filters, nickname, (roomId) => {
-      console.log("ROOM CODE:", roomId);
-      setRoomId(roomId);
-      //pass roomId to Share component
-    })
+  console.log('sending create room event')
+  if (nickname === "") {
+      failToJoinAlert('idunno what your name is!')
+    } else {
+      //event to create a room to server, response with server code
+      socket.emit('createRoom', filters, nickname, (roomId) => {
+        console.log("ROOM CODE:", roomId);
+        setRoomId(roomId);
+        //pass roomId to Share component
+        setRedirectInvitation(true);
+      })
+    }
   }
   
-  // const [lobbyReady, setLobbyReady] = useState(false);
+  const [redirectInvitation, setRedirectInvitation] = useState(false);
   const [redirectLobby, setRedirectLobby] = useState(false);
   const [startSession, setStartSession] = useState(false);
 
-  function handleReady() {
-    // setLobbyReady(!lobbyReady);
-    emitReady();
-  }
-
+  
   function joinRoom(roomId, nickname) {
     console.log(roomId);
-    socket.emit('joinRoom', roomId, nickname, (hasJoined) => {
-      console.log('has joined is', hasJoined)
-      if (hasJoined === false) {
-        failToJoinAlert();
-      } else {
-        console.log("GOT HERE")
-        setRedirectLobby(true);
-      }        
-    })
-    
-    const failToJoinAlert = () =>
+    if (nickname === "") {
+      failToJoinAlert('idunno what your name is!')
+    } else {
+      socket.emit('joinRoom', roomId, nickname, (hasJoined) => {
+        console.log('has joined is', hasJoined)
+        if (hasJoined === false) {
+          failToJoinAlert('Room does not exist');
+        } else {
+          setRedirectLobby(true);
+        }        
+      })
+    }
+  }
+
+  function failToJoinAlert(msg) {
     Alert.alert(
-      "Room does not exist",
-      "Unable to join room",
+      "Unable to join room", msg,
       [
         {
           text: "Cancel",
@@ -101,15 +103,21 @@ export default function App() {
         { text: "OK", onPress: () => console.log("OK Pressed") }
       ],
       { cancelable: false }
-    );  
-  }
+      );  
+    }
     
-  function emitReady() {
-    socket.emit('lobbyReady');
-  }
+    function handleReady() {
+      // setLobbyReady(!lobbyReady);
+      emitReady();
+    }
 
-  function setUserArray(users) {
+    function emitReady() {
+      socket.emit('lobbyReady');
+    }
+
+  function setUserArray(users, nickname) {
     setUsers(users);
+    setSocketName(nickname);
   }
   
   function setData(data) {
@@ -141,11 +149,11 @@ export default function App() {
           return (<Home {...homeProps}/>)}} />
 
         <Route exact path="/filters"  render={(routeProps) => {
-          let filtersProps = { ...routeProps, createRoom, filters, setFilters }
+          let filtersProps = { ...routeProps, createRoom, filters, setFilters, redirectInvitation }
           return (<Filters {...filtersProps}/>)}} />
 
         <Route exact path="/room" exact render={(routeProps)=> {
-          let roomProps = { ...routeProps, handleReady, startSession, users }
+          let roomProps = { ...routeProps, handleReady, startSession, users, socketName }
           return (<Room {...roomProps}/>)}} />
           
         <Route exact path="/invitation" exact render={(routeProps) => {
