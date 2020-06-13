@@ -3,9 +3,9 @@ import axios from 'axios'
 
 import React, {useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, Button } from 'react-native';
-import { Container } from 'native-base';
+import { Container, Card, CardItem } from 'native-base';
 import Carousel from 'react-native-snap-carousel'
-
+import { Rating } from "react-native-elements"
 import HeaderNav from './Header';
 import Footer from './Footer'
 
@@ -31,6 +31,7 @@ export default function Results(props) {
   //     try {
   //       const detailsRequest = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${props.result}&key=${API_KEY}`);
   //       setDetails(detailsRequest.data.result)
+  //       console.log(detailsRequest.data.result)
   //     } catch(err) {
   //       console.log(err)
   //     }
@@ -40,10 +41,9 @@ export default function Results(props) {
   
   const _imageItem = ({item}) => {
     return (
-      <View style={styles.slide}>
-        <Text>{item.title}</Text>
+      <View style={{alignSelf:'center', padding: 0}}>
         <Image  
-          style={{flex:1, height: 144, width: 256,  borderRadius: 20}}
+          style={{height: 144, width: 256, borderRadius: 20, alignSelf: 'center'}}
           source={item.uri} />
       </View>
     );
@@ -53,7 +53,7 @@ export default function Results(props) {
     return (
       <View style={styles.slide}>
         <Text>{item.title}</Text>
-        <Rating type='custom' imageSize={30} readonly startingValue={4} ratingColor='#e76f51' ratingBackgroundColor='#fcfaf2' style={{padding:10, paddingLeft: 20, paddingBottom: 20, alignSelf: 'flex-start'}}></Rating>
+        <Text>{item.reviews}</Text>
         <Text>{item.genre}</Text>
       </View>
     );
@@ -74,37 +74,49 @@ export default function Results(props) {
       <Container style={styles.container}>
         <HeaderNav />
         <View style={styles.main}>
-          <Text>Results</Text>
-          <View style={styles.carouselBackground}>
-            <Carousel
-              style={styles.carousel}
-              data={Users}
-              renderItem={_carouselItem}
-              enableSnap
-              sliderWidth={430}
-              itemWidth={256}
-              inactiveSlideOpacity={0}
-              // inactiveSlideScale={1}
-            />
-          </View>
-          {/* <Text>Result: {details.name}</Text> */}
-          <Text>Cactus Club Cafe</Text>
-          {/* <Text>Rating: {details.rating}</Text> */}
-          <Rating type='custom' imageSize={30} readonly startingValue={4} ratingColor='#e76f51' ratingBackgroundColor='#fcfaf2' style={{padding:10, paddingLeft: 20, paddingBottom: 20, alignSelf: 'flex-start'}}></Rating>
-          {/* <Text>Reviewer: {details.reviews[0].author_name}</Text> */}
-          {/* <Text>Rating: {details.reviews[0].rating} / 5</Text> */}
-          {/* <Text>Text: {details.reviews[0].text}</Text> */}
-          <View style={styles.carouselBackground}>
-            <Carousel
-              style={styles.carousel}
-              data={Users}
-              renderItem={_carouselItem}
-              enableSnap
-              sliderWidth={430}
-              itemWidth={256}
-              inactiveSlideOpacity={0}
-              inactiveSlideScale={1}
-            />
+          {/* BANNER STYLE */}
+          
+          <Text style={{padding: 10, fontSize: 30}}>Results</Text> 
+          <View> 
+          <Card style={{width:330, height: 500, justifyContent: 'center', alignItems: 'center'}}>
+            {/* <Text>Result: {details.name}</Text> */}
+            <Text>Cactus Club Cafe</Text>
+            {/* <Text>Rating: {details.rating}</Text> */}
+            <Rating type='custom' imageSize={30} readonly startingValue={4} ratingColor='#e76f51' ratingBackgroundColor='#fcfaf2' style={{padding:10, paddingLeft: 20, paddingBottom: 20, }}></Rating>
+            
+            <View style={styles.carouselBackground}>
+              <CardItem style={{width: '100%', height: 220, paddingLeft:0, paddingRight:0 }}>
+                <Carousel
+                  style={styles.carousel}
+                  data={Users}
+                  renderItem={_imageItem}
+                  enableSnap
+                  sliderWidth={320}
+                  itemWidth={200}
+                  inactiveSlideOpacity={0}
+                  layout={'stack'} 
+                  layoutCardOffset={`16`}
+                />
+              </CardItem>
+            </View>
+          
+            {/* <Text>Reviewer: {details.reviews[0].author_name}</Text> */}
+            {/* <Text>Rating: {details.reviews[0].rating} / 5</Text> */}
+            {/* <Text>Text: {details.reviews[0].text}</Text> */}
+            <View style={styles.carouselBackground}>
+              <CardItem style={{width: '100%', paddingLeft: 0, paddingRight: 0}}>
+                <Carousel
+                  style={styles.carousel}
+                  data={Users}
+                  renderItem={_reviewItem}
+                  enableSnap
+                  sliderWidth={380}
+                  itemWidth={300}
+                  inactiveSlideScale={1}
+                />
+              </CardItem>
+            </View>
+          </Card>
           </View>
         </View>
         <Footer />
@@ -122,14 +134,20 @@ const styles = StyleSheet.create({
     flex: 5, 
     justifyContent: 'space-around',
     alignItems: 'center',
-    // height: 530,
-    width: 530,
+    top: 20,
+    height: 518,
+    // width: 530,
     backgroundColor: '#eef'
   },
+  carousel: {
+    
+  },
   carouselBackground: {
-    backgroundColor: 'red',
-    height: 200,
-    width: '90%'
+    flex: 1,
+    justifyContent: 'center',
+    // alignItems: 'center',
+    height: 144,
+    // width: '90%'
   },
   slide: {
     justifyContent: 'center',
