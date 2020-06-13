@@ -7,6 +7,9 @@ import Footer from './Footer'
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
+import { AppLoading } from 'expo';
+import { useFonts, Candal_400Regular } from '@expo-google-fonts/candal';
+
 export default Invitation = ({roomId, history}) => {
 
   const onShare = async () => {
@@ -32,6 +35,13 @@ export default Invitation = ({roomId, history}) => {
   const goToLobby = () => {
     history.push("/room");
   }
+  let [fontsLoaded] = useFonts({
+    Candal_400Regular,
+  });
+ 
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
 
   return(
     <Container style={{flex: 1,}}>
@@ -63,7 +73,7 @@ export default Invitation = ({roomId, history}) => {
       <Footer />
     </Container>
   )};
-
+}
 const styles = StyleSheet.create({
   container: {
     flex:1,
@@ -114,7 +124,8 @@ const styles = StyleSheet.create({
     fontWeight: '700', 
     paddingHorizontal: 20, 
     paddingVertical: 10,
-    alignSelf: 'center'
+    alignSelf: 'center',
+    fontFamily: 'Candal_400Regular'
   },
   QR: {
     
