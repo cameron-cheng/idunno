@@ -3,9 +3,9 @@ import axios from 'axios'
 
 import React, {useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, Button } from 'react-native';
-import { Container } from 'native-base';
+import { Container, Card, CardItem } from 'native-base';
 import Carousel from 'react-native-snap-carousel'
-
+import { Rating } from "react-native-elements"
 import HeaderNav from './Header';
 import Footer from './Footer'
 
@@ -41,9 +41,8 @@ export default function Results(props) {
   const _imageItem = ({item}) => {
     return (
       <View style={styles.slide}>
-        <Text>{item.title}</Text>
         <Image  
-          style={{flex:1, height: 144, width: 256,  borderRadius: 20}}
+          style={{height: 144, width: 256, top: 27, borderRadius: 20}}
           source={item.uri} />
       </View>
     );
@@ -53,7 +52,7 @@ export default function Results(props) {
     return (
       <View style={styles.slide}>
         <Text>{item.title}</Text>
-        <Rating type='custom' imageSize={30} readonly startingValue={4} ratingColor='#e76f51' ratingBackgroundColor='#fcfaf2' style={{padding:10, paddingLeft: 20, paddingBottom: 20, alignSelf: 'flex-start'}}></Rating>
+        <Text>{item.reviews}</Text>
         <Text>{item.genre}</Text>
       </View>
     );
@@ -75,18 +74,22 @@ export default function Results(props) {
         <HeaderNav />
         <View style={styles.main}>
           <Text>Results</Text>
-          <View style={styles.carouselBackground}>
-            <Carousel
-              style={styles.carousel}
-              data={Users}
-              renderItem={_carouselItem}
-              enableSnap
-              sliderWidth={430}
-              itemWidth={256}
-              inactiveSlideOpacity={0}
-              // inactiveSlideScale={1}
-            />
-          </View>
+          <Card style={{ width: 330, justifyContent: 'center', alignContent: 'center'}}>
+            <CardItem style={{width: '100%', paddingLeft: 0, paddingRight: 0, justifyContent: 'center'}}>
+              <View style={styles.carouselBackground}>
+                <Carousel
+                  style={styles.carousel}
+                  data={Users}
+                  renderItem={_imageItem}
+                  enableSnap
+                  sliderWidth={300}
+                  itemWidth={200}
+                  inactiveSlideOpacity={0}
+                  layout={'stack'}
+                  layoutCardOffset={`16`}
+                />
+              </View>
+            </CardItem>
           {/* <Text>Result: {details.name}</Text> */}
           <Text>Cactus Club Cafe</Text>
           {/* <Text>Rating: {details.rating}</Text> */}
@@ -95,17 +98,20 @@ export default function Results(props) {
           {/* <Text>Rating: {details.reviews[0].rating} / 5</Text> */}
           {/* <Text>Text: {details.reviews[0].text}</Text> */}
           <View style={styles.carouselBackground}>
-            <Carousel
-              style={styles.carousel}
-              data={Users}
-              renderItem={_carouselItem}
-              enableSnap
-              sliderWidth={430}
-              itemWidth={256}
-              inactiveSlideOpacity={0}
-              inactiveSlideScale={1}
-            />
+            <CardItem style={{width: '100%', paddingLeft: 0, paddingRight: 0}}>
+              <Carousel
+                style={styles.carousel}
+                data={Users}
+                renderItem={_reviewItem}
+                enableSnap
+                sliderWidth={400}
+                itemWidth={300}
+                inactiveSlideOpacity={0}
+                inactiveSlideScale={1}
+              />
+            </CardItem>
           </View>
+          </Card>
         </View>
         <Footer />
       </Container>
@@ -120,20 +126,20 @@ const styles = StyleSheet.create({
   },
   main: {
     flex: 5, 
+    top: 20,
     justifyContent: 'space-around',
     alignItems: 'center',
-    // height: 530,
-    width: 530,
     backgroundColor: '#eef'
   },
   carouselBackground: {
-    backgroundColor: 'red',
+    // backgroundColor: 'red',
     height: 200,
-    width: '90%'
+    width: '100%'
   },
   slide: {
     justifyContent: 'center',
-    alignItems: 'center',
-    width: 256
+    alignSelf: 'center',
+    width: 256,
+    
   }
 })
