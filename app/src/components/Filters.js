@@ -15,9 +15,12 @@ export default function Filters(props){
 
   const handleCreateRoom = () =>{
     props.createRoom(nickname);
-    props.history.push('/invitation');
   }
 
+  if (props.redirectInvitation) {
+    props.history.push('/invitation');
+  }
+  
   function toggleOverlay() {
     setVisible(!visible);
   }
@@ -28,7 +31,7 @@ export default function Filters(props){
         <View style={{alignItems: 'stretch', justifyContent: 'center', height:40}}>
           <Slider
             
-            minimumValue='200'
+            minimumValue='500'
             maximumValue='2000'
             step='10'
             value={filters.radius} 

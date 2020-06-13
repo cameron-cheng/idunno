@@ -61,7 +61,7 @@ io.on('connection', (socket) => {
     console.log('a user connected', socket.id);
     console.log(`*** ${roomId} has ${io.sockets.adapter.rooms[`${roomId}`].length} user ***`);
     console.log("USERS:", users)
-    io.in(roomId).emit('usersSentToRoom', users[roomId]);
+    io.in(roomId).emit('usersSentToRoom', users[roomId], socket.nickname);
   })
    
   socket.on('joinRoom', (roomId, nickname, ackFn) => {
@@ -80,7 +80,7 @@ io.on('connection', (socket) => {
       console.log(`${socket.nickname} joins room ${roomId}`);
       console.log(`*** ${roomId} has ${io.sockets.adapter.rooms[`${roomId}`].length} user ***`);
       console.log("USERS:", users)
-      io.in(roomId).emit('usersSentToRoom', users[roomId]);
+      io.in(roomId).emit('usersSentToRoom', users[roomId], socket.nickname);
     }
   });
   

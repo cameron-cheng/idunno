@@ -11,12 +11,6 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 
 export default function Lobby(props) {
 
-  const playersReady = () => {
-    //loop through players in room and return <Text>Name</Text> and <Icon type='Entypo' name='block'/>
-    //if player not ready - "not ready" button should not be pressable: greyed out?
-    //if player ready, change icon to <Icon type='FontAwesome' name='check'/>
-  }
-
   const UserItem = ({ user }) => {
     return (
       <View style={{padding:20, alignItems: 'center'}}>
@@ -26,6 +20,21 @@ export default function Lobby(props) {
     )
   }
   
+  const hostButton = () => {
+    if (props.users[0] === props.name) {
+      return (
+        <TouchableOpacity 
+          onPress={props.handleReady}
+          style={styles.buttonReady}>
+            <Icon type='Feather' name='check-circle' style={styles.icon}/>
+            <Text style={styles.buttonText}>Start!</Text>
+        </TouchableOpacity>
+      )
+    } else {
+      return <Text>Waiting For Host To Start...</Text>
+    }
+  }
+
   return(  
     <Container style={styles.container}>
       <Header />
@@ -48,12 +57,7 @@ export default function Lobby(props) {
               <Text style={styles.title}>Ready to start deciding?</Text>
               <CardItem style={styles.cardItemButtons}>
                 <View >
-                  <TouchableOpacity 
-                    onPress={props.handleReady}
-                    style={styles.buttonReady}>
-                      <Icon type='Feather' name='check-circle' style={styles.icon}/>
-                      <Text style={styles.buttonText}>Ready</Text>
-                  </TouchableOpacity>
+                  {hostButton()}
                 </View>
               </CardItem>
             </View>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 import { Alert, View, Text, StyleSheet, Button, TouchableOpacity,  } from 'react-native';
 import { Input } from 'react-native-elements';
@@ -6,15 +6,13 @@ import { Redirect } from 'react-router-native';
 
 import Header from './Header';
 import Footer from './Footer';
-import Filters from './Filters';
+import Results from './Results';
 import Loader from './Loader';
 import LottieView from 'lottie-react-native';
 
 
-
-
 export default ({ history, joinRoom, redirectLobby }) => {
-  
+
   const [joinRoomId, setJoinRoomId] = useState('')
   const [nickname, setNickname] = useState('')
 
@@ -43,6 +41,7 @@ export default ({ history, joinRoom, redirectLobby }) => {
         <View style={{width:300}}>
 
           <Button title="shrugger" onPress={() => history.push('/shrugger')}></Button>
+          <Button title="results styling" onPress={() => history.push('/results')}></Button>
 
           <Input placeholder="Nickname" style={{}} onChangeText={text => setNickname(text)} value={nickname} ></Input>
           <Input placeholder="Room Code" style={{}} onChangeText={text => setJoinRoomId(text.toUpperCase().trim())} value={joinRoomId} ></Input>
