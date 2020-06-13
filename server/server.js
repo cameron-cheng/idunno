@@ -103,6 +103,7 @@ io.on('connection', (socket) => {
     const winner = winners[Math.floor(Math.random() * winners.length)];
     console.log("WINNER:", winner);
     io.in(roomId).emit('resultSentToRoom', winner)
+    results = [];
   });
 
   socket.on('disconnect', () => {
