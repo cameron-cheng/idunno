@@ -4,11 +4,20 @@ import { View, Text, StyleSheet, Dimensions, ImageBackground } from 'react-nativ
 import { Container, Content, Card, CardItem, Header, Body, Button, Left, Right, Icon, Title  } from 'native-base';
 import { State } from 'react-native-gesture-handler';
 // import LottieView from 'lottie-react-native'
+import { AppLoading } from 'expo';
+import { useFonts, Candal_400Regular } from '@expo-google-fonts/candal';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
 export default function Footer(props) {
-  
+ 
+  let [fontsLoaded] = useFonts({
+    Candal_400Regular,
+  });
+ 
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
   return (
     <View style={style.container}>
         <View span style={style.header}>
@@ -18,10 +27,8 @@ export default function Footer(props) {
         </View>
     </View>
 
-  );
-
+  )};
 }
-
 const style = StyleSheet.create({
   container: {
     flex: 1,
@@ -54,6 +61,7 @@ const style = StyleSheet.create({
     fontSize: 50,
     height: 60,
     fontWeight: '900',
+    fontFamily: 'Candal_400Regular'
     // position: 'absolute',
     
   },

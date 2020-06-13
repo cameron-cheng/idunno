@@ -9,6 +9,9 @@ import Footer from './Footer';
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
+import { AppLoading } from 'expo';
+import { useFonts, Candal_400Regular } from '@expo-google-fonts/candal';
+
 export default function Lobby(props) {
 
   const UserItem = ({ user }) => {
@@ -202,6 +205,7 @@ const styles = StyleSheet.create({
     fontWeight: '700', 
     paddingRight: 10, 
     paddingVertical: 10,
+    fontFamily: 'Candal_400Regular'
     
   },
   playersView: {

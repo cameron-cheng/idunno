@@ -10,6 +10,8 @@ import Results from './Results';
 import Loader from './Loader';
 import LottieView from 'lottie-react-native';
 
+import { AppLoading } from 'expo';
+import { useFonts, Candal_400Regular } from '@expo-google-fonts/candal';
 
 export default ({ history, joinRoom, redirectLobby }) => {
 
@@ -28,6 +30,14 @@ export default ({ history, joinRoom, redirectLobby }) => {
     return <Redirect to='/room' />
   }
 
+  let [fontsLoaded] = useFonts({
+    Candal_400Regular,
+  });
+ 
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
+
   return (
 
     <View style={styles.container}>
@@ -42,7 +52,7 @@ export default ({ history, joinRoom, redirectLobby }) => {
 
           <Button title="shrugger" onPress={() => history.push('/shrugger')}></Button>
           <Button title="results styling" onPress={() => history.push('/results')}></Button>
-
+          <Text style={styles.hello}>Hello</Text>
           <Input placeholder="Nickname" style={{}} onChangeText={text => setNickname(text)} value={nickname} ></Input>
           <Input placeholder="Room Code" style={{}} onChangeText={text => setJoinRoomId(text.toUpperCase().trim())} value={joinRoomId} ></Input>
           <TouchableOpacity onPress={handleJoinRoom} style={styles.buttonJoin}>
@@ -77,7 +87,8 @@ export default ({ history, joinRoom, redirectLobby }) => {
      <Footer />
    </View>
  )};
-
+}
+      
 
  const styles = StyleSheet.create({
   container: {
@@ -117,7 +128,8 @@ export default ({ history, joinRoom, redirectLobby }) => {
     fontSize: 30, 
     color: '#fcfaf2', 
     fontWeight: '800',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    fontFamily: 'Candal_400Regular'
   },
   shrugger: {
     fontSize: 70,
@@ -129,8 +141,11 @@ export default ({ history, joinRoom, redirectLobby }) => {
     shadowRadius: 2,
     paddingBottom: 50,
     paddingTop: 50
-  }
+  },
 
+hello: {
+  fontFamily: 'Candal_400Regular'
+}
 
 })
 
