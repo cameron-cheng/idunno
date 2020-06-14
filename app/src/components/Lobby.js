@@ -34,11 +34,11 @@ export default function Lobby(props) {
           onPress={props.handleReady}
           style={styles.buttonReady}>
             <Icon type='Feather' name='check-circle' style={styles.icon}/>
-            <Text style={styles.buttonText}>Start!</Text>
+            <Text style={styles.buttonText}>READY!</Text>
         </TouchableOpacity>
       )
     } else {
-      return <Text>Waiting For Host To Start...</Text>
+      return <Text style={{color: "#09413a",}}>Waiting For Host To Start...</Text>
     }
   }
 
@@ -134,16 +134,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderColor: '#fcfaf2',
     width: 300,
-    // justifyContent: 'space-between'
-   
     
   },
-  // content: {
-  //   padding: 15,
-  //   top: 100,
-  //   width: 300,
-  //   alignSelf: 'center'
-  // },
   cardItem: {
     flexDirection:'column', 
     backgroundColor: '#f9f1dc',
@@ -157,29 +149,16 @@ const styles = StyleSheet.create({
     width: 300, 
     backgroundColor: '#f9f1dc',
   },
-  // card: {
-  //   // justifyContent: 'space-evenly',
-  //   borderRadius: 20,
-  //   height: 400,
-  //   alignItems: 'center',
-  //   backgroundColor: '#f9f1dc',
-  //   shadowColor: '#988a55',
-  //   shadowOffset: { width: 2, height: 4 },
-  //   shadowOpacity: 0.8,
-  //   shadowRadius: 2,
-  // },
-  // header: {
-  //   borderTopLeftRadius:20, 
-  //   borderTopRightRadius:20,
-  // },
   text: {
     fontSize: 15,
     alignSelf: 'center',
-    padding: 20
+    padding: 20,
+    color: "#09413a",
   },
   title: {
     fontSize: 25,
-    alignSelf: 'center'
+    alignSelf: 'center',
+    color: "#09413a",
   },
   // body: {
   //   // alignItems: 'center',
@@ -192,7 +171,7 @@ const styles = StyleSheet.create({
     paddingRight: 10
   },
   buttonReady: {
-    backgroundColor:'#e76f51',  
+    backgroundColor:'#ee937c',  
     borderRadius: 10,
     flexDirection: 'row',
     alignItems: 'center'

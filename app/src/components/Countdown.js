@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-native';
 
 export default function Countdown(props) {
   // initialize timeLeft with the seconds prop
+
   const [timeLeft, setTimeLeft] = useState(15);
   
   useEffect(() => {
