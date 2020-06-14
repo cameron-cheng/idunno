@@ -10,8 +10,7 @@ import Results from './Results';
 import Loader from './Loader';
 import LottieView from 'lottie-react-native';
 
-import { AppLoading } from 'expo';
-import { useFonts, Candal_400Regular } from '@expo-google-fonts/candal';
+
 
 export default ({ history, joinRoom, redirectLobby }) => {
 
@@ -30,13 +29,6 @@ export default ({ history, joinRoom, redirectLobby }) => {
     return <Redirect to='/room' />
   }
 
-  let [fontsLoaded] = useFonts({
-    Candal_400Regular,
-  });
- 
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  } else {
 
   return (
 
@@ -87,7 +79,7 @@ export default ({ history, joinRoom, redirectLobby }) => {
      <Footer />
    </View>
  )};
-}
+
       
 
  const styles = StyleSheet.create({
@@ -129,7 +121,6 @@ export default ({ history, joinRoom, redirectLobby }) => {
     color: '#fcfaf2', 
     fontWeight: '800',
     alignSelf: 'center',
-    fontFamily: 'Candal_400Regular'
   },
   shrugger: {
     fontSize: 70,
@@ -142,10 +133,5 @@ export default ({ history, joinRoom, redirectLobby }) => {
     paddingBottom: 50,
     paddingTop: 50
   },
-
-hello: {
-  fontFamily: 'Candal_400Regular'
-}
-
 })
 

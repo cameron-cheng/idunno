@@ -9,13 +9,10 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 import { AppLoading } from 'expo';
-import { useFonts, Candal_400Regular } from '@expo-google-fonts/candal';
 
 export default function Filters(props){
 
-  let [fontsLoaded] = useFonts({
-    Candal_400Regular,
-  });
+
 
   const [visible, setVisible] = useState(false)
   const [nickname, setNickname] = useState('')
@@ -96,7 +93,7 @@ export default function Filters(props){
               <Input style={{height:40}}placeholder="Host Name" onChangeText={text => setNickname(text.trim())} value={nickname} ></Input>
 
               <TouchableOpacity onPress={handleCreateRoom} style={{backgroundColor: '#ee937c', borderRadius: 10,}}>
-                <Text style={{fontSize: 30, alignSelf: 'center', color:'#fcfaf2', fontWeight: '700', paddingVertical:10, fontFamily: 'Candal_400Regular' }}>Start Deciding!</Text>
+                <Text style={{fontSize: 30, alignSelf: 'center', color:'#fcfaf2', fontWeight: '700', paddingVertical:1 }}>Start Deciding!</Text>
               </TouchableOpacity>
             </View>
           
