@@ -12,6 +12,11 @@ import { AppLoading } from 'expo';
 import { useFonts, Candal_400Regular } from '@expo-google-fonts/candal';
 
 export default function Filters(props){
+
+  let [fontsLoaded] = useFonts({
+    Candal_400Regular,
+  });
+
   const [visible, setVisible] = useState(false)
   const [nickname, setNickname] = useState('')
   const { filters, setFilters } = props
@@ -44,10 +49,6 @@ export default function Filters(props){
       )
     } else {
 
-      let [fontsLoaded] = useFonts({
-        Candal_400Regular,
-      });
-     
       if (!fontsLoaded) {
         return <AppLoading />;
       } else {

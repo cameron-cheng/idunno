@@ -14,6 +14,10 @@ import { useFonts, Candal_400Regular } from '@expo-google-fonts/candal';
 
 export default function Lobby(props) {
 
+  let [fontsLoaded] = useFonts({
+    Candal_400Regular,
+  });
+
   const UserItem = ({ user }) => {
     return (
       <View style={{padding:20, alignItems: 'center'}}>
@@ -205,7 +209,7 @@ const styles = StyleSheet.create({
     fontWeight: '700', 
     paddingRight: 10, 
     paddingVertical: 10,
-    fontFamily: 'Candal_400Regular'
+    // fontFamily: 'Candal_400Regular'
     
   },
   playersView: {
