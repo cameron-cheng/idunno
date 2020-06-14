@@ -5,7 +5,7 @@ import React, {useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, Button } from 'react-native';
 
 import { Container, Card, CardItem, Icon } from 'native-base';
-import Carousel from 'react-native-snap-carousel'
+// import Carousel from 'react-native-snap-carousel'
 import { Rating, Overlay } from "react-native-elements"
 
 import HeaderNav from './Header';
