@@ -88,7 +88,6 @@ io.on('connection', (socket) => {
     // const hostId = Object.keys(socket.rooms)[0];
     const roomId = Object.keys(socket.rooms)[1];
     
-    console.log("DATA:", data[roomId])
     io.in(roomId).emit('dataSentToRoom', data[roomId]);
   })
   

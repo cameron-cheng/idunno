@@ -25,8 +25,8 @@ export default function Filters(props) {
     props.createRoom(nickname);
   };
 
-  if (props.redirectInvitation) {
-    props.history.push("/invitation");
+  if (props.redirect.invitation) {
+    props.history.push('/invitation');
   }
 
   function toggleOverlay() {
@@ -482,6 +482,7 @@ export default function Filters(props) {
                 checked={filters.greek}
                 onPress={() => setFilters({...filters, greek: !filters.greek})}
               /> */}
+
           </View>
           <View style={{ alignSelf: "center", padding: 10 }}>
             <TouchableOpacity

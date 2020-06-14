@@ -12,7 +12,7 @@ import LottieView from 'lottie-react-native';
 
 
 
-export default ({ history, joinRoom, redirectLobby }) => {
+export default ({ history, joinRoom, redirect }) => {
 
   const [joinRoomId, setJoinRoomId] = useState('')
   const [nickname, setNickname] = useState('')
@@ -25,7 +25,7 @@ export default ({ history, joinRoom, redirectLobby }) => {
     history.push("/filters");
   }
   
-  if (redirectLobby) {
+  if (redirect.lobby) {
     return <Redirect to='/room' />
   }
 
