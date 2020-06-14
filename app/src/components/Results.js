@@ -2,9 +2,9 @@ import { API_KEY } from "react-native-dotenv";
 import axios from "axios";
 
 import React, { useState, useEffect } from "react";
-import { View, Text, Image, StyleSheet, Button } from "react-native";
+import { View, Text, Image, StyleSheet, } from "react-native";
 
-import { Container, Card, CardItem, Icon } from "native-base";
+import { Container, Card, CardItem, Icon, Button } from "native-base";
 import Carousel from "react-native-snap-carousel";
 import { Rating, Overlay } from "react-native-elements";
 
@@ -32,6 +32,28 @@ export default function Results(props) {
     }
     getDetails();
   }, []);
+
+  const getWeekDayHours = () => {
+    const weekDayArray = details.opening_hours.weekday_text
+    // console.log("WEEKDAY", weekDayArray)
+
+    const date = new Date()
+    // console.log(date.getDay())
+    const today = date.getDay()
+
+    if (!details.opening_hours) {
+      return "Hours not available"
+    } else {
+      if (today === 0) {
+        return weekDayArray[6]
+      } else {
+        return weekDayArray[today -1]
+      }
+    }
+  }
+
+  
+  
 
   const _imageItem = ({ item }) => {
     return (
@@ -149,24 +171,27 @@ export default function Results(props) {
                 layout={"default"}
               />
             </View>
-            <View
-              style={{ alignContent: "flex-start", width: 60, padding: 10 }}
-            >
-              <Icon
-                type="Feather"
-                name="clock"
-                style={({ width: 21 }, styles.icons)}
-              ></Icon>
-              <Icon
-                type="Fontisto"
-                name="dollar"
-                style={({ width: 12 }, styles.icons)}
-              ></Icon>
-              <Icon
-                type="MaterialIcons"
-                name="restaurant"
-                style={({ width: 25 }, styles.icons)}
-              ></Icon>
+            <View style={{flexDirection: 'row', height:110}}>
+              <View style={{ flex:1, alignItems: 'center'}}>
+                <Button transparent style={{flex: 1, justifyContent: 'center'  }} >
+                  <Icon
+                    type="Feather"
+                    name="clock"
+                    style={styles.clock}
+                  />
+                </Button>
+                <Button transparent style={{flex: 1, left: -6 }} >
+                  <Icon
+                  type="MaterialIcons"
+                  name="location-on"
+                  style={ styles.location}
+                  />
+                </Button>
+              </View>
+              <View style={{flex:4,padding:15, paddingLeft:0, justifyContent: 'space-between'}}> 
+                <Text style={{fontSize: 20}}>{getWeekDayHours()}</Text>
+                <Text style={{fontSize: 20}}>Address</Text>
+              </View>
             </View>
 
             {/* <CardItem style={{ paddingLeft: 0, paddingRight: 0, alignSelf: 'center', backgroundColor: '#fcfaf2', borderRadius: 10 }}> */}
@@ -184,11 +209,7 @@ export default function Results(props) {
             <View
               style={{ flexDirection: "row", justifyContent: "space-around" }}
             >
-              <Icon
-                type="MaterialIcons"
-                name="location-on"
-                style={({ width: 25 }, styles.icons)}
-              ></Icon>
+              
               <Icon
                 type="MaterialCommunityIcons"
                 name="web"
@@ -254,5 +275,30 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     shadowRadius: 1,
     paddingVertical: 5,
+  },
+  clock: {
+    // fontSize: 20,
+    // alignSelf: "center",
+    color: "#2a9d8f",
+    shadowColor: "#988a55",
+    shadowOffset: { width: 2, height: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 1,
+    // paddingVertical: 5,
+    fontSize: 30,
+    width: 35
+  },
+  location: {
+    // fontSize: 20,
+    // justifyContent: 'center',
+    // alignSelf: "center",
+    color: "#2a9d8f",
+    shadowColor: "#988a55",
+    shadowOffset: { width: 2, height: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 1,
+    // paddingVertical: 5,
+    fontSize: 40,
+    width: 35
   },
 });
