@@ -13,7 +13,7 @@ export default Invitation = ({roomId, history}) => {
     try {
       const result = await Share.share({
         message:
-          `Session Code: ${roomId}`
+          `iDUNNO Session Code: ${roomId}`
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {

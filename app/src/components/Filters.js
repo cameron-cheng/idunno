@@ -25,7 +25,7 @@ export default function Filters(props){
     props.createRoom(nickname);
   }
 
-  if (props.redirectInvitation) {
+  if (props.redirect.invitation) {
     props.history.push('/invitation');
   }
   
@@ -103,12 +103,13 @@ export default function Filters(props){
             </View>
             </Card>
           <Overlay overlayStyle={{ top: 20, height: 590, borderRadius: 10, width: 350, backgroundColor: '#fcfaf2'}} isVisible={visible} onBackdropPress={toggleOverlay}>
+            <>
             <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'space-between', flexWrap: 'wrap', paddingVertical: 15}}>
-              <ListItem style={styles.listItem}>
+              <ListItem style={styles.listItem} onPress={() => setFilters({...filters, family: !filters.family})}>
                 <CheckBox 
                   checked={filters.family} 
                   color={'#ee937c'}
-                  onPress={() => setFilters({...filters, family: !filters.family})}/>
+                  />
                   <Body>
                     <Text style={styles.checkText}>Family</Text>
                   </Body>
@@ -372,6 +373,7 @@ export default function Filters(props){
                 <Text style={{padding: 10, color: '#fcfaf2', fontSize: 20, fontWeight: '700'}}>DONE</Text>
               </TouchableOpacity>
             </View>
+            </>
           </Overlay>
         
         </View>

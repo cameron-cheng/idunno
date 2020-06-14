@@ -9,7 +9,7 @@ export default function Shrugger(props) {
   useEffect(() => {
     setTimeout(() => {
       setFinished(true)
-    }, 3000)
+    }, 2000)
   }, [])
   
   if (finished) {

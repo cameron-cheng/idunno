@@ -8,7 +8,6 @@ export default function Countdown(props) {
   const [timeLeft, setTimeLeft] = useState(15);
   
   useEffect(() => {
-    console.log(timeLeft)
     // exit early when we reach 0
     if (!timeLeft) return;
     

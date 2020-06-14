@@ -13,9 +13,9 @@ import { Redirect } from 'react-router-native';
 
 const SCREEN_HEIGHT   = Dimensions.get('window').height;
 
-export default function Room({ history, handleReady, startSession, users, socketName }) {
+export default function Room({ history, handleReady, redirect, users, socketName }) {
   
-  if (startSession) {
+  if (redirect.session) {
     return <Loader /> 
   } else {
     return(
