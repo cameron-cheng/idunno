@@ -9,8 +9,7 @@ import { State } from 'react-native-gesture-handler';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
 export default function Footer(props) {
- 
- 
+
   return (
     <View style={style.container}>
         <View span style={style.header}>
@@ -20,7 +19,9 @@ export default function Footer(props) {
         </View>
     </View>
 
+
   )};
+
 
 const style = StyleSheet.create({
   container: {
@@ -54,7 +55,7 @@ const style = StyleSheet.create({
     fontSize: 50,
     height: 60,
     fontWeight: '900',
-    // position: 'absolute',
+
     
   },
 

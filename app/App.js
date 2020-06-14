@@ -36,6 +36,18 @@ export default function App() {
     buffet: false,
     bistro: false,
     breakfast: false,
+    brewery: false,
+    bar: false,
+    burger: false,
+    japanese: false,
+    chinese: false,
+    mexican: false,
+    indian: false,
+    italian: false,
+    greek: false,
+    thai: false,
+    american: false,
+    french: false
   })
   
   const [socket] = useState(() => io(IP_ADDRESS));
@@ -58,7 +70,7 @@ export default function App() {
   function createRoom(nickname) {
   console.log('sending create room event')
   if (nickname === "") {
-      failToJoinAlert('idunno what your name is!')
+      failToJoinAlert('iDUNNO what your name is!')
     } else {
       //event to create a room to server, response with server code
       socket.emit('createRoom', filters, nickname, (roomId) => {
@@ -78,7 +90,7 @@ export default function App() {
   function joinRoom(roomId, nickname) {
     console.log(roomId);
     if (nickname === "") {
-      failToJoinAlert('idunno what your name is!')
+      failToJoinAlert('iDUNNO what your name is!')
     } else {
       socket.emit('joinRoom', roomId, nickname, (hasJoined) => {
         console.log('has joined is', hasJoined)
@@ -93,7 +105,7 @@ export default function App() {
 
   function failToJoinAlert(msg) {
     Alert.alert(
-      "Unable to join room", msg,
+      "Unable to Join Room", msg,
       [
         {
           text: "Cancel",
