@@ -299,7 +299,7 @@ const styles = StyleSheet.create({
     // flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    
+    backgroundColor: '#fcfaf2',
   },
   card: {
     flex: 1,
