@@ -106,7 +106,19 @@ export default function Results(props) {
     );
   };
 
-  if (details) {
+  if (!props.result) {
+    return (
+      <Container>
+        <HeaderNav />
+        <View style={styles.main}>
+          <Text>Really...nothing?</Text>
+        </View>
+        <Footer />
+      </Container>
+    );
+  } else if (!details) {
+    return null;
+  } else {
     return (
       <Container style={styles.container}>
         <HeaderNav />
@@ -204,24 +216,13 @@ export default function Results(props) {
               ></Icon>
             </View>
           </Card>
-            <Hurray />
-        </View>
-        <Footer />
-      </Container>
-    );
-  } else {
-    return (
-      <Container>
-        <HeaderNav />
-        <View style={styles.main}>
-          <Text>Really...nothing?</Text>
+          <Hurray />
         </View>
         <Footer />
       </Container>
     );
   }
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
