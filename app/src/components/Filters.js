@@ -16,7 +16,7 @@ export default function Filters(props){
   let [fontsLoaded] = useFonts({
     Candal_400Regular,
   });
-  
+
   const [visible, setVisible] = useState(false)
   const [nickname, setNickname] = useState('')
   const { filters, setFilters } = props

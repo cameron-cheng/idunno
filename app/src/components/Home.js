@@ -50,9 +50,9 @@ export default ({ history, joinRoom, redirectLobby }) => {
       <View style={{flex: 5, padding: 20,  justifyContent: 'space-evenly', alignItems: 'center', }}>
         <View style={{width:300}}>
 
-          <Button title="shrugger" onPress={() => history.push('/shrugger')}></Button>
-          <Button title="results styling" onPress={() => history.push('/results')}></Button>
-          <Text style={styles.hello}>Hello</Text>
+          {/* <Button title="shrugger" onPress={() => history.push('/shrugger')}></Button>
+          <Button title="results styling" onPress={() => history.push('/results')}></Button> */}
+          {/* <Text style={styles.hello}>Hello</Text> */}
           <Input placeholder="Nickname" style={{}} onChangeText={text => setNickname(text)} value={nickname} ></Input>
           <Input placeholder="Room Code" style={{}} onChangeText={text => setJoinRoomId(text.toUpperCase().trim())} value={joinRoomId} ></Input>
           <TouchableOpacity onPress={handleJoinRoom} style={styles.buttonJoin}>
