@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Redirect } from 'react-router-native';
-import LottieView from 'lottie-react-native';
+import React, { useEffect, useState } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { Redirect } from "react-router-native";
+import LottieView from "lottie-react-native";
 
 export default function Shrugger(props) {
   const [finished, setFinished] = useState(false);
@@ -13,12 +13,20 @@ export default function Shrugger(props) {
   }, [])
   
   if (finished) {
-    return <Redirect to={{
-      pathname: '/results'
-    }} />
-  }    
+    return (
+      <Redirect
+        to={{
+          pathname: "/results",
+        }}
+      />
+    );
+  }
 
   return (
-    <LottieView source={require('../assets/shrugs-green.json')} autoPlay speed={1.5} />
-  )
+    <LottieView
+      source={require("../assets/shrugs-green.json")}
+      autoPlay
+      speed={1.5}
+    />
+  );
 }

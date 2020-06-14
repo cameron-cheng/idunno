@@ -10,7 +10,6 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 
 
 export default Hurray = () => {
-    const [visible, setVisible] = useState(true)
     const [finished, setFinished] = useState(false);
     // if (finished) {
     //   return <Redirect to={{
@@ -33,7 +32,7 @@ export default Hurray = () => {
     return (
       // <Overlay style={toggleOverlay}>
       <LottieView source={require('../assets/hurray2.json')} autoPlay loop={false} onAnimationFinish={() => {setFinished(true)}}
-      style={toggleOverlay} />
+      style={toggleOverlay()} />
     // </Overlay>
     )
 }
