@@ -70,6 +70,7 @@ export default function Results(props) {
   if (!details) {
     return (
       <Container>
+        
         <HeaderNav />
         <View style={styles.main}>
           <Text>Really...nothing?</Text>
@@ -80,10 +81,9 @@ export default function Results(props) {
   } else {
     return (
       <Container style={styles.container}>
+        <Hurray/>
         <HeaderNav />
-        {/* <Overlay>
-          <Hurray >
-        </Overlay> */}
+        
         <View style={styles.main}>
           
           <Card style={styles.card}>
@@ -121,7 +121,7 @@ export default function Results(props) {
               />
             </View>
 
-            <View style={{flexDirection: 'row', justifyContent: 'space-around', paddingVertical: 10}}>
+            <View style={{flexDirection: 'row', justifyContent: 'space-around',}}>
               <Icon type='MaterialIcons' name='location-on' style={{width: 25,}, styles.icons}></Icon>
               <Icon type='MaterialCommunityIcons' name='web' style={{width: 25,}, styles.icons}></Icon>
               <Icon type='Entypo' name='phone' style={{width: 25,}, styles.icons}></Icon>
@@ -131,6 +131,7 @@ export default function Results(props) {
           </Card>
         </View>
         <Footer />
+        
       </Container>
     )
   }

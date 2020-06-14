@@ -77,7 +77,6 @@ export default Invitation = ({roomId, history}) => {
 const styles = StyleSheet.create({
   container: {
     flex:1,
-    // width: SCREEN_WIDTH,
     backgroundColor: '#fcfaf2',
     // flex: 1, 
     padding: 20,  
