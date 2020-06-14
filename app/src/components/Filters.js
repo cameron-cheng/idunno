@@ -11,9 +11,11 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 
 
+
 export default function Filters(props){
 
   
+
 
   const [visible, setVisible] = useState(false)
   const [nickname, setNickname] = useState('')
@@ -92,8 +94,10 @@ export default function Filters(props){
             <View style={{justifyContent: 'center', top: 50}}>
               <Input style={{height:40}}placeholder="Host Name" onChangeText={text => setNickname(text.trim())} value={nickname} ></Input>
 
+
               <TouchableOpacity onPress={handleCreateRoom} style={styles.button}>
                 <Text style={styles.buttonText}>START DECIDING!</Text>
+
               </TouchableOpacity>
             </View>
             </View>

@@ -19,8 +19,9 @@ export default function Footer(props) {
         </View>
     </View>
 
-  )
-};
+
+  )};
+
 
 const style = StyleSheet.create({
   container: {
@@ -54,6 +55,7 @@ const style = StyleSheet.create({
     fontSize: 50,
     height: 60,
     fontWeight: '900',
+
     
   },
 
