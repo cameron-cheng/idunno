@@ -50,6 +50,34 @@ export default function App() {
     french: false
   })
   
+  const baseFilters = {
+    searchType: 'nearby',
+    type: 'restaurant',
+    area: null,
+    radius: 500,
+    price: 1,
+    vegan: false,
+    family: false,
+    casual: false,
+    fine: false,
+    cafe: false,
+    buffet: false,
+    bistro: false,
+    breakfast: false,
+    brewery: false,
+    bar: false,
+    burger: false,
+    japanese: false,
+    chinese: false,
+    mexican: false,
+    indian: false,
+    italian: false,
+    greek: false,
+    thai: false,
+    american: false,
+    french: false
+  }
+
   const [socket] = useState(() => io(IP_ADDRESS));
 
   useEffect(() => {
@@ -77,15 +105,16 @@ export default function App() {
         console.log("ROOM CODE:", roomId);
         setRoomId(roomId);
         //pass roomId to Share component
-        setRedirectInvitation(true);
+        setRedirect({...redirect, invitation: true});
       })
     }
   }
   
-  const [redirectInvitation, setRedirectInvitation] = useState(false);
-  const [redirectLobby, setRedirectLobby] = useState(false);
-  const [startSession, setStartSession] = useState(false);
-
+  const [redirect, setRedirect] = useState({
+    invitation: false,
+    lobby: false,
+    session: false
+  });
   
   function joinRoom(roomId, nickname) {
     console.log(roomId);
@@ -97,7 +126,7 @@ export default function App() {
         if (hasJoined === false) {
           failToJoinAlert('Room does not exist');
         } else {
-          setRedirectLobby(true);
+          setRedirect({...redirect, lobby: true});
         }        
       })
     }
@@ -119,7 +148,6 @@ export default function App() {
     }
     
     function handleReady() {
-      // setLobbyReady(!lobbyReady);
       emitReady();
     }
 
@@ -136,7 +164,7 @@ export default function App() {
     console.log("Received Cards")
     setPlaces(data) 
     console.log("DATA:" , data.length)
-    setStartSession(true);
+    setRedirect({...redirect, session: true});
   }
   
   function setWinner(winner) {
@@ -157,15 +185,15 @@ export default function App() {
     <View style={styles.container}>
       <Switch>
         <Route exact path="/"  render={(routeProps) => {
-          let homeProps = { ...routeProps, createRoom, joinRoom, setRoomId, redirectLobby }
+          let homeProps = { ...routeProps, createRoom, joinRoom, setRoomId, redirect }
           return (<Home {...homeProps}/>)}} />
 
         <Route exact path="/filters"  render={(routeProps) => {
-          let filtersProps = { ...routeProps, createRoom, filters, setFilters, redirectInvitation }
+          let filtersProps = { ...routeProps, createRoom, filters, setFilters, redirect }
           return (<Filters {...filtersProps}/>)}} />
 
         <Route exact path="/room" exact render={(routeProps)=> {
-          let roomProps = { ...routeProps, handleReady, startSession, users, socketName }
+          let roomProps = { ...routeProps, handleReady, redirect, users, socketName }
           return (<Room {...roomProps}/>)}} />
           
         <Route exact path="/invitation" exact render={(routeProps) => {
@@ -179,7 +207,7 @@ export default function App() {
           return (<Swiper {...swiperProps} />)}}/>
 
         <Route exact path ="/results" exact render={(routeProps) => {
-          let resultsProps = {...routeProps, result} 
+          let resultsProps = {...routeProps, result, setRedirect, baseFilters, setFilters} 
           return (<Results {...resultsProps} />)}}/>
       </Switch>
 

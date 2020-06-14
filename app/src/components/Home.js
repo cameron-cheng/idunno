@@ -10,10 +10,9 @@ import Results from './Results';
 import Loader from './Loader';
 import LottieView from 'lottie-react-native';
 
-import { AppLoading } from 'expo';
-import { useFonts, Candal_400Regular } from '@expo-google-fonts/candal';
 
-export default ({ history, joinRoom, redirectLobby }) => {
+
+export default ({ history, joinRoom, redirect }) => {
 
   const [joinRoomId, setJoinRoomId] = useState('')
   const [nickname, setNickname] = useState('')
@@ -26,17 +25,10 @@ export default ({ history, joinRoom, redirectLobby }) => {
     history.push("/filters");
   }
   
-  if (redirectLobby) {
+  if (redirect.lobby) {
     return <Redirect to='/room' />
   }
 
-  let [fontsLoaded] = useFonts({
-    Candal_400Regular,
-  });
- 
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  } else {
 
   return (
 
@@ -77,7 +69,7 @@ export default ({ history, joinRoom, redirectLobby }) => {
      <Footer />
    </View>
  )};
-}
+
       
 
  const styles = StyleSheet.create({
@@ -119,7 +111,6 @@ export default ({ history, joinRoom, redirectLobby }) => {
     color: '#fcfaf2', 
     fontWeight: '800',
     alignSelf: 'center',
-    // fontFamily: 'Candal_400Regular'
   },
   shrugger: {
     fontSize: 50,
@@ -132,6 +123,7 @@ export default ({ history, joinRoom, redirectLobby }) => {
     padding: 10,
     paddingBottom: 30
   },
+
   card: {
     borderRadius: 20,
     alignItems: 'center',
@@ -143,6 +135,7 @@ export default ({ history, joinRoom, redirectLobby }) => {
     padding: 20,
     justifyContent: 'space-between',
   }
+
 
 })
 

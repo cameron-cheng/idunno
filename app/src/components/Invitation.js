@@ -7,16 +7,13 @@ import Footer from './Footer'
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
-import { AppLoading } from 'expo';
-import { useFonts, Candal_400Regular } from '@expo-google-fonts/candal';
-
 export default Invitation = ({roomId, history}) => {
 
   const onShare = async () => {
     try {
       const result = await Share.share({
         message:
-          `Session Code: ${roomId}`
+          `iDUNNO Session Code: ${roomId}`
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -35,13 +32,7 @@ export default Invitation = ({roomId, history}) => {
   const goToLobby = () => {
     history.push("/room");
   }
-  let [fontsLoaded] = useFonts({
-    Candal_400Regular,
-  });
  
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  } else {
 
   return(
     <Container style={{flex: 1,}}>
@@ -73,7 +64,7 @@ export default Invitation = ({roomId, history}) => {
       <Footer />
     </Container>
   )};
-}
+
 const styles = StyleSheet.create({
   container: {
     flex:1,
