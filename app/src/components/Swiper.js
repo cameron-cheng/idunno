@@ -167,13 +167,13 @@ export default class App extends Component {
                   <View >
                     {/* Top Card Title/Rating */}
                     <Text style={{alignSelf: 'flex-start', color:"#09413a", fontSize: 25, padding: 20, paddingLeft:20, paddingBottom:0}}>{item.name}</Text>
-                    <Rating type='custom' imageSize={30} readonly startingValue={item.rating} ratingColor='#e76f51' ratingBackgroundColor='#fcfaf2' style={{padding:10, paddingLeft: 20, paddingBottom: 20, alignSelf: 'flex-start'}}></Rating>
+                    <Rating type='custom' imageSize={30} readonly startingValue={item.rating} ratingColor='#ee937c' ratingBackgroundColor='#cccbca' style={{padding:10, paddingLeft: 20, paddingBottom: 20, alignSelf: 'flex-start'}}></Rating>
                   </View>
 
                   {/* Top Card Image */}
                   <View style={{alignItems: 'center'}}>
                     <Image 
-                    style={{height:300, width:'90%', resizeMode: 'cover', borderRadius: 15}}
+                    style={{height:300, width:'90%', resizeMode: 'cover', borderRadius: 10}}
                     source={{
                       uri: `https://maps.googleapis.com/maps/api/place/photo?key=${API_KEY}&photoreference=${item.photos[0].photo_reference}&maxheight=400`
                     }}/>
@@ -232,13 +232,13 @@ export default class App extends Component {
                   <View >
                      {/* Underneath Title/Rating */}
                      <Text style={{alignSelf: 'flex-start', color:"#09413a", fontSize: 25, padding: 20, paddingLeft:20, paddingBottom:0}}>{item.name}</Text>
-                    <Rating type='custom' imageSize={30} readonly startingValue={item.rating} ratingColor='#e76f51' ratingBackgroundColor='#fcfaf2' style={{padding:10, paddingLeft: 20, paddingBottom: 20, alignSelf: 'flex-start'}}></Rating>
+                    <Rating type='custom' imageSize={30} readonly startingValue={item.rating} ratingColor='#ee937c' ratingBackgroundColor='#fcfaf2' style={{padding:10, paddingLeft: 20, paddingBottom: 20, alignSelf: 'flex-start'}}></Rating>
                   </View>
 
                   {/* Underneath Image */}
                   <View style={{alignItems: 'center'}}>
                     <Image 
-                    style={{height:300, width:'90%', resizeMode: 'cover', borderRadius: 15}}
+                    style={{height:300, width:'90%', resizeMode: 'cover', borderRadius: 10}}
                     source={{
                       uri: `https://maps.googleapis.com/maps/api/place/photo?key=${API_KEY}&photoreference=${item.photos[0].photo_reference}&maxheight=400`
                     }}/>
@@ -282,10 +282,10 @@ export default class App extends Component {
     return (
       <View>
         <HeaderNav />
-          <View style={{ height: 40 }}>
+          <View style={{ height: 60, width: 180, top: 30, alignSelf: 'center' }}>
             <Countdown readyForResult={this.props.readyForResult} />
           </View>
-          <View style={{ flex: 5, alignItems: 'center',  }}>
+          <View style={{ flex: 5, alignItems: 'center', top: 30  }}>
             {this.renderCards()}
           </View>
         <Footer />

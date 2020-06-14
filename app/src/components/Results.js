@@ -5,9 +5,10 @@ import React, {useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, Button } from 'react-native';
 import { Container, Card, CardItem } from 'native-base';
 import Carousel from 'react-native-snap-carousel'
-import { Rating } from "react-native-elements"
+import { Rating, Overlay } from "react-native-elements"
 import HeaderNav from './Header';
-import Footer from './Footer'
+import Footer from './Footer';
+import Hurray from './Hurray'
 
 export default function Results(props) {
   const [details, setDetails] = useState(null);
@@ -77,6 +78,9 @@ export default function Results(props) {
     return (
       <Container style={styles.container}>
         <HeaderNav />
+        {/* <Overlay>
+          <Hurray >
+        </Overlay> */}
         <View style={styles.main}>
           {/* <Text style={{fontSize: 30}}>Results</Text> */}
           
