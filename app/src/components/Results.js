@@ -5,8 +5,12 @@ import React, { useState, useEffect } from "react";
 import { View, Text, Image, StyleSheet, Alert, Linking, Dimensions, TouchableOpacity, ScrollView } from "react-native";
 import { Container, Card, CardItem, Icon, Button } from "native-base";
 import Carousel from "react-native-snap-carousel";
+
 import { Rating, Overlay } from "react-native-elements";
 import {LinearGradient } from 'expo-linear-gradient'
+
+import { Rating } from "react-native-ratings";
+
 
 import HeaderNav from "./Header";
 import Footer from "./Footer";
@@ -62,7 +66,7 @@ export default function Results(props) {
     const today = date.getDay();
 
     if (!weekDayArray) {
-      return "Hours not available"
+      return "Hours not available";
     } else {
       if (today === 0) {
         return weekDayArray[6];
@@ -70,17 +74,15 @@ export default function Results(props) {
         return weekDayArray[today - 1];
       }
     }
-
-
-  }
+  };
 
   const getAddress = () => {
     const stNum = details.address_components[0].short_name;
     const stName = details.address_components[1].short_name;
     const city = details.address_components[3].short_name;
     const province = details.address_components[5].short_name;
-    return `${stNum} ${stName}, ${city}, ${province}`
-  }
+    return `${stNum} ${stName}, ${city}, ${province}`;
+  };
 
   const _imageItem = ({ item }) => {
     return (
@@ -213,13 +215,18 @@ export default function Results(props) {
               </Text>
               <Rating
                 type="custom"
-                imageSize={30}
-                readonly
                 startingValue={details.rating}
+                imageSize={40}
+                ratingTextColor="black"
                 ratingColor="#ee937c"
-                ratingBackgroundColor="#cccbca"
-                style={styles.stars}
-              ></Rating>
+                ratingBackgroundColor="#CCCBCA"	
+                style={{
+                  padding: 10,
+                  paddingLeft: 20,
+                  paddingBottom: 20,
+                  alignSelf: "flex-start",
+                }}
+              />
             </View>
 
             <View style={{ alignItems: "center" }}>
@@ -242,8 +249,13 @@ export default function Results(props) {
                   <Icon type="Feather" name="clock" style={styles.clock} />
                 </Button>
 
-                <Button transparent style={{flex: 1, left: -6 }} onPress={()=>{ Linking.openURL(details.url)}}>
-
+                <Button
+                  transparent
+                  style={{ flex: 1, left: -6 }}
+                  onPress={() => {
+                    Linking.openURL(details.url);
+                  }}
+                >
                   <Icon
                     type="MaterialIcons"
                     name="location-on"
@@ -252,9 +264,11 @@ export default function Results(props) {
                 </Button>
               </View>
 
+
               <View style={{flex:4,padding:16, paddingLeft:0, justifyContent: 'space-between'}}> 
                 <Text style={{fontSize: 15, fontFamily: 'Avenir'}}>{getWeekDayHours()}</Text>
                 <Text style={{fontSize: 15, fontFamily: 'Avenir'}}>{getAddress()}</Text>
+
 
               </View>
             </View>
