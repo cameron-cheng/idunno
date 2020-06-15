@@ -56,8 +56,6 @@ export default function Results(props) {
     // console.log(date.getDay())
     const today = date.getDay();
 
-
-
     if (!weekDayArray) {
       return "Hours not available"
     } else {
