@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 import { View, Text, Image, StyleSheet, Alert, Linking } from "react-native";
 import { Container, Card, CardItem, Icon, Button } from "native-base";
 import Carousel from "react-native-snap-carousel";
-import { Rating, Overlay } from "react-native-elements";
+import { Rating } from "react-native-ratings";
 
 import HeaderNav from "./Header";
 import Footer from "./Footer";
@@ -167,13 +167,18 @@ export default function Results(props) {
               </Text>
               <Rating
                 type="custom"
-                imageSize={30}
-                readonly
                 startingValue={details.rating}
+                imageSize={40}
+                ratingTextColor="black"
                 ratingColor="#ee937c"
-                ratingBackgroundColor="#cccbca"
-                style={styles.stars}
-              ></Rating>
+                ratingBackgroundColor="#CCCBCA"	
+                style={{
+                  padding: 10,
+                  paddingLeft: 20,
+                  paddingBottom: 20,
+                  alignSelf: "flex-start",
+                }}
+              />
             </View>
 
             <View style={{ alignItems: "center" }}>
