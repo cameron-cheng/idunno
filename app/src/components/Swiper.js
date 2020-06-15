@@ -33,9 +33,9 @@ export default class App extends Component {
   
   constructor(props){
     super(props)
-    console.log("4: PROPS:", this.props.places.length)
+
     this.places = this.props.places
-    console.log(this.places[0].opening_hours.open_now)
+
     this.position = new Animated.ValueXY()
     this.state = {
       currentIndex: 0,
