@@ -15,7 +15,7 @@ import Hurray from "./Hurray";
 export default function Results(props) {
   
   const [details, setDetails] = useState(null);
-  
+
   useEffect(() => {
     props.setRedirect({invitation: false, lobby: false, session: false});
     props.setFilters(props.baseFilters);
