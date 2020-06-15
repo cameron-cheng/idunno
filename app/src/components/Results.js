@@ -2,7 +2,7 @@ import { API_KEY } from "react-native-dotenv";
 import axios from "axios";
 
 import React, { useState, useEffect } from "react";
-import { View, Text, Image, StyleSheet, Linking } from "react-native";
+import { View, Text, Image, StyleSheet, Alert, Linking } from "react-native";
 import { Container, Card, CardItem, Icon, Button } from "native-base";
 import Carousel from "react-native-snap-carousel";
 import { Rating, Overlay } from "react-native-elements";
@@ -12,11 +12,10 @@ import Footer from "./Footer";
 import Hurray from "./Hurray";
 
 export default function Results(props) {
-  
   const [details, setDetails] = useState(null);
-  
+
   useEffect(() => {
-    props.setRedirect({invitation: false, lobby: false, session: false});
+    props.setRedirect({ invitation: false, lobby: false, session: false });
     props.setFilters(props.baseFilters);
     props.setPlaces([]);
     props.setIsHost(false);
@@ -34,23 +33,42 @@ export default function Results(props) {
     getDetails();
   }, []);
 
+  function phoneModal() {
+    Alert.alert(
+      "Call",
+      details.formatted_phone_number,
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+        { text: "Call", onPress: () => console.log("OK Pressed") },
+      ],
+      { cancelable: false }
+    );
+  }
   const getWeekDayHours = () => {
-    const weekDayArray = details.opening_hours.weekday_text
+    const weekDayArray = details.opening_hours.weekday_text;
     // console.log("WEEKDAY", weekDayArray)
 
-    const date = new Date()
+    const date = new Date();
     // console.log(date.getDay())
-    const today = date.getDay()
+    const today = date.getDay();
+
+
 
     if (!weekDayArray) {
       return "Hours not available"
     } else {
       if (today === 0) {
-        return weekDayArray[6]
+        return weekDayArray[6];
       } else {
-        return weekDayArray[today -1]
+        return weekDayArray[today - 1];
       }
     }
+
+
   }
 
   const getAddress = () => {
@@ -127,10 +145,10 @@ export default function Results(props) {
     return (
       <Container>
         <HeaderNav />
-          <View style={styles.main} />
+        <View style={styles.main} />
         <Footer />
       </Container>
-    )
+    );
   } else {
     return (
       <Container style={styles.container}>
@@ -173,26 +191,29 @@ export default function Results(props) {
                 layout={"default"}
               />
             </View>
-            <View style={{flexDirection: 'row', height:110}}>
-              <View style={{ flex:1, alignItems: 'center'}}>
-                <Button transparent style={{flex: 1, justifyContent: 'center'  }} >
-                  <Icon
-                    type="Feather"
-                    name="clock"
-                    style={styles.clock}
-                  />
+            <View style={{ flexDirection: "row", height: 110 }}>
+              <View style={{ flex: 1, alignItems: "center" }}>
+                <Button
+                  transparent
+                  style={{ flex: 1, justifyContent: "center" }}
+                >
+                  <Icon type="Feather" name="clock" style={styles.clock} />
                 </Button>
+
                 <Button transparent style={{flex: 1, left: -6 }} onPress={()=>{ Linking.openURL(details.url)}}>
+
                   <Icon
-                  type="MaterialIcons"
-                  name="location-on"
-                  style={ styles.location}
+                    type="MaterialIcons"
+                    name="location-on"
+                    style={styles.location}
                   />
                 </Button>
               </View>
+
               <View style={{flex:4,padding:16, paddingLeft:0, justifyContent: 'space-between'}}> 
                 <Text style={{fontSize: 15}}>{getWeekDayHours()}</Text>
                 <Text style={{fontSize: 15}}>{getAddress()}</Text>
+
               </View>
             </View>
 
@@ -210,7 +231,6 @@ export default function Results(props) {
               <WebView source={details.url} />
             </Overlay> */}
             <View style={{ alignItems: "center" }}>
-
               <Carousel
                 data={details.reviews}
                 renderItem={_reviewItem}
@@ -223,16 +243,21 @@ export default function Results(props) {
             <View
               style={{ flexDirection: "row", justifyContent: "space-around" }}
             >
-              
               <Icon
                 type="MaterialCommunityIcons"
                 name="web"
                 style={({ width: 25 }, styles.icons)}
-              ></Icon>
+                onPress={() => {
+                  Linking.openURL(details.website);
+                }}
+              />
               <Icon
                 type="Entypo"
                 name="phone"
                 style={({ width: 25 }, styles.icons)}
+                onPress={() => {
+                  phoneModal();
+                }}
               ></Icon>
               <Icon
                 type="MaterialCommunityIcons"
@@ -300,7 +325,7 @@ const styles = StyleSheet.create({
     shadowRadius: 1,
     // paddingVertical: 5,
     fontSize: 30,
-    width: 35
+    width: 35,
   },
   location: {
     // fontSize: 20,
@@ -313,6 +338,6 @@ const styles = StyleSheet.create({
     shadowRadius: 1,
     // paddingVertical: 5,
     fontSize: 40,
-    width: 35
+    width: 35,
   },
 });
