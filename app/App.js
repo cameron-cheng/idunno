@@ -19,7 +19,7 @@ import Shrugger from './src/components/Shrugger';
 
 
 export default function App() {
-
+  
   const [roomId, setRoomId] = useState(null)
   
   const [filters, setFilters] = useState({
@@ -82,6 +82,7 @@ export default function App() {
 
   useEffect(() => {
     socket.on('connect', () => console.log("Client connected:", socket.connected));
+    socket.on('setHost', setHost);
     socket.on('usersSentToRoom', setUserArray);
     socket.on('dataSentToRoom', setData);
     socket.on('resultSentToRoom', setWinner);
@@ -93,7 +94,12 @@ export default function App() {
   const [users, setUsers] = useState([]);
   const [places, setPlaces] = useState([]);
   const [result, setResult] = useState('');
-  const [socketName, setSocketName] = useState('');
+  const [isHost, setIsHost] = useState(false);
+  const [redirect, setRedirect] = useState({
+    invitation: false,
+    lobby: false,
+    session: false
+  });
   
   function createRoom(nickname) {
   console.log('sending create room event')
@@ -110,11 +116,6 @@ export default function App() {
     }
   }
   
-  const [redirect, setRedirect] = useState({
-    invitation: false,
-    lobby: false,
-    session: false
-  });
   
   function joinRoom(roomId, nickname) {
     console.log(roomId);
@@ -144,20 +145,23 @@ export default function App() {
         { text: "OK", onPress: () => console.log("OK Pressed") }
       ],
       { cancelable: false }
-      );  
-    }
+    );  
+  }
     
-    function handleReady() {
-      emitReady();
-    }
+  function handleReady() {
+    emitReady();
+  }
 
-    function emitReady() {
-      socket.emit('lobbyReady');
-    }
+  function emitReady() {
+    socket.emit('lobbyReady');
+  }
 
-  function setUserArray(users, nickname) {
+  function setHost() {
+    setIsHost(true);
+  }
+
+  function setUserArray(users) {
     setUsers(users);
-    setSocketName(nickname);
   }
   
   function setData(data) {
@@ -193,7 +197,7 @@ export default function App() {
           return (<Filters {...filtersProps}/>)}} />
 
         <Route exact path="/room" exact render={(routeProps)=> {
-          let roomProps = { ...routeProps, handleReady, redirect, users, socketName }
+          let roomProps = { ...routeProps, handleReady, redirect, users, isHost}
           return (<Room {...roomProps}/>)}} />
           
         <Route exact path="/invitation" exact render={(routeProps) => {
@@ -207,7 +211,7 @@ export default function App() {
           return (<Swiper {...swiperProps} />)}}/>
 
         <Route exact path ="/results" exact render={(routeProps) => {
-          let resultsProps = {...routeProps, result, setRedirect, baseFilters, setFilters} 
+          let resultsProps = {...routeProps, result, setPlaces, setRedirect, baseFilters, setFilters, setIsHost} 
           return (<Results {...resultsProps} />)}}/>
       </Switch>
 

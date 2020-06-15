@@ -49,6 +49,8 @@ io.on('connection', (socket) => {
     const roomId = makeId();
     console.log("filters:", filters)
     socket.join(roomId);
+
+    const hostId = Object.keys(socket.rooms)[0];
     
     socket.nickname = nickname;
     users[roomId] = [socket.nickname];
@@ -61,7 +63,8 @@ io.on('connection', (socket) => {
     console.log('a user connected', socket.id);
     console.log(`*** ${roomId} has ${io.sockets.adapter.rooms[`${roomId}`].length} user ***`);
     console.log("USERS:", users)
-    io.in(roomId).emit('usersSentToRoom', users[roomId], socket.nickname);
+    io.in(roomId).emit('usersSentToRoom', users[roomId], true);
+    io.to(hostId).emit('setHost')
   })
    
   socket.on('joinRoom', (roomId, nickname, ackFn) => {
@@ -80,12 +83,11 @@ io.on('connection', (socket) => {
       console.log(`${socket.nickname} joins room ${roomId}`);
       console.log(`*** ${roomId} has ${io.sockets.adapter.rooms[`${roomId}`].length} user ***`);
       console.log("USERS:", users)
-      io.in(roomId).emit('usersSentToRoom', users[roomId], socket.nickname);
+      io.in(roomId).emit('usersSentToRoom', users[roomId], false);
     }
   });
   
   socket.on('lobbyReady', () => {
-    // const hostId = Object.keys(socket.rooms)[0];
     const roomId = Object.keys(socket.rooms)[1];
     
     io.in(roomId).emit('dataSentToRoom', data[roomId]);
