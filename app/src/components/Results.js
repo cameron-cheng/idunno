@@ -2,11 +2,11 @@ import { API_KEY } from "react-native-dotenv";
 import axios from "axios";
 
 import React, { useState, useEffect } from "react";
-import { View, Text, Image, StyleSheet, Alert, Linking, Dimensions } from "react-native";
+import { View, Text, Image, StyleSheet, Alert, Linking, Dimensions, TouchableOpacity, ScrollView } from "react-native";
 import { Container, Card, CardItem, Icon, Button } from "native-base";
 import Carousel from "react-native-snap-carousel";
 import { Rating, Overlay } from "react-native-elements";
-import LinearGradient from 'react-native-linear-gradient';
+import {LinearGradient } from 'expo-linear-gradient'
 
 import HeaderNav from "./Header";
 import Footer from "./Footer";
@@ -17,6 +17,7 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 export default function Results(props) {
   const [details, setDetails] = useState(null);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     props.setRedirect({ invitation: false, lobby: false, session: false });
@@ -92,8 +93,40 @@ export default function Results(props) {
     );
   };
 
+  const toggleReviewOverlay = () => {
+    setVisible(!visible);
+  }
+
+  const reviewOverlay = () => {
+    
+  }
+
   const _reviewItem = ({ item }) => {
     return (
+      <TouchableOpacity onPress={toggleReviewOverlay}>
+      <Overlay
+      overlayStyle={{
+        top: 20,
+        borderRadius: 10,
+        width: SCREEN_WIDTH -60,
+        maxHeight: SCREEN_HEIGHT -400,
+        backgroundColor: "#fcfaf2",
+      }}
+      isVisible={visible}
+      onBackdropPress={toggleReviewOverlay}
+    >
+     
+     <ScrollView style={{padding: 20}}>
+        <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
+          <Text style={{paddingRight: 10, paddingBottom: 5, fontSize: 30, fontWeight: "600", color: "#09413a",}}>{item.author_name}  </Text>
+          <Text style={{paddingRight: 10, paddingBottom: 5, fontSize: 30, fontWeight: "600",color: "#ee937c", fontFamily: 'Avenir'}}>{item.rating} / 5</Text>
+       </View>
+       <Text style={{fontSize: 18,fontFamily: 'Avenir',}}>{item.text}</Text>
+     </ScrollView>
+    </Overlay>
+
+
+
       <CardItem
         style={{
           width: 300,
@@ -102,8 +135,8 @@ export default function Results(props) {
           backgroundColor: "#fcfaf2",
         }}
       >
-        <View>
-          <View style={{ flexDirection: "row" }}>
+        <View style={{ alignSelf: 'flex-start', width: '100%'}}>
+          <View style={{ flexDirection: "row" , }}>
             <Text
               style={{
                 paddingRight: 10,
@@ -115,7 +148,6 @@ export default function Results(props) {
             >
               {item.author_name}
             </Text>
-            <LinearGradient colors={["#ee937c", 'transparent']}>
             <Text
               style={{
                 paddingRight: 10,
@@ -128,11 +160,15 @@ export default function Results(props) {
             >
               {item.rating} / 5
             </Text>
-              </LinearGradient>
           </View>
-          <Text style={{ fontSize: 12,fontFamily: 'Avenir' }}>{item.text}</Text>
+          <View>
+            <Text style={{ fontSize: 12,fontFamily: 'Avenir', position: 'absolute', }}>{item.text}</Text>
+            <LinearGradient colors={['rgba(255,255,255,0)',"#fcfaf2"]} start={[0, 0.4]} end={[0,.9]} style={{ top: -5, position: 'relative', alignSelf: 'center', width: '102%', height: 75}}></LinearGradient>
+          </View>
         </View>
       </CardItem>
+      
+      </TouchableOpacity>
     );
   };
 
@@ -223,19 +259,6 @@ export default function Results(props) {
               </View>
             </View>
 
-            {/* <CardItem style={{ paddingLeft: 0, paddingRight: 0, alignSelf: 'center', backgroundColor: '#fcfaf2', borderRadius: 10 }}> */}
-            {/* <Overlay 
-            overlayStyle={{
-              top: 20,
-              height: 590,
-              borderRadius: 10,
-              width: 350,
-              backgroundColor: "#fcfaf2",
-            }}
-              isVisible={visible}
-              onBackdropPress={toggleOverlay}>
-              <WebView source={details.url} />
-            </Overlay> */}
             <View style={{ alignItems: "center" }}>
               <Carousel
                 data={details.reviews}
