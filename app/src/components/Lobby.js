@@ -21,7 +21,7 @@ export default function Lobby(props) {
   }
   
   const hostButton = () => {
-    if (props.users[0] === props.name) {
+    if (props.isHost) {
       return (
         <TouchableOpacity 
           onPress={props.handleReady}

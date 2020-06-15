@@ -35,7 +35,7 @@ export default class App extends Component {
     super(props)
     console.log("4: PROPS:", this.props.places.length)
     this.places = this.props.places
-
+    console.log(this.places[0].opening_hours.open_now)
     this.position = new Animated.ValueXY()
     this.state = {
       currentIndex: 0,
@@ -152,7 +152,7 @@ export default class App extends Component {
 
       //no cards left
       if (index < this.state.currentIndex) {
-        return null
+        return null;
 
         //top card
       } else if (index === this.state.currentIndex) {
@@ -189,8 +189,8 @@ export default class App extends Component {
                      </View>
                       <View style={{flex:1, padding: 10,  height:120, justifyContent: 'space-between'}}>
                         
-                        <Text style={{alignSelf: 'flex-start', fontSize: 15, }}>Address: </Text>
-                        <Text style={{alignSelf: 'flex-start', fontSize: 15}}>OPEN now</Text>
+                        <Text style={{alignSelf: 'flex-start', fontSize: 15, }}>{item.formatted_address || item.vicinity}</Text>
+                        <Text style={{alignSelf: 'flex-start', fontSize: 15}}>Open Now</Text>
                         <Text style={{alignSelf: 'flex-start', fontSize: 15}}>Price Level: {item.price_level}</Text>
                       </View>
                   </View>
@@ -253,9 +253,8 @@ export default class App extends Component {
                         <Icon type='FontAwesome' name='dollar' style={{fontSize: 20, width: 12, alignSelf: 'center', color: '#2a9d8f'}}></Icon>
                      </View>
                       <View style={{flex:1, padding: 10,  height:120, justifyContent: 'space-between'}}>
-                        
-                        <Text style={{alignSelf: 'flex-start', fontSize: 15, }}>Address: </Text>
-                        <Text style={{alignSelf: 'flex-start', fontSize: 15}}>OPEN now</Text>
+                        <Text style={{alignSelf: 'flex-start', fontSize: 15, }}>{item.formatted_address || item.vicinity}</Text>
+                        <Text style={{alignSelf: 'flex-start', fontSize: 15}}>Open Now</Text>
                         <Text style={{alignSelf: 'flex-start', fontSize: 15}}>Price Level: {item.price_level}</Text>
                       </View>
                   </View>

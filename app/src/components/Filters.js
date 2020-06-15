@@ -159,6 +159,7 @@ export default function Filters(props) {
           isVisible={visible}
           onBackdropPress={toggleOverlay}
         >
+          <>
           <View
             style={{
               flex: 1,
@@ -400,95 +401,12 @@ export default function Filters(props) {
                 <Text style={styles.checkText}>French</Text>
               </Body>
             </ListItem>
-
-            {/* <CheckBox
-                style={{}}
-                title='Family'
-                checked={filters.family}
-                onPress={() => setFilters({...filters, family: !filters.family})}
-              />
-                <CheckBox
-                  title='Casual'
-                  checked={filters.casual}
-                  onPress={() => setFilters({...filters, casual: !filters.casual})}
-                />
-              <CheckBox 
-                title='Vegan'
-                checked={filters.vegan}
-                onPress={() => setFilters({...filters, vegan: !filters.vegan})}
-              />
-              <CheckBox 
-                title='Fine Dining'
-                checked={filters.fine}
-                onPress={() => setFilters({...filters, fine: !filters.fine})}
-              />
-              <CheckBox 
-                title='Café'
-                checked={filters.cafe}
-                onPress={() => setFilters({...filters, cafe: !filters.cafe})}
-              />
-              <CheckBox
-                title='Buffet'
-                checked={filters.buffet}
-                onPress={() => setFilters({...filters, buffet: !filters.buffet})}
-              />
-              <CheckBox 
-                title='Bistro'
-                checked={filters.bistro}
-                onPress={() => setFilters({...filters, bistro: !filters.bistro})}
-              />
-              <CheckBox
-                title='Breakfast'
-                checked={filters.breakfast}
-                onPress={() => setFilters({...filters, breakfast: !filters.breakfast})}
-              />
-              <CheckBox
-                title='Brewery'
-                checked={filters.brewery}
-                onPress={() => setFilters({...filters, brewery: !filters.brewery})}
-              />
-              <CheckBox
-                title='Bar/Pub'
-                checked={filters.bar}
-                onPress={() => setFilters({...filters, bar: !filters.bar})}
-              />
-              <CheckBox
-                title='Burger'
-                checked={filters.burger}
-                onPress={() => setFilters({...filters, burger: !filters.burger})}
-              />
-              <CheckBox
-                title='Asian'
-                checked={filters.asian}
-                onPress={() => setFilters({...filters, asian: !filters.asian})}
-              />
-              <CheckBox
-                title='Indian'
-                checked={filters.indian}
-                onPress={() => setFilters({...filters, indian: !filters.indian})}
-              />
-              <CheckBox
-                title='Mexican'
-                checked={filters.mexican}
-                onPress={() => setFilters({...filters, mexican: !filters.mexican})}
-              />
-              <CheckBox
-                title='Italian'
-                checked={filters.italian}
-                onPress={() => setFilters({...filters, italian: !filters.italian})}
-              />
-              <CheckBox
-                title='Greek'
-                checked={filters.greek}
-                onPress={() => setFilters({...filters, greek: !filters.greek})}
-              /> */}
-
           </View>
           <View style={{ alignSelf: "center", padding: 10 }}>
             <TouchableOpacity
               style={{ backgroundColor: "#ee937c", borderRadius: 10 }}
               onPress={toggleOverlay}
-            >
+              >
               <Text
                 style={{
                   padding: 10,
@@ -496,11 +414,12 @@ export default function Filters(props) {
                   fontSize: 20,
                   fontWeight: "700",
                 }}
-              >
+                >
                 DONE
               </Text>
             </TouchableOpacity>
           </View>
+          </>
         </Overlay>
       </View>
       <Footer />

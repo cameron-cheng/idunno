@@ -13,7 +13,7 @@ import { Redirect } from 'react-router-native';
 
 const SCREEN_HEIGHT   = Dimensions.get('window').height;
 
-export default function Room({ history, handleReady, redirect, users, socketName }) {
+export default function Room({ history, handleReady, redirect, users, isHost }) {
   
   if (redirect.session) {
     return <Loader /> 
@@ -21,7 +21,7 @@ export default function Room({ history, handleReady, redirect, users, socketName
     return(
       <View style={styles.container}>
         <View>
-          <Lobby handleReady={handleReady} users={users} name={socketName}/>
+          <Lobby handleReady={handleReady} users={users} isHost={isHost}/>
         </View>
         <Button title="Homepage" onPress={() => history.push("/")}></Button>
       </View>

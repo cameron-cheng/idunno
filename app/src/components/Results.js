@@ -11,7 +11,6 @@ import { Rating, Overlay } from "react-native-elements";
 import HeaderNav from "./Header";
 import Footer from "./Footer";
 import Hurray from "./Hurray";
-import { LinearGradient } from "expo-linear-gradient";
 
 export default function Results(props) {
   
@@ -20,6 +19,9 @@ export default function Results(props) {
   useEffect(() => {
     props.setRedirect({invitation: false, lobby: false, session: false});
     props.setFilters(props.baseFilters);
+    props.setPlaces([]);
+    props.setIsHost(false);
+
     async function getDetails() {
       try {
         const detailsRequest = await axios.get(
@@ -43,16 +45,6 @@ export default function Results(props) {
       />
     );
   };
-
-  {
-    /* <Text>Reviewer: {details.reviews[0].author_name}</Text> */
-  }
-  {
-    /* <Text>Rating: {details.reviews[0].rating} / 5</ext> */
-  }
-  {
-    /* <Text>Text: {details.reviews[0].text}</Text> */
-  }
 
   const _reviewItem = ({ item }) => {
     return (
@@ -106,7 +98,13 @@ export default function Results(props) {
       </Container>
     );
   } else if (!details) {
-    return null;
+    return (
+      <Container>
+        <HeaderNav />
+          <View style={styles.main} />
+        <Footer />
+      </Container>
+    )
   } else {
     return (
       <Container style={styles.container}>
