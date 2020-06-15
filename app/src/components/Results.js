@@ -2,8 +2,7 @@ import { API_KEY } from "react-native-dotenv";
 import axios from "axios";
 
 import React, { useState, useEffect } from "react";
-import { View, Text, Image, StyleSheet, } from "react-native";
-
+import { View, Text, Image, StyleSheet, Linking } from "react-native";
 import { Container, Card, CardItem, Icon, Button } from "native-base";
 import Carousel from "react-native-snap-carousel";
 import { Rating, Overlay } from "react-native-elements";
@@ -43,7 +42,7 @@ export default function Results(props) {
     // console.log(date.getDay())
     const today = date.getDay()
 
-    if (!details.opening_hours) {
+    if (!weekDayArray) {
       return "Hours not available"
     } else {
       if (today === 0) {
@@ -54,8 +53,13 @@ export default function Results(props) {
     }
   }
 
-  
-  
+  const getAddress = () => {
+    const stNum = details.address_components[0].short_name;
+    const stName = details.address_components[1].short_name;
+    const city = details.address_components[3].short_name;
+    const province = details.address_components[5].short_name;
+    return `${stNum} ${stName}, ${city}, ${province}`
+  }
 
   const _imageItem = ({ item }) => {
     return (
@@ -114,7 +118,7 @@ export default function Results(props) {
       <Container>
         <HeaderNav />
         <View style={styles.main}>
-          <Text>Really...nothing?</Text>
+          <Text>Can't make a decision. You're too picky... Try Again</Text>
         </View>
         <Footer />
       </Container>
@@ -178,7 +182,7 @@ export default function Results(props) {
                     style={styles.clock}
                   />
                 </Button>
-                <Button transparent style={{flex: 1, left: -6 }} >
+                <Button transparent style={{flex: 1, left: -6 }} onPress={()=>{ Linking.openURL(details.url)}}>
                   <Icon
                   type="MaterialIcons"
                   name="location-on"
@@ -186,13 +190,25 @@ export default function Results(props) {
                   />
                 </Button>
               </View>
-              <View style={{flex:4,padding:15, paddingLeft:0, justifyContent: 'space-between'}}> 
-                <Text style={{fontSize: 20}}>{getWeekDayHours()}</Text>
-                <Text style={{fontSize: 20}}>Address</Text>
+              <View style={{flex:4,padding:16, paddingLeft:0, justifyContent: 'space-between'}}> 
+                <Text style={{fontSize: 15}}>{getWeekDayHours()}</Text>
+                <Text style={{fontSize: 15}}>{getAddress()}</Text>
               </View>
             </View>
 
             {/* <CardItem style={{ paddingLeft: 0, paddingRight: 0, alignSelf: 'center', backgroundColor: '#fcfaf2', borderRadius: 10 }}> */}
+            {/* <Overlay 
+            overlayStyle={{
+              top: 20,
+              height: 590,
+              borderRadius: 10,
+              width: 350,
+              backgroundColor: "#fcfaf2",
+            }}
+              isVisible={visible}
+              onBackdropPress={toggleOverlay}>
+              <WebView source={details.url} />
+            </Overlay> */}
             <View style={{ alignItems: "center" }}>
 
               <Carousel
