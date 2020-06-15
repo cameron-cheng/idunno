@@ -52,7 +52,12 @@ export default function Filters(props) {
             value={filters.radius}
             onValueChange={(value) => setFilters({ ...filters, radius: value })}
           />
-          <Text style={{ paddingVertical: 15 }}>Radius: {filters.radius}m</Text>
+          <Text style={{ 
+                    paddingVertical: 15,
+                    fontSize: 15,
+                    color: "#ee937c",
+                    fontWeight: "500",
+                   }}>RADIUS: {filters.radius}m</Text>
         </View>
       );
     } else {
@@ -113,8 +118,12 @@ export default function Filters(props) {
                     setFilters({ ...filters, price: Math.ceil(value) })
                   }
                 />
-                <Text>
-                  Price: {"$".repeat(Math.ceil(filters.price)) || "Free"}
+                <Text style={{
+                    fontSize: 15,
+                    color: "#ee937c",
+                    fontWeight: "500",
+                  }}>
+                  PRICE: {"$".repeat(Math.ceil(filters.price)) || "Free"}
                 </Text>
               </View>
               <TouchableOpacity onPress={toggleOverlay} style={{ top: -10 }}>
@@ -143,7 +152,7 @@ export default function Filters(props) {
                 onPress={handleCreateRoom}
                 style={styles.button}
               >
-                <Text style={styles.buttonText}>START DECIDING!</Text>
+                <Text style={styles.buttonText}>START DECIDING</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -412,7 +421,8 @@ export default function Filters(props) {
                   padding: 10,
                   color: "#fcfaf2",
                   fontSize: 20,
-                  fontWeight: "700",
+                  fontWeight: "800",
+                  fontFamily: 'GillSans'
                 }}
                 >
                 DONE
@@ -435,6 +445,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   filters: {
+    flex: 7.35,
     flexDirection: "column",
     justifyContent: "center",
     margin: 40,
@@ -443,7 +454,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#ee937c",
     padding: 10,
     borderRadius: 10,
-    width: 200,
+    width: 250,
     shadowColor: "#ae9f77",
     shadowOffset: { width: 3, height: 4 },
     shadowOpacity: 0.8,
@@ -456,6 +467,7 @@ const styles = StyleSheet.create({
     color: "#fcfaf2",
     fontWeight: "800",
     alignSelf: "center",
+    fontFamily: 'GillSans'
   },
   card: {
     borderRadius: 20,

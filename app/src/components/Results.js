@@ -2,14 +2,18 @@ import { API_KEY } from "react-native-dotenv";
 import axios from "axios";
 
 import React, { useState, useEffect } from "react";
-import { View, Text, Image, StyleSheet, Alert, Linking } from "react-native";
+import { View, Text, Image, StyleSheet, Alert, Linking, Dimensions } from "react-native";
 import { Container, Card, CardItem, Icon, Button } from "native-base";
 import Carousel from "react-native-snap-carousel";
 import { Rating, Overlay } from "react-native-elements";
+import LinearGradient from 'react-native-linear-gradient';
 
 import HeaderNav from "./Header";
 import Footer from "./Footer";
 import Hurray from "./Hurray";
+
+const SCREEN_WIDTH = Dimensions.get('window').width;
+const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 export default function Results(props) {
   const [details, setDetails] = useState(null);
@@ -80,7 +84,7 @@ export default function Results(props) {
   const _imageItem = ({ item }) => {
     return (
       <Image
-        style={{ height: 175, width: 300, borderRadius: 10 }}
+        style={{ height: SCREEN_HEIGHT - 700, width: SCREEN_WIDTH -100, borderRadius: 10 }}
         source={{
           uri: `https://maps.googleapis.com/maps/api/place/photo?key=${API_KEY}&photoreference=${item.photo_reference}&maxheight=300`,
         }}
@@ -111,6 +115,7 @@ export default function Results(props) {
             >
               {item.author_name}
             </Text>
+            <LinearGradient colors={["#ee937c", 'transparent']}>
             <Text
               style={{
                 paddingRight: 10,
@@ -118,12 +123,14 @@ export default function Results(props) {
                 fontSize: 15,
                 fontWeight: "600",
                 color: "#ee937c",
+                fontFamily: 'Avenir'
               }}
             >
               {item.rating} / 5
             </Text>
+              </LinearGradient>
           </View>
-          <Text style={{ fontSize: 12 }}>{item.text}</Text>
+          <Text style={{ fontSize: 12,fontFamily: 'Avenir' }}>{item.text}</Text>
         </View>
       </CardItem>
     );
@@ -163,6 +170,7 @@ export default function Results(props) {
                   padding: 10,
                   paddingTop: 0,
                   paddingBottom: 0,
+                  fontFamily: 'Avenir'
                 }}
               >
                 {details.name}
@@ -183,8 +191,8 @@ export default function Results(props) {
                 data={details.photos}
                 renderItem={_imageItem}
                 enableSnap
-                sliderWidth={380}
-                itemWidth={300}
+                sliderWidth={SCREEN_WIDTH -50}
+                itemWidth={SCREEN_WIDTH -100}
                 // inactiveSlideOpacity={0}
                 layout={"default"}
               />
@@ -209,8 +217,8 @@ export default function Results(props) {
               </View>
 
               <View style={{flex:4,padding:16, paddingLeft:0, justifyContent: 'space-between'}}> 
-                <Text style={{fontSize: 15}}>{getWeekDayHours()}</Text>
-                <Text style={{fontSize: 15}}>{getAddress()}</Text>
+                <Text style={{fontSize: 15, fontFamily: 'Avenir'}}>{getWeekDayHours()}</Text>
+                <Text style={{fontSize: 15, fontFamily: 'Avenir'}}>{getAddress()}</Text>
 
               </View>
             </View>
@@ -233,7 +241,7 @@ export default function Results(props) {
                 data={details.reviews}
                 renderItem={_reviewItem}
                 enableSnap
-                sliderWidth={380}
+                sliderWidth={SCREEN_WIDTH -50}
                 itemWidth={300}
               />
             </View>
@@ -286,7 +294,7 @@ const styles = StyleSheet.create({
   },
   card: {
     flex: 1,
-    width: 380,
+    width: SCREEN_WIDTH -50,
     alignSelf: "center",
     justifyContent: "space-between",
     borderRadius: 20,
@@ -304,37 +312,17 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
   },
   icons: {
-    // fontSize: 20,
     alignSelf: "center",
     color: "#2a9d8f",
-    shadowColor: "#988a55",
-    shadowOffset: { width: 2, height: 1 },
-    shadowOpacity: 0.8,
-    shadowRadius: 1,
     paddingVertical: 5,
   },
   clock: {
-    // fontSize: 20,
-    // alignSelf: "center",
     color: "#2a9d8f",
-    shadowColor: "#988a55",
-    shadowOffset: { width: 2, height: 1 },
-    shadowOpacity: 0.8,
-    shadowRadius: 1,
-    // paddingVertical: 5,
     fontSize: 30,
     width: 35,
   },
   location: {
-    // fontSize: 20,
-    // justifyContent: 'center',
-    // alignSelf: "center",
     color: "#2a9d8f",
-    shadowColor: "#988a55",
-    shadowOffset: { width: 2, height: 1 },
-    shadowOpacity: 0.8,
-    shadowRadius: 1,
-    // paddingVertical: 5,
     fontSize: 40,
     width: 35,
   },
