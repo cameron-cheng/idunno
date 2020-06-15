@@ -37,12 +37,12 @@ export default Invitation = ({roomId, history}) => {
   return(
     <Container style={{flex: 1,}}>
       <Header/>
-      <View style={{width: 350, top: 20, height: 590,justifyContent: 'center',alignSelf: 'center'}}>
+      <View style={{flex: 5.30, width: 350, top: 20, height: 590,justifyContent: 'center',alignSelf: 'center'}}>
         <Card style={styles.cardMain}>
           <Card style={styles.cardCode}>
           <View style={{}}>
             <View style={{width: 300, height: 280, justifyContent:'space-evenly'}}>
-              <Text style={{alignSelf:'center', color: "#09413a", fontWeight: '500', fontSize: 15, top: 13}}>YOUR DECISION CODE IS...</Text>
+              <Text style={{alignSelf:'center', color: "#09413a", fontWeight: '500', fontSize: 15, fontFamily: 'Futura',top: 13}}>YOUR DECISION CODE IS...</Text>
               <Text style={styles.QRText}>{roomId}</Text> 
               <View style={styles.QR}>
                 <QRCode value="http://www.google.com"/>

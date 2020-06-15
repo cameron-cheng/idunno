@@ -13,7 +13,7 @@ export default function Lobby(props) {
 
   const UserItem = ({ user }) => {
     return (
-      <View style={{padding:20, alignItems: 'center'}}>
+      <View style={{width: 80, paddingVertical: 10, alignItems: 'center'}}>
         <Icon type='Feather' name='check-circle' style={styles.playerTrue}/>
         <Text>{user}</Text>
       </View>
@@ -38,8 +38,8 @@ export default function Lobby(props) {
   return(  
     <Container style={styles.container}>
       <Header />
-      <View style={{margin: 50, }}>
-        <View style={{width: 350, top: 20, height: 490,justifyContent: 'center',alignSelf: 'center'}}>
+      <View style={{flex: 4.65, margin: 50, }}>
+        <View style={{width: 350, top: 20, height: '99%',justifyContent: 'center',alignSelf: 'center',}}>
           <Card style={styles.cardMain}>
             <View>
             <Text style={styles.text}>

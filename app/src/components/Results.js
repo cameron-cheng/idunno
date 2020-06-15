@@ -2,17 +2,26 @@ import { API_KEY } from "react-native-dotenv";
 import axios from "axios";
 
 import React, { useState, useEffect } from "react";
-import { View, Text, Image, StyleSheet, Alert, Linking } from "react-native";
+import { View, Text, Image, StyleSheet, Alert, Linking, Dimensions, TouchableOpacity, ScrollView } from "react-native";
 import { Container, Card, CardItem, Icon, Button } from "native-base";
 import Carousel from "react-native-snap-carousel";
+
+import { Rating, Overlay } from "react-native-elements";
+import {LinearGradient } from 'expo-linear-gradient'
+
 import { Rating } from "react-native-ratings";
+
 
 import HeaderNav from "./Header";
 import Footer from "./Footer";
 import Hurray from "./Hurray";
 
+const SCREEN_WIDTH = Dimensions.get('window').width;
+const SCREEN_HEIGHT = Dimensions.get('window').height;
+
 export default function Results(props) {
   const [details, setDetails] = useState(null);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     props.setRedirect({ invitation: false, lobby: false, session: false });
@@ -78,7 +87,7 @@ export default function Results(props) {
   const _imageItem = ({ item }) => {
     return (
       <Image
-        style={{ height: 175, width: 300, borderRadius: 10 }}
+        style={{ height: SCREEN_HEIGHT - 700, width: SCREEN_WIDTH -100, borderRadius: 10 }}
         source={{
           uri: `https://maps.googleapis.com/maps/api/place/photo?key=${API_KEY}&photoreference=${item.photo_reference}&maxheight=300`,
         }}
@@ -86,8 +95,40 @@ export default function Results(props) {
     );
   };
 
+  const toggleReviewOverlay = () => {
+    setVisible(!visible);
+  }
+
+  const reviewOverlay = () => {
+    
+  }
+
   const _reviewItem = ({ item }) => {
     return (
+      <TouchableOpacity onPress={toggleReviewOverlay}>
+      <Overlay
+      overlayStyle={{
+        top: 20,
+        borderRadius: 10,
+        width: SCREEN_WIDTH -60,
+        maxHeight: SCREEN_HEIGHT -400,
+        backgroundColor: "#fcfaf2",
+      }}
+      isVisible={visible}
+      onBackdropPress={toggleReviewOverlay}
+    >
+     
+     <ScrollView style={{padding: 20}}>
+        <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
+          <Text style={{paddingRight: 10, paddingBottom: 5, fontSize: 30, fontWeight: "600", color: "#09413a",}}>{item.author_name}  </Text>
+          <Text style={{paddingRight: 10, paddingBottom: 5, fontSize: 30, fontWeight: "600",color: "#ee937c", fontFamily: 'Avenir'}}>{item.rating} / 5</Text>
+       </View>
+       <Text style={{fontSize: 18,fontFamily: 'Avenir',}}>{item.text}</Text>
+     </ScrollView>
+    </Overlay>
+
+
+
       <CardItem
         style={{
           width: 300,
@@ -96,8 +137,8 @@ export default function Results(props) {
           backgroundColor: "#fcfaf2",
         }}
       >
-        <View>
-          <View style={{ flexDirection: "row" }}>
+        <View style={{ alignSelf: 'flex-start', width: '100%'}}>
+          <View style={{ flexDirection: "row" , }}>
             <Text
               style={{
                 paddingRight: 10,
@@ -116,14 +157,20 @@ export default function Results(props) {
                 fontSize: 15,
                 fontWeight: "600",
                 color: "#ee937c",
+                fontFamily: 'Avenir'
               }}
             >
               {item.rating} / 5
             </Text>
           </View>
-          <Text style={{ fontSize: 12 }}>{item.text}</Text>
+          <View>
+            <Text style={{ fontSize: 12,fontFamily: 'Avenir', position: 'absolute', }}>{item.text}</Text>
+            <LinearGradient colors={['rgba(255,255,255,0)',"#fcfaf2"]} start={[0, 0.4]} end={[0,.9]} style={{ top: -5, position: 'relative', alignSelf: 'center', width: '102%', height: 75}}></LinearGradient>
+          </View>
         </View>
       </CardItem>
+      
+      </TouchableOpacity>
     );
   };
 
@@ -161,6 +208,7 @@ export default function Results(props) {
                   padding: 10,
                   paddingTop: 0,
                   paddingBottom: 0,
+                  fontFamily: 'Avenir'
                 }}
               >
                 {details.name}
@@ -186,8 +234,8 @@ export default function Results(props) {
                 data={details.photos}
                 renderItem={_imageItem}
                 enableSnap
-                sliderWidth={380}
-                itemWidth={300}
+                sliderWidth={SCREEN_WIDTH -50}
+                itemWidth={SCREEN_WIDTH -100}
                 // inactiveSlideOpacity={0}
                 layout={"default"}
               />
@@ -216,38 +264,21 @@ export default function Results(props) {
                 </Button>
               </View>
 
-              <View
-                style={{
-                  flex: 4,
-                  padding: 16,
-                  paddingLeft: 0,
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text style={{ fontSize: 15 }}>{getWeekDayHours()}</Text>
-                <Text style={{ fontSize: 15 }}>{getAddress()}</Text>
+
+              <View style={{flex:4,padding:16, paddingLeft:0, justifyContent: 'space-between'}}> 
+                <Text style={{fontSize: 15, fontFamily: 'Avenir'}}>{getWeekDayHours()}</Text>
+                <Text style={{fontSize: 15, fontFamily: 'Avenir'}}>{getAddress()}</Text>
+
+
               </View>
             </View>
 
-            {/* <CardItem style={{ paddingLeft: 0, paddingRight: 0, alignSelf: 'center', backgroundColor: '#fcfaf2', borderRadius: 10 }}> */}
-            {/* <Overlay 
-            overlayStyle={{
-              top: 20,
-              height: 590,
-              borderRadius: 10,
-              width: 350,
-              backgroundColor: "#fcfaf2",
-            }}
-              isVisible={visible}
-              onBackdropPress={toggleOverlay}>
-              <WebView source={details.url} />
-            </Overlay> */}
             <View style={{ alignItems: "center" }}>
               <Carousel
                 data={details.reviews}
                 renderItem={_reviewItem}
                 enableSnap
-                sliderWidth={380}
+                sliderWidth={SCREEN_WIDTH -50}
                 itemWidth={300}
               />
             </View>
@@ -300,7 +331,7 @@ const styles = StyleSheet.create({
   },
   card: {
     flex: 1,
-    width: 380,
+    width: SCREEN_WIDTH -50,
     alignSelf: "center",
     justifyContent: "space-between",
     borderRadius: 20,
@@ -318,37 +349,17 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
   },
   icons: {
-    // fontSize: 20,
     alignSelf: "center",
     color: "#2a9d8f",
-    shadowColor: "#988a55",
-    shadowOffset: { width: 2, height: 1 },
-    shadowOpacity: 0.8,
-    shadowRadius: 1,
     paddingVertical: 5,
   },
   clock: {
-    // fontSize: 20,
-    // alignSelf: "center",
     color: "#2a9d8f",
-    shadowColor: "#988a55",
-    shadowOffset: { width: 2, height: 1 },
-    shadowOpacity: 0.8,
-    shadowRadius: 1,
-    // paddingVertical: 5,
     fontSize: 30,
     width: 35,
   },
   location: {
-    // fontSize: 20,
-    // justifyContent: 'center',
-    // alignSelf: "center",
     color: "#2a9d8f",
-    shadowColor: "#988a55",
-    shadowOffset: { width: 2, height: 1 },
-    shadowOpacity: 0.8,
-    shadowRadius: 1,
-    // paddingVertical: 5,
     fontSize: 40,
     width: 35,
   },

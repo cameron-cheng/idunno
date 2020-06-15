@@ -14,7 +14,8 @@ export default function Footer(props) {
     <View style={style.container}>
         <View span style={style.header}>
           <Body style={style.body}>
-            <Title style={style.title}>iDUNNO</Title>
+          <Title style={style.i}>i</Title>
+            <Title style={style.title}>DUNNO</Title>
           </Body>
         </View>
     </View>
@@ -29,10 +30,10 @@ const style = StyleSheet.create({
     // width: SCREEN_WIDTH,
     // height: 10,
     justifyContent: 'center',
-    shadowColor: '#ae9f77',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
+    // shadowColor: '#ae9f77',
+    // shadowOffset: { width: 0, height: 4 },
+    // shadowOpacity: 0.8,
+    // shadowRadius: 2,
   },
   header: {
     height: 800,
@@ -44,18 +45,37 @@ const style = StyleSheet.create({
   },
   body: {
     flex: 1,
+    flexDirection: 'row',
     justifyContent: 'flex-end' ,
     paddingBottom: 20,
     position: 'relative'
   },
   title: {
     justifyContent: 'center',
-    alignSelf: "center",
+    alignSelf: 'flex-end',
     color: '#2a9d8f',
     fontSize: 50,
     height: 60,
     fontWeight: '900',
-
+    fontFamily: 'Gill Sans',
+    shadowColor: '#37635C',
+    shadowOffset: { width: 3, height: 3 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    
+  },
+  i: {
+    justifyContent: 'center',
+    alignSelf: "flex-end",
+    color: '#fcfaf2',
+    fontSize: 50,
+    height: 60,
+    fontWeight: '800',
+    fontFamily: 'Gill Sans',
+    shadowColor: '#37635C',
+    shadowOffset: { width: 3, height: 3 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
     
   },
 

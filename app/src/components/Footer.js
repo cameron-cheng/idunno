@@ -37,10 +37,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    shadowColor: '#ae9f77',
-    shadowOffset: { width: 0, height: -4 },
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
+    // shadowColor: '#ae9f77',
+    // shadowOffset: { width: 0, height: -4 },
+    // shadowOpacity: 0.8,
+    // shadowRadius: 2,
   },
   footer: {
     backgroundColor: '#2a9d8f',
@@ -62,11 +62,16 @@ const styles = StyleSheet.create({
     color: '#fcfaf2',
     height: 30,
     alignSelf: 'center',
+    
   },
   iconPlus: {
     color: '#fcfaf2',
     height: 65,
     fontSize: 60,
+    shadowColor: '#0E5249',
+    shadowOffset: { width: 3, height: 3 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
   },
 
 
