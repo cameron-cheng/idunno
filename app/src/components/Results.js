@@ -179,7 +179,7 @@ export default function Results(props) {
       <Container>
         <HeaderNav />
         <View style={styles.main}>
-          <Text>Can't make a decision. You're too picky... Try Again</Text>
+          <Text style={{fontFamily: 'Avenir'}} >Can't make a decision. You're too picky... Try Again</Text>
         </View>
         <Footer />
       </Container>
