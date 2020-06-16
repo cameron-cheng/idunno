@@ -176,10 +176,12 @@ export default function Results(props) {
 
   if (!props.result) {
     return (
-      <Container>
+      <Container style={styles.container}>
         <HeaderNav />
-        <View style={styles.main}>
-          <Text style={{fontFamily: 'Avenir'}} >Can't make a decision. You're too picky... Try Again</Text>
+        <View style={{flex: 5, top: 20, justifyContent: "center", alignSelf: "center",}}>
+          <Text style={{fontFamily: 'Avenir', fontSize: 20}} >Can't make a decision. </Text>
+          <Text style={{fontFamily: 'Avenir', fontSize: 20}} >You're too picky... </Text>
+          <Text style={{fontFamily: 'Avenir', paddingTop: 50}} >Try Again</Text>
         </View>
         <Footer />
       </Container>
