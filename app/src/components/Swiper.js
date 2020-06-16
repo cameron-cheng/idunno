@@ -530,7 +530,7 @@ export default class App extends Component {
         <View style={{ flex: 5, alignItems: "center", top: 30 }}>
           {this.renderCards()}
         </View>
-        <Footer />  
+        <Footer />
       </View>
     );
   }
