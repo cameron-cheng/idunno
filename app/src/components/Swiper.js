@@ -525,7 +525,7 @@ export default class App extends Component {
       <View>
         <HeaderNav />
         <View style={{ height: 60, width: 180, top: 30, alignSelf: "center" }}>
-          {/* <Countdown readyForResult={this.props.readyForResult} /> */}
+          <Countdown readyForResult={this.props.readyForResult} />
         </View>
         <View style={{ flex: 5, alignItems: "center", top: 30 }}>
           {this.renderCards()}
