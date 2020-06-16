@@ -222,6 +222,7 @@ export default class App extends Component {
                           padding: 20,
                           paddingLeft: 20,
                           paddingBottom: 0,
+                          fontFamily: 'Avenir'
                         }}
                       >
                         {item.name}
@@ -313,13 +314,13 @@ export default class App extends Component {
                           justifyContent: "space-between",
                         }}
                       >
-                        <Text style={{ alignSelf: "flex-start", fontSize: 15 }}>
+                        <Text style={{ alignSelf: "flex-start", fontSize: 15, fontFamily: 'Avenir' }}>
                           {item.formatted_address || item.vicinity}
                         </Text>
-                        <Text style={{ alignSelf: "flex-start", fontSize: 15 }}>
+                        <Text style={{ alignSelf: "flex-start", fontSize: 15, fontFamily: 'Avenir' }}>
                           Open Now
                         </Text>
-                        <Text style={{ alignSelf: "flex-start", fontSize: 15 }}>
+                        <Text style={{ alignSelf: "flex-start", fontSize: 15, fontFamily: 'Avenir' }}>
                           Price Level: {item.price_level}
                         </Text>
                       </View>
@@ -404,6 +405,7 @@ export default class App extends Component {
                           padding: 20,
                           paddingLeft: 20,
                           paddingBottom: 0,
+                          fontFamily: 'Avenir'
                         }}
                       >
                         {item.name}
@@ -495,13 +497,13 @@ export default class App extends Component {
                           justifyContent: "space-between",
                         }}
                       >
-                        <Text style={{ alignSelf: "flex-start", fontSize: 15 }}>
+                        <Text style={{ alignSelf: "flex-start", fontSize: 15,fontFamily: 'Avenir' }}>
                           {item.formatted_address || item.vicinity}
                         </Text>
-                        <Text style={{ alignSelf: "flex-start", fontSize: 15 }}>
+                        <Text style={{ alignSelf: "flex-start", fontSize: 15, fontFamily: 'Avenir' }}>
                           Open Now
                         </Text>
-                        <Text style={{ alignSelf: "flex-start", fontSize: 15 }}>
+                        <Text style={{ alignSelf: "flex-start", fontSize: 15, fontFamily: 'Avenir' }}>
                           Price Level: {item.price_level}
                         </Text>
                       </View>

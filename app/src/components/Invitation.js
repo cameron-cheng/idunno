@@ -42,7 +42,7 @@ export default Invitation = ({roomId, history}) => {
           <Card style={styles.cardCode}>
           <View style={{}}>
             <View style={{width: 300, height: 280, justifyContent:'space-evenly'}}>
-              <Text style={{alignSelf:'center', color: "#09413a", fontWeight: '500', fontSize: 15, fontFamily: 'Futura',top: 13}}>YOUR DECISION CODE IS...</Text>
+              <Text style={{alignSelf:'center', color: "#09413a", fontWeight: '500', fontSize: 15, fontFamily: 'Futura',top: 13, fontFamily: 'Avenir'}}>YOUR DECISION CODE IS...</Text>
               <Text style={styles.QRText}>{roomId}</Text> 
               <View style={styles.QR}>
                 <QRCode value="http://www.google.com"/>
@@ -107,10 +107,12 @@ const styles = StyleSheet.create({
   shareText: {
     color:'#fcfaf2',
     fontSize: 20, 
-    fontWeight: '700', 
+    // fontWeight: '700', 
     paddingHorizontal: 20, 
     paddingVertical: 10,
     alignSelf: 'center',
+    fontFamily: 'GillSans-Light',
+    fontWeight: '800'
   },
   QR: {
     
@@ -122,6 +124,7 @@ const styles = StyleSheet.create({
     fontSize: 80,
     fontWeight: '900',
     color: '#2a9d8f',
+    fontFamily: 'Avenir'
   }
 
 

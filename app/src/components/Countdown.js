@@ -52,7 +52,8 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 30,
     alignSelf: 'center',
-    paddingVertical: 10
+    paddingVertical: 10,
+    fontFamily: 'Avenir'
   }
   
 

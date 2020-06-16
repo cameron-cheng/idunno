@@ -6,7 +6,7 @@ import { View, Text, Image, StyleSheet, Alert, Linking, Dimensions, TouchableOpa
 import { Container, Card, CardItem, Icon, Button } from "native-base";
 import Carousel from "react-native-snap-carousel";
 
-import { Rating, Overlay } from "react-native-elements";
+import { Overlay } from "react-native-elements";
 import {LinearGradient } from 'expo-linear-gradient'
 
 import { Rating } from "react-native-ratings";
@@ -176,10 +176,12 @@ export default function Results(props) {
 
   if (!props.result) {
     return (
-      <Container>
+      <Container style={styles.container}>
         <HeaderNav />
-        <View style={styles.main}>
-          <Text>Can't make a decision. You're too picky... Try Again</Text>
+        <View style={{flex: 5, top: 20, justifyContent: "center", alignSelf: "center",}}>
+          <Text style={{fontFamily: 'Avenir', fontSize: 20}} >Can't make a decision. </Text>
+          <Text style={{fontFamily: 'Avenir', fontSize: 20}} >You're too picky... </Text>
+          <Text style={{fontFamily: 'Avenir', paddingTop: 50}} >Try Again</Text>
         </View>
         <Footer />
       </Container>
@@ -215,18 +217,16 @@ export default function Results(props) {
               </Text>
               <Rating
                 type="custom"
+                imageSize={30}
+                readonly
                 startingValue={details.rating}
-                imageSize={40}
-                ratingTextColor="black"
-                ratingColor="#ee937c"
-                ratingBackgroundColor="#CCCBCA"	
-                style={{
-                  padding: 10,
-                  paddingLeft: 20,
-                  paddingBottom: 20,
-                  alignSelf: "flex-start",
-                }}
-              />
+                ratingColor="#ee937c"	
+                ratingBackgroundColor="#cccbca"
+                style={styles.stars}
+              ></Rating>
+
+
+
             </View>
 
             <View style={{ alignItems: "center" }}>

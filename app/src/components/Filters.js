@@ -57,6 +57,7 @@ export default function Filters(props) {
                     fontSize: 15,
                     color: "#ee937c",
                     fontWeight: "500",
+                    fontFamily: 'Avenir'
                    }}>RADIUS: {filters.radius}m</Text>
         </View>
       );
@@ -122,6 +123,7 @@ export default function Filters(props) {
                     fontSize: 15,
                     color: "#ee937c",
                     fontWeight: "500",
+                    fontFamily: 'Avenir'
                   }}>
                   PRICE: {"$".repeat(Math.ceil(filters.price)) || "Free"}
                 </Text>
@@ -133,6 +135,7 @@ export default function Filters(props) {
                     alignSelf: "flex-end",
                     color: "#ee937c",
                     fontWeight: "500",
+                    fontFamily: 'Avenir'
                   }}
                 >
                   More Filters
@@ -489,5 +492,6 @@ const styles = StyleSheet.create({
   checkText: {
     paddingLeft: 10,
     fontSize: 15,
+    fontFamily: 'Avenir'
   },
 });

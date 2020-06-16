@@ -15,7 +15,7 @@ export default function Lobby(props) {
     return (
       <View style={{width: 80, paddingVertical: 10, alignItems: 'center'}}>
         <Icon type='Feather' name='check-circle' style={styles.playerTrue}/>
-        <Text>{user}</Text>
+        <Text style={{fontFamily: 'Avenir'}}>{user}</Text>
       </View>
     )
   }
@@ -27,11 +27,11 @@ export default function Lobby(props) {
           onPress={props.handleReady}
           style={styles.buttonReady}>
             <Icon type='Feather' name='check-circle' style={styles.icon}/>
-            <Text style={styles.buttonText}>READY!</Text>
+            <Text style={styles.buttonText}>READY</Text>
         </TouchableOpacity>
       )
     } else {
-      return <Text style={{color: "#09413a",}}>Waiting For Host To Start...</Text>
+      return <Text style={{color: "#09413a", fontFamily: 'Avenir'}}>Waiting For Host To Start...</Text>
     }
   }
 
@@ -147,11 +147,13 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     padding: 20,
     color: "#09413a",
+    fontFamily: 'Avenir'
   },
   title: {
     fontSize: 25,
     alignSelf: 'center',
     color: "#09413a",
+    fontFamily: 'Avenir'
   },
   // body: {
   //   // alignItems: 'center',
@@ -161,7 +163,9 @@ const styles = StyleSheet.create({
     color: '#fcfaf2', 
     fontSize: 18, 
     paddingLeft: 10,
-    paddingRight: 10
+    paddingRight: 10,
+    // fontFamily: 'GillSans-Light',
+    fontWeight: '800'
   },
   buttonReady: {
     backgroundColor:'#ee937c',  
@@ -178,9 +182,11 @@ const styles = StyleSheet.create({
   buttonText: {
     color:'#fcfaf2',
     fontSize: 20, 
-    fontWeight: '700', 
+    // fontWeight: '700', 
     paddingRight: 10, 
     paddingVertical: 10,
+    fontFamily: 'GillSans-Light',
+    fontWeight: '800'
     
   },
   playersView: {
