@@ -264,6 +264,7 @@ export default class App extends Component {
                         flexDirection: "row",
                         justifyContent: "center",
                         paddingVertical: 15,
+                        top: -20
                       }}
                     >
                       <View
@@ -272,7 +273,7 @@ export default class App extends Component {
                           paddingLeft: 20,
                           height: 120,
                           flexDirection: "column",
-                          justifyContent: "space-between",
+                          justifyContent: "space-around",
                         }}
                       >
                         <Icon
@@ -295,7 +296,7 @@ export default class App extends Component {
                             color: "#2a9d8f",
                           }}
                         ></Icon>
-                        <Icon
+                        {/* <Icon
                           type="FontAwesome"
                           name="dollar"
                           style={{
@@ -304,14 +305,14 @@ export default class App extends Component {
                             alignSelf: "center",
                             color: "#2a9d8f",
                           }}
-                        ></Icon>
+                        ></Icon> */}
                       </View>
                       <View
                         style={{
                           flex: 1,
                           padding: 10,
                           height: 120,
-                          justifyContent: "space-between",
+                          justifyContent: "space-around",
                         }}
                       >
                         <Text style={{ alignSelf: "flex-start", fontSize: 15, fontFamily: 'Avenir' }}>
@@ -320,9 +321,9 @@ export default class App extends Component {
                         <Text style={{ alignSelf: "flex-start", fontSize: 15, fontFamily: 'Avenir' }}>
                           Open Now
                         </Text>
-                        <Text style={{ alignSelf: "flex-start", fontSize: 15, fontFamily: 'Avenir' }}>
+                        {/* <Text style={{ alignSelf: "flex-start", fontSize: 15, fontFamily: 'Avenir' }}>
                           Price Level: {item.price_level}
-                        </Text>
+                        </Text> */}
                       </View>
                     </View>
                   </Card>
@@ -447,6 +448,7 @@ export default class App extends Component {
                         flexDirection: "row",
                         justifyContent: "center",
                         paddingVertical: 15,
+                        top: -20
                       }}
                     >
                       <View
@@ -455,7 +457,7 @@ export default class App extends Component {
                           paddingLeft: 20,
                           height: 120,
                           flexDirection: "column",
-                          justifyContent: "space-between",
+                          justifyContent: "space-around",
                         }}
                       >
                         <Icon
@@ -478,7 +480,7 @@ export default class App extends Component {
                             color: "#2a9d8f",
                           }}
                         ></Icon>
-                        <Icon
+                        {/* <Icon
                           type="FontAwesome"
                           name="dollar"
                           style={{
@@ -487,14 +489,14 @@ export default class App extends Component {
                             alignSelf: "center",
                             color: "#2a9d8f",
                           }}
-                        ></Icon>
+                        ></Icon> */}
                       </View>
                       <View
                         style={{
                           flex: 1,
                           padding: 10,
                           height: 120,
-                          justifyContent: "space-between",
+                          justifyContent: "space-around",
                         }}
                       >
                         <Text style={{ alignSelf: "flex-start", fontSize: 15,fontFamily: 'Avenir' }}>
@@ -503,9 +505,9 @@ export default class App extends Component {
                         <Text style={{ alignSelf: "flex-start", fontSize: 15, fontFamily: 'Avenir' }}>
                           Open Now
                         </Text>
-                        <Text style={{ alignSelf: "flex-start", fontSize: 15, fontFamily: 'Avenir' }}>
+                        {/* <Text style={{ alignSelf: "flex-start", fontSize: 15, fontFamily: 'Avenir' }}>
                           Price Level: {item.price_level}
-                        </Text>
+                        </Text> */}
                       </View>
                     </View>
                   </Card>
